@@ -19,7 +19,7 @@ const EventAboutPlace = () => {
 	const [banner, setBanner] = useState("");
 	const [priceType, setPriceType] = useState("per_day");
 	const [clearTime, setClearTime] = useState("0");
-	const [maxDay, setMaxDay] = useState("0");
+	const [maxDay, setMaxDay] = useState("1");
 	const [about, setAbout] = useState("");
 	const eventId = localStorage.getItem("eventId");
 	const eventType = params.eventType;
@@ -31,7 +31,7 @@ const EventAboutPlace = () => {
 	const initialState = {
 		place_price: "",
 		clearing_time: "0",
-		max_day: "0",
+		max_day: "1",
 
 	}
 
