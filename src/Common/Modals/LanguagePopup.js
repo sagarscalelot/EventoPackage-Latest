@@ -22,7 +22,7 @@ const LanguagePopup = ({ handleClose }) => {
         onClick={() => handleClose(false)}
       ></div>
       <div className="w-full lg:w-1/2 2xl:w-5/12 bg-brightGray py-12 space-y-8">
-        <h1 className="px-12">{intl.formatMessage({ id: "LANGUAGE" })}</h1>
+        <h1 className="px-12">Language</h1>
         <div className="space-y-2.5 px-12 h-[calc(100vh-170px)] overflow-y-auto language">
           <label
             htmlFor="selact1"
@@ -130,9 +130,9 @@ const LanguagePopup = ({ handleClose }) => {
                 />
               </svg>
               <div>
-                <h3 className="text-sm">{intl.formatMessage({ id: "INDIA - HINDI" })}</h3>
+                <h3 className="text-sm">India - Hindi</h3>
                 <span className="input-titel text-spiroDiscoBall">
-                  {intl.formatMessage({id: "INDIAN RUPEE"})}
+                    Indian Rupee
                 </span>
               </div>
             </div>
@@ -895,7 +895,7 @@ const LanguagePopup = ({ handleClose }) => {
                                 <i className="icon-right text-[10px] scale-0 origin-center duration-300 transition-all"></i>
                             </div>
                         </div>
-                    </label>
+                    </label>*/}
                     <label
                         htmlFor="selact8"
                         className="bg-white rounded-md py-3 px-5 flex items-center justify-between cursor-pointer"
@@ -934,6 +934,10 @@ const LanguagePopup = ({ handleClose }) => {
                                 name="select"
                                 id="selact8"
                                 className="w-6 h-6 rounded-full bg-brightGray appearance-none hidden"
+                                onChange={() => {
+                                    onSelectLanguage("gr");
+                                  }}
+                                  checked={selectLanguage === "gr"}
                             />
                             <div className="w-6 h-6 flex items-center justify-center rounded-full bg-brightGray overflow-hidden check-language">
                                 <i className="icon-right text-[10px] scale-0 origin-center duration-300 transition-all"></i>
@@ -988,6 +992,10 @@ const LanguagePopup = ({ handleClose }) => {
                                 name="select"
                                 id="selact9"
                                 className="w-6 h-6 rounded-full bg-brightGray appearance-none hidden"
+                                onChange={() => {
+                                    onSelectLanguage("ch");
+                                  }}
+                                checked={selectLanguage === "ch"}
                             />
                             <div className="w-6 h-6 flex items-center justify-center rounded-full bg-brightGray overflow-hidden check-language">
                                 <i className="icon-right text-[10px] scale-0 origin-center duration-300 transition-all"></i>
@@ -1031,13 +1039,17 @@ const LanguagePopup = ({ handleClose }) => {
                                 name="select"
                                 id="selact10"
                                 className="w-6 h-6 rounded-full bg-brightGray appearance-none hidden"
+                                onChange={() => {
+                                    onSelectLanguage("th");
+                                  }}
+                                checked={selectLanguage === "th"}
                             />
                             <div className="w-6 h-6 flex items-center justify-center rounded-full bg-brightGray overflow-hidden check-language">
                                 <i className="icon-right text-[10px] scale-0 origin-center duration-300 transition-all"></i>
                             </div>
                         </div>
                     </label>
-                    <label
+                    {/*<label
                         htmlFor="selact11"
                         className="bg-white rounded-md py-3 px-5 flex items-center justify-between cursor-pointer"
                     >
@@ -1941,8 +1953,8 @@ const LanguagePopup = ({ handleClose }) => {
                 />
               </svg>
               <div>
-                <h3 className="text-sm">{intl.formatMessage({id: "UNITED STATES - ENGLISH"})}</h3>
-                <span className="input-titel text-spiroDiscoBall">{intl.formatMessage({id: "DOLLAR"})}</span>
+                <h3 className="text-sm">United States - English</h3>
+                <span className="input-titel text-spiroDiscoBall">Dollar</span>
               </div>
             </div>
             <div>
@@ -1961,7 +1973,7 @@ const LanguagePopup = ({ handleClose }) => {
               </div>
             </div>
           </label>
-          {/* <label
+           <label
                         htmlFor="selact20"
                         className="bg-white rounded-md py-3 px-5 flex items-center justify-between cursor-pointer"
                     >
@@ -2009,13 +2021,17 @@ const LanguagePopup = ({ handleClose }) => {
                                 name="select"
                                 id="selact20"
                                 className="w-6 h-6 rounded-full bg-brightGray appearance-none hidden"
+                                onChange={() => {
+                                    onSelectLanguage("fr");
+                                  }}
+                                checked={selectLanguage === "fr"}
                             />
                             <div className="w-6 h-6 flex items-center justify-center rounded-full bg-brightGray overflow-hidden check-language">
                                 <i className="icon-right text-[10px] scale-0 origin-center duration-300 transition-all"></i>
                             </div>
                         </div>
                     </label>
-                    <label
+                   {/* <label
                         htmlFor="selact21"
                         className="bg-white rounded-md py-3 px-5 flex items-center justify-between cursor-pointer"
                     >

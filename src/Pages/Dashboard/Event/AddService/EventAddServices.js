@@ -39,10 +39,10 @@ const EventAddServices = () => {
 				await dispatch(selectServiceGet(eventId)).unwrap();
 			}
 			if (!response.data.IsSuccess) {
-				toast.error("Enable To Fetch Data.");
+				toast.error(`${intl.formatMessage({ id: "ENABLE TO FETCH DATA." })}`);
 			}
 		} catch (error) {
-			toast.error("Something Went wrong.");
+			toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
 			console.log(error);
 		}
 	}

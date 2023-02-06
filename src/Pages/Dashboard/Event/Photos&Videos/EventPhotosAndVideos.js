@@ -51,11 +51,11 @@ const EventPhotosAndVideos = () => {
       const res = await dispatch(AllMedia(payload)).unwrap();
       console.log("Image>>", res);
       if (res.data.IsSuccess) {
-        toast.success("Image removed Successfully.");
+        toast.success(`${intl.formatMessage({ id: "IMAGE REMOVED SUCCESSFULLY." })}`);
         getMedia();
       }
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
       console.log(error);
     }
   };
@@ -76,11 +76,11 @@ const EventPhotosAndVideos = () => {
       const res = await dispatch(AllMedia(payload)).unwrap();
       console.log("Video>>", res);
       if (res.data.IsSuccess) {
-        toast.success("Video removed Successfully.");
+        toast.success(`${intl.formatMessage({ id: "VIDEO REMOVED SUCCESSFULLY." })}`);
         getMedia();
       }
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
       console.log(error);
     }
   };

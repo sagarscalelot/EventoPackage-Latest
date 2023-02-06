@@ -107,7 +107,7 @@ const EventPersonalDetails = () => {
         toast.error(response.data.Message);
       }
     } catch (error) {
-      toast.error("Something Went Wrong.");
+      toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
       console.log(error);
     }
   };
@@ -131,7 +131,7 @@ const EventPersonalDetails = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something Went Wrong.");
+      toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
     }
   };
 
@@ -145,14 +145,14 @@ const EventPersonalDetails = () => {
           setBanner(selected);
           addBanner(selected);
         } else {
-          toast.warn("file size is greater than 3MB");
+          toast.warn(`${intl.formatMessage({ id: "FILE SIZE IS GREATER THAN 3MB" })}`);
         }
       } else {
-        toast.warn("please select image file with jpeg/png.");
+        toast.warn(`${intl.formatMessage({ id: "PLEASE SELECT IMAGE FILE WITH JPEG/PNG." })}`);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Error while Selecting Image.");
+      toast.error(`${intl.formatMessage({ id: "ERROR WHILE SELECTING IMAGE." })}`);
     }
   };
 
@@ -188,7 +188,7 @@ const EventPersonalDetails = () => {
         setPriceType(response.data.Data.personaldetail.price_type);
       }
       if (!response.data.IsSuccess) {
-        toast.error("Error occured while fetching data.");
+        toast.error(`${intl.formatMessage({ id: "ERROR OCCURED WHILE FETCHING DATA." })}`);
       }
     } catch (error) {
       console.log(error);

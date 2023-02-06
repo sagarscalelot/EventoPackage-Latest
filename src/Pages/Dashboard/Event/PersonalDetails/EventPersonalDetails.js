@@ -95,7 +95,7 @@ const EventPersonalDetails = () => {
         toast.error(response.data.Message);
       }
     } catch (error) {
-      toast.error("Something Went Wrong.");
+      toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
       navigate(`/auth/login`);
       console.log(error);
     }
@@ -137,7 +137,7 @@ const EventPersonalDetails = () => {
         formik.setValues(response.data.Data.personaldetail);
       }
       if (!response.data.IsSuccess) {
-        toast.error("Error occured while fetching data.");
+        toast.error(`${intl.formatMessage({ id: "ERROR OCCURED WHILE FETCHING DATA." })}`);
       }
     } catch (error) {
       console.log(error);

@@ -56,9 +56,9 @@ const BusinessProfile = ({ business, getProfile }) => {
       initialRender = false;
     } else {
       if (!isDisable) {
-        toast.info("Edit Profile Enable.");
+        toast.info(`${intl.formatMessage({ id: "EDIT PROFILE ENABLE." })}`);
       } else {
-        toast.info("Edit Profile Disable.");
+        toast.info(`${intl.formatMessage({ id: "EDIT PROFILE DISABLE." })}`);
       }
     }
   }, [isDisable]);
@@ -76,7 +76,7 @@ const BusinessProfile = ({ business, getProfile }) => {
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something Went Wrong.");
+      toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
     }
   };
 
@@ -95,7 +95,7 @@ const BusinessProfile = ({ business, getProfile }) => {
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something Went Wrong.");
+      toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
     }
   };
 
@@ -109,14 +109,14 @@ const BusinessProfile = ({ business, getProfile }) => {
           setProfileImage(selected);
           addProfilePic(selected);
         } else {
-          toast.warn("file size is greater than 1MB");
+          toast.warn(`${intl.formatMessage({ id: "FILE SIZE IS GREATER THAN 1MB" })}`);
         }
       } else {
-        toast.warn("please select image file with jpeg/png.");
+        toast.warn(`${intl.formatMessage({ id: "PLEASE SELECT IMAGE FILE WITH JPEG/PNG." })}`);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Error while Selecting Image.");
+      toast.error(`${intl.formatMessage({ id: "ERROR WHILE SELECTING IMAGE." })}`);
     }
   };
   // console.log('details for business', business);

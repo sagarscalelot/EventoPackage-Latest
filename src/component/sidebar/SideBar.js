@@ -92,7 +92,7 @@ const SideBar = () => {
     // console.log(error);
     // toast.error("something Went wrong.");
     // }
-    toast.success("Logout successfully.");
+    toast.success(`${intl.formatMessage({ id: "LOGOUT SUCCESSFULLY." })}`);
     // setTimeout(() => {
     //   navigate("../auth/login");
     // }, 200);
@@ -122,7 +122,7 @@ const SideBar = () => {
           <NavLink
             to="../dashboard"
             activeclassname="active"
-            title="Dashboard"
+            title={intl.formatMessage({ id: "DASHBOARD" })}
             onClick={removeId}
           >
             <span>
@@ -139,7 +139,7 @@ const SideBar = () => {
           <NavLink
             to="refer-to-earn"
             activeclassname="active"
-            title="Refer & Earn"
+            title={intl.formatMessage({ id: "REFER & EARN" })}
           >
             <span>
               <i className="w-6 block text-center text-lg icon-refer"></i>
@@ -147,7 +147,7 @@ const SideBar = () => {
             <span>{intl.formatMessage({ id: "REFER & EARN" })}</span>
 
           </NavLink>
-          <NavLink to="redeem" activeclassname="active" title="Redeem">
+          <NavLink to="redeem" activeclassname="active" title={intl.formatMessage({ id: "REDEEM" })}>
             <span>
               <i className="w-6 block text-center text-lg icon-redem"></i>
             </span>
@@ -156,7 +156,7 @@ const SideBar = () => {
           <NavLink
             to="entertainment"
             activeclassname="active"
-            title="Entertainment"
+            title={intl.formatMessage({ id: "ENTERTAINMENT" })}
           >
             <span>
               <i className="w-6 block text-center text-lg icon-gallery"></i>
@@ -173,13 +173,13 @@ const SideBar = () => {
             </span>
             <span>{intl.formatMessage({ id: "FESTUM EVENTO" })}</span>
           </a>
-          <NavLink to="booking" activeclassname="active" title="Booking">
+          <NavLink to="booking" activeclassname="active" title={intl.formatMessage({ id: "BOOKING" })}>
             <span>
               <i className="w-6 block text-center text-lg icon-booking"></i>
             </span>
             <span>{intl.formatMessage({ id: "BOOKING" })}</span>
           </NavLink>
-          <NavLink to="invoice" activeclassname="active" title="Invoice">
+          <NavLink to="invoice" activeclassname="active" title={intl.formatMessage({ id: "INVOICE" })}>
             <span>
               <i className="w-6 block text-center text-lg icon-invoice"></i>
             </span>
@@ -194,7 +194,7 @@ const SideBar = () => {
           <NavLink
             to="our-products"
             activeclassname="active"
-            title="Our Products"
+            title={intl.formatMessage({ id: "OUR PRODUCTS" })}
           >
             <span>
               <i className="w-6 block text-center text-lg icon-our-product"></i>
@@ -207,13 +207,13 @@ const SideBar = () => {
             </span>
             <span>Gift</span>
           </NavLink> */}
-          <NavLink to="faq" activeclassname="active" title="Help & FAQ">
+          <NavLink to="faq" activeclassname="active" title={intl.formatMessage({ id: "FAQ" })}>
             <span>
               <i className="w-6 block text-center text-lg icon-help"></i>
             </span>
             <span>{intl.formatMessage({ id: "FAQ" })}</span>
           </NavLink>
-          <NavLink to="chatbot" activeclassname="active" title="Help & FAQ">
+          <NavLink to="chatbot" activeclassname="active" title={intl.formatMessage({ id: "HELP" })}>
             <span>
               <i className="w-6 block text-center text-lg icon-massage"></i>
             </span>
@@ -256,7 +256,7 @@ const SideBar = () => {
               <a
                 href="#"
                 className="block hover:text-spiroDiscoBall anim"
-                title="Language"
+                title={intl.formatMessage({ id: "LANGUAGE" })}
                 onClick={() => setLanguagePopup(true)}
               >
                 <span className="icon-language text-2xl block"></span>
@@ -271,7 +271,7 @@ const SideBar = () => {
               <Link
                 to="notification"
                 className="block hover:text-spiroDiscoBall anim "
-                title="Megaphone"
+                title={intl.formatMessage({ id: "NOTIFICATION" })}
               >
                 <span className="icon-megaphone text-2xl block"></span>
               </Link>

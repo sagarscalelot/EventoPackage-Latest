@@ -23,12 +23,12 @@ const CompanyPopUpUploadPhotos = ({handleClose, setImageList}) => {
 				}
 				else {
 					console.log("file size is greater than 3MB. File size is ", selected.size);
-					setErrorMessage("file size is greater than 3MB.");
+					setErrorMessage(`${intl.formatMessage({ id: "FILE SIZE IS GREATER THAN 3MB" })}`);
 					setError(true);
 				}
 			} else {
 				console.log("please select image file with jpeg/png. File type is ", selected.type);
-				setErrorMessage("please select image file with jpeg/png.");
+				setErrorMessage(`${intl.formatMessage({ id: "PLEASE SELECT IMAGE FILE WITH JPEG/PNG." })}`);
 				setError(true);
 			}
 		} catch (error) {

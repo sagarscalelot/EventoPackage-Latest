@@ -72,7 +72,7 @@ const EventTermsAndConditions = () => {
   // https://m.media-amazon.com/images/I/516wEE7dasL.jpg
   const saveData = async () => {
     if (!acceptTerm) {
-      toast.warn("Pleace Accept the Terms and Condition.");
+      toast.warn(`${intl.formatMessage({ id: "PLEACE ACCEPT THE TERMS AND CONDITION." })}`);
       return;
     }
     try {
@@ -83,14 +83,14 @@ const EventTermsAndConditions = () => {
         eventid: eventId,
       };
       const response = await dispatch(termsAndCondition(payload)).unwrap()
-      console.log("DDDDDDDDDDDDDDDD",response);
+      console.log(response);
       if (response?.data?.IsSuccess) {
-        // toast.success(response.data.Message);
+        toast.success(response.data.Message);
       } else {
         toast.error(response.data.Message);
       }
     } catch (error) {
-      toast.error("Something Went Wrong.");
+      toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
       console.log(error);
     }
   };

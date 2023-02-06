@@ -30,7 +30,7 @@ const SelectBusiness = () => {
       dispatch(increment());
       localStorage.setItem("usertype", "haveyouplace")
     } catch (error) {
-      toast.error("Something Went Wrong.");
+      toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
       console.log(error);
     }
 
@@ -43,7 +43,7 @@ const SelectBusiness = () => {
       dispatch(increment());
       localStorage.setItem("usertype", "personalskillsbusiness")
     } catch (error) {
-      toast.error("Something Went Wrong.");
+      toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
       console.log(error);
     }
   }
@@ -55,7 +55,7 @@ const SelectBusiness = () => {
       dispatch(increment());
       localStorage.setItem("usertype", "groupskillsbusiness")
     } catch (error) {
-      toast.error("Something Went Wrong.");
+      toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
       console.log(error);
     }
   }
@@ -67,7 +67,7 @@ const SelectBusiness = () => {
       dispatch(increment());
       localStorage.setItem("usertype", "allusers")
     } catch (error) {
-      toast.error("Something Went Wrong.");
+      toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
       console.log(error);
     }
   }
@@ -79,7 +79,7 @@ const SelectBusiness = () => {
       dispatch(increment());
       localStorage.setItem("usertype", "existingusers")
     } catch (error) {
-      toast.error("Something Went Wrong.");
+      toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
       console.log(error);
     }
   }

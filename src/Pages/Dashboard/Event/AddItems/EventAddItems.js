@@ -44,10 +44,10 @@ const EventAddItems = () => {
 				}
 			}
 			if (!response.data.IsSuccess) {
-				toast.error("Enable To Fetch Data.");
+				toast.error(`${intl.formatMessage({ id: "ENABLE TO FETCH DATA." })}`);
 			}
 		} catch (error) {
-			toast.error("Something Went wrong.");
+			toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
 			console.log(error);
 		}
 
@@ -60,7 +60,7 @@ const EventAddItems = () => {
 	}, [isAddItemPopUpOpen, reload]);
 
 	const clickNextHandler = () => {
-		toast.success("Items saved Successfully.");
+		toast.success(`${intl.formatMessage({ id: "ITEMS SAVED SUCCESSFULLY." })}`);
 		dispatch(increment());
 		if (eventType === "hyp") navigate(`../capacity`);
 		else if (eventType === "gsb") navigate(`../addequipments`)

@@ -34,12 +34,12 @@ const EventPopUpUploadPhoto = ({ handleClose, eventId, imageList }) => {
 				}
 				else {
 					// console.log("file size is greater than 3MB. File size is ", selected.size);
-					setErrorMessage("file size is greater than " + size + " MB");
+					setErrorMessage(`${intl.formatMessage({ id: "FILE SIZE IS GREATER THEN" })}` + size + " MB");
 					setError(true);
 				}
 			} else {
 				// console.log("please select valid image file. File type is ", selected.type);
-				setErrorMessage("please select valid image file.");
+				setErrorMessage(`${intl.formatMessage({ id: "PLEASE SELECT VALID IMAGE FILE." })}`);
 				setError(true);
 			}
 		} catch (error) {
@@ -72,7 +72,7 @@ const EventPopUpUploadPhoto = ({ handleClose, eventId, imageList }) => {
 				toast.error(response.data.Message);
 			}
 		} catch (error) {
-			toast.success("Something Went Wrong");
+			toast.success(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
 			console.log(error);
 		}
 	}

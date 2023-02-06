@@ -3,13 +3,23 @@ import AllRoutes from "./routes/allRoutes";
 import LanguageProvider from "./Common/LanguageSelector/LanguageSelector";
 import enTranslationMessages from "./Common/translations/en.json";
 import hiTranslationMessages from "./Common/translations/hi.json";
+import grTranslationMessages from "./Common/translations/gr.json";
+import thTranslationMessages from "./Common/translations/th.json";
+import frTranslationMessages from "./Common/translations/fr.json";
+import chTranslationMessages from "./Common/translations/ch.json";
 
 const App = () => {
-  
   return (
     <React.Fragment>
       <LanguageProvider
-        messages={{ en: enTranslationMessages, hi: hiTranslationMessages }}
+        messages={{
+          en: enTranslationMessages,
+          hi: hiTranslationMessages,
+          gr: grTranslationMessages,
+          th: thTranslationMessages,
+          fr: frTranslationMessages,
+          ch: chTranslationMessages,
+        }}
       >
         <AllRoutes />
       </LanguageProvider>

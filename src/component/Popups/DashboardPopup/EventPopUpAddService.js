@@ -52,11 +52,11 @@ const EventPopUpAddService = ({
           setErrorMessage(null);
           setError(false);
         } else {
-          setErrorMessage("file size is greater than " + size + " MB");
+          setErrorMessage(`${intl.formatMessage({ id: "FILE SIZE IS GREATER THEN" })}` + size + " MB");
           setError(true);
         }
       } else {
-        setErrorMessage("please select valid image file.");
+        setErrorMessage(`${intl.formatMessage({ id: "PLEASE SELECT VALID IMAGE FILE." })}`);
         setError(true);
       }
     } catch (error) {
@@ -67,15 +67,15 @@ const EventPopUpAddService = ({
 
   const addServices = async () => {
     if (name.trim() === "" || price.trim() === "" || quantity.trim() === "") {
-      toast.warn("Please fill all the reqired fields.");
+      toast.warn(`${intl.formatMessage({ id: "PLEASE FILL ALL THE REQIRED FIELDS." })}`);
       return;
     }
     if (!onlyDigits.test(price.trim())) {
-      toast.warn("Please enter valid Price.");
+      toast.warn(`${intl.formatMessage({ id: "PLEASE ENTER VALID PRICE." })}`);
       return;
     }
     if (!onlyDigits.test(quantity.trim())) {
-      toast.warn("Please enter valid Qunatity.");
+      toast.warn(`${intl.formatMessage({ id: "PLEASE ENTER VALID QUNATITY." })}`);
       return;
     }
 
@@ -117,7 +117,7 @@ const EventPopUpAddService = ({
           toast.error(res.data.Message);
         }
       } catch (error) {
-        toast.error("Something went wrong.");
+        toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
         console.log(error);
       }
     else
@@ -139,7 +139,7 @@ const EventPopUpAddService = ({
           toast.error(res.data.Message);
         }
       } catch (error) {
-        toast.error("Something went wrong.");
+        toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
         console.log(error);
       }
   };

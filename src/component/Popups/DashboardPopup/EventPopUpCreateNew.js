@@ -58,7 +58,7 @@ const EventPopUpCreateNew = ({
       }
       console.log(payload);
       if (newCategoryDisplayName === "" || newCategoryDisplayName === null) {
-        toast.warn("Display name can not be empty.");
+        toast.warn(`${intl.formatMessage({ id: "DISPLAY NAME CAN NOT BE EMPTY." })}`);
         return;
       }
       console.log(payload, "*--**--*");
@@ -79,7 +79,7 @@ const EventPopUpCreateNew = ({
         handleClose(false);
       }
     } catch (error) {
-      toast.error("Something went Wrong.");
+      toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
       console.log(error);
     }
   };

@@ -54,7 +54,7 @@ const PSBOtherCost = () => {
         toast.error(response.data.Message);
       }
     } catch (error) {
-      toast.error("Something Went Wrong.");
+      toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
       console.log(error);
     }
   };
@@ -77,7 +77,7 @@ const PSBOtherCost = () => {
         setFoodOn(response.data.Data.othercost[2]?.food);
       }
       if (!response.data.IsSuccess) {
-        toast.error("Error occured while fetching data.");
+        toast.error(`${intl.formatMessage({ id: "ERROR OCCURED WHILE FETCHING DATA." })}`);
       }
     } catch (error) {
       console.log(error);

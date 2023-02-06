@@ -19,7 +19,7 @@ const EventAboutPlace = () => {
 	const [banner, setBanner] = useState("");
 	const [priceType, setPriceType] = useState("per_day");
 	const [clearTime, setClearTime] = useState("0");
-	const [maxDay, setMaxDay] = useState("1");
+	const [maxDay, setMaxDay] = useState("0");
 	const [about, setAbout] = useState("");
 	const eventId = localStorage.getItem("eventId");
 	const eventType = params.eventType;
@@ -31,7 +31,7 @@ const EventAboutPlace = () => {
 	const initialState = {
 		place_price: "",
 		clearing_time: "0",
-		max_day: "1",
+		max_day: "0",
 
 	}
 
@@ -56,7 +56,7 @@ const EventAboutPlace = () => {
 
 		} catch (error) {
 			console.log(error);
-			toast.error("Something Went Wrong.");
+			toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
 		}
 	}
 
@@ -74,7 +74,7 @@ const EventAboutPlace = () => {
 			}
 		} catch (error) {
 			console.log(error);
-			toast.error("Something Went Wrong.");
+			toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
 		}
 	}
 
@@ -89,14 +89,14 @@ const EventAboutPlace = () => {
 					addBanner(selected);
 				}
 				else {
-					toast.warn("file size is greater than 3MB");
+					toast.warn(`${intl.formatMessage({ id: "FILE SIZE IS GREATER THAN 3MB" })}`);
 				}
 			} else {
-				toast.warn("please select image file with jpeg/png.");
+				toast.warn(`${intl.formatMessage({ id: "PLEASE SELECT IMAGE FILE WITH JPEG/PNG." })}`);
 			}
 		} catch (error) {
 			console.log(error);
-			toast.error("Error while Selecting Image.");
+			toast.error(`${intl.formatMessage({ id: "ERROR WHILE SELECTING IMAGE." })}`);
 		}
 	}
 
@@ -122,7 +122,7 @@ const EventAboutPlace = () => {
 				setMaxDay(response.data.Data.aboutplace.max_day);
 			}
 			if (!response.data.IsSuccess) {
-				toast.error("Error occured while fetching data.")
+				toast.error(`${intl.formatMessage({ id: "ERROR OCCURED WHILE FETCHING DATA." })}`)
 			}
 		} catch (error) {
 			console.log(error);

@@ -42,7 +42,7 @@ const EventPopUpAddEquipment = ({ handleClose, data, setReload, edit }) => {
     const size = 5;
     let selected = event.target.files[0];
     if (imageList.length >= 1) {
-      toast.info("Image Upload Limit Exceed.");
+      toast.info(`${intl.formatMessage({ id: "IMAGE UPLOAD LIMIT EXCEED." })}`);
       return
     }
     try {
@@ -62,16 +62,16 @@ const EventPopUpAddEquipment = ({ handleClose, data, setReload, edit }) => {
               toast.error(response.data.Message);
             }
           } catch (error) {
-            toast.error("Something Went Wrong.");
+            toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
             console.log(error);
           }
         }
         else {
-          setErrorMessage("file size is greater than " + size + " MB");
+          setErrorMessage(`${intl.formatMessage({ id: "FILE SIZE IS GREATER THEN" })}` + size + " MB");
           setError(true);
         }
       } else {
-        setErrorMessage("please select valid image file.");
+        setErrorMessage(`${intl.formatMessage({ id: "PLEASE SELECT VALID IMAGE FILE." })}`);
         setError(true);
       }
     } catch (error) {
@@ -85,7 +85,7 @@ const EventPopUpAddEquipment = ({ handleClose, data, setReload, edit }) => {
     let selected = event.target.files[0];
     const size = 1024;
     if (videoList.length >= 1) {
-      toast.info("Video Upload Limit Exceed.");
+      toast.info(`${intl.formatMessage({ id: "VIDEO UPLOAD LIMIT EXCEED." })}`);
       return
     }
     try {
@@ -105,18 +105,18 @@ const EventPopUpAddEquipment = ({ handleClose, data, setReload, edit }) => {
               toast.error(response.data.Message);
             }
           } catch (error) {
-            toast.error("Something Went Wrong.");
+            toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
             console.log(error);
           }
         }
         else {
           // console.log("file size is greater than 512MB. File size is ", selected.size);
-          setErrorMessage("file size is greater than " + size + " Mb.");
+          setErrorMessage(`${intl.formatMessage({ id: "FILE SIZE IS GREATER THEN" })}` + size + " Mb.");
           setError2(true);
         }
       } else {
         // console.log("please select video file with mp4 extension.",selected.type);
-        setErrorMessage("please select valid video file.");
+        setErrorMessage(`${intl.formatMessage({ id: "PLEASE SELECT VALID VIDEO FILE." })}`);
         setError2(true);
       }
     } catch (error) {
@@ -129,15 +129,15 @@ const EventPopUpAddEquipment = ({ handleClose, data, setReload, edit }) => {
   const addServices = async () => {
 
     if (name.trim() === "" || price.trim() === "" || quantity.trim() === "") {
-      toast.warn("Please fill all the reqired fields.");
+      toast.warn(`${intl.formatMessage({ id: "PLEASE FILL ALL THE REQIRED FIELDS." })}`);
       return
     }
     if (!(onlyDigits.test(price.trim()))) {
-      toast.warn("Please enter valid Price.");
+      toast.warn(`${intl.formatMessage({ id: "PLEASE ENTER VALID PRICE." })}`);
       return
     }
     if (!(onlyDigits.test(quantity.trim()))) {
-      toast.warn("Please enter valid Qunatity.");
+      toast.warn(`${intl.formatMessage({ id: "PLEASE ENTER VALID QUNATITY." })}`);
       return
     }
 
@@ -164,7 +164,7 @@ const EventPopUpAddEquipment = ({ handleClose, data, setReload, edit }) => {
         toast.error(res.data.Message);
       }
     } catch (error) {
-      toast.error("Something went wrong.")
+      toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`)
       console.log(error);
     }
   }

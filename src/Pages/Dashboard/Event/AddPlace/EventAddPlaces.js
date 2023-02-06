@@ -23,7 +23,7 @@ const EventAddPlaces = () => {
 		try {
 			const response = await dispatch(addPlaces(eventId)).unwrap()
 			if (!response.data.IsSuccess) {
-				toast.error("Error occured while fetching data.")
+				toast.error(`${intl.formatMessage({ id: "ERROR OCCURED WHILE FETCHING DATA." })}`)
 				setNewEvent(response?.data?.Data);
 				setCategoryName(addPlace?.event_category?.category_name);
 			}

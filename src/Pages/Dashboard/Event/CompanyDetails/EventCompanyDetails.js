@@ -160,7 +160,7 @@ const EventCompanyDetails = () => {
       //   setVideoList(stateCompanyDetailId?.companydetail?.videos)
       //   setGstFile(stateCompanyDetailId?.companydetail?.gst)
       if (!response.data.IsSuccess) {
-        toast.error("Error occured while fetching data.");
+        toast.error(`${intl.formatMessage({ id: "ERROR OCCURED WHILE FETCHING DATA." })}`);
       }
     } catch (error) {
       console.log(error);
@@ -200,12 +200,12 @@ const EventCompanyDetails = () => {
               toast.error(response.data.Message);
             }
           } catch (error) {
-            toast.error("Something went Wrong.");
+            toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
             console.log(error);
           }
         }
       } else {
-        setGstFileError("Please select Pdf File.");
+        setGstFileError(`${intl.formatMessage({ id: "PLEASE SELECT PDF FILE." })}`);
       }
     } else {
       setGstFileError(null);
@@ -216,7 +216,7 @@ const EventCompanyDetails = () => {
     const size = 5;
     let selected = event.target.files[0];
     if (imageList.length >= 5) {
-      toast.info("Image Upload Limit Exceed.");
+      toast.info(`${intl.formatMessage({ id: "IMAGE UPLOAD LIMIT EXCEED." })}`);
       return;
     }
     try {
@@ -241,15 +241,15 @@ const EventCompanyDetails = () => {
               toast.error(response.data.Message);
             }
           } catch (error) {
-            toast.error("Something Went Wrong.");
+            toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
             console.log(error);
           }
         } else {
-          setErrorMessage("file size is greater than " + size + " MB");
+          setErrorMessage(`${intl.formatMessage({ id: "FILE SIZE IS GREATER THEN" })}` + size + " MB");
           setError(true);
         }
       } else {
-        setErrorMessage("please select valid image file.");
+        setErrorMessage(`${intl.formatMessage({ id: "PLEASE SELECT VALID IMAGE FILE." })}`);
         setError(true);
       }
     } catch (error) {
@@ -262,7 +262,7 @@ const EventCompanyDetails = () => {
     let selected = event.target.files[0];
     const size = 1024;
     if (videoList.length >= 2) {
-      toast.info("Video Upload Limit Exceed.");
+      toast.info(`${intl.formatMessage({ id: "VIDEO UPLOAD LIMIT EXCEED." })}`);
       return;
     }
     try {
@@ -286,15 +286,15 @@ const EventCompanyDetails = () => {
               toast.error(response.data.Message);
             }
           } catch (error) {
-            toast.error("Something Went Wrong.");
+            toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
             console.log(error);
           }
         } else {
-          setErrorMessage("file size is greater than " + size + " Mb.");
+          setErrorMessage(`${intl.formatMessage({ id: "FILE SIZE IS GREATER THEN" })}` + size + " Mb.");
           setError2(true);
         }
       } else {
-        setErrorMessage("please select valid video file.");
+        setErrorMessage(`${intl.formatMessage({ id: "PLEASE SELECT VALID VIDEO FILE." })}`);
         setError2(true);
       }
     } catch (error) {

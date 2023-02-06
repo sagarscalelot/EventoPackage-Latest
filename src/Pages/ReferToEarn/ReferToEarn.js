@@ -24,7 +24,7 @@ const ReferToEarn = () => {
   const copyCode = () => {
     navigator.clipboard.writeText(`Give 20 Coin, Get 10 Coin
     Refer Friends to allset and give them 10 coin with your referral code ${profileDetails?.my_refer_code} once they order, you get 20 coin too. www.eventopackage.com`);
-    toast.success("Referral Code Copied");
+    toast.success(`${intl.formatMessage({ id: "REFERRAL CODE COPIED" })}`);
   };
 
   return (

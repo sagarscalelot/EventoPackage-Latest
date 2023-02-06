@@ -28,7 +28,7 @@ const EventPopUpCategory = ({ handleClose }) => {
       }
       handleClose(false);
     } catch (error) {
-      toast.error("Something Went Wrong.");
+      toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
       console.log(error);
     }
   };

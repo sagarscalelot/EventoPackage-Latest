@@ -23,12 +23,12 @@ const CompanyPopUpUploadVideo = ({handleClose, setVideoList}) => {
 				}
 				else {
 					console.log("file size is greater than 512MB. File size is ", selected.size);
-					setErrorMessage("file size is greater than 512MB.");
+					setErrorMessage(`${intl.formatMessage({ id: "FILE SIZE IS GREATER THAN 512MB." })}`);
 					setError(true);
 				}
 			} else {
 				console.log("please select video file with mp4 extension.",selected.type);
-				setErrorMessage("please select video file with mp4 extension.");
+				setErrorMessage(`${intl.formatMessage({ id: "PLEASE SELECT VIDEO FILE WITH MP4 EXTENSION." })}`);
 				setError(true);
 			}
 		} catch (error) {

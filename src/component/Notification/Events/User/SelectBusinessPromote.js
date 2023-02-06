@@ -36,7 +36,7 @@ function SelectBusinessPromote() {
         toast.error(response.data.Message);
       }
     } catch (error) {
-      toast.error("Something Went Wrong.");
+      toast.error(`${intl.formatMessage({ id: `${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`})}`);
       navigate(`/auth/login`);
       console.log(error);
     }

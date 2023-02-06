@@ -53,7 +53,7 @@ const EventAddPlacesEventList = ({ displayName, categoryName, eventId }) => {
                 </Modal>
             </div>
         );
-    else if (displayName === "" && categoryName === "") return toast.error("Enable to show Event");
+    else if (displayName === "" && categoryName === "") return toast.error(`${intl.formatMessage({ id: "ENABLE TO SHOW EVENT" })}`);
     else
         return "";
 }

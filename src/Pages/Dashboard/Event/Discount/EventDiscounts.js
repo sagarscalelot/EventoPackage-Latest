@@ -34,7 +34,6 @@ const EventDiscounts = () => {
   const [activeList, setActiveList] = useState([]);
   const [selectedDiscount, setSelectedDiscount] = useState({});
   const [serviceList, setServiceList] = useState([]);
-  const [isNoError, setIsNoError] = useState(false);
 
   const getDiscount = async () => {
     const displayDiscount = [];
@@ -85,46 +84,6 @@ const EventDiscounts = () => {
   const initialRender = useRef(true);
   const initialRender2 = useRef(true);
 
-  const CheckError = async (activeListData) => {
-    let isBack = false;
-    activeListData.map((e) => {
-      if (e?.discounttype === "discount_on_equipment_or_item") {
-        // if(!e.items.length){
-        // 	toast.error("Please select any Equipment Or Item")
-        // 	isBack = true
-        // 	return
-        // }
-        if (eventType === "hyp") {
-          if (!e.services?.length && !e.items?.length) {
-            toast.error("Please select any services");
-            isBack = true;
-            return;
-          }
-        }
-        if (eventType === "psb") {
-          if (!e.equipments?.length && !e.items?.length) {
-            toast.error("Please select any equipments");
-            isBack = true;
-            return;
-          }
-        }
-        if (eventType === "gsb") {
-          if (!e.equipments?.length && !e.items?.length) {
-            toast.error("Please select any equipments or items");
-            isBack = true;
-            return;
-          }
-        }
-      }
-    });
-    if (isBack === false) {
-      console.log("====");
-      setIsNoError(true);
-    } else {
-      setIsNoError(false);
-    }
-  };
-
   const clickNextHandler = async () => {
     let allList = Object.assign([], allDiscount);
     let activeListData = allList.filter(
@@ -135,21 +94,21 @@ const EventDiscounts = () => {
       if (e?.discounttype === "discount_on_equipment_or_item") {
         if (eventType === "hyp") {
           if (!e.services?.length && !e.items?.length) {
-            toast.error("Please select any services");
+            toast.error(`${intl.formatMessage({ id: "PLEASE SELECT ANY SERVICES" })}`);
             isBack = true;
             return;
           }
         }
         if (eventType === "psb") {
           if (!e.equipments?.length && !e.items?.length) {
-            toast.error("Please select any equipments");
+            toast.error(`${intl.formatMessage({ id: "PLEASE SELECT ANY EQUIPMENTS" })}`);
             isBack = true;
             return;
           }
         }
         if (eventType === "gsb") {
           if (!e.equipments?.length && !e.items?.length) {
-            toast.error("Please select any equipments or items");
+            toast.error(`${intl.formatMessage({ id: "PLEASE SELECT ANY EQUIPMENTS OR ITEMS" })}`);
             isBack = true;
             return;
           }
@@ -208,7 +167,7 @@ const EventDiscounts = () => {
     if (e.target.checked) {
       if (ele?.discounttype === "discount_on_equipment_or_item") {
         if (!serviceList.length) {
-          toast.error("Any equipment or item not available");
+          toast.error(`${intl.formatMessage({ id: "ANY EQUIPMENT OR ITEM NOT AVAILABLE" })}`);
           return;
         }
       }

@@ -37,12 +37,12 @@ const EventPopUpUploadVideo = ({ handleClose, eventId, videoList }) => {
         }
         else {
           // console.log("file size is greater than 512MB. File size is ", selected.size);
-          setErrorMessage("file size is greater than " + size + " Mb.");
+          setErrorMessage(`${intl.formatMessage({ id: "FILE SIZE IS GREATER THEN" })}` + size + " Mb.");
           setError(true);
         }
       } else {
         // console.log("please select video file with mp4 extension.",selected.type);
-        setErrorMessage("please select valid video file.");
+        setErrorMessage(`${intl.formatMessage({ id: "PLEASE SELECT VALID VIDEO FILE." })}`);
         setError(true);
       }
     } catch (error) {
@@ -77,7 +77,7 @@ const EventPopUpUploadVideo = ({ handleClose, eventId, videoList }) => {
         toast.error(response.data.Message);
       }
     } catch (error) {
-      toast.error("Something Went wrong.");
+      toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
       console.log(error);
     }
   }
