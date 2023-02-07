@@ -175,8 +175,8 @@ const EventAboutPlace = () => {
 										<input type="text" className="w-full outline-none text-spiroDiscoBall font-bold text-base"
 											value={formik.values?.place_price} name="place_price" onChange={(e) => setInputValue("place_price", e.target.value)} />
 									</div>
-									<div className="selectPrice flex items-center space-x-3">
-										<label className="block cursor-pointer">
+									<div className="selectPrice flex items-center space-x-3 max-[490px]:block">
+										<label className="block cursor-pointer max-[490px]:ml-3">
 											<input type="radio" name="price" value="per_day" checked={priceType === "per_day" && true} className="hidden" onChange={(e) => setPriceType("per_day")} />
 											<span
 												className="text-sm text-quicksilver py-2 px-3 bg-white shadow-lg whitespace-nowrap font-bold rounded block">

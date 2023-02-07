@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import logoImage from "../../assest/svg/logo.svg";
 import userImage from "../../assest/images/userdefault.jpg";
 import Modal from "../../Common/Modals/Modal.js";
@@ -60,12 +60,13 @@ const SideBar = () => {
   const dispatch = useDispatch();
   const profileDetails = useProfileDetails();
   const [languagePopup, setLanguagePopup] = useState(false);
+  // const [isToggleSidebar, setIsToggleSidebar] = useState(false);
   const intl = useIntl();
 
   const navigate = useNavigate();
   const { user } = useUser();
   const token = user?.token || null;
-
+  let isToggleSidebar = useRef(false)
   const getProfile = async () => {
     try {
       await dispatch(getProfileDetails()).unwrap();
@@ -105,11 +106,25 @@ const SideBar = () => {
     localStorage.removeItem("stepCount");
   };
 
+  const toggleSidebar = () => {
+    isToggleSidebar.current = !isToggleSidebar.current
+    if (isToggleSidebar.current) {
+      document.querySelector(".app")?.classList.add("sidenav-toggled-open");
+    } else {
+      document.querySelector(".app")?.classList.remove("sidenav-toggled-open");
+    }
+  };
+
+  const Outhover = () => {
+    isToggleSidebar.current = false
+    document.querySelector(".app")?.classList.remove("sidenav-toggled-open");
+  };
+
   return (
-    <div className="main flex min-h-screen">
-      {/* <!-- Left Panel --> */}
-      <div className="leftPanel max-w-[230px] w-full bg-white shadow-md relative z-30">
-        <div className="logo text-center px-4 pt-5 pb-8">
+    <div className="main flex min-h-screen relative">
+      {/* <!-- Left Panel -->*/}
+      <div className="leftPanel max-w-[230px] w-full  bg-white absolute shadow-md max-[768px]:top-[76px] z-30">
+        <div className="logo text-center px-4 pt-5 pb-8 max-[768px]:hidden">
           <Link to="/" className="block">
             <img
               src={logoImage}
@@ -145,9 +160,12 @@ const SideBar = () => {
               <i className="w-6 block text-center text-lg icon-refer"></i>
             </span>
             <span>{intl.formatMessage({ id: "REFER & EARN" })}</span>
-
           </NavLink>
-          <NavLink to="redeem" activeclassname="active" title={intl.formatMessage({ id: "REDEEM" })}>
+          <NavLink
+            to="redeem"
+            activeclassname="active"
+            title={intl.formatMessage({ id: "REDEEM" })}
+          >
             <span>
               <i className="w-6 block text-center text-lg icon-redem"></i>
             </span>
@@ -173,13 +191,21 @@ const SideBar = () => {
             </span>
             <span>{intl.formatMessage({ id: "FESTUM EVENTO" })}</span>
           </a>
-          <NavLink to="booking" activeclassname="active" title={intl.formatMessage({ id: "BOOKING" })}>
+          <NavLink
+            to="booking"
+            activeclassname="active"
+            title={intl.formatMessage({ id: "BOOKING" })}
+          >
             <span>
               <i className="w-6 block text-center text-lg icon-booking"></i>
             </span>
             <span>{intl.formatMessage({ id: "BOOKING" })}</span>
           </NavLink>
-          <NavLink to="invoice" activeclassname="active" title={intl.formatMessage({ id: "INVOICE" })}>
+          <NavLink
+            to="invoice"
+            activeclassname="active"
+            title={intl.formatMessage({ id: "INVOICE" })}
+          >
             <span>
               <i className="w-6 block text-center text-lg icon-invoice"></i>
             </span>
@@ -207,13 +233,21 @@ const SideBar = () => {
             </span>
             <span>Gift</span>
           </NavLink> */}
-          <NavLink to="faq" activeclassname="active" title={intl.formatMessage({ id: "FAQ" })}>
+          <NavLink
+            to="faq"
+            activeclassname="active"
+            title={intl.formatMessage({ id: "FAQ" })}
+          >
             <span>
               <i className="w-6 block text-center text-lg icon-help"></i>
             </span>
             <span>{intl.formatMessage({ id: "FAQ" })}</span>
           </NavLink>
-          <NavLink to="chatbot" activeclassname="active" title={intl.formatMessage({ id: "HELP" })}>
+          <NavLink
+            to="chatbot"
+            activeclassname="active"
+            title={intl.formatMessage({ id: "HELP" })}
+          >
             <span>
               <i className="w-6 block text-center text-lg icon-massage"></i>
             </span>
@@ -224,9 +258,44 @@ const SideBar = () => {
       {/* <!-- Content --> */}
       <div className="w-full">
         {/* <!-- Top Header --> */}
-        <div className="w-full bg-white py-3.5 px-6 xl:px-12 flex flex-wrap items-center shadow-sm">
+        <div className="w-auto ml-[230px] max-[768px]:ml-[0] bg-white max-[550px]:px-3.5 py-3.5 px-6 xl:px-12 flex flex-wrap items-center shadow-sm">
           {/* <!-- Search Box --> */}
-          <div className="w-72 relative bg-brightGray rounded-md flex items-center">
+          <button
+            className="px-3.5 max-[550px]:px-2 menu-toggle min-[769px]:hidden"
+            // onMouseOver={() => Onhover()}
+            onMouseOut={() => Outhover()}
+            onClick={() => {toggleSidebar();}}
+          >
+            <svg
+              version="1.0"
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 512.000000 512.000000"
+              preserveAspectRatio="xMidYMid meet"
+              className="block hover:fill-spiroDiscoBall anim"
+            >
+              <g
+                transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                // fill="#000000"
+                stroke="none"
+              >
+                <path d="M799 3906 c-56 -20 -96 -53 -126 -104 -24 -40 -28 -58 -28 -123 0 -67 4 -81 30 -125 19 -30 49 -60 79 -79 l49 -30 1757 0 1757 0 49 30 c30 19 60 49 79 79 27 44 30 58 30 126 0 68 -3 82 -30 126 -19 30 -49 60 -79 79 l-49 30 -1741 2 c-1406 2 -1748 0 -1777 -11z" />
+                <path d="M799 2786 c-56 -20 -96 -53 -126 -104 -24 -40 -28 -58 -28 -123 0 -67 4 -81 30 -125 19 -30 49 -60 79 -79 l49 -30 1757 0 1757 0 49 30 c30 19 60 49 79 79 27 44 30 58 30 126 0 68 -3 82 -30 126 -19 30 -49 60 -79 79 l-49 30 -1741 2 c-1406 2 -1748 0 -1777 -11z" />
+                <path d="M799 1666 c-56 -20 -96 -53 -126 -104 -24 -40 -28 -58 -28 -123 0 -67 4 -81 30 -125 19 -30 49 -60 79 -79 l49 -30 1757 0 1757 0 49 30 c30 19 60 49 79 79 27 44 30 58 30 126 0 68 -3 82 -30 126 -19 30 -49 60 -79 79 l-49 30 -1741 2 c-1406 2 -1748 0 -1777 -11z" />
+              </g>
+            </svg>
+          </button>
+          {/* <div className="logo text-center px-4 pt-5 pb-8 min-[768px]:hidden">
+          <Link to="/" className="block">
+            <img
+              src={logoImage}
+              alt="Evento Package Logo"
+              className="max-w-full w-auto mx-auto"
+            />
+          </Link>
+        </div> */}
+          <div className="w-72 max-[768px]:w-50 max-[550px]:w-40 max-[400px]:w-32 relative bg-brightGray rounded-md flex items-center">
             <input
               type="text"
               name=""
@@ -296,7 +365,7 @@ const SideBar = () => {
                     >
                       <i className="w-6 block text-center text-lg icon-user mr-4"></i>
                       <span className="font-bold font-primary leading-4">
-                      {intl.formatMessage({ id: "VIEW PROFILE" })}
+                        {intl.formatMessage({ id: "VIEW PROFILE" })}
                       </span>
                     </div>
                     <div
@@ -307,7 +376,7 @@ const SideBar = () => {
                     >
                       <i className="w-6 block text-center text-lg icon-logout mr-4"></i>
                       <span className="font-bold font-primary leading-4">
-                      {intl.formatMessage({ id: "SIGN OUT" })}
+                        {intl.formatMessage({ id: "SIGN OUT" })}
                       </span>
                     </div>
                   </div>
@@ -320,7 +389,7 @@ const SideBar = () => {
           <LanguagePopup handleClose={setLanguagePopup} />
         </Modal>
         {/* <!-- Content In --> */}
-        <div className="rightInContent">
+        <div className="rightInContent max-[768px]:ml-[0]">
           <Routes>
             <Route path="dashboard">
               <Route index element={<SelectWhoYouAre />} />

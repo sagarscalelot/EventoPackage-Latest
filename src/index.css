@@ -61,6 +61,7 @@ p.exsmall {
 /* rightInContent */
 .rightInContent {
 	@apply py-12 overflow-y-auto h-[calc(100vh-76px)];
+	margin-left: 230px;
 }
 
 /* Button Default */
@@ -774,4 +775,23 @@ img.fixed-images {
 	outline: none;
 	outline-offset: 0;
 	box-shadow: none !important;
+}
+
+/* Sidebar toggle css*/
+/* .app.sidenav-toggled-open .main .leftPanel .logo{
+	display: none;
+} */
+
+@media (max-width: 768px) {
+	.app .main .leftPanel{
+		left: -230px;
+		transition: left 0.45s ease,width 0.45s ease;
+		-webkit-transition: left 0.45s ease,width 0.45s ease;
+	}
+}
+
+.app.sidenav-toggled-open .main .leftPanel{
+	top: 76px;
+	/* display: unset !important; */
+	left: 0;
 }

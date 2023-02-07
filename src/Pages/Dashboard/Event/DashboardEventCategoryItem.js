@@ -167,7 +167,7 @@ const DashboardEventCategoryItem = ({ data, getAllEvents, handleClick }) => {
               </h1>
             </div>
           </div>
-          <div className="flex justify-between pt-4">
+          <div className="flex justify-between pt-4 max-[530px]:block">
             <div className="flex items-center">
               <div className="flex items-center space-x-1">
                 <Star ratings={data?.ratings} />
@@ -212,7 +212,7 @@ const DashboardEventCategoryItem = ({ data, getAllEvents, handleClick }) => {
                 )}
               </div>
             </div>
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 max-[530px]:pt-5">
               <button className="bg-brightGray px-2 py-1 text-center rounded">
                 <Link
                   to={`./addplaces`}

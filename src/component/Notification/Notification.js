@@ -41,11 +41,11 @@ const Notification = () => {
     <div className="wrapper min-h-full">
       <div className="space-y-8 h-full">
         {/* <!-- title-holder  --> */}
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center max-[660px]:block">
           <Link to="/" className="flex items-center">
             <h1>{intl.formatMessage({id: "NOTIFICATION"})}</h1>
           </Link>
-          <div className="flex items-center  space-x-5">
+          <div className="flex items-center  space-x-5 max-[660px]:pt-3">
             <button className="btn-primary" onClick={() => navigate("/notification/history")}>
               <i className="icon-time mr-3"></i>
               <span>{intl.formatMessage({id: "HISTORY"})}</span>

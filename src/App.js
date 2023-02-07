@@ -9,6 +9,9 @@ import frTranslationMessages from "./Common/translations/fr.json";
 import chTranslationMessages from "./Common/translations/ch.json";
 
 const App = () => {
+  document
+    .querySelector("body")
+    ?.classList.add("app");
   return (
     <React.Fragment>
       <LanguageProvider

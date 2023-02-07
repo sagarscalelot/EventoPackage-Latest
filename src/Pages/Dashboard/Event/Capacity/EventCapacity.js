@@ -170,7 +170,7 @@ const EventCapacity = () => {
           <StepProgressBar eventType={eventType} />
           {/* <!-- main-content  --> */}
           <div className="space-y-5">
-            <div className="flex items-end -mx-3.5">
+          <div className="flex items-end -mx-3.5 max-[540px]:overflow-auto">
               <div className="w-full lg:w-1/3 px-3.5">
                 <label htmlFor="selact" className="p-5 py-4 bg-white rounded-md flex space-x-3 cursor-pointer">
                   <input type="radio" name="type" id="select" className="w-6 h-6 rounded-full bg-brightGray appearance-none cursor-pointer" checked={type === "romantic_stay" && true} onChange={(e) => setType("romantic_stay")} />

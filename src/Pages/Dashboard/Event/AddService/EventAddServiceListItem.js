@@ -60,7 +60,7 @@ const EventAddServiceListItem = ({ data, edit, eventId, setReload, setActiveList
 	}
 
 	return (
-		<div className="bg-white rounderd px-7 py-4">
+		<div className="bg-white rounderd px-7 py-4 max-[400px]:w-full overflow-auto">
 			<div className="flex justify-between">
 				<div className="">
 					<div className="w-28 h-28 border-2 border-brightGray rounded-md">
@@ -68,7 +68,7 @@ const EventAddServiceListItem = ({ data, edit, eventId, setReload, setActiveList
 					</div>
 				</div>
 				<div className="w-full pl-5">
-					<div className="flex justify-between">
+				<div className="flex justify-between max-[400px]:block">
 						<h2>{data.name}</h2>
 						<div className="flex items-center space-x-5">
 							<div className="flex items-center">
@@ -77,8 +77,8 @@ const EventAddServiceListItem = ({ data, edit, eventId, setReload, setActiveList
 								<span className="on text-base font-bold anim order-3">{intl.formatMessage({ id: "ON" })}</span>
 							</div>
 							{data.quantity && <span
-								className="inline-block text-base text-spiroDiscoBall font-bold bg-brightGray py-1.5 px-3.5 rounded">{data.quantity} Qty</span>}
-							<a href="#" title="Delete" onClick={() => { deleteHandler() }}><i className="text-center icon-fill-delete text-xl"></i></a>
+							className="inline-block text-base text-spiroDiscoBall font-bold bg-brightGray py-1.5 px-3.5 rounded max-[550px]:my-3">{data.quantity} Qty</span>}
+							<a href="#" title="Delete" onClick={() => { deleteHandler() }}><i className="text-center icon-fill-delete text-xl max-[550px]:mx-19"></i></a>
 							<a href="#" title="Edit" onClick={() => setIsAddServicesPopUpOpen(true)}><i className="text-center icon-edit text-xl"></i></a>
 						</div>
 					</div>
@@ -88,7 +88,7 @@ const EventAddServiceListItem = ({ data, edit, eventId, setReload, setActiveList
 				   since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
 				   specimen book 
 				 </p> */}
-					<h3 className="text-right">{data.price} INR</h3>
+				 <h3 className="text-right max-[400px]:text-left">{data.price} INR</h3>
 				</div>
 			</div>
 			<Modal isOpen={isAddServicesPopUpOpen}>
