@@ -367,7 +367,7 @@ input:checked + .check-language i {
 	@apply bg-white px-8 py-7 rounded-md;
 }
 .Accordion_item h3.title_tab {
-	@apply flex items-center justify-between cursor-pointer capitalize text-xl 2xl:text-2xl;
+	@apply flex items-center justify-between cursor-pointer uppercase text-xl 2xl:text-2xl;
 }
 .Accordion_item h3.title_tab span {
 	@apply flex items-center text-lg text-japaneseIndigo;
