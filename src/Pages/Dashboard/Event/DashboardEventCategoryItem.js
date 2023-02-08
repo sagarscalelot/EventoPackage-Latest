@@ -106,7 +106,7 @@ const DashboardEventCategoryItem = ({ data, getAllEvents, handleClick }) => {
               <h2 className="text-japaneseIndigo pt-5">{data?.display_name}</h2>
               <div className="text-sm text-quicksilver pt-3">
                 <i className="icon-fill-location mr-3"></i>
-                {data?.capacity?.address}{data?.personaldetail?.area + "," + data?.personaldetail?.city + "," + data?.personaldetail?.state}
+                {/* {data?.capacity?.address}{data?.personaldetail?.area + "," + data?.personaldetail?.city + "," + data?.personaldetail?.state} */}
                 {data?.capacity ? (
                   data?.capacity?.address
                 ) : (
