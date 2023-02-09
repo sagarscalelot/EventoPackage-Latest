@@ -194,8 +194,8 @@ const EventPopUpAddService = ({
                       onChange={(e) => setPrice(e.target.value)}
                     />
                   </div>
-                  <div className="selectPrice flex items-center space-x-3">
-                    <label className="block cursor-pointer">
+                  <div className="selectPrice flex items-center space-x-3 max-[768px]:flex-col">
+                    <label className="block cursor-pointer max-[768px]:ml-3">
                       <input
                         type="radio"
                         name="price"

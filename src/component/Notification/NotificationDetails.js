@@ -110,7 +110,7 @@ const NotificationDetails = () => {
                 onChange={(e) => setTitle(e.target.value)}
               />
             </div>
-            <div className="w-full md:w-1/2 px-2 inputHolder">
+            <div className="w-full md:w-1/2 px-2 inputHolder max-[768px]:pt-3">
               <span className="input-titel text-lg text-japaneseIndigo font-bold">
               {intl.formatMessage({ id: "LINK" })}
               </span>

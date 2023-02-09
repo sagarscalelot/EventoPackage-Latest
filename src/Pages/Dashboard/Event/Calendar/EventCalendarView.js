@@ -90,7 +90,7 @@ const EventCalendarView = () => {
 					{/* <!-- step-progress-bar  --> */}
 					{/* <!-- main-content  --> */}
 					<div className="space-y-5">
-						<div className="flex items-end -mx-3.5">
+					<div className="flex items-end -mx-3.5 max-[768px]:flex-col">
 							<div className="w-full lg:w-1/3 px-3.5">
 								<h3 className="pb-2">{intl.formatMessage({ id: "START DATE & TIME" })}</h3>
 								<label className="bg-white rounded-md flex space-x-3 relative">

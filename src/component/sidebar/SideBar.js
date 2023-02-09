@@ -60,7 +60,6 @@ const SideBar = () => {
   const dispatch = useDispatch();
   const profileDetails = useProfileDetails();
   const [languagePopup, setLanguagePopup] = useState(false);
-  // const [isToggleSidebar, setIsToggleSidebar] = useState(false);
   const intl = useIntl();
 
   const navigate = useNavigate();
@@ -123,7 +122,7 @@ const SideBar = () => {
   return (
     <div className="main flex min-h-screen relative">
       {/* <!-- Left Panel -->*/}
-      <div className="leftPanel max-w-[230px] w-full  bg-white absolute shadow-md max-[768px]:top-[76px] z-30">
+      <div className="leftPanel max-w-[230px] w-full  bg-white fixed shadow-md max-[768px]:top-[75px] z-30">
         <div className="logo text-center px-4 pt-5 pb-8 max-[768px]:hidden">
           <Link to="/" className="block">
             <img
@@ -258,7 +257,7 @@ const SideBar = () => {
       {/* <!-- Content --> */}
       <div className="w-full">
         {/* <!-- Top Header --> */}
-        <div className="w-auto ml-[230px] max-[768px]:ml-[0] bg-white max-[550px]:px-3.5 py-3.5 px-6 xl:px-12 flex flex-wrap items-center shadow-sm">
+        <div className="w-[calc(100%-230px)] max-[768px]:w-full ml-[230px] max-[768px]:ml-[0] bg-white max-[550px]:px-3.5 py-3.5 px-6 xl:px-12 flex flex-wrap items-center fixed shadow-sm">
           {/* <!-- Search Box --> */}
           <button
             className="px-3.5 max-[550px]:px-2 menu-toggle min-[769px]:hidden"

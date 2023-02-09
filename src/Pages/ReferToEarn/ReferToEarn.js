@@ -32,7 +32,7 @@ const ReferToEarn = () => {
       <div className="space-y-7 h-full">
         {/* <!-- title-holder  --> */}
         <h1><span>{intl.formatMessage({ id: "REFER TO EARN" })}</span></h1>
-        <div className="p-7 bg-white rounded-md">
+        <div className="p-7 max-[768px]:p-4 bg-white rounded-md">
           <div className="py-3.5 px-5 rounded-lg bg-spiroDiscoBall flex items-center justify-between">
             <svg
               width="62"
@@ -417,11 +417,11 @@ const ReferToEarn = () => {
             <span>{intl.formatMessage({ id: "REFER A FRIEND AND GET AN ADDITIONAL 10 COINS AND YOUR FRIEND GETS ADDITIONAL 20 POINT. SO REFER AWAY" })}</span>
             </p>
           </div>
-          <div className="pt-10 space-y-5">
+          <div className="pt-10 space-y-5 max-[1096px]:flex max-[1096px]:items-center max-[1096px]:flex-col">
             <h3 className="text-lg"><span>{intl.formatMessage({ id: "SHARE YOUR REFER CODE VIA" })}</span></h3>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-5">
-                <div className="flex items-center space-x-2">
+            <div className="flex items-center justify-between max-[1096px]:flex-col">
+              <div className="flex items-center space-x-5 max-[768px]:space-x-2">
+                <div className="flex items-center space-x-2 listShare">
                   {/* <!-- whatsapp  --> */}
                   <a href="#">
                     <svg
@@ -529,12 +529,12 @@ const ReferToEarn = () => {
                 </div>
                 <button
                   type="button"
-                  className="p-3 px-4 bg-brightGray rounded-md text-lg font-bold uppercase"
+                  className="p-3 px-4 bg-brightGray rounded-md text-lg font-bold uppercase max-[768px]:rounded-full max-[768px]:py-[0.45rem] max-[768px]:px-3"
                 >
-                  <i className="icon-share mr-2"></i> <span>{intl.formatMessage({ id: "OTHER" })}</span>
+                   <i className="icon-share mr-2 max-[768px]:mr-0"></i> <span className="max-[768px]:hidden">{intl.formatMessage({ id: "OTHER" })}</span>
                 </button>
               </div>
-              <div>
+              <div className="max-[1096px]:mt-6">
                 <div className="rounded-md border-2 border-dotted border-ufoGreen bg-green-100 p-3 flex items-center justify-between">
                   <div className="pr-7">
                     <p className="text-xs"><span>{intl.formatMessage({ id: "REFERRAL CODE" })}</span></p>

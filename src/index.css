@@ -60,7 +60,8 @@ p.exsmall {
 
 /* rightInContent */
 .rightInContent {
-	@apply py-12 overflow-y-auto h-[calc(100vh-76px)];
+	/* @apply py-12 overflow-y-auto h-[calc(100vh-76px)]; */
+	@apply pb-12 pt-[100px] overflow-y-auto;
 	margin-left: 230px;
 }
 
@@ -107,11 +108,21 @@ p.exsmall {
 .checkbox input {
 	@apply appearance-none w-8 h-8 border bg-white border-gray-300 rounded-md cursor-pointer;
 }
+@media (max-width: 768px) {
+	.checkbox input {
+		@apply appearance-none w-6 h-6 bg-opacity-40 border-opacity-75 bg-black border-2 border-gray-300 rounded-full cursor-pointer;
+	}
+} 
 .checkbox i {
 	@apply absolute scale-0 origin-center;
 }
 input:checked {
 	@apply bg-spiroDiscoBall border-spiroDiscoBall duration-200;
+}
+@media (max-width: 768px) {
+	.checkbox i {
+		@apply absolute ml-1.5 text-10 scale-0 origin-center;
+	}
 }
 input:checked + i {
 	@apply scale-100 duration-300;
@@ -367,7 +378,7 @@ input:checked + .check-language i {
 	@apply bg-white px-8 py-7 rounded-md;
 }
 .Accordion_item h3.title_tab {
-	@apply flex items-center justify-between cursor-pointer uppercase text-xl 2xl:text-2xl;
+	@apply flex items-center justify-between cursor-pointer capitalize text-xl 2xl:text-2xl;
 }
 .Accordion_item h3.title_tab span {
 	@apply flex items-center text-lg text-japaneseIndigo;
@@ -791,7 +802,19 @@ img.fixed-images {
 }
 
 .app.sidenav-toggled-open .main .leftPanel{
-	top: 76px;
-	/* display: unset !important; */
+	top: 75px;
 	left: 0;
+}
+
+@media (min-width: 769px) {
+	.app.sidenav-toggled-open .main .leftPanel{
+		top: 0;
+	}
+}
+
+@media (max-width: 768px) {
+	.listShare svg{
+		width: 40px; 
+		height: 40px;
+	}
 }

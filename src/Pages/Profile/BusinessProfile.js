@@ -154,9 +154,9 @@ const BusinessProfile = ({ business, getProfile }) => {
         )}
       </div>
       {/* <!-- profile image--> */}
-      <div className="flex items-center">
+      <div className="flex items-center max-[768px]:flex-col">
         <div className="">
-          <div className="w-44 h-44 rounded-full border-8 border-spiroDiscoBall relative mr-9">
+          <div className="w-44 h-44 rounded-full border-8 border-spiroDiscoBall relative mr-9 max-[768px]:mr-0">
             <img
               src={
                 profileImage
@@ -179,7 +179,7 @@ const BusinessProfile = ({ business, getProfile }) => {
             </div>
           </div>
         </div>
-        <div className="">
+        <div className="max-[768px]:flex flex-col items-center mt-4">
           <h2>{business?.name}</h2>
           <p className="text-xl font-bold text-japaneseIndigo pt-2.5">
             {business?.about}
@@ -188,7 +188,7 @@ const BusinessProfile = ({ business, getProfile }) => {
       </div>
       {/* <!-- form Edit  --> */}
       <div className="">
-        <div className="flex justify-between space-x-5 -mx-2">
+        <div className="flex justify-between space-x-5 max-[768px]:space-x-0 -mx-2 max-[768px]:flex-col">
           <div className="w-full md:w-1/2 px-2 inputHolder">
             <span className="input-titel">{intl.formatMessage({ id: "NAME" })}</span>
             <input
@@ -200,7 +200,7 @@ const BusinessProfile = ({ business, getProfile }) => {
               disabled={isDisable}
             />
           </div>
-          <div className="w-full md:w-1/2 px-2 inputHolder">
+          <div className="w-full md:w-1/2 px-2 inputHolder max-[768px]:pt-3">
             <span className="input-titel">{intl.formatMessage({ id: "EMAIL" })}</span>
             <input
               type="text"
@@ -212,8 +212,8 @@ const BusinessProfile = ({ business, getProfile }) => {
             />
           </div>
         </div>
-        <div className="flex justify-between space-x-5 pt-3 -mx-2">
-          <div className="w-1/2 px-2">
+        <div className="flex justify-between space-x-5 max-[768px]:space-x-0 pt-3 -mx-2 max-[768px]:flex-col">
+          <div className="w-1/2 px-2 max-[768px]:w-full">
             <span className="input-titel">{intl.formatMessage({ id: "PHONE NUMBER" })}</span>
             <div className="flex items-center h-auto space-x-3 mt-1">
               <div className="">
@@ -243,7 +243,7 @@ const BusinessProfile = ({ business, getProfile }) => {
               </div>
             </div>
           </div>
-          <div className="w-full md:w-1/2 px-2 inputHolder">
+          <div className="w-full md:w-1/2 px-2 inputHolder  max-[768px]:pt-3">
             <span className="input-titel">{intl.formatMessage({ id: "ADDRESS" })}</span>
             <input
               type="text"
@@ -255,7 +255,7 @@ const BusinessProfile = ({ business, getProfile }) => {
             />
           </div>
         </div>
-        <div className="flex justify-between space-x-5 pt-3 -mx-2">
+        <div className="flex justify-between space-x-5 max-[768px]:space-x-0 pt-3 -mx-2 max-[768px]:flex-col">
           <div className="w-full md:w-1/2 px-2 inputHolder">
             <span className="input-titel">{intl.formatMessage({ id: "DATE OF BIRTH" })}</span>
             <input
@@ -268,7 +268,7 @@ const BusinessProfile = ({ business, getProfile }) => {
               disabled={isDisable}
             />
           </div>
-          <div className="w-full md:w-1/2 px-2 inputHolder">
+          <div className="w-full md:w-1/2 px-2 inputHolder max-[768px]:pt-3">
             <span className="input-titel">{intl.formatMessage({ id: "COUNTRY" })}</span>
             <input
               type="text"
