@@ -65,8 +65,8 @@ const DashboardEventCategoryItem = ({ data, getAllEvents, handleClick }) => {
   const state = data?.personaldetail?.state + "-";
   const pincode = data?.personaldetail?.pincode;
   return (
-    <div className="w-full flex items-center ">
-      <div className="flex space-x-5 w-full p-4 pr-7 bg-white rounded">
+    <div className="w-full flex items-center">
+      <div className="flex space-x-5 max-[820px]:space-x-0 w-full p-4 max-[820px]:pr-4 pr-7 bg-white rounded max-[820px]:flex-col">
         <div className="max-w-xs h-[200px] w-full">
           <Link
             to={`../event-view/${eventType}`}
@@ -94,8 +94,8 @@ const DashboardEventCategoryItem = ({ data, getAllEvents, handleClick }) => {
             />
           </Link>
         </div>
-        <div className="w-full">
-          <div className="flex justify-between border-b-2 pb-4">
+        <div className="w-full max-[820px]:mt-5">
+          <div className="flex justify-between border-b-2 pb-4 max-[820px]:flex-col">
             <div className="capitalize">
               <span className="text-sm text-white bg-spiroDiscoBall px-3 py-1">
                 {data?.event_category?.category_name}
@@ -107,7 +107,7 @@ const DashboardEventCategoryItem = ({ data, getAllEvents, handleClick }) => {
               <div className="text-sm text-quicksilver pt-3">
                 <i className="icon-fill-location mr-3"></i>
                 {/* {data?.capacity?.address}{data?.personaldetail?.area + "," + data?.personaldetail?.city + "," + data?.personaldetail?.state} */}
-                {data?.capacity ? (
+                {data?.capacity?.address ? (
                   data?.capacity?.address
                 ) : (
                   <>
@@ -121,7 +121,7 @@ const DashboardEventCategoryItem = ({ data, getAllEvents, handleClick }) => {
                 )}
               </div>
             </div>
-            <div className="">
+            <div className="max-[820px]:flex max-[820px]:justify-between max-[820px]:flex-row-reverse max-[820px]:pt-3">
               <div className="flex items-center justify-end">
                 {/* {console.log("check : ", data?.display_name, data?.is_live)} */}
                 {data?.is_approved == true ? (
@@ -149,7 +149,7 @@ const DashboardEventCategoryItem = ({ data, getAllEvents, handleClick }) => {
                 </label>
               </div>
               {/* <h1 className="pt-7">{parseFloat(data?.).toFixed(2)} INR</h1> */}
-              <h1 className="pt-7">
+              <h1 className="pt-7 max-[820px]:pt-0">
                 {/* {data?.aboutplace ?
 									<>{data?.aboutplace?.place_price ?
 										<>{parseFloat(data?.aboutplace?.place_price).toFixed(2)} INR</> : ""} </> :
@@ -167,15 +167,15 @@ const DashboardEventCategoryItem = ({ data, getAllEvents, handleClick }) => {
               </h1>
             </div>
           </div>
-          <div className="flex justify-between pt-4 max-[530px]:block">
-            <div className="flex items-center">
-              <div className="flex items-center space-x-1">
+          <div className="flex justify-between pt-4 max-[820px]:flex-col">
+            <div className="flex items-center max-[820px]:flex-col max-[820px]:items-start">
+              <div className="flex items-center space-x-1 max-[820px]:space-x-2">
                 <Star ratings={data?.ratings} />
                 <span className="text-quicksilver text-xs font-bold pl-2">
                   {data?.totalreview} {intl.formatMessage({ id: "RATINGS" })}
                 </span>
               </div>
-              <div className="flex text-spiroDiscoBall text-xs font-bold ml-6">
+              <div className="flex text-spiroDiscoBall text-xs font-bold ml-6 max-[820px]:ml-0 max-[820px]:pt-2">
                 {data?.discounts[0]?.discounttype ===
                   "discount_on_total_bill" ? (
                   <>
@@ -212,7 +212,7 @@ const DashboardEventCategoryItem = ({ data, getAllEvents, handleClick }) => {
                 )}
               </div>
             </div>
-            <div className="flex space-x-2 max-[530px]:pt-5">
+            <div className="flex space-x-2 max-[820px]:space-x-3 max-[820px]:pt-3">
               <button className="bg-brightGray px-2 py-1 text-center rounded">
                 <Link
                   to={`./addplaces`}

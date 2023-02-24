@@ -36,12 +36,12 @@ const AllUserSelectPlan = () => {
         {/* <!-- select user card  --> */}
         <div className="">
           <h3>{intl.formatMessage({id: "SELECT USER PLAN"})}</h3>
-          <div className="flex justify-between space-x-5 items-center py-5">
+          <div className="flex justify-between space-x-5 items-center py-5 max-[820px]:flex-col max-[820px]:space-x-0">
             {/* <UserPlanCard totalUser={999} notificationCount={69} smsCount={399} emailCount={89} allCount={475} colorFrom={"#13e1b094"} colorTo={"#13E1B0"} />
           <UserPlanCard totalUser={9999} notificationCount={69} smsCount={399} emailCount={89} allCount={475} />
           <UserPlanCard totalUser={99999} notificationCount={69} smsCount={399} emailCount={89} allCount={475} /> */}
 
-            <div className="w-1/3">
+            <div className="w-1/3 max-[820px]:w-[80%]  max-[600px]:w-full">
               <div className="bg-gradient-to-r from-[#13e1b094] to-[#13E1B0] p-5 rounded-xl relative overflow-hidden">
                 <div className="absolute -left-3 -bottom-3">
                   <img src={celebrationSvg} alt="celebration" />
@@ -75,7 +75,7 @@ const AllUserSelectPlan = () => {
                 </label>
               </div>
             </div>
-            <div className="w-1/3">
+            <div className="w-1/3 max-[820px]:w-[80%] mt-3 max-[600px]:w-full">
               <div className="bg-gradient-to-r from-[#20c0e878] to-[#20C0E8] p-5 rounded-xl relative overflow-hidden">
                 <div className="absolute -left-3 -bottom-3">
                   <img src={celebrationSvg} alt="celebration" />
@@ -109,7 +109,7 @@ const AllUserSelectPlan = () => {
                 </label>
               </div>
             </div>
-            <div className="w-1/3">
+            <div className="w-1/3 max-[820px]:w-[80%] mt-4 max-[600px]:w-full">
               <div className="bg-gradient-to-r from-[#faba1585] to-[#FABA15] p-5 rounded-xl relative overflow-hidden">
                 <div className="absolute -left-3 -bottom-3">
                   <img src={celebrationSvg} alt="celebration" />
@@ -154,8 +154,8 @@ const AllUserSelectPlan = () => {
         </h2>
         {/* <!-- main-content  --> */}
         <div>
-          <div className="flex items-end justify-between">
-            <div className="w-1/2">
+          <div className="flex items-end justify-between  max-[600px]:items-start max-[600px]:flex-col">
+            <div className="w-1/2 max-[600px]:w-full">
               <h3 className="pb-3">{intl.formatMessage({ id: "SELECT ALL APP USER" })}</h3>
               <select className="bg-white rounded-md flex space-x-3 outline-0 px-6 py-[18px] relative arrow option">
                 <option>{intl.formatMessage({ id: "SELECT ALL" })}</option>
@@ -163,16 +163,16 @@ const AllUserSelectPlan = () => {
                 <option>{intl.formatMessage({ id: "2" })}</option>
               </select>
             </div>
-            <div className="bg-white p-[18px] rounded-md">
+            <div className="bg-white p-[18px] rounded-md max-[600px]:w-full max-[600px]:mt-3">
               <span className="text-base font-bold text-japaneseIndigo">
               {intl.formatMessage({ id: "TOTAL USER : 10000" })}
               </span>
             </div>
           </div>
           <div className="flex pt-7">
-            <div className="w-1/2">
+            <div className="w-1/2 max-[600px]:w-full">
               <h3 className="pb-3">{intl.formatMessage({ id: "ADS PUBLISH LOCATION" })}</h3>
-              <select className="bg-white rounded-md flex space-x-3 outline-0 px-6 py-[18px] relative location option">
+              <select className="bg-white rounded-md flex space-x-3 outline-0 px-6 py-[18px] relative location option max-[600px]:w-full">
                 <option>{intl.formatMessage({ id: "SURAT" })}</option>
                 <option>{intl.formatMessage({ id: "RAJKOT" })}</option>
                 <option>{intl.formatMessage({ id: "AHMADABAD" })}</option>

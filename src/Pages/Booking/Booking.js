@@ -39,19 +39,19 @@ const Booking = () => {
 
       <div className="space-y-8 h-full">
         {/* <!-- title-holder  --> */}
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center max-[820px]:items-start max-[820px]:flex-col">
           <h1 className="w-4/12">{intl.formatMessage({ id: "BOOKING" })}</h1>
-          <div className="w-8/12 flex items-center space-x-2.5">
-            <span className="w-1/12 text-xl font-bold">{intl.formatMessage({ id: "FILTER" })}</span>
-            <div className="w-4/12 bg-white flex justify-between items-center py-2 px-3 rounded-md">
+          <div className="w-8/12 flex items-center space-x-2.5 max-[820px]:pt-3 max-[820px]:flex-col max-[820px]:items-start max-[820px]:w-[95%]">
+            <span className="w-1/12 text-xl font-bold max-[820px]:w-[30%]">{intl.formatMessage({ id: "FILTER" })}</span>
+            <div className="w-4/12 bg-white flex justify-between items-center py-2 px-3 rounded-md max-[820px]:w-full max-[820px]:mt-3">
               <input type="date" className="w-full outline-none" placeholder="" />
               <span className="icon-calendar pl-2"></span>
             </div>
-            <div className="w-3/12 bg-white flex justify-between items-center py-2 px-3 rounded-md">
+            <div className="w-3/12 bg-white flex justify-between items-center py-2 px-3 rounded-md max-[820px]:w-full max-[820px]:mt-3">
               <input type="time" className="w-full outline-none" placeholder="" />
               <span className="icon-time pl-2"></span>
             </div>
-            <div className="w-4/12 relative bg-white py-2 px-3 rounded-md">
+            <div className="w-4/12 relative bg-white py-2 px-3 rounded-md max-[820px]:w-full max-[820px]:mt-3">
               <select name="All Category" className="arrow pr-11 text-japaneseIndigo font-bold tracking-wider appearance-none focus-visible:outline-none">
                 <option value="all-category">{intl.formatMessage({ id: "SELECT PLACE" })}</option>
                 <option value="Party ">{intl.formatMessage({ id: "SELECT PLACE 1" })}    </option>

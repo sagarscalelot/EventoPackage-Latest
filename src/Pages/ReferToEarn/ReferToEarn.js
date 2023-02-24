@@ -531,7 +531,7 @@ const ReferToEarn = () => {
                   type="button"
                   className="p-3 px-4 bg-brightGray rounded-md text-lg font-bold uppercase max-[768px]:rounded-full max-[768px]:py-[0.45rem] max-[768px]:px-3"
                 >
-                   <i className="icon-share mr-2 max-[768px]:mr-0"></i> <span className="max-[768px]:hidden">{intl.formatMessage({ id: "OTHER" })}</span>
+                  <i className="icon-share mr-2 max-[768px]:mr-0"></i> <span className="max-[768px]:hidden">{intl.formatMessage({ id: "OTHER" })}</span>
                 </button>
               </div>
               <div className="max-[1096px]:mt-6">

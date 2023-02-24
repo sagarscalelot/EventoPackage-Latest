@@ -225,7 +225,7 @@ const EventPersonalDetails = () => {
           {/* <!-- step-progress-bar  --> */}
           <StepProgressBar eventType={eventType} />
           {/* <!-- main-content  --> */}
-          <div className="space-y-5 -mx-2">
+          <div className="space-y-5 -mx-2 max-[768px]:space-y-0">
             <div className="w-full flex items-end flex-wrap">
               <div className="w-full md:w-1/2 px-2 inputHolder">
                 <span className="input-titel">
@@ -374,16 +374,16 @@ const EventPersonalDetails = () => {
               </span>
             </div>
             {/* option 1 */}
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3 max-[768px]:flex-col max-[768px]:space-x-0">
               <div
                 className={
                   "inputHolder " +
                   (priceType === "per_day" && true
-                    ? "w-8/12"
+                    ? "w-8/12 max-[768px]:w-full"
                     : (priceType === "per_event"
-                        ? "w-7/12 2xl:w-8/12"
-                        : "w-7/12 2xl:w-8/12") &&
-                      (priceType === "per_hour" ? "w-8/12" : "w-8/12"))
+                        ? "w-7/12 2xl:w-8/12 max-[768px]:w-full"
+                        : "w-7/12 2xl:w-8/12 max-[768px]:w-full") &&
+                      (priceType === "per_hour" ? "w-8/12 max-[768px]:w-full" : "w-8/12 max-[768px]:w-full"))
                 }
               >
                 <span className="input-titel">
@@ -392,18 +392,18 @@ const EventPersonalDetails = () => {
                 </span>
                 <label
                   htmlFor=""
-                  className="flex items-center w-full bg-white p-2 px-3.5 rounded-md"
+                  className="flex items-center w-full bg-white p-2 px-3.5 rounded-md max-[768px]:flex-col"
                 >
                   <div className="w-full inputHolder">
                     <input
                       type="text"
-                      className="w-full outline-none text-spiroDiscoBall font-bold text-base"
+                      className="w-full outline-none text-spiroDiscoBall font-bold text-base max-[768px]:pb-2"
                       value={formik.values?.price}
                       name="price"
                       onChange={(e) => setInputValue("price", e.target.value)}
                     />
                   </div>
-                  <div className="selectPrice flex items-center space-x-3">
+                  <div className="selectPrice flex items-center space-x-3 max-[768px]:w-full max-[768px]:justify-between">
                     <label className="block cursor-pointer">
                       <input
                         type="radio"
@@ -453,11 +453,11 @@ const EventPersonalDetails = () => {
                 className={
                   "inputHolder " +
                   (priceType === "per_hour"
-                    ? "w-4/12"
+                    ? "w-4/12 max-[768px]:w-full max-[768px]:pt-2"
                     : priceType === "per_event"
-                    ? "w-4/12 2xl:w-2/12"
+                    ? "w-4/12 2xl:w-2/12 max-[768px]:w-full max-[768px]:pt-2"
                     : priceType === "per_day"
-                    ? "w-4/12"
+                    ? "w-4/12 max-[768px]:w-full max-[768px]:pt-2"
                     : "hidden")
                 }
               >
@@ -478,7 +478,7 @@ const EventPersonalDetails = () => {
               <div
                 className={
                   "inputHolder " +
-                  (priceType === "per_event" ? "w-2/12" : "hidden")
+                  (priceType === "per_event" ? "w-2/12 max-[768px]:w-full max-[768px]:pt-2" : "hidden")
                 }
               >
                 <label className="input-titel">
@@ -497,7 +497,7 @@ const EventPersonalDetails = () => {
             <small className="text-red-500 text-xs">
               {formik.errors.price}
             </small>
-            <div className="space-y-5">
+            <div className="space-y-5 max-[768px]:space-y-1">
               <h3 className="px-2">{intl.formatMessage({ id: "ADDRESS" })}</h3>
               <div className="w-full flex flex-wrap">
                 <div className="w-full md:w-1/3 px-2 inputHolder">

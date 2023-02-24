@@ -179,7 +179,7 @@ const EventPersonalDetails = () => {
           {/* <!-- step-progress-bar  --> */}
           <StepProgressBar eventType={eventType} />
           {/* <!-- main-content  --> */}
-          <div className="space-y-5 -mx-2">
+          <div className="space-y-5 -mx-2 max-[768px]:space-y-1">
             <div className="w-full flex items-end flex-wrap">
               <div className="w-full md:w-1/2 px-2 inputHolder">
                 <span className="input-titel">{intl.formatMessage({ id: "PROFESSIONAL SKILL" })}</span>
@@ -294,7 +294,7 @@ const EventPersonalDetails = () => {
                 <br />
               </div>
             </div>
-            <div className="space-y-5">
+            <div className="space-y-5 max-[768px]:space-y-0">
               <h3 className="px-2">{intl.formatMessage({ id: "ADDRESS" })}</h3>
               <div className="w-full flex flex-wrap">
                 <div className="w-full md:w-1/3 px-2 inputHolder">

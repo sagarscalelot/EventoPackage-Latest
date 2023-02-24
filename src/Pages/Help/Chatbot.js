@@ -18,7 +18,7 @@ const Chatbot = () => {
                 {/* <!-- title-holder  --> */}
                 <div className="space-y-6 w-full">
                     <h1 className="w-full">{intl.formatMessage({ id: "CHATBOX" })}</h1>
-                    <div className="flex relative w-full h-[calc(100vh-200px)]">
+                    <div className="flex relative w-full h-[calc(100vh-200px)] max-[820px]:flex-col">
                         <div className="w-full lg:w-8/12">
                             <div className="shadow-lg rounded-md overflow-hidden h-full">
                                 {/* <!-- chat-titel  --> */}
@@ -67,7 +67,7 @@ const Chatbot = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="w-full lg:w-4/12 pl-5">
+                        <div className="w-full lg:w-4/12 pl-5 max-[820px]:pl-0 max-[820px]:mt-10">
                             <div className="bg-white py-5 2xl:py-7 rounded-md h-full">
                                 <h3 className="pb-2.5 px-5 2xl:px-7">{intl.formatMessage({ id: "USER LIST" })}</h3>
                                 <div className="user-container px-5 2xl:px-7">

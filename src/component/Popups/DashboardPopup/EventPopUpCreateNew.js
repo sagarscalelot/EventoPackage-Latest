@@ -89,16 +89,16 @@ const EventPopUpCreateNew = ({
     <div className="popup table fixed w-full inset-0 z-40 bg-black bg-opacity-75 h-screen">
       <div className="table-cell align-middle">
         <div className="popin max-w-2xl w-full mx-auto max-h-[calc(100vh-55px)] overflow-y-auto lg:px-9">
-          <div className="bg-brightGray p-12">
-            <div className="flex justify-between items-center">
+          <div className="bg-brightGray p-12  max-[640px]:p-8">
+            <div className="flex justify-between items-center max-[640px]:items-start max-[640px]:flex-col">
               <h1 className="h1">{intl.formatMessage({ id: "CREATE NEW" })}</h1>
-              <div className="flex items-center space-x-6">
+              <div className="flex items-center space-x-6 max-[640px]:justify-between max-[640px]:space-x-20">
                 <button
                   onClick={() => {
                     setIsCategoryPopUpOpen(true);
                   }}
                   href="#"
-                  className="text-base font-bold text-spiroDiscoBall"
+                  className="text-base font-bold text-spiroDiscoBall max-[640px]:pt-2"
                 >
                   <i className="icon-plus font-bold text-xs"></i>{" "}
                   <span>{intl.formatMessage({ id: "ADD CATEGORY" })}</span>
@@ -106,7 +106,7 @@ const EventPopUpCreateNew = ({
                 <button
                   onClick={() => handleClose(false)}
                   href="#"
-                  className="text-xl"
+                  className="text-xl max-[640px]:pl-6"
                 >
                   <i className="icon-close"></i>
                 </button>

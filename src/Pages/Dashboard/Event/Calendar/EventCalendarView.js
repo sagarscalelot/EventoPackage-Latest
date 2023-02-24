@@ -90,7 +90,7 @@ const EventCalendarView = () => {
 					{/* <!-- step-progress-bar  --> */}
 					{/* <!-- main-content  --> */}
 					<div className="space-y-5">
-					<div className="flex items-end -mx-3.5 max-[768px]:flex-col">
+						<div className="flex items-end -mx-3.5 max-[820px]:flex-col">
 							<div className="w-full lg:w-1/3 px-3.5">
 								<h3 className="pb-2">{intl.formatMessage({ id: "START DATE & TIME" })}</h3>
 								<label className="bg-white rounded-md flex space-x-3 relative">
@@ -98,14 +98,14 @@ const EventCalendarView = () => {
 									<i className="icon-calendar2 absolute top-6 right-5"></i>
 								</label>
 							</div>
-							<div className="w-full lg:w-1/3 px-3.5">
+							<div className="w-full lg:w-1/3 px-3.5 max-[820px]:pt-1">
 								<h3 className="pb-2">{intl.formatMessage({ id: "END DATE & TIME" })}</h3>
 								<label className="bg-white rounded-md flex space-x-3 relative">
 									<Calendar id="minmax" value={date || new Date()} onChange={(e) => setDate(e.value)} minDate={minDateValue} dateFormat="mm-dd-yy" className="w-full py-1.5 bg-white block rounded-md relative" readOnlyInput />
 									<i className="icon-calendar2 absolute top-6 right-5"></i>
 								</label>
 							</div>
-							<div className="w-full lg:w-1/3 px-3.5">
+							<div className="w-full lg:w-1/3 px-3.5 max-[820px]:pt-1">
 								<h3 className="pb-2">{intl.formatMessage({ id: "MONTHS" })}</h3>
 								<select className="bg-white rounded-md flex space-x-3 outline-0 px-6 py-4 relative arrow">
 									<option>{intl.formatMessage({ id: "JANUARY" })}</option>
@@ -122,7 +122,7 @@ const EventCalendarView = () => {
 									<option>{intl.formatMessage({ id: "DECEMBER" })}</option>
 								</select>
 							</div>
-							<div className="w-full lg:w-1/3 px-3.5">
+							<div className="w-full lg:w-1/3 px-3.5 max-[820px]:pt-1">
 								<h3 className="pb-2">{intl.formatMessage({ id: "YEARS" })}</h3>
 								<select className="bg-white rounded-md flex space-x-3 outline-0 px-6 py-4 relative arrow">
 									<option>{year}</option>

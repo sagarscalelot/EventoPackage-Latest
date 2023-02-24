@@ -25,6 +25,7 @@ import {
   useCompanyDetailId,
 } from "./companyDetailsSlice";
 import { useIntl } from "react-intl";
+import PhoneInput from "react-phone-input-2";
 
 const EventCompanyDetails = () => {
   const intl = useIntl();
@@ -46,24 +47,37 @@ const EventCompanyDetails = () => {
   const [count, setCount] = useState(false);
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required(`${intl.formatMessage({ id: "COMPANY NAME IS REQUIRED" })}`),
+    name: Yup.string().required(
+      `${intl.formatMessage({ id: "COMPANY NAME IS REQUIRED" })}`
+    ),
     mobile: Yup.number()
       .typeError(`${intl.formatMessage({ id: "THE VALUE MUST BE A DIGIT" })}`)
       .integer()
-      .positive(`${intl.formatMessage({ id: "CONTACT NUMBER MUST BE POSITIVE" })}`)
+      .positive(
+        `${intl.formatMessage({ id: "CONTACT NUMBER MUST BE POSITIVE" })}`
+      )
       .required(`${intl.formatMessage({ id: "CONTACT NUMBER IS REQUIRED" })}`),
     email: Yup.string()
       .email(`${intl.formatMessage({ id: "INVALID EMAIL FORMAT" })}`)
       .required(`${intl.formatMessage({ id: "EMAIL IS REQUIRED" })}`),
-    about: Yup.string().required(`${intl.formatMessage({ id: "ABOUT IS REQUIRED" })}`),
+    about: Yup.string().required(
+      `${intl.formatMessage({ id: "ABOUT IS REQUIRED" })}`
+    ),
     flat_no: Yup.string(),
     street: Yup.string(),
     area: Yup.string(),
-    city: Yup.string().required(`${intl.formatMessage({ id: "CITY IS REQUIRED" })}`),
-    state: Yup.string().required(`${intl.formatMessage({ id: "STATE IS REQUIRED" })}`),
+    city: Yup.string().required(
+      `${intl.formatMessage({ id: "CITY IS REQUIRED" })}`
+    ),
+    state: Yup.string().required(
+      `${intl.formatMessage({ id: "STATE IS REQUIRED" })}`
+    ),
     pincode: Yup.number()
       .typeError(`${intl.formatMessage({ id: "THE VALUE MUST BE A DIGIT" })}`)
-      .min(6, `${intl.formatMessage({ id: "PINCODE SHOULD BE SIX DIGIT LONG." })}`)
+      .min(
+        6,
+        `${intl.formatMessage({ id: "PINCODE SHOULD BE SIX DIGIT LONG." })}`
+      )
       .required(`${intl.formatMessage({ id: "PINCODE IS REQUIRED" })}`),
   });
 
@@ -80,8 +94,9 @@ const EventCompanyDetails = () => {
     state: "",
     pincode: "",
   };
-
   const clickNextHandler = async (values) => {
+    // console.log(values,"jhdfdf");
+    // return
     try {
       const payload = {
         ...values,
@@ -90,6 +105,7 @@ const EventCompanyDetails = () => {
         videos: videoList,
         eventid: eventId,
       };
+      payload["mobile"] = values?.mobile.slice(values.country_code?.length)
       const response = await dispatch(detailsOfCompany(payload)).unwrap();
       if (response.data.IsSuccess) {
         // toast.success(response.data.Message);
@@ -114,15 +130,6 @@ const EventCompanyDetails = () => {
     onSubmit: clickNextHandler,
   });
 
-  const setInputValue = useCallback(
-    (key, value) =>
-      formik.setValues({
-        ...formik.values,
-        [key]: value,
-      }),
-    [formik]
-  );
-
   const getProfile = async () => {
     try {
       await dispatch(getProfileDetails()).unwrap();
@@ -133,14 +140,15 @@ const EventCompanyDetails = () => {
   };
 
   useEffect(() => {
-    console.log(profileDetails, formik.values, "profileDetails");
     if (profileDetails?.businessProfile) {
-      formik.values.name = profileDetails?.businessProfile?.name;
-      formik.values.country_code =
-        profileDetails?.businessProfile?.country_code;
-      formik.values.mobile = profileDetails?.businessProfile?.mobile;
-      formik.values.email = profileDetails?.businessProfile?.email;
-      formik.values.about = profileDetails?.businessProfile?.about;
+      formik.setValues({
+        ...formik.values,
+        name: profileDetails?.businessProfile?.name,
+        country_code: profileDetails?.businessProfile?.country_code,
+        mobile: profileDetails?.businessProfile?.mobile,
+        email: profileDetails?.businessProfile?.email,
+        about: profileDetails?.businessProfile?.about,
+      });
     }
   }, [profileDetails]);
 
@@ -160,7 +168,9 @@ const EventCompanyDetails = () => {
       //   setVideoList(stateCompanyDetailId?.companydetail?.videos)
       //   setGstFile(stateCompanyDetailId?.companydetail?.gst)
       if (!response.data.IsSuccess) {
-        toast.error(`${intl.formatMessage({ id: "ERROR OCCURED WHILE FETCHING DATA." })}`);
+        toast.error(
+          `${intl.formatMessage({ id: "ERROR OCCURED WHILE FETCHING DATA." })}`
+        );
       }
     } catch (error) {
       console.log(error);
@@ -200,12 +210,16 @@ const EventCompanyDetails = () => {
               toast.error(response.data.Message);
             }
           } catch (error) {
-            toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
+            toast.error(
+              `${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`
+            );
             console.log(error);
           }
         }
       } else {
-        setGstFileError(`${intl.formatMessage({ id: "PLEASE SELECT PDF FILE." })}`);
+        setGstFileError(
+          `${intl.formatMessage({ id: "PLEASE SELECT PDF FILE." })}`
+        );
       }
     } else {
       setGstFileError(null);
@@ -241,15 +255,23 @@ const EventCompanyDetails = () => {
               toast.error(response.data.Message);
             }
           } catch (error) {
-            toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
+            toast.error(
+              `${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`
+            );
             console.log(error);
           }
         } else {
-          setErrorMessage(`${intl.formatMessage({ id: "FILE SIZE IS GREATER THEN" })}` + size + " MB");
+          setErrorMessage(
+            `${intl.formatMessage({ id: "FILE SIZE IS GREATER THEN" })}` +
+              size +
+              " MB"
+          );
           setError(true);
         }
       } else {
-        setErrorMessage(`${intl.formatMessage({ id: "PLEASE SELECT VALID IMAGE FILE." })}`);
+        setErrorMessage(
+          `${intl.formatMessage({ id: "PLEASE SELECT VALID IMAGE FILE." })}`
+        );
         setError(true);
       }
     } catch (error) {
@@ -286,15 +308,23 @@ const EventCompanyDetails = () => {
               toast.error(response.data.Message);
             }
           } catch (error) {
-            toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
+            toast.error(
+              `${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`
+            );
             console.log(error);
           }
         } else {
-          setErrorMessage(`${intl.formatMessage({ id: "FILE SIZE IS GREATER THEN" })}` + size + " Mb.");
+          setErrorMessage(
+            `${intl.formatMessage({ id: "FILE SIZE IS GREATER THEN" })}` +
+              size +
+              " Mb."
+          );
           setError2(true);
         }
       } else {
-        setErrorMessage(`${intl.formatMessage({ id: "PLEASE SELECT VALID VIDEO FILE." })}`);
+        setErrorMessage(
+          `${intl.formatMessage({ id: "PLEASE SELECT VALID VIDEO FILE." })}`
+        );
         setError2(true);
       }
     } catch (error) {
@@ -316,7 +346,8 @@ const EventCompanyDetails = () => {
     tmpList.splice(index, 1);
     setVideoList([...tmpList]);
   };
-
+console.log(formik.values,"-----------");
+  
   return (
     <div>
       <form onSubmit={formik.handleSubmit} className="wrapper min-h-full">
@@ -334,7 +365,7 @@ const EventCompanyDetails = () => {
           {/* <!-- step-progress-bar  --> */}
           <StepProgressBar eventType={eventType} />
           {/* <!-- main-content  --> */}
-          <div className="space-y-5 -mx-2">
+          <div className="space-y-5 -mx-2 max-[768px]:space-y-1">
             <div className="w-full flex items-end flex-wrap">
               <div className="w-full md:w-1/2 px-2 inputHolder">
                 <span className="input-titel">
@@ -345,7 +376,7 @@ const EventCompanyDetails = () => {
                   className="input"
                   name="name"
                   value={formik.values?.name}
-                  onChange={(e) => setInputValue("name", e.target.value)}
+                  onChange={(e) => formik.setFieldValue("name", e.target.value)}
                 />
                 <small className="text-red-500 text-xs">
                   {formik.errors.name}
@@ -393,13 +424,25 @@ const EventCompanyDetails = () => {
                 </div>
                 {/* {country_code} */}
                 <div className="flex">
-                  <input
+                  <PhoneInput
+                    country={"us"}
+                    value={formik.values.mobile}
+                    className="input"
+                    defaultErrorMessage="kjnihiou"
+                    onChange={(e, i, o) => {
+                      console.log(e,i,"gsfds");
+                      formik.setValues({...formik.values,mobile:e,country_code:i.dialCode})
+                      // formik.setFieldValue("mobile", e);
+                      // formik.setFieldValue("country_code", i.dialCode);
+                    }}
+                  />
+                  {/* <input
                     type="text"
                     className="input max-w-[80px] w-full mr-3"
                     name="country_code"
                     value={formik.values?.country_code}
                     onChange={(e) =>
-                      setInputValue("country_code", e.target.value)
+                      formik.setFieldValue("country_code", e.target.value)
                     }
                   />
                   <input
@@ -407,8 +450,8 @@ const EventCompanyDetails = () => {
                     className="input"
                     name="mobile"
                     value={formik.values?.mobile}
-                    onChange={(e) => setInputValue("mobile", e.target.value)}
-                  />
+                    onChange={(e) => formik.setFieldValue("mobile", e.target.value)}
+                  /> */}
                 </div>
                 <small className="text-red-500 text-xs">
                   {formik.errors.mobile}
@@ -424,7 +467,7 @@ const EventCompanyDetails = () => {
                   className="input"
                   name="email"
                   value={formik.values?.email}
-                  onChange={(e) => setInputValue("email", e.target.value)}
+                  onChange={(e) => formik.setFieldValue("email", e.target.value)}
                 />
                 <small className="text-red-500 text-xs">
                   {formik.errors.email}
@@ -442,7 +485,7 @@ const EventCompanyDetails = () => {
                   rows="3"
                   className="outline-none flex items-center w-full bg-white rounded-md p-3"
                   value={formik.values?.about}
-                  onChange={(e) => setInputValue("about", e.target.value)}
+                  onChange={(e) => formik.setFieldValue("about", e.target.value)}
                 ></textarea>
                 <small className="text-red-500 text-xs">
                   {formik.errors.about}
@@ -450,7 +493,7 @@ const EventCompanyDetails = () => {
                 <br />
               </div>
             </div>
-            <div className="space-y-5">
+            <div className="space-y-5 max-[768px]:space-y-0">
               <h3 className="px-2">{intl.formatMessage({ id: "ADDRESS" })}</h3>
               <div className="w-full flex flex-wrap">
                 <div className="w-full md:w-1/3 px-2 inputHolder">
@@ -462,7 +505,7 @@ const EventCompanyDetails = () => {
                     className="input"
                     name="flat_no"
                     value={formik.values?.flat_no}
-                    onChange={(e) => setInputValue("flat_no", e.target.value)}
+                    onChange={(e) => formik.setFieldValue("flat_no", e.target.value)}
                   />
                   <small className="text-red-500 text-xs">
                     {formik.errors.area}
@@ -478,7 +521,7 @@ const EventCompanyDetails = () => {
                     className="input"
                     name="street"
                     value={formik.values?.street}
-                    onChange={(e) => setInputValue("street", e.target.value)}
+                    onChange={(e) => formik.setFieldValue("street", e.target.value)}
                   />
                   <small className="text-red-500 text-xs">
                     {formik.errors.street}
@@ -494,7 +537,7 @@ const EventCompanyDetails = () => {
                     className="input"
                     name="area"
                     value={formik.values?.area}
-                    onChange={(e) => setInputValue("area", e.target.value)}
+                    onChange={(e) => formik.setFieldValue("area", e.target.value)}
                   />
                   <small className="text-red-500 text-xs">
                     {formik.errors.area}
@@ -512,7 +555,7 @@ const EventCompanyDetails = () => {
                     className="input"
                     name="city"
                     value={formik.values?.city}
-                    onChange={(e) => setInputValue("city", e.target.value)}
+                    onChange={(e) => formik.setFieldValue("city", e.target.value)}
                   />
                   <small className="text-red-500 text-xs">
                     {formik.errors.city}
@@ -528,7 +571,7 @@ const EventCompanyDetails = () => {
                     className="input"
                     name="state"
                     value={formik.values?.state}
-                    onChange={(e) => setInputValue("state", e.target.value)}
+                    onChange={(e) => formik.setFieldValue("state", e.target.value)}
                   />
                   <small className="text-red-500 text-xs">
                     {formik.errors.state}
@@ -544,7 +587,7 @@ const EventCompanyDetails = () => {
                     className="input"
                     name="pincode"
                     value={formik.values?.pincode}
-                    onChange={(e) => setInputValue("pincode", e.target.value)}
+                    onChange={(e) => formik.setFieldValue("pincode", e.target.value)}
                   />
                   <small className="text-red-500 text-xs">
                     {formik.errors.pincode}

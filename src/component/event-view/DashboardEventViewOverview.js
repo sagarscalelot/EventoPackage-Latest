@@ -193,10 +193,10 @@ const DashboardEventViewOverview = ({
     <div className="pt-7 lg:pt-10">
       {/* <!--overview-tab-contents --> */}
       <div className="relative tab-main active" id="overview">
-        <div className="flex">
+        <div className="flex max-[640px]:flex-col">
           {/* <!-- left-bar --> */}
           <div className="w-full lg:w-8/12 lg:pr-5 space-y-7">
-            <div className="p-7 bg-white rounded-md space-y-1">
+            <div className="p-7 bg-white rounded-md space-y-1 max-[820px]:mr-3">
               <h3>{data?.display_name}</h3>
               <p className="text-quicksilver text-sm font-normal">
                 {data?.aboutplace ? data?.aboutplace?.details : ""}
@@ -293,7 +293,7 @@ const DashboardEventViewOverview = ({
                 </h3>
 
                 {service.map((e, i) => (
-                  <div className="flex justify-between bg-white rounderd px-7 py-4">
+                  <div className="flex justify-between bg-white rounderd px-7 py-4 max-[820px]:px-4 max-[820px]:mr-3">
                     <div className="">
                       <div className="w-28 h-28 border-2 border-brightGray rounded-md">
                         <img
@@ -308,11 +308,11 @@ const DashboardEventViewOverview = ({
                         />
                       </div>
                     </div>
-                    <div className="w-full pl-5">
-                      <div className="flex justify-between">
+                    <div className="w-full pl-5 max-[820px]:pr-2 max-[820px]:pl-2 max-[640px]:pl-4">
+                      <div className="flex justify-between max-[820px]:flex-col max-[768px]:flex-row max-[640px]:flex-col" >
                         <h3>{e.name}</h3>
                         {/* <h3>Cutting board</h3> */}
-                        <div className="flex items-center space-x-1">
+                        <div className="flex items-center space-x-1 max-[820px]:items-start max-[820px]:flex-col max-[820px]:mt-1">
                           <h3>{e.price} INR </h3>
                           {e.price_type === "per_day" ? (
                             <h3>P/D</h3>
@@ -850,7 +850,7 @@ const DashboardEventViewOverview = ({
                     key={i}
                     className={
                       gradientStyle(e.discounttype) +
-                      "bg-gradient-to-r from-[#13e1b094] to-[#13E1B0] p-3.5 xl:p-5 rounded-lg relative"
+                      "bg-gradient-to-r from-[#13e1b094] to-[#13E1B0] p-3.5 xl:p-5 rounded-lg relative max-[820px]:py-3 max-[820px]:px-1"
                     }
                   >
                     {/* <DashboardEventViewOverviewPhoto key={e.id} alt={e.description} imageUrl={s3Url + "/" + e?.url} /> */}
@@ -878,7 +878,7 @@ const DashboardEventViewOverview = ({
               </>
             )}
 
-            {/* <div className="calendar inline-block justify-center items-center rounded-md drop-shadow-one bg-white w-full my-10 pb-5">
+            {/* <div className="calendar inline-block justify-center items-center rounded-md drop-shadow-one bg-white w-full my-10 pb-5 ">
 							<div className="month flex justify-center items-center text-lg lg:text-xl font-semibold py-4 px-10 border-b border-opacity-20">
 								<a href="#"><i className="icon-left-d-arrow"></i></a>
 								<div className="year px-8 xl:px-14 whitespace-nowrap">July 2021</div>
@@ -887,7 +887,7 @@ const DashboardEventViewOverview = ({
 							<div className="days grid grid-cols-7 justify-center items-center text-center py-4 font-semibold"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
 							<div className="dates flex flex-wrap"><button><time></time></button><button><time></time></button><button><time>1</time></button><button><time>2</time></button><button><time>3</time></button><button><time>4</time></button><button><time>5</time></button><button><time>6</time></button><button className="active"><time>7</time></button><button><time>8</time></button><button><time>9</time></button><button><time>10</time></button><button><time>11</time></button><button><time>12</time></button><button><time>13</time></button><button><time>14</time></button><button><time>15</time></button><button className="active"><time>16</time></button><button><time className="selact">17</time></button><button className="today"><time>18</time></button><button><time>19</time></button><button><time className="selact">20</time></button><button><time>21</time></button><button><time>22</time></button><button><time>23</time></button><button><time>24</time></button><button><time>25</time></button><button><time>26</time></button><button><time>27</time></button><button><time>28</time></button><button><time>29</time></button><button><time>30</time></button><button><time>31</time></button></div>
 						</div> */}
-            <div className="calendar inline-block justify-center items-center rounded-md drop-shadow-one bg-white w-full px-12 py-7">
+            <div className="calendar inline-block justify-center items-center rounded-md drop-shadow-one bg-white w-full px-12 py-7 max-[820px]:px-3 max-[820px]:ml-1 max-[820px]:py-4">
               <FullCalendar
                 plugins={[dayGridPlugin]}
                 initialView="dayGridMonth"

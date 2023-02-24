@@ -117,12 +117,12 @@ const DashboardEvent = () => {
 
   return (
     <div className="wrapper">
-      <div className="flex flex-wrap items-center">
+      <div className="flex flex-wrap items-center max-[768px]:flex-col max-[768px]:items-start">
         <h1>{intl.formatMessage({ id: "ALL CATEGORY" })}</h1>
-        <div className="flex whitespace-nowrap space-x-5 ml-auto">
+        <div className="flex whitespace-nowrap space-x-5 max-[590px]:space-x-0 max-[590px]:flex-wrap max-[768px]:space-x-3 ml-auto max-[768px]:ml-0 max-[768px]:mt-3">
           <select
             name="All Category"
-            className="arrow bg-white pl-5 pr-11 py-3 text-japaneseIndigo font-bold rounded-md tracking-wider appearance-none focus-visible:outline-none"
+            className="arrow bg-white pl-5 pr-11 py-3 text-japaneseIndigo font-bold rounded-md tracking-wider appearance-none focus-visible:outline-none max-[590px]:w-full max-[768px]:w-3/5"
             onChange={(e) => cat(e.target.value)}
           >
             <option value="">{intl.formatMessage({ id: "ALL CATEGORY" })}</option>
@@ -133,7 +133,7 @@ const DashboardEvent = () => {
             ))}
           </select>
           <button
-            className="bg-white px-5 py-3 text-japaneseIndigo font-bold rounded-md tracking-wider"
+            className="bg-white px-5 py-3 text-japaneseIndigo font-bold rounded-md tracking-wider btn-live"
             onClick={() => multipleEventlive()}
           >
             {intl.formatMessage({ id: "MULTIPLELIVE" })}
@@ -141,13 +141,13 @@ const DashboardEvent = () => {
           <button
             href="#"
             onClick={() => setIsCreateNewPopUpOpen(true)}
-            className="btn-primary"
+            className="btn-primary btn-create"
           >
             <i className="icon-plus mr-3"></i>{intl.formatMessage({ id: "CREATE NEW" })}
           </button>
         </div>
       </div>
-      <div className="space-y-5 pt-10 h-auto">
+      <div className="space-y-5 max-[590px]:pt-5 pt-10 h-auto">
         <MoonLoader
           cssOverride={{ margin: "100px auto" }}
           color={"#20c0E8"}
@@ -159,10 +159,10 @@ const DashboardEvent = () => {
         {allEvents.docs?.map((ele, index) => {
           return (
             <React.Fragment key={index}>
-              <div className="w-full flex items-center ">
+              <div className="w-full flex items-center max-[768px]:relative">
                 {ele.is_approved == true ? (
-                  <div>
-                    <label className="checkbox w-16">
+                  <div className="max-[768px]:absolute max-[768px]:top-5 max-[768px]:left-5">
+                    <label className="checkbox w-16 max-[768px]:justify-start">
                       <input
                         type="checkbox"
                         className="bg-white"
@@ -173,8 +173,8 @@ const DashboardEvent = () => {
                     </label>
                   </div>
                 ) : (
-                  <div>
-                    <label className="checkbox w-16">
+                  <div className="max-[768px]:absolute max-[768px]:top-5 max-[768px]:left-5">
+                    <label className="checkbox w-16 max-[768px]:justify-start">
                       <input
                         type="checkbox"
                         className="bg-white opacity-30"

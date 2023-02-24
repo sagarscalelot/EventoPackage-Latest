@@ -103,11 +103,11 @@ const PSBOtherCost = () => {
           <StepProgressBar eventType={eventType} />
           {/* <!-- main-content  --> */}
           <div className="space-y-5 pt-5">
-            <div className="flex justify-between items-center space-x-5">
-              <div className="w-full md:w-1/2 lg:w-1/3">
+            <div className="flex justify-between items-center space-x-5 max-[820px]:flex-col max-[820px]:space-x-0 max-[820px]:items-start">
+              <div className="w-full md:w-1/2 lg:w-1/3 max-[820px]:w-full">
                 <h3>{intl.formatMessage({ id: "TRAVEL COST" })}</h3>
                 <div className="bg-white shadow rounded-md mt-5">
-                  <div className="flex items-center bg-brightGray px-8 py-3">
+                  <div className="flex items-center bg-brightGray px-8 max-[820px]:px-2 max-[820px]:py-3">
                     <input
                       type="checkbox"
                       id="on"
@@ -135,10 +135,10 @@ const PSBOtherCost = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-full md:w-1/2 lg:w-1/3">
+              <div className="w-full md:w-1/2 lg:w-1/3 max-[820px]:mt-5 max-[820px]:w-full">
                 <h3>{intl.formatMessage({ id: "ACCOMMODATION" })}</h3>
                 <div className="bg-white shadow rounded-md mt-5">
-                  <div className="flex items-center bg-brightGray px-8 py-3">
+                  <div className="flex items-center bg-brightGray px-8 max-[820px]:px-2 py-3">
                     <input
                       type="checkbox"
                       id="on"
@@ -166,10 +166,10 @@ const PSBOtherCost = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-full md:w-1/2 lg:w-1/3">
+              <div className="w-full md:w-1/2 lg:w-1/3 max-[820px]:mt-5 max-[820px]:w-full">
                 <h3>{intl.formatMessage({ id: "FOOD" })}</h3>
                 <div className="bg-white shadow rounded-md mt-5">
-                  <div className="flex items-center bg-brightGray px-8 py-3">
+                  <div className="flex items-center bg-brightGray px-8 max-[820px]:px-2 py-3">
                     <input
                       type="checkbox"
                       id="on"

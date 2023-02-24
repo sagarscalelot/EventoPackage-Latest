@@ -228,7 +228,7 @@ const NotificationMode = () => {
             <div className="bg-white p-[30px] rounded-md">
               <div className="flex w-full justify-between items-center">
                 <div className="w-full">
-                  <div className="flex justify-between items-center pl-4">
+                  <div className="flex justify-between items-center pl-4 max-[600px]:flex-col max-[600px]:pl-0">
                     <div className="flex">
                       <svg
                         width="30"
@@ -263,7 +263,7 @@ const NotificationMode = () => {
                     </div>
                     <button
                       type="button"
-                      className="text-base btn-primary whitespace-nowrap uppercase"
+                      className="text-base btn-primary whitespace-nowrap uppercase max-[600px]:mt-3"
                       onClick={() =>
                         setIsNotificationDetailPreviewPopupOpen(true)
                       }

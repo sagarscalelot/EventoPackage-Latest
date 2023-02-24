@@ -149,7 +149,7 @@ const EventPopUpAddService = ({
     <div className="popup table fixed w-full inset-0 z-40 bg-black bg-opacity-75 h-screen">
       <div className="table-cell align-middle">
         <div className="popin max-w-2xl w-full mx-auto max-h-[calc(100vh-55px)] overflow-y-auto lg:px-9">
-          <div className="bg-brightGray p-12">
+          <div className="bg-brightGray p-12 max-[640px]:px-5">
             <div className="flex justify-between items-center">
               <h1 className="h1">
                 {intl.formatMessage({ id: "ADD SERVICE" })}
@@ -184,7 +184,7 @@ const EventPopUpAddService = ({
                 </span>
                 <label
                   htmlFor=""
-                  className="flex items-center w-full bg-white p-2 px-3.5 rounded-md"
+                  className="flex items-center w-full bg-white p-2 px-3.5 rounded-md max-[640px]:flex-col"
                 >
                   <div className="w-full px-3.5">
                     <input
@@ -194,8 +194,8 @@ const EventPopUpAddService = ({
                       onChange={(e) => setPrice(e.target.value)}
                     />
                   </div>
-                  <div className="selectPrice flex items-center space-x-3 max-[768px]:flex-col">
-                    <label className="block cursor-pointer max-[768px]:ml-3">
+                  <div className="selectPrice flex items-center space-x-3">
+                    <label className="block cursor-pointer">
                       <input
                         type="radio"
                         name="price"
@@ -204,7 +204,7 @@ const EventPopUpAddService = ({
                         checked={priceType === "per_day" && true}
                         onChange={(e) => setPriceType("per_day")}
                       />
-                      <span className="text-sm text-quicksilver py-2 px-3 bg-white shadow-lg whitespace-nowrap font-bold rounded block">
+                      <span className="text-sm text-quicksilver py-2 px-3 bg-white shadow-lg whitespace-nowrap font-bold rounded block max-[640px]:px-0.5">
                         {intl.formatMessage({ id: "PER" })} /{" "}
                         {intl.formatMessage({ id: "DAY" })}
                       </span>
@@ -218,7 +218,7 @@ const EventPopUpAddService = ({
                         checked={priceType === "per_person" && true}
                         onChange={(e) => setPriceType("per_person")}
                       />
-                      <span className="text-sm text-quicksilver py-2 px-3 bg-white shadow-lg whitespace-nowrap font-bold rounded block">
+                      <span className="text-sm text-quicksilver py-2 px-3 bg-white shadow-lg whitespace-nowrap font-bold rounded block max-[640px]:px-0.5">
                         {intl.formatMessage({ id: "PER" })} /{" "}
                         {intl.formatMessage({ id: "PERSON" })}
                       </span>
@@ -232,7 +232,7 @@ const EventPopUpAddService = ({
                         checked={priceType === "per_event" && true}
                         onChange={(e) => setPriceType("per_event")}
                       />
-                      <span className="text-sm text-quicksilver py-2 px-3 bg-white shadow-lg whitespace-nowrap font-bold rounded block">
+                      <span className="text-sm text-quicksilver py-2 px-3 bg-white shadow-lg whitespace-nowrap font-bold rounded block max-[640px]:px-0.5">
                         {intl.formatMessage({ id: "PER" })} /{" "}
                         {intl.formatMessage({ id: "EVENT" })}
                       </span>

@@ -19,7 +19,7 @@ const EventAboutPlace = () => {
 	const [banner, setBanner] = useState("");
 	const [priceType, setPriceType] = useState("per_day");
 	const [clearTime, setClearTime] = useState("0");
-	const [maxDay, setMaxDay] = useState("1");
+	const [maxDay, setMaxDay] = useState("0");
 	const [about, setAbout] = useState("");
 	const eventId = localStorage.getItem("eventId");
 	const eventType = params.eventType;
@@ -31,7 +31,7 @@ const EventAboutPlace = () => {
 	const initialState = {
 		place_price: "",
 		clearing_time: "0",
-		max_day: "1",
+		max_day: "0",
 
 	}
 
@@ -46,7 +46,7 @@ const EventAboutPlace = () => {
 		try {
 			const response = await dispatch(aboutPlaces(payload)).unwrap();
 			if (response.data.IsSuccess) {
-				// toast.success(response.data.Message);
+				toast.success(response.data.Message);
 				dispatch(increment());
 				navigate("../personaldetails");
 			} else {
@@ -167,16 +167,16 @@ const EventAboutPlace = () => {
 						</div>
 
 						{/* option 1 */}
-						<div className="flex items-center space-x-3">
-							<div className={"inputHolder " + (priceType === "per_day" && true ? 'w-8/12' : (priceType === "per_event" ? 'w-7/12 2xl:w-8/12' : 'w-7/12 2xl:w-8/12') && (priceType === "per_hour" ? 'w-8/12' : 'w-8/12'))}>
+						<div className="flex items-center space-x-3 max-[820px]:flex-col max-[820px]:items-start max-[820px]:space-x-0">
+							<div className={"inputHolder " + (priceType === "per_day" && true ? 'w-8/12 max-[820px]:w-full' : (priceType === "per_event" ? 'w-7/12 2xl:w-8/12 max-[820px]:w-full' : 'w-7/12 2xl:w-8/12 max-[820px]:w-full') && (priceType === "per_hour" ? 'w-8/12 max-[820px]:w-full' : 'w-8/12 max-[820px]:w-full'))}>
 								<span className="input-titel">{intl.formatMessage({ id: "PRICE" })}<span>*</span></span>
-								<label htmlFor="" className="flex items-center w-full bg-white p-2 px-3.5 rounded-md">
-									<div className="w-full inputHolder">
+								<label htmlFor="" className="flex items-center w-full bg-white p-2 px-3.5 rounded-md max-[640px]:flex-col">
+									<div className="w-full inputHolder max-[820px]:pb-1">
 										<input type="text" className="w-full outline-none text-spiroDiscoBall font-bold text-base"
 											value={formik.values?.place_price} name="place_price" onChange={(e) => setInputValue("place_price", e.target.value)} />
 									</div>
-									<div className="selectPrice flex items-center space-x-3 max-[490px]:block">
-										<label className="block cursor-pointer max-[490px]:ml-3">
+									<div className="selectPrice flex items-center space-x-3 max-[768px]:w-full max-[768px]:justify-between">
+										<label className="block cursor-pointer">
 											<input type="radio" name="price" value="per_day" checked={priceType === "per_day" && true} className="hidden" onChange={(e) => setPriceType("per_day")} />
 											<span
 												className="text-sm text-quicksilver py-2 px-3 bg-white shadow-lg whitespace-nowrap font-bold rounded block">
@@ -200,11 +200,11 @@ const EventAboutPlace = () => {
 									</div>
 								</label>
 							</div>
-							<div className={"inputHolder " + (priceType === "per_hour" ? 'w-4/12' : (priceType === "per_event" ? 'w-4/12 2xl:w-2/12' : (priceType === "per_day" ? 'w-4/12' : 'hidden')))}>
+							<div className={"inputHolder " + (priceType === "per_hour" ? 'w-4/12 max-[820px]:w-full' : (priceType === "per_event" ? 'w-4/12 2xl:w-2/12 max-[820px]:w-full' : (priceType === "per_day" ? 'w-4/12 max-[820px]:w-full' : 'hidden')))}>
 								<label className="input-titel">{intl.formatMessage({ id: "CLEARING TIME (IN HOURS)" })} <span>*</span></label>
 								<input type="number" className="input py-[14px]" name='clearning time' value={formik.values?.clearing_time} onChange={(e) => setInputValue("clearing_time", e.target.value)} />
 							</div>
-							<div className={"inputHolder " + (priceType === "per_event" ? 'w-2/12' : 'hidden')}>
+							<div className={"inputHolder " + (priceType === "per_event" ? 'w-2/12 max-[820px]:w-full' : 'hidden')}>
 								<label className="input-titel">{intl.formatMessage({ id: "MAX DAY (IN DAYS)" })}<span>*</span></label>
 								<input type="number" className="input py-[14px]" name='max_day' value={formik.values?.max_day} onChange={(e) => setInputValue("max_day", e.target.value)} />
 							</div>

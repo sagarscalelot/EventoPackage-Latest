@@ -51,7 +51,7 @@ export default function EventPopUpShareEvent({ handleClose, url }) {
     <div className="popup table fixed w-full inset-0 z-40 bg-black bg-opacity-75 h-screen">
       <div className="table-cell align-middle">
         <div className="popin max-w-2xl w-full mx-auto max-h-[calc(100vh-55px)] overflow-y-auto lg:px-9">
-          <div className="bg-brightGray p-12">
+          <div className="bg-brightGray p-12 max-[768px]:p-5">
             <div className="space-y-10">
               <div className="flex justify-between">
                 <h1 className="h1">
@@ -65,7 +65,7 @@ export default function EventPopUpShareEvent({ handleClose, url }) {
                   <i className="icon-close"></i>
                 </button>
               </div>
-              <div className="flex flex-wrap">
+              <div className="flex flex-wrap share-event">
                 <div className="w-2/12 mb-5">
                   <WhatsappShareButton url={url}>
                     <WhatsappIcon size={size} round={true} />
@@ -101,6 +101,7 @@ export default function EventPopUpShareEvent({ handleClose, url }) {
                   style={{ width: "50px", height: "50px" }}
                   alt="copy"
                   onClick={() => copyCode()}
+                  className="cope-event"
                 />
                 {/* <button className="text-sm font-bold uppercase" >Copy<br />Code</button> */}
                 {/* <div className="w-2/12 mb-5">

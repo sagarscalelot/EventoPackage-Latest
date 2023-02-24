@@ -35,8 +35,8 @@ const ExistingUserPromote = () => {
       <br />
       <div className="">
         <h3>{intl.formatMessage({id: "SELECT USER"})}</h3>
-        <div className="flex space-x-12 pt-5">
-          <div className="w-1/2">
+        <div className="flex space-x-12 max-[600px]:space-x-0 max-[600px]:pt-5 max-[600px]:flex-col">
+          <div className="w-1/2 max-[600px]:w-full">
             <div className="space-y-3">
               <div className="flex items-center bg-white rounded-md cursor-pointer w-full p-4">
                 <label className="checkbox w-8 h-8">
@@ -52,8 +52,8 @@ const ExistingUserPromote = () => {
               <ExistingUserPromoteListItem />
             </div>
           </div>
-          <div className="w-1/2">
-            <div className="max-w-max ml-auto text-base font-bold text-japaneseIndigo bg-white py-4 px-8 rounded-md">{intl.formatMessage({ id: "TOTAL USER : " })} <span>{intl.formatMessage({ id: "512" })}</span></div>
+          <div className="w-1/2 max-[600px]:w-full">
+            <div className="max-w-max ml-auto text-base font-bold text-japaneseIndigo bg-white py-4 px-8 rounded-md max-[600px]:mt-5 max-[600px]:max-w-full max-[600px]:ml-0">{intl.formatMessage({ id: "TOTAL USER : " })} <span>{intl.formatMessage({ id: "512" })}</span></div>
             <div className="upload-holder pt-5">
               <h3 className="flex items-end">{intl.formatMessage({ id: "UPLOAD EXCEL" })}</h3>
               <label htmlFor="upload2" className="upload py-14">

@@ -94,21 +94,29 @@ const EventDiscounts = () => {
       if (e?.discounttype === "discount_on_equipment_or_item") {
         if (eventType === "hyp") {
           if (!e.services?.length && !e.items?.length) {
-            toast.error(`${intl.formatMessage({ id: "PLEASE SELECT ANY SERVICES" })}`);
+            toast.error(
+              `${intl.formatMessage({ id: "PLEASE SELECT ANY SERVICES" })}`
+            );
             isBack = true;
             return;
           }
         }
         if (eventType === "psb") {
           if (!e.equipments?.length && !e.items?.length) {
-            toast.error(`${intl.formatMessage({ id: "PLEASE SELECT ANY EQUIPMENTS" })}`);
+            toast.error(
+              `${intl.formatMessage({ id: "PLEASE SELECT ANY EQUIPMENTS" })}`
+            );
             isBack = true;
             return;
           }
         }
         if (eventType === "gsb") {
           if (!e.equipments?.length && !e.items?.length) {
-            toast.error(`${intl.formatMessage({ id: "PLEASE SELECT ANY EQUIPMENTS OR ITEMS" })}`);
+            toast.error(
+              `${intl.formatMessage({
+                id: "PLEASE SELECT ANY EQUIPMENTS OR ITEMS",
+              })}`
+            );
             isBack = true;
             return;
           }
@@ -167,7 +175,11 @@ const EventDiscounts = () => {
     if (e.target.checked) {
       if (ele?.discounttype === "discount_on_equipment_or_item") {
         if (!serviceList.length) {
-          toast.error(`${intl.formatMessage({ id: "ANY EQUIPMENT OR ITEM NOT AVAILABLE" })}`);
+          toast.error(
+            `${intl.formatMessage({
+              id: "ANY EQUIPMENT OR ITEM NOT AVAILABLE",
+            })}`
+          );
           return;
         }
       }
@@ -240,12 +252,12 @@ const EventDiscounts = () => {
             {allDiscount.map((ele, index) => {
               return (
                 <div
-                  className="w-full flex items-center"
+                  className="w-full flex items-center max-[768px]:relative"
                   id={ele._id}
                   key={index}
                 >
                   {/* {console.log("tf : ",  ele.isAdded)} */}
-                  <label className="checkbox w-16">
+                  <label className="checkbox w-16 max-[768px]:absolute max-[768px]:top-1 max-[768px]:left-1 max-[768px]:justify-start max-[768px]:z-[1]">
                     <input
                       type="checkbox"
                       className="bg-white"
@@ -261,7 +273,7 @@ const EventDiscounts = () => {
                   <div
                     className={
                       gradientStyle(ele.discounttype) +
-                      "bg-gradient-to-r p-5 pr-8 relative overflow-hidden rounded-lg w-full"
+                      "bg-gradient-to-r p-5 pr-8 max-[768px]:pr-5 relative overflow-hidden rounded-lg w-full"
                     }
                   >
                     <div className="flex justify-between item-basline">

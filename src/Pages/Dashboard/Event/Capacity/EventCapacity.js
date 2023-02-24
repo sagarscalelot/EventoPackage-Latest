@@ -170,20 +170,20 @@ const EventCapacity = () => {
           <StepProgressBar eventType={eventType} />
           {/* <!-- main-content  --> */}
           <div className="space-y-5">
-          <div className="flex items-end -mx-3.5 max-[540px]:overflow-auto">
+            <div className="flex items-end -mx-3.5 max-[820px]:flex-col">
               <div className="w-full lg:w-1/3 px-3.5">
                 <label htmlFor="selact" className="p-5 py-4 bg-white rounded-md flex space-x-3 cursor-pointer">
                   <input type="radio" name="type" id="select" className="w-6 h-6 rounded-full bg-brightGray appearance-none cursor-pointer" checked={type === "romantic_stay" && true} onChange={(e) => setType("romantic_stay")} />
                   <h3 className="text-base">{intl.formatMessage({ id: "ROMANTIC STAY" })}</h3>
                 </label>
               </div>
-              <div className="w-full lg:w-1/3 px-3.5">
+              <div className="w-full lg:w-1/3 px-3.5 max-[820px]:mt-2">
                 <label htmlFor="selact1" className="p-5 py-4 bg-white rounded-md flex space-x-3 cursor-pointer">
                   <input type="radio" name="type" id="select1" className="w-6 h-6 rounded-full bg-brightGray appearance-none cursor-pointer" checked={type === "romantic_lunch_dinner" && true} onChange={(e) => setType('romantic_lunch_dinner')} />
                   <h3 className="text-base">{intl.formatMessage({ id: "ROMANTIC LUNCH / DINNER" })}</h3>
                 </label>
               </div>
-              <div className="w-full lg:w-1/3 px-3.5">
+              <div className="w-full lg:w-1/3 px-3.5 max-[820px]:mt-2">
                 <label htmlFor="selact2" className="p-5 py-4 bg-white rounded-md flex space-x-3 cursor-pointer">
                   <input type="radio" name="type" id="select2" className="w-6 h-6 rounded-full bg-brightGray appearance-none cursor-pointer" checked={type === "romantic_candlelight_dinner" && true} onChange={(e) => setType('romantic_candlelight_dinner')} />
                   <h3 className="text-base">{intl.formatMessage({ id: "ROMANTIC CANDLELIGHT DINNER" })}</h3>

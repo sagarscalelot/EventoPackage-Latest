@@ -140,8 +140,8 @@ const EventPopUpDiscountOnEquipmentOrItem = ({ handleClose, eventId, allDiscount
 				<div className="table-cell align-middle">
 					<div className="popin max-w-2xl w-full mx-auto max-h-[calc(100vh-55px)] overflow-y-auto lg:px-9">
 						<div className="bg-brightGray p-7 space-y-7">
-							<h2 className="h1 w-full max-w-[60%] text-center mx-auto"> {selectedDiscount?.discountname} </h2>
-							<form className="flex items-center space-x-5">
+							<h2 className="h1 w-full max-w-[60%] max-[768px]:max-w-[80%] text-center mx-auto"> {selectedDiscount?.discountname} </h2>
+							<form className="flex items-center space-x-5 max-[768px]:flex-col max-[768px]:space-x-0">
 								<div className="w-full lg:w-2/3 inputHolder">
 									<label className="input-titel">{intl.formatMessage({ id: "EQUIPMENT OR ITEM" })}</label>
 									<Multiselect

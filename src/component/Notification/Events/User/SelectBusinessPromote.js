@@ -67,8 +67,8 @@ function SelectBusinessPromote() {
       <br />
       <NotificationStepProgressBar />
       <br />
-      <div className="flex items-end justify-between">
-        <div className="w-1/2">
+      <div className="flex items-end justify-between max-[820px]:items-start max-[820px]:flex-col">
+        <div className="w-1/2 max-[820px]:w-full">
           <h3 className="pb-3">{intl.formatMessage({id: "SELECT USER"})}</h3>
           <select
             className="bg-white rounded-md flex space-x-3 outline-0 px-6 py-[18px] relative arrow option"
@@ -80,7 +80,7 @@ function SelectBusinessPromote() {
             <option value={300}>{intl.formatMessage({ id: "300" })}</option>
           </select>
         </div>
-        <div className="bg-white p-[18px] rounded-md">
+        <div className="bg-white p-[18px] rounded-md max-[820px]:mt-3 max-[820px]:w-full">
           <span className="text-base font-bold text-japaneseIndigo">
           {intl.formatMessage({id: "TOTAL USER : 500"})}
           </span>

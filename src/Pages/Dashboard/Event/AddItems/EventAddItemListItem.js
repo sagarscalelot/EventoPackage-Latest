@@ -66,10 +66,10 @@ const EventAddItemListItem = ({
   };
 
   return (
-    <div className="bg-white rounderd px-7 py-4">
-      <div className="flex justify-between">
-        <div className="">
-          <div className="w-28 h-28 border-2 border-brightGray rounded-md">
+    <div className="bg-white rounderd px-7 py-4 max-[600px]:px-4">
+      <div className="flex justify-between max-[600px]:flex-col">
+        <div className="max-[600px]:justify-center max-[600px]:flex">
+          <div className="w-28 h-28 max-[600px]:w-80 max-[600px]:h-64 border-2 border-brightGray rounded-md">
             <img
               src={
                 data?.photos[0].url
@@ -81,10 +81,10 @@ const EventAddItemListItem = ({
             />
           </div>
         </div>
-        <div className="w-full pl-5">
-          <div className="flex justify-between">
-            <h2>{data.name}</h2>
-            <div className="flex items-center space-x-5">
+        <div className="w-full pl-5 max-[600px]:pt-2 max-[600px]:px-2">
+          <div className="flex justify-between max-[600px]:flex-col-reverse">
+            <h2 className='max-[600px]:pt-3'>{data.name}</h2>
+            <div className="flex items-center space-x-5 max-[600px]:space-x-3 max-[600px]:justify-between max-[600px]:flex-wrap">
               <div className="flex items-center">
                 <input
                   type="checkbox"
@@ -115,11 +115,11 @@ const EventAddItemListItem = ({
               </a>
             </div>
           </div>
-          <p className="text-quicksilver text-sm font-normal leading-6 pt-3 xl:max-w-[90%]">
+          <p className="text-quicksilver text-sm font-normal leading-6 pt-3 max-[600px]:pt-0 xl:max-w-[90%]">
             {" "}
             {data.description}{" "}
           </p>
-          <h3 className="text-right">{data.price} INR</h3>
+          <h3 className="text-right max-[600px]:text-left">{data.price} INR</h3>
         </div>
       </div>
       <Modal isOpen={isAddItemPopUpOpen}>

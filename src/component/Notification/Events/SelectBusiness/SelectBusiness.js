@@ -96,9 +96,9 @@ const SelectBusiness = () => {
       {/* <StepProgressBar /> */}
       <NotificationStepProgressBar />
       <br />
-      <div className="flex flex-wrap justify-center pt-4 -mx-4">
+      <div className="flex flex-wrap justify-center pt-4 -mx-4 ax-[640px]:mflex-col ax-[640px]:items-center">
         {/* Have you Places */}
-        <Link to="nhyp/selectbusinesspromote" onClick={nHyp} className="w-1/2 lg:w-1/3 xl:w-1/5 px-2 xl:px-2.5 pb-4 xl:pb-0 group">
+        <Link to="nhyp/selectbusinesspromote" onClick={nHyp} className="w-1/2 lg:w-1/3 xl:w-1/5 px-2 xl:px-2.5 pb-4 xl:pb-0 group max-[640px]:w-[90%]">
           <div className="text-center bg-white rounded flex flex-col justify-between items-center h-full px-5 py-7 border-2 border-transparent group-hover:border-2 group-hover:border-spiroDiscoBall" >
             <div className="w-32 h-32">
               <img
@@ -107,13 +107,13 @@ const SelectBusiness = () => {
                 className="w-full h-full object-contain"
               />
             </div>
-            <p className="text-base font-bold group-hover:text-spiroDiscoBall pt-8 whitespace-nowrap">
+            <p className="text-base font-bold group-hover:text-spiroDiscoBall pt-8 whitespace-nowrap truncate w-full">
             {intl.formatMessage({ id: "HAVE YOU PLACES?" })}
             </p>
           </div>
         </Link >
         {/* Personal Skills Business */}
-        <Link to="npsb/selectbusinesspromote" onClick={nPsb} className="w-1/2 lg:w-1/3 xl:w-1/5 px-2 xl:px-2.5 pb-4 xl:pb-0 group">
+        <Link to="npsb/selectbusinesspromote" onClick={nPsb} className="w-1/2 lg:w-1/3 xl:w-1/5 px-2 xl:px-2.5 pb-4 xl:pb-0 group max-[640px]:w-[90%]">
           <div className="text-center bg-white rounded flex flex-col justify-between items-center h-full px-5 py-7 border-2 border-transparent group-hover:border-2 group-hover:border-spiroDiscoBall">
             <div className="w-32 h-32">
               <img
@@ -122,13 +122,13 @@ const SelectBusiness = () => {
                 className="w-full h-full object-contain"
               />
             </div>
-            <p className="text-base font-bold group-hover:text-spiroDiscoBall pt-8 whitespace-nowrap">
+            <p className="text-base font-bold group-hover:text-spiroDiscoBall pt-8 whitespace-nowrap truncate w-full">
             {intl.formatMessage({ id: "PERSONAL SKILLS BUSINESS" })}
             </p>
           </div>
         </Link >
         {/* Group Skils Business */}
-        <Link to="ngsb/selectbusinesspromote" onClick={nGsb} className="w-1/2 lg:w-1/3 xl:w-1/5 px-2 xl:px-2.5 pb-4 xl:pb-0 group">
+        <Link to="ngsb/selectbusinesspromote" onClick={nGsb} className="w-1/2 lg:w-1/3 xl:w-1/5 px-2 xl:px-2.5 pb-4 xl:pb-0 group max-[640px]:w-[90%]">
           <div className="text-center bg-white rounded flex flex-col justify-between items-center h-full px-5 py-7 border-2 border-transparent group-hover:border-2 group-hover:border-spiroDiscoBall">
             <div className="w-32 h-32">
               <img
@@ -137,13 +137,13 @@ const SelectBusiness = () => {
                 className="w-full h-full object-contain"
               />
             </div>
-            <p className="text-base font-bold group-hover:text-spiroDiscoBall pt-8 whitespace-nowrap">
+            <p className="text-base font-bold group-hover:text-spiroDiscoBall pt-8 whitespace-nowrap truncate w-full">
             {intl.formatMessage({ id: "GROUP SKILLS BUSINESS" })}
             </p>
           </div>
         </Link >
         {/* All User */}
-        <Link to="nalluser/alluserpalns" onClick={nAlluser} className="w-1/2 lg:w-1/3 xl:w-1/5 px-2 xl:px-2.5 pb-4 xl:pb-0 group">
+        <Link to="nalluser/alluserpalns" onClick={nAlluser} className="w-1/2 lg:w-1/3 xl:w-1/5 px-2 xl:px-2.5 pb-4 xl:pb-0 group max-[640px]:w-[90%]">
           <div className="text-center bg-white rounded flex flex-col justify-between items-center h-full px-5 py-7 border-2 border-transparent group-hover:border-2 group-hover:border-spiroDiscoBall">
             <div className="w-32 h-32">
               <img
@@ -152,13 +152,13 @@ const SelectBusiness = () => {
                 className="w-full h-full object-contain"
               />
             </div>
-            <p className="text-base font-bold group-hover:text-spiroDiscoBall pt-8 whitespace-nowrap">
+            <p className="text-base font-bold group-hover:text-spiroDiscoBall pt-8 whitespace-nowrap truncate w-full">
             {intl.formatMessage({ id: "ALL USER" })}
             </p>
           </div>
         </Link >
         {/* Existing User */}
-        <Link to="nexistinguser/existinguserpromote" onClick={nExisting} className="w-1/2 lg:w-1/3 xl:w-1/5 px-2 xl:px-2.5 pb-4 xl:pb-0 group">
+        <Link to="nexistinguser/existinguserpromote" onClick={nExisting} className="w-1/2 lg:w-1/3 xl:w-1/5 px-2 xl:px-2.5 pb-4 xl:pb-0 group max-[640px]:w-[90%]">
           <div className="text-center bg-white rounded flex flex-col justify-between items-center h-full px-5 py-7 border-2 border-transparent group-hover:border-2 group-hover:border-spiroDiscoBall">
             <div className="w-32 h-32">
               <img
@@ -167,7 +167,7 @@ const SelectBusiness = () => {
                 className="w-full h-full object-contain"
               />
             </div>
-            <p className="text-base font-bold group-hover:text-spiroDiscoBall pt-8 whitespace-nowrap">
+            <p className="text-base font-bold group-hover:text-spiroDiscoBall pt-8 whitespace-nowrap truncate w-full">
             {intl.formatMessage({ id: "EXISTING USER" })}
             </p>
           </div>

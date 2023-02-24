@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import "./assest/css/fonts.css";
 import "./assest/css/moon-icon.css";
+import "react-phone-input-2/lib/style.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

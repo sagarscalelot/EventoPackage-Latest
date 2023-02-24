@@ -164,8 +164,8 @@ const FAQ = () => {
                   <h5 className="mt-3 pl-3">{intl.formatMessage({ id: "HOW CAN I EARN POINTS BY REFERRING?" })}</h5>
                   <p className="pl-7">-	{intl.formatMessage({ id: "WHEN YOU SEND IT FOR THE FIRST TIME, YOU EARN 10 POINTS FOR SENDING IT TO OTHER USERS AND 20 POINTS FOR SENDING IT TO OTHER SHOPKEEPERS AND ORGANIZERS. YOU ALSO RECEIVE 10 POINTS EVERY TIME A USER OR SHOPKEEPER, THAT YOU REFERRED TO, OPENS AN ACCOUNT FOR THE FIRST TIME." })}</p>
                   <p className="pl-7">-	{intl.formatMessage({ id: "1 INR = 25 POINTS. REFERRAL POINTS EXPIRE AFTER 9 MONTHS AT FIRST TIME ONCE YOU LOGIN DATE. COIN EXPIRES EVERY 3 MONTHS OF COIN EARN." })}</p>
-                  <h5 className="mt-3 pl-3">{intl.formatMessage({ id: "How can I earn points by redeem?" })}</h5>
-                  <p className="pl-7">- {intl.formatMessage({ id: "Everyone can earn coins by redeem event and offer details, which is set by default with our fam system." })}</p>
+                  <h5 className="mt-3 pl-3">{intl.formatMessage({ id: "HOW CAN I EARN POINTS BY REDEEM?" })}</h5>
+                  <p className="pl-7">- {intl.formatMessage({ id: "EVERYONE CAN EARN COINS BY REDEEM EVENT AND OFFER DETAILS, WHICH IS SET BY DEFAULT WITH OUR FAM SYSTEM." })}</p>
                 </div>
               </div>
             </div>

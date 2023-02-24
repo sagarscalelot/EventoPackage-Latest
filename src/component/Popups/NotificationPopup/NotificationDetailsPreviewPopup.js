@@ -26,16 +26,16 @@ const NotificationDetailsPreviewPopup = ({ handleClose, notification_title, bann
                   </Link>
                 </div>
               </div>
-              <div className="bg-white p-5 rounded-md">
-                <div className="flex justify-between items-center">
-                  <div className="w-2/12">
+              <div className="bg-white p-5 rounded-md max-[640px]:p-4">
+                <div className="flex justify-between items-center max-[640px]:flex-col max-[640px]:justify-center">
+                  <div className="w-2/12 max-[640px]:p-0 max-[640px]:w-full">
                     <img src={banner ? s3Url + "/" + banner : notificationSvg2} alt="" className="max-h-[130px] h-full w-full object-cover" />
                   </div>
                   <div className="w-10/12">
-                    <div className="flex justify-between pl-4">
+                    <div className="flex justify-between pl-4 max-[640px]:p-0">
                       <h2>{notification_title}</h2>
                     </div>
-                    <p className="text-gray-400 text-base pt-3 font-medium pl-4">
+                    <p className="text-gray-400 text-base pt-3 font-medium pl-4 max-[640px]:p-0">
                       {parse(description)}
                     </p>
 

@@ -38,7 +38,7 @@ const EventPopUpCategory = ({ handleClose }) => {
     <div className="popup table fixed w-full inset-0 z-40 bg-black bg-opacity-75 h-screen">
       <div className="table-cell align-middle">
         <div className="popin max-w-2xl w-full mx-auto max-h-[calc(100vh-55px)] overflow-y-auto lg:px-9">
-          <div className="bg-brightGray p-12">
+          <div className="bg-brightGray p-12 max-[640px]:p-9">
             <div className="flex justify-between items-center">
               <h1 className="h1">{intl.formatMessage({ id: "ADD CATEGORY" })}</h1>
               <div>

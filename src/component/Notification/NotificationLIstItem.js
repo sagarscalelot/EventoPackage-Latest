@@ -22,9 +22,9 @@ const NotificationLIstItem = ({ data }) => {
   return (
 
     <div className="bg-white p-5 rounded-md">
-      <div className="flex justify-between items-center max-[640px]:flex-col">
-        <div className="w-2/12 max-[820px]:w-full">
-          <img src={(data && data.banner && data.banner != '') ? (s3Url + "/" + data.banner) : notificationSvg2} alt="" className="max-h-[130px] h-full w-full object-cover" />
+      <div className="flex justify-between items-center max-[640px]:flex-col max-[640px]:items-start">
+        <div className="w-2/12 max-[820px]:w-full max-[768px]:w-[30%] max-[640px]:w-full">
+          <img src={(data && data.banner && data.banner != '') ? (s3Url + "/" + data.banner) : notificationSvg2} alt="" className="max-h-[130px] h-full  w-full object-cover max-[640px]:max-h-[250px]" />
         </div>
         <div className="w-10/12 max-[640px]:flex flex-col items-start">
           <div className="flex justify-between pl-4 max-[640px]:p-0 mt-1">
