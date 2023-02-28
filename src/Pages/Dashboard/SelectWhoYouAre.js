@@ -17,7 +17,7 @@ const SelectWhoYouAre = () => {
             <div>
               <img src={haveYouPlacesSvg} alt="" className="" />
             </div>
-            <h2 className="pt-12 group-hover:text-spiroDiscoBall">{intl.formatMessage({ id: "HAVE YOU PLACES?" })}</h2>
+            <h2 className="pt-12 group-hover:text-spiroDiscoBall">{intl.formatMessage({ id: "PLACES" })}</h2>
           </div>
         </Link>
         <Link to="event/psb" className="w-full sm:w-1/2 xl:w-1/3 px-2 xl:px-4 pb-4 xl:pb-0 group">

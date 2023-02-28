@@ -108,10 +108,10 @@ const SelectBusiness = () => {
               />
             </div>
             <p className="text-base font-bold group-hover:text-spiroDiscoBall pt-8 whitespace-nowrap truncate w-full">
-            {intl.formatMessage({ id: "HAVE YOU PLACES?" })}
+            {intl.formatMessage({ id: "PLACES" })}
             </p>
           </div>
-        </Link >
+        </Link>
         {/* Personal Skills Business */}
         <Link to="npsb/selectbusinesspromote" onClick={nPsb} className="w-1/2 lg:w-1/3 xl:w-1/5 px-2 xl:px-2.5 pb-4 xl:pb-0 group max-[640px]:w-[90%]">
           <div className="text-center bg-white rounded flex flex-col justify-between items-center h-full px-5 py-7 border-2 border-transparent group-hover:border-2 group-hover:border-spiroDiscoBall">
