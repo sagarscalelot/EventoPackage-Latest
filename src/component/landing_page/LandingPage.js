@@ -711,7 +711,7 @@ function LandingPage() {
                     className="max-w-[320px] inline-block sm:hidden mb-4"
                   />
                   <p className="text-base sm:text-lg leading-6 sm:leading-7 font-bold text-white uppercase tracking-wide mb-4 lg:mb-7">
-                    {t("Exclusive Services, Priceless Memories")}
+                    {t("Services at your Fingertips")}
                   </p>
                   <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-white max-w-full font-bold capitalize">
                     Why have just one service when you get the whole package{" "}
@@ -1714,11 +1714,7 @@ function LandingPage() {
               Who we are?
             </h2>
             <p className="text-base md:text-lg xl:text-xl text-[#9BA0A8] font-semibold mb-3 text-justify">
-              Festumevento is a group of knowledgeable specialists and techies
-              who are always improving the product thinking to provide the most
-              recent marketing advantage. We have led the market in IT solution
-              providers since 2019 and connect you to excellent business
-              insights.
+            Evento Package is an easy-to-use platform that helps every small and big professional to connect with potential clients who are planning to conduct an event. It also empowers event planners to connect and hire every small and big professional who is related to the event industry.
             </p>
             <p className="text-base md:text-lg xl:text-xl text-[#9BA0A8] font-semibold mb-3 text-justify">
               Our mission is to achieve growth by making our clients grow with
@@ -2092,7 +2088,7 @@ function LandingPage() {
                 </h2>
                 <p className="font-semibold text-[#9BA0A8] pb-4 text-base md:text-lg xl:text-xl  max-h-96 overflow-y-auto text-ellipsis pr-2 lg:pr-4 text-justify">
                   Festumevento, established in 2019, brings a unique blend of
-                  the organization through emerging it solutions such as
+                  the organization through emerging IT solutions such as
                   accounting software, erp management system, and many more.
                   earlier, we started as a product-based organization. after the
                   positive response from our client and the successful evolution

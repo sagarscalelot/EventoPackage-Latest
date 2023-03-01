@@ -414,7 +414,7 @@ const ReferToEarn = () => {
             </p>
             <h1 className="text-[#E58F0D]"><span>{intl.formatMessage({ id: "REFER AND GET 10 COIN" })}</span></h1>
             <p className="text-base font-normal">
-            <span>{intl.formatMessage({ id: "REFER A FRIEND AND GET AN ADDITIONAL 10 COINS AND YOUR FRIEND GETS ADDITIONAL 20 POINT. SO REFER AWAY" })}</span>
+            <span>{intl.formatMessage({ id: "REFER A FRIEND AND GET ADDITIONAL 10 COINS AND YOUR FRIEND GETS ADDITIONAL 20 POINT. SO REFER AWAY" })}</span>
             </p>
           </div>
           <div className="pt-10 space-y-5 max-[1096px]:flex max-[1096px]:items-center max-[1096px]:flex-col">
