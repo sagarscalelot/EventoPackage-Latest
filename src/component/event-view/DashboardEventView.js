@@ -36,7 +36,7 @@ const DashboardEventView = () => {
   const getEventById = async () => {
     try {
       const response = await dispatch(getOneEventDetails(eventId)).unwrap()
-      console.log("OVERVIEW",response);
+      // console.log("OVERVIEW",response);
       setEvent(response.data.Data);
       setCapacity(response.data.Data.capacity);
       setsocials(response.data.Data.tandc);

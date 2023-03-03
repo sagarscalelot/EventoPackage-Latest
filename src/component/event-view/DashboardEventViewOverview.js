@@ -198,7 +198,7 @@ const DashboardEventViewOverview = ({
           <div className="w-full lg:w-8/12 lg:pr-5 space-y-7">
             <div className="p-7 bg-white rounded-md space-y-1 max-[820px]:mr-3">
               <h3>{data?.display_name}</h3>
-              <p className="text-quicksilver text-sm font-normal">
+              <p className="text-quicksilver text-sm font-normal break-all">
                 {data?.aboutplace ? parse(data?.aboutplace?.details) : ""}
               </p>
             </div>
