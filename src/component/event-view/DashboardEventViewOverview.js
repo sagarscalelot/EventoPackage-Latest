@@ -463,9 +463,7 @@ const DashboardEventViewOverview = ({
                 {intl.formatMessage({ id: "ADDRESS" })}
               </h3>
               <div className="bg-white p-4 rounded-md">
-                {data?.capacity.address ? (
-                  <h3>{data?.capacity?.address}</h3>
-                ) : (
+                {
                   <h3>
                     {data?.personaldetail?.flat_no ? flat_no : ""}
                     {data?.personaldetail?.street ? street : ""}
@@ -474,7 +472,7 @@ const DashboardEventViewOverview = ({
                     {data?.personaldetail?.state ? state : ""}
                     {data?.personaldetail?.pincode ? pincode : ""}
                   </h3>
-                )}
+                }
                 {/* <h3>Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016</h3> */}
               </div>
             </div>
@@ -835,7 +833,7 @@ const DashboardEventViewOverview = ({
                     {intl.formatMessage({ id: "LOCATION" })}
                   </span>
                   <h3 className="text-sm xl:text-base">
-                    {data?.capacity?.address}
+                    {data?.capacity?.city}
                   </h3>
                 </div>
               </div>
