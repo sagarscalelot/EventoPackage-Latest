@@ -168,7 +168,7 @@
   "COMPANY EMAIL": "อีเมล์บริษัท",
   "COMPANY ABOUT": "บริษัท เกี่ยวกับ",
   "COMPANY PHOTOS MAX 5 IMAGES (UP TO 5MB/IMAGE)": "รูปถ่ายบริษัท สูงสุด 5 รูป (สูงสุด 5MB/รูป)",
-  "COMPANY VIDEO MAX 2 VIDEOS (UP TO 2GB/VIDEO)": "วิดีโอของบริษัท สูงสุด 2 วิดีโอ (สูงสุด 2GB/วิดีโอ)",
+  "COMPANY VIDEO MAX 2 VIDEOS (UP TO 512MB/VIDEO)": "วิดีโอของบริษัท สูงสุด 2 วิดีโอ (สูงสุด 512MB/วิดีโอ)",
   "TERMS AND CONDITIONS": "ข้อกำหนดและเงื่อนไข",
   "ACCEPT YOUR": "ยอมรับของคุณ",
   "GO TO DISCOUNT": "ไปที่ส่วนลด",
@@ -460,5 +460,6 @@
   "FILE SIZE IS GREATER THEN": "ขนาดไฟล์ใหญ่กว่า",
   "FILE SIZE IS GREATER THAN 512MB.": "ขนาดไฟล์มากกว่า 512ล้านบาท",
   "PLEASE SELECT VIDEO FILE WITH MP4 EXTENSION.": "กรุณาเลือกไฟล์วิดีโอที่มีนามสกุล mp4",
-  "PLEASE SELECT PDF FILE.": "กรุณาเลือกไฟล์ รูปแบบเอกสารพกพา"
+  "PLEASE SELECT PDF FILE.": "กรุณาเลือกไฟล์ รูปแบบเอกสารพกพา",
+  "ONLY 15 IMAGES ARE ALLOW": "อนุญาตเพียง 15 ภาพเท่านั้น"
 }

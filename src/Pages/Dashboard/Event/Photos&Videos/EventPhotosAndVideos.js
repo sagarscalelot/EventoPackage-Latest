@@ -98,6 +98,14 @@ const EventPhotosAndVideos = () => {
     navigate(-1);
   };
 
+  const openUploadPhoto = () =>  {
+    setIsUploadPhotoPopUpOpen(true)
+    if(imageList.length > 14  ){
+      toast.error(`${intl.formatMessage({ id: "ONLY 15 IMAGES ARE ALLOW" })}`);
+
+    }
+  }
+
   return (
     //  <!-- Content In -->
     <div>
@@ -124,7 +132,7 @@ const EventPhotosAndVideos = () => {
                 </span>
               </h3>
               <label
-                onClick={() => setIsUploadPhotoPopUpOpen(true)}
+                onClick={() =>openUploadPhoto() }
                 htmlFor="upload"
                 className="upload"
               >

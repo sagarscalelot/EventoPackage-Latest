@@ -90,7 +90,7 @@ const EventPersonalDetails = () => {
       const response = await dispatch(personalDetails(payload)).unwrap();
       if (response.data.IsSuccess) {
         dispatch(increment());
-        navigate(`../photosandvideos`);
+        navigate(`../companydetails`);
       } else {
         toast.error(response.data.Message);
       }
@@ -220,7 +220,7 @@ const EventPersonalDetails = () => {
                   <label className="input-titel">
                     {intl.formatMessage({ id: "MOBILE NUMBER" })} <span>*</span>
                   </label>
-                  <div className="input-checkd">
+                  {/* <div className="input-checkd">
                     <input
                       type="checkbox"
                       className="mr-2"
@@ -228,7 +228,7 @@ const EventPersonalDetails = () => {
                       onChange={() => setMobileNoHidden(!mobileNoHidden)}
                     />
                     {intl.formatMessage({ id: "HIDDEN" })}
-                  </div>
+                  </div> */}
                 </div>
                 <div className="flex">
                   <input
@@ -272,14 +272,14 @@ const EventPersonalDetails = () => {
                   <label className="input-titel">
                   {intl.formatMessage({ id: "EMAIL ADDRESS" })} <span>*</span>
                   </label>
-                  <div className="input-checkd">
+                  {/* <div className="input-checkd">
                     <input
                       type="checkbox"
                       className="mr-2"
                       onChange={() => setEmailHidden(!emailHidden)}
                     />
                     {intl.formatMessage({ id: "HIDDEN" })}
-                  </div>
+                  </div> */}
                 </div>
                 <input
                   type="text"

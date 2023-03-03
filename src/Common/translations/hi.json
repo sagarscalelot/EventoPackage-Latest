@@ -168,7 +168,7 @@
   "COMPANY EMAIL": "कंपनी ईमेल",
   "COMPANY ABOUT": "कंपनी के बारे में",
   "COMPANY PHOTOS MAX 5 IMAGES (UP TO 5MB/IMAGE)": "कंपनी तस्वीरें अधिकतम ५ तस्वीरें (५MB/तस्वीर तक)",
-  "COMPANY VIDEO MAX 2 VIDEOS (UP TO 2GB/VIDEO)": "कंपनी वीडियो अधिकतम २ वीडियो (२GB/वीडियो तक)",
+  "COMPANY VIDEO MAX 2 VIDEOS (UP TO 512MB/VIDEO)": "कंपनी वीडियो अधिकतम २ वीडियो (५१२MB/वीडियो तक)",
   "TERMS AND CONDITIONS": "नियम और शर्तें",
   "ACCEPT YOUR": "अपना स्वीकार करें",
   "GO TO DISCOUNT": "डिस्काउंट पर जाएं",
@@ -460,5 +460,6 @@
   "FILE SIZE IS GREATER THEN": "फ़ाइल का आकार से बड़ा है",
   "FILE SIZE IS GREATER THAN 512MB.": "फ़ाइल का आकार ५१२MB से अधिक है।",
   "PLEASE SELECT VIDEO FILE WITH MP4 EXTENSION.": "कृपया MP४ एक्सटेंशन के साथ वीडियो फ़ाइल चुनें।",
-  "PLEASE SELECT PDF FILE.": "कृपया PDF फाइल का चयन करें।"
+  "PLEASE SELECT PDF FILE.": "कृपया PDF फाइल का चयन करें।",
+  "ONLY 15 IMAGES ARE ALLOW": "केवल 15 छवियों की अनुमति है"
 }

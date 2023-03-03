@@ -167,7 +167,7 @@ const PSBCompanyDetails = () => {
             </div>
             <div className="upload-holder px-2 pt-5">
               <span className="input-titel">
-                Company Video Max 2 videos (up to 2GB/video)
+                Company Video Max 2 videos (up to 512MB/video)
               </span>
               <label htmlfor="upload2" className="upload">
                 <input

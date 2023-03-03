@@ -168,7 +168,7 @@
   "COMPANY EMAIL": "公司邮箱",
   "COMPANY ABOUT": "公司简介",
   "COMPANY PHOTOS MAX 5 IMAGES (UP TO 5MB/IMAGE)": "公司照片最多 5 张图像（最多 5MB/图像）",
-  "COMPANY VIDEO MAX 2 VIDEOS (UP TO 2GB/VIDEO)": "公司视频最多 2 个视频（最多 2GB/视频）",
+  "COMPANY VIDEO MAX 2 VIDEOS (UP TO 512MB/VIDEO)": "公司视频最多 2 个视频（最多 512MB/视频）",
   "TERMS AND CONDITIONS": "条款和条件",
   "ACCEPT YOUR": "接受你的",
   "GO TO DISCOUNT": "去打折",
@@ -460,5 +460,6 @@
   "FILE SIZE IS GREATER THEN": "文件大小大于",
   "FILE SIZE IS GREATER THAN 512MB.": "文件大小大于 512姆。",
   "PLEASE SELECT VIDEO FILE WITH MP4 EXTENSION.": "请选择扩展名为 熔点4 的视频文件。",
-  "PLEASE SELECT PDF FILE.": "请选择 便携式文档格式 文件。"
+  "PLEASE SELECT PDF FILE.": "请选择 便携式文档格式 文件。",
+  "ONLY 15 IMAGES ARE ALLOW": "只允许 15 张图像"
 }

@@ -21,26 +21,31 @@ const EventCapacity = () => {
   const eventType = params.eventType;
   const eventId = localStorage.getItem("eventId");
   const token = localStorage.getItem("Token");
-
-
   const [type, setType] = useState("romantic_stay");
   const [coordinates, setCoordinates] = useState([]);
 
   const ValidationSchema = Yup.object().shape({
-    person_capacity: Yup.number().typeError('Person Capacity must be a digit').integer().positive("Person Capacity must be positive").required(`${intl.formatMessage({ id: "PERSON CAPACITY IS REQUIRED" })}`),
-    parking_capacity: Yup.number().typeError('Parking Capacity must be a digit').integer().positive("Parking Capacity must be positive").required(`${intl.formatMessage({ id: "PARKING CAPACITY IS REQUIRED" })}`)
+    // person_capacity: Yup.number().typeError('Person Capacity must be a digit').integer().positive("Person Capacity must be positive").required(`${intl.formatMessage({ id: "PERSON CAPACITY IS REQUIRED" })}`),
+    // parking_capacity: Yup.number().typeError('Parking Capacity must be a digit').integer().positive("Parking Capacity must be positive").required(`${intl.formatMessage({ id: "PARKING CAPACITY IS REQUIRED" })}`)
   });
 
 
   const initialState = {
     eventid: eventId,
-    person_capacity: "",
-    parking_capacity: "",
+    // person_capacity: "",
+    // parking_capacity: "",
+    flat_no: "",
+    street_name: "",
+    area_name: "",
+    city: "",
+    state: "",
+    pincode: "",
     address: "",
     location: {
       type: "Point",
       coordinates: [coordinates[0], coordinates[1]],
     },
+
   }
 
   const [values, setValues] = useState(initialState);
@@ -93,17 +98,15 @@ const EventCapacity = () => {
 
 
   const clickNextHandler = async (values) => {
-    if (!onlyDigits.test(values.parking_capacity.trim()) || !onlyDigits.test(values.person_capacity.trim())) {
-      toast.warn("Please Enter valid capacity.");
-      return
-    }
+   
     let payload = { ...values, facilities: type, eventid: eventId }
     try {
       const response = await dispatch(yourCapacity(payload)).unwrap();
       if (response.data.IsSuccess) {
         // toast.success(response.data.Message);
         dispatch(increment());
-        navigate(`../companydetails`);
+        navigate(`../photosandvideos`);
+
       } else {
         toast.error(response.data.Message);
       }
@@ -170,7 +173,7 @@ const EventCapacity = () => {
           <StepProgressBar eventType={eventType} />
           {/* <!-- main-content  --> */}
           <div className="space-y-5">
-            <div className="flex items-end -mx-3.5 max-[820px]:flex-col">
+            {/* <div className="flex items-end -mx-3.5 max-[820px]:flex-col">
               <div className="w-full lg:w-1/3 px-3.5">
                 <label htmlFor="selact" className="p-5 py-4 bg-white rounded-md flex space-x-3 cursor-pointer">
                   <input type="radio" name="type" id="select" className="w-6 h-6 rounded-full bg-brightGray appearance-none cursor-pointer" checked={type === "romantic_stay" && true} onChange={(e) => setType("romantic_stay")} />
@@ -189,16 +192,113 @@ const EventCapacity = () => {
                   <h3 className="text-base">{intl.formatMessage({ id: "ROMANTIC CANDLELIGHT DINNER" })}</h3>
                 </label>
               </div>
+            </div> */}
+            
+            <div className="space-y-5 max-[768px]:space-y-0">
+              <h3 className="px-2">{intl.formatMessage({ id: "ADDRESS" })}</h3>
+              <div className="w-full flex flex-wrap">
+                <div className="w-full md:w-1/3 px-2 inputHolder">
+                  <span className="input-titel">
+                    {intl.formatMessage({ id: "FLAT NO." })}
+                  </span>
+                  <input
+                    type="text"
+                    className="input"
+                    name="flat_no"
+                    value={formik.values?.flat_no}
+                    onChange={(e) => formik.setFieldValue("flat_no", e.target.value)}
+                  />
+                  <small className="text-red-500 text-xs">
+                    {formik.errors.area}
+                  </small>
+                  <br />
+                </div>
+                <div className="w-full md:w-1/3 px-2 inputHolder">
+                  <span className="input-titel">
+                    {intl.formatMessage({ id: "STREET NAME." })}
+                  </span>
+                  <input
+                    type="text"
+                    className="input"
+                    name="street_name"
+                    value={formik.values?.street_name}
+                    onChange={(e) => formik.setFieldValue("street_name", e.target.value)}
+                  />
+                  <small className="text-red-500 text-xs">
+                    {formik.errors.street}
+                  </small>
+                  <br />
+                </div>
+                <div className="w-full md:w-1/3 px-2 inputHolder">
+                  <span className="input-titel">
+                    {intl.formatMessage({ id: "AREA NAME." })}
+                  </span>
+                  <input
+                    type="text"
+                    className="input"
+                    name="area_name"
+                    value={formik.values?.area_name}
+                    onChange={(e) => formik.setFieldValue("area_name", e.target.value)}
+                  />
+                  <small className="text-red-500 text-xs">
+                    {formik.errors.area}
+                  </small>
+                  <br />
+                </div>
+              </div>
+              <div className="w-full flex flex-wrap">
+                <div className="w-full md:w-1/3 px-2 inputHolder">
+                  <label className="input-titel">
+                    {intl.formatMessage({ id: "CITY" })} <span>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    className="input"
+                    name="city"
+                    value={formik.values?.city}
+                    onChange={(e) => formik.setFieldValue("city", e.target.value)}
+                  />
+                  <small className="text-red-500 text-xs">
+                    {formik.errors.city}
+                  </small>
+                  <br />
+                </div>
+                <div className="w-full md:w-1/3 px-2 inputHolder">
+                  <label className="input-titel">
+                    {intl.formatMessage({ id: "STATE" })} <span>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    className="input"
+                    name="state"
+                    value={formik.values?.state}
+                    onChange={(e) => formik.setFieldValue("state", e.target.value)}
+                  />
+                  <small className="text-red-500 text-xs">
+                    {formik.errors.state}
+                  </small>
+                  <br />
+                </div>
+                <div className="w-full md:w-1/3 px-2 inputHolder">
+                  <label className="input-titel">
+                    {intl.formatMessage({ id: "PINCODE" })} <span>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    className="input"
+                    name="pincode"
+                    value={formik.values?.pincode}
+                    onChange={(e) => formik.setFieldValue("pincode", e.target.value)}
+                  />
+                  <small className="text-red-500 text-xs">
+                    {formik.errors.pincode}
+                  </small>
+                  <br />
+                </div>
+              </div>
             </div>
-            <div className="w-full inputHolder">
-              <span className="input-titel">{intl.formatMessage({ id: "PERSON CAPACITY" })}</span>
-              <input type="text" className="input font-bold" name="person_capacity" value={formik.values?.person_capacity} onChange={(e) => setInputValue("person_capacity", e.target.value)} />
-            </div>
-            <small className="text-red-500 text-xs">{formik.errors.person_capacity}</small>
-            <div className="w-full inputHolder">
-              <span className="input-titel">{intl.formatMessage({ id: "PARKING CAPACITY" })}</span>
-              <input type="text" className="input font-bold" name="parking_capacity" value={formik.values?.parking_capacity} onChange={(e) => setInputValue("parking_capacity", e.target.value)} />
-            </div>
+
+
             <small className="text-red-500 text-xs">{formik.errors.parking_capacity}</small>
             <div className="w-full relative">
               <button type='button' className='absolute bottom-3 right-3 bg-spiroDiscoBall text-base capitalize font-semibold text-white px-7 py-3 rounded-md z-40' onClick={getLiveLocation}>{intl.formatMessage({id: "GET LIVE LOCATION"})}</button>

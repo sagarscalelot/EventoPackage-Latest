@@ -148,19 +148,22 @@ const EventPopUpUploadPhoto = ({ handleClose, eventId, imageList }) => {
                   </span>
                 )}
               </div>
-              <div className="w-full">
-                <span className="input-titel">
-                  {intl.formatMessage({ id: "DETAILS" })}
-                </span>
-                <textarea
-                  name="details"
-                  id=""
-                  cols="30"
-                  rows="5"
-                  className="outline-none flex items-center w-full bg-white p-2 px-3.5 rounded-md"
-                  onChange={(e) => setDetails(e.target.value)}
-                ></textarea>
-              </div>
+              {acceptedFiles.length > 1 ? null : 
+               <div className="w-full">
+               <span className="input-titel">
+                 {intl.formatMessage({ id: "DETAILS" })}
+               </span>
+               <textarea
+                 name="details"
+                 id=""
+                 cols="30"
+                 rows="5"
+                 className="outline-none flex items-center w-full bg-white p-2 px-3.5 rounded-md"
+                 onChange={(e) => setDetails(e.target.value)}
+               ></textarea>
+             </div>
+              }
+             
             </form>
             {/* <Link to="/" className="btn-primary w-full uppercase">Submit</Link> */}
             <div

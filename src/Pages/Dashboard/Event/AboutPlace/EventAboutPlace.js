@@ -7,10 +7,15 @@ import { decrement, increment } from '../../../../Common/CommonSlice/stepProgres
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { s3Url } from '../../../../config';
+
 import { aboutPlaces, aboutPlacesId, aboutPlacesPickUpload } from './eventAboutPlaceSlice';
 import { useIntl } from "react-intl";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const EventAboutPlace = () => {
+	const [bannerSrc, setbannerSrc] = useState();
 	const intl = useIntl();
 	const displayName = localStorage.getItem("displayName");
 	const navigate = useNavigate();
@@ -21,6 +26,8 @@ const EventAboutPlace = () => {
 	const [clearTime, setClearTime] = useState("0");
 	const [maxDay, setMaxDay] = useState("0");
 	const [about, setAbout] = useState("");
+
+
 	const eventId = localStorage.getItem("eventId");
 	const eventType = params.eventType;
 
@@ -28,12 +35,21 @@ const EventAboutPlace = () => {
 		place_price: Yup.number().typeError(`${intl.formatMessage({ id: "PRICE MUST BE A DIGIT" })}`).integer().positive(`${intl.formatMessage({ id: "PRICE MUST BE POSITIVE" })}`).required(`${intl.formatMessage({ id: "PRICE IS REQUIRED" })}`)
 	});
 
+	const removeImage = () => {
+		setbannerSrc("")
+		setBanner("")
+
+	}
+	
 	const initialState = {
 		place_price: "",
 		clearing_time: "0",
 		max_day: "0",
+		person_capacity: "0",
+		parking_capacity: "0",
 
 	}
+
 
 	const clickNextHandler = async (values) => {
 		const payload = {
@@ -48,7 +64,8 @@ const EventAboutPlace = () => {
 			if (response.data.IsSuccess) {
 				toast.success(response.data.Message);
 				dispatch(increment());
-				navigate("../personaldetails");
+				 navigate("../location");
+
 			} else {
 				toast.error(response.data.Message);
 			}
@@ -80,7 +97,10 @@ const EventAboutPlace = () => {
 
 	const photoChangeHandler = (event) => {
 		const types = ['image/png', 'image/jpeg', 'image/jpg'];
+
 		let selected = event.target.files[0];
+		setbannerSrc(URL.createObjectURL(selected))
+
 		console.log("selected", selected);
 		try {
 			if (selected && types.includes(selected.type)) {
@@ -115,9 +135,12 @@ const EventAboutPlace = () => {
 			const response = await dispatch(aboutPlacesId(eventId)).unwrap()
 			if (response.data.Data.aboutplace) {
 				setAbout(response.data.Data.aboutplace.details);
+				// setParkingcapacity(response.data.Data.aboutplace.parkingcapacity);
+				// setPersoncapacity(response.data.Data.aboutplace.personcapacity);
 				formik.setValues(response.data.Data.aboutplace);
 				setPriceType(response.data.Data.aboutplace.price_type);
 				setBanner(response.data.Data.aboutplace.banner);
+				setbannerSrc(s3Url + "/" + response.data.Data.aboutplace.banner)
 				setClearTime(response.data.Data.aboutplace.clearing_time);
 				setMaxDay(response.data.Data.aboutplace.max_day);
 			}
@@ -159,9 +182,15 @@ const EventAboutPlace = () => {
 					<div className="space-y-3">
 						<div className="upload-holder">
 							<span className="input-titel ml-2">{intl.formatMessage({ id: "PLACE BANNER" })}</span>
-							<label htmlFor="upload" className="upload">
+							<label htmlFor="upload" className="upload relative flex justify-center items-center h-40 p-0">
+								
 								<input type="file" name="images" id="upload" className="appearance-none hidden" onChange={photoChangeHandler} />
-								<span className="input-titel mt-1"><i className="icon-image mr-2"></i>{intl.formatMessage({ id: "UPLOAD IMAGES" })}</span>
+								{bannerSrc ? <>
+								<button className='absolute right-2 top-2 bg-sky-500/75 ... w-16 h-7 text-white' type="button" onClick={()=>removeImage()}>Remove</button>
+								<img src={bannerSrc} className="w-full h-full object-cover" /> 
+								</>:
+									<span className="input-titel flex justify-center"><i className="icon-image mr-2"></i>{intl.formatMessage({ id: "UPLOAD IMAGES" })}</span>
+								}
 							</label>
 							<span className="input-titel ml-2">{banner ? (banner.name || banner) : `${intl.formatMessage({ id: "PLEASE SELECT IMAGES" })}`}</span>
 						</div>
@@ -209,12 +238,32 @@ const EventAboutPlace = () => {
 								<input type="number" className="input py-[14px]" name='max_day' value={formik.values?.max_day} onChange={(e) => setInputValue("max_day", e.target.value)} />
 							</div>
 						</div>
+
+
 						<small className="text-red-500 text-xs">{formik.errors.place_price}</small>
-						<div className="w-full">
-							<span className="input-titel">{intl.formatMessage({ id: "ABOUT PLACE" })}</span>
-							<textarea name="" id="" cols="30" rows="5" value={about}
-								className="outline-none flex items-center w-full bg-white p-2 px-3.5 rounded-md" onChange={(e) => setAbout(e.target.value)}></textarea>
+
+						<div className="w-full inputHolder">
+							<span className="input-titel">{intl.formatMessage({ id: "PERSON CAPACITY" })}</span>
+							<input type="text" className="input font-bold" name="person_capacity" value={formik.values?.person_capacity} onChange={(e) => setInputValue("person_capacity", e.target.value)} />
 						</div>
+						<small className="text-red-500 text-xs">{formik.errors.person_capacity}</small>
+						<div className="w-full inputHolder">
+							<span className="input-titel">{intl.formatMessage({ id: "PARKING CAPACITY" })}</span>
+							<input type="text" className="input font-bold" name="parking_capacity" value={formik.values?.parking_capacity} onChange={(e) => setInputValue("parking_capacity", e.target.value)} />
+						</div>
+						<small className="text-red-500 text-xs">{formik.errors.parking_capacity}</small>
+
+						<div className="w-full space-y-2.5">
+							<h3>{intl.formatMessage({ id: "ABOUT PLACE" })}</h3>
+							<CKEditor
+								editor={ClassicEditor}
+								onChange={(event, editor) => {
+									setAbout(editor.getData());
+								}}
+								data={about}
+							/>
+						</div>
+
 					</div>
 					{/* <!-- advisement --> */}
 					{/* <Advertisement /> */}

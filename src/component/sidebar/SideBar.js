@@ -415,7 +415,7 @@ const SideBar = () => {
                     path="addequipments"
                     element={<EventAddEquipments />}
                   />
-                  <Route path="capacity" element={<EventCapacity />} />
+                  <Route path="location" element={<EventCapacity />} />
                   <Route
                     path="companydetails"
                     element={<EventCompanyDetails />}

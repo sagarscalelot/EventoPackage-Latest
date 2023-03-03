@@ -168,7 +168,7 @@
   "COMPANY EMAIL": "Company Email",
   "COMPANY ABOUT": "Company About",
   "COMPANY PHOTOS MAX 5 IMAGES (UP TO 5MB/IMAGE)": "Company Photos Max 5 images (up to 5MB/image)",
-  "COMPANY VIDEO MAX 2 VIDEOS (UP TO 2GB/VIDEO)": "Company Video Max 2 videos (up to 2GB/video)",
+  "COMPANY VIDEO MAX 2 VIDEOS (UP TO 512MB/VIDEO)": "Company Video Max 2 videos (up to 512MB/video)",
   "TERMS AND CONDITIONS": "Terms and Conditions",
   "ACCEPT YOUR": "Accept Your",
   "GO TO DISCOUNT": "Go To Discount",
@@ -460,5 +460,6 @@
   "FILE SIZE IS GREATER THEN": "file size is greater than",
   "FILE SIZE IS GREATER THAN 512MB.": "file size is greater than 512MB.",
   "PLEASE SELECT VIDEO FILE WITH MP4 EXTENSION.": "please select video file with mp4 extension.",
-  "PLEASE SELECT PDF FILE.": "Please select Pdf File."
+  "PLEASE SELECT PDF FILE.": "Please select Pdf File.",
+  "ONLY 15 IMAGES ARE ALLOW": "Only 15 Images Are Allow"
 }

@@ -86,6 +86,7 @@ const EventTermsAndConditions = () => {
       console.log(response);
       if (response?.data?.IsSuccess) {
         toast.success(response.data.Message);
+        clickNextHandler()
       } else {
         toast.error(response.data.Message);
       }
@@ -410,13 +411,13 @@ const EventTermsAndConditions = () => {
             <i className="icon-back-arrow mr-3"></i>
             <h3>{intl.formatMessage({ id: "BACK" })}</h3>
           </button>
-          <button
+          {/* <button
             type="button"
             className="flex items-center btn-primary"
             onClick={clickNextHandler}
           >
             {intl.formatMessage({ id: "GO TO DISCOUNT" })}
-          </button>
+          </button> */}
         </div>
         <Modal isOpen={isTermsAndConditionPopUpOpen}>
           <EventPopUpTermsAndConditions

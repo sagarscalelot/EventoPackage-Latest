@@ -168,7 +168,7 @@
   "COMPANY EMAIL": "Firmen-E-Mail",
   "COMPANY ABOUT": "Firma Über",
   "COMPANY PHOTOS MAX 5 IMAGES (UP TO 5MB/IMAGE)": "Firmenfotos Max. 5 Bilder (bis zu 5 MB/Bild)",
-  "COMPANY VIDEO MAX 2 VIDEOS (UP TO 2GB/VIDEO)": "Unternehmensvideo Max. 2 Videos (bis zu 2 GB/Video)",
+  "COMPANY VIDEO MAX 2 VIDEOS (UP TO 512MB/VIDEO)": "Unternehmensvideo Max. 2 Videos (bis zu 512 MB/Video)",
   "TERMS AND CONDITIONS": "Bedingungen und Bedingungen",
   "ACCEPT YOUR": "Akzeptiere deine",
   "GO TO DISCOUNT": "Gehen Sie zu Rabatt",
@@ -460,5 +460,6 @@
   "FILE SIZE IS GREATER THEN":"Dateigröße ist größer als",
   "FILE SIZE IS GREATER THAN 512MB.":"Dateigröße ist größer als 512 MB.",
   "PLEASE SELECT VIDEO FILE WITH MP4 EXTENSION.":"Bitte wählen Sie eine Videodatei mit der Erweiterung mp4 aus.",
-  "PLEASE SELECT PDF FILE.":"Bitte PDF-Datei auswählen."
+  "PLEASE SELECT PDF FILE.":"Bitte PDF-Datei auswählen.",
+  "ONLY 15 IMAGES ARE ALLOW": "Nur 15 Bilder sind erlaubt"
 }

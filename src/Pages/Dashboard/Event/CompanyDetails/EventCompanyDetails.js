@@ -47,38 +47,38 @@ const EventCompanyDetails = () => {
   const [count, setCount] = useState(false);
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required(
-      `${intl.formatMessage({ id: "COMPANY NAME IS REQUIRED" })}`
-    ),
-    mobile: Yup.number()
-      .typeError(`${intl.formatMessage({ id: "THE VALUE MUST BE A DIGIT" })}`)
-      .integer()
-      .positive(
-        `${intl.formatMessage({ id: "CONTACT NUMBER MUST BE POSITIVE" })}`
-      )
-      .required(`${intl.formatMessage({ id: "CONTACT NUMBER IS REQUIRED" })}`),
-    email: Yup.string()
-      .email(`${intl.formatMessage({ id: "INVALID EMAIL FORMAT" })}`)
-      .required(`${intl.formatMessage({ id: "EMAIL IS REQUIRED" })}`),
-    about: Yup.string().required(
-      `${intl.formatMessage({ id: "ABOUT IS REQUIRED" })}`
-    ),
-    flat_no: Yup.string(),
-    street: Yup.string(),
-    area: Yup.string(),
-    city: Yup.string().required(
-      `${intl.formatMessage({ id: "CITY IS REQUIRED" })}`
-    ),
-    state: Yup.string().required(
-      `${intl.formatMessage({ id: "STATE IS REQUIRED" })}`
-    ),
-    pincode: Yup.number()
-      .typeError(`${intl.formatMessage({ id: "THE VALUE MUST BE A DIGIT" })}`)
-      .min(
-        6,
-        `${intl.formatMessage({ id: "PINCODE SHOULD BE SIX DIGIT LONG." })}`
-      )
-      .required(`${intl.formatMessage({ id: "PINCODE IS REQUIRED" })}`),
+    // name: Yup.string().required(
+    //   `${intl.formatMessage({ id: "COMPANY NAME IS REQUIRED" })}`
+    // ),
+    // mobile: Yup.number()
+    //   .typeError(`${intl.formatMessage({ id: "THE VALUE MUST BE A DIGIT" })}`)
+    //   .integer()
+    //   .positive(
+    //     `${intl.formatMessage({ id: "CONTACT NUMBER MUST BE POSITIVE" })}`
+    //   )
+    //   .required(`${intl.formatMessage({ id: "CONTACT NUMBER IS REQUIRED" })}`),
+    // email: Yup.string()
+    //   .email(`${intl.formatMessage({ id: "INVALID EMAIL FORMAT" })}`)
+    //   .required(`${intl.formatMessage({ id: "EMAIL IS REQUIRED" })}`),
+    // about: Yup.string().required(
+    //   `${intl.formatMessage({ id: "ABOUT IS REQUIRED" })}`
+    // ),
+    // flat_no: Yup.string(),
+    // street: Yup.string(),
+    // area: Yup.string(),
+    // city: Yup.string().required(
+    //   `${intl.formatMessage({ id: "CITY IS REQUIRED" })}`
+    // ),
+    // state: Yup.string().required(
+    //   `${intl.formatMessage({ id: "STATE IS REQUIRED" })}`
+    // ),
+    // pincode: Yup.number()
+    //   .typeError(`${intl.formatMessage({ id: "THE VALUE MUST BE A DIGIT" })}`)
+    //   .min(
+    //     6,
+    //     `${intl.formatMessage({ id: "PINCODE SHOULD BE SIX DIGIT LONG." })}`
+    //   )
+    //   .required(`${intl.formatMessage({ id: "PINCODE IS REQUIRED" })}`),
   });
 
   const initialState = {
@@ -369,7 +369,7 @@ console.log(formik.values,"-----------");
             <div className="w-full flex items-end flex-wrap">
               <div className="w-full md:w-1/2 px-2 inputHolder">
                 <span className="input-titel">
-                  {intl.formatMessage({ id: "COMPANY NAME" })} <span>*</span>
+                  {intl.formatMessage({ id: "COMPANY NAME" })}
                 </span>
                 <input
                   type="text"
@@ -419,7 +419,7 @@ console.log(formik.values,"-----------");
                 <div className="input-label-holder">
                   <label className="input-titel">
                     {intl.formatMessage({ id: "COMPANY CONTACT NO" })}{" "}
-                    <span>*</span>
+                    
                   </label>
                 </div>
                 {/* {country_code} */}
@@ -460,7 +460,7 @@ console.log(formik.values,"-----------");
               </div>
               <div className="w-full md:w-1/2 px-2 inputHolder">
                 <span className="input-titel">
-                  {intl.formatMessage({ id: "COMPANY EMAIL" })} <span>*</span>
+                  {intl.formatMessage({ id: "COMPANY EMAIL" })} 
                 </span>
                 <input
                   type="text"
@@ -476,7 +476,7 @@ console.log(formik.values,"-----------");
               </div>
               <div className="w-full px-2 mt-3">
                 <span className="input-titel">
-                  {intl.formatMessage({ id: "COMPANY ABOUT" })} <span>*</span>
+                  {intl.formatMessage({ id: "COMPANY ABOUT" })} 
                 </span>
                 <textarea
                   name="about"
@@ -548,7 +548,7 @@ console.log(formik.values,"-----------");
               <div className="w-full flex flex-wrap">
                 <div className="w-full md:w-1/3 px-2 inputHolder">
                   <label className="input-titel">
-                    {intl.formatMessage({ id: "CITY" })} <span>*</span>
+                    {intl.formatMessage({ id: "CITY" })} 
                   </label>
                   <input
                     type="text"
@@ -564,7 +564,7 @@ console.log(formik.values,"-----------");
                 </div>
                 <div className="w-full md:w-1/3 px-2 inputHolder">
                   <label className="input-titel">
-                    {intl.formatMessage({ id: "STATE" })} <span>*</span>
+                    {intl.formatMessage({ id: "STATE" })} 
                   </label>
                   <input
                     type="text"
@@ -580,7 +580,7 @@ console.log(formik.values,"-----------");
                 </div>
                 <div className="w-full md:w-1/3 px-2 inputHolder">
                   <label className="input-titel">
-                    {intl.formatMessage({ id: "PINCODE" })} <span>*</span>
+                    {intl.formatMessage({ id: "PINCODE" })}
                   </label>
                   <input
                     type="text"
@@ -650,7 +650,7 @@ console.log(formik.values,"-----------");
             <div className="upload-holder px-2">
               <span className="input-titel ">
                 {intl.formatMessage({
-                  id: "COMPANY VIDEO MAX 2 VIDEOS (UP TO 2GB/VIDEO)",
+                  id: "COMPANY VIDEO MAX 2 VIDEOS (UP TO 512MB/VIDEO)",
                 })}
               </span>
               <label htmlFor="upload2" className="upload">

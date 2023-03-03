@@ -61,7 +61,7 @@ const EventAddServices = () => {
 	const clickNextHandler = () => {
 		// toast.success("Services saved Successfully.");
 		dispatch(increment());
-		if (eventType === "hyp") navigate(`../capacity`);
+		if (eventType === "hyp") navigate("../personaldetails");
 		else if (eventType === "gsb") navigate(`../addequipments`)
 		else navigate(`../othercost`);
 	};
