@@ -484,7 +484,7 @@ const DashboardEventViewOverview = ({
               </h3>
               <div className="p-7 bg-white rounded-md space-y-1">
                 <h3>{company?.name}</h3>
-                <p className="text-quicksilver text-sm font-normal">
+                <p className="text-quicksilver text-sm font-normal break-all">
                   {company?.about}
                 </p>
               </div>
@@ -597,7 +597,7 @@ const DashboardEventViewOverview = ({
               </h3>
               <div className="p-3.5 xl:p-5 bg-white rounded-md">
                 <div className="flex items-start text-quicksilver font-normal">
-                  <p className="text-sm font-normal pl-3">
+                  <p className="text-sm font-normal pl-3 break-all">
                     {socials?.t_and_c ? parse(socials?.t_and_c) : ""}
                   </p>
                 </div>
