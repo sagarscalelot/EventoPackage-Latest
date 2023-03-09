@@ -203,7 +203,7 @@ const SideBar = () => {
           <NavLink
             to="invoice"
             activeclassname="active"
-            title={intl.formatMessage({ id: "INVOICE" })}
+            title={intl.formatMessage({ id: "Invoice" })}
           >
             <span>
               <i className="w-6 block text-center text-lg icon-invoice"></i>

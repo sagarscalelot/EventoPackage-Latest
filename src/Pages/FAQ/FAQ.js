@@ -268,7 +268,7 @@ const FAQ = () => {
             </div>
             <div className="Accordion_item">
               <h3 className="title_tab">
-              {intl.formatMessage({ id: "INVOICE" })}
+              {intl.formatMessage({ id: "INVOICES" })}
                 <span>
                   <i className="icon-plus"></i>
                   <i className="icon-minus text-[3px]"></i>
