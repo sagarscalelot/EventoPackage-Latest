@@ -26,6 +26,7 @@ const DashboardEventReview = () => {
     <div className="pt-7 lg:pt-10">
       <div className="w-full space-y-7" id="reviews">
         <div className="w-full space-y-2">
+        
           {allEvents.map(ele => (
             <>
               <DashboardEventReviewListItem key={ele._id} data={ele} />

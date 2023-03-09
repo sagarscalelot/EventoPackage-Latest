@@ -201,8 +201,8 @@ const DashboardEventViewOverview = ({
           <div className="w-full lg:w-8/12 lg:pr-5 space-y-7">
             <div className="p-7 bg-white rounded-md space-y-1 max-[820px]:mr-3">
               <h3>{data?.display_name}</h3>
-              <p className="text-quicksilver text-sm font-normal">
-                {data?.aboutplace ? data?.aboutplace?.details : ""}
+              <p className="text-quicksilver text-sm font-normal break-all">
+                {data?.aboutplace ? parse(data?.aboutplace?.details) : ""}
               </p>
             </div>
             {/* <!-- Photo-holder --> */}
@@ -574,8 +574,8 @@ const DashboardEventViewOverview = ({
               </h3>
               <div className="p-7 bg-white rounded-md space-y-1">
                 <h3>{company?.name}</h3>
-                <p className="text-quicksilver text-sm font-normal">
-                  {company?.about}
+                <p className="text-quicksilver text-sm font-normal break-all">
+                  {(company?.about) ? parse(company?.about):""}
                 </p>
               </div>
             </div>
@@ -687,7 +687,7 @@ const DashboardEventViewOverview = ({
               </h3>
               <div className="p-3.5 xl:p-5 bg-white rounded-md">
                 <div className="flex items-start text-quicksilver font-normal">
-                  <p className="text-sm font-normal pl-3">
+                  <p className="text-sm font-normal pl-3 break-all">
                     {socials?.t_and_c ? parse(socials?.t_and_c) : ""}
                   </p>
                 </div>
