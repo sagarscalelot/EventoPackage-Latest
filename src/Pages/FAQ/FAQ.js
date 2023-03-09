@@ -39,7 +39,7 @@ const FAQ = () => {
       <div className="space-y-7 h-full">
         {/* <!-- title-holder  --> */}
         <div className="w-full space-y-7">
-          <h1>{intl.formatMessage({ id: "FAQ" })}</h1>
+          <h1>{intl.formatMessage({ id: "FAQs" })}</h1>
           <div className="Accordions w-full space-y-5">
             <div className="Accordion_item">
               <h3 className="title_tab">

@@ -40,7 +40,7 @@ const Chatbot = () => {
                                         <span className="arrow"></span>
                                     </div>
                                     <div className="text-massage left-massage">
-                                        <p>{intl.formatMessage({ id: "CAN YOU TELL ME EXACTLY WHAT YOU'RE LOOKING HTMLFOR?" })} <span>{intl.formatMessage({ id: "3:35PM" })}</span></p>
+                                        <p>{intl.formatMessage({ id: "CAN YOU TELL ME EXACTLY WHAT YOU'RE LOOKING FOR?" })} <span>{intl.formatMessage({ id: "3:35PM" })}</span></p>
                                         <span className="arrow"></span>
                                     </div>
                                     <div className="line-main">

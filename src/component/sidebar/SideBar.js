@@ -235,12 +235,12 @@ const SideBar = () => {
           <NavLink
             to="faq"
             activeclassname="active"
-            title={intl.formatMessage({ id: "FAQ" })}
+            title={intl.formatMessage({ id: "FAQs" })}
           >
             <span>
               <i className="w-6 block text-center text-lg icon-help"></i>
             </span>
-            <span>{intl.formatMessage({ id: "FAQ" })}</span>
+            <span>{intl.formatMessage({ id: "FAQs" })}</span>
           </NavLink>
           <NavLink
             to="chatbot"
