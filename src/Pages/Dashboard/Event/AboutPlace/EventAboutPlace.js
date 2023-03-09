@@ -52,8 +52,10 @@ const EventAboutPlace = () => {
 
 
 	const clickNextHandler = async (values) => {
-		const payload = {
-			...values,
+		if(about.length < 2001) {
+
+			const payload = {
+				...values,
 			eventid: eventId,
 			price_type: priceType,
 			details: about,
@@ -64,17 +66,20 @@ const EventAboutPlace = () => {
 			if (response.data.IsSuccess) {
 				toast.success(response.data.Message);
 				dispatch(increment());
-				 navigate("../location");
-
+				navigate("../location");
+				
 			} else {
 				toast.error(response.data.Message);
 			}
-
-
+			
+			
 		} catch (error) {
 			console.log(error);
 			toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
 		}
+	} else {
+		toast.error(`About text limit exceeded!`);
+	}
 	}
 
 	const addBanner = async (selected) => {
@@ -254,7 +259,8 @@ const EventAboutPlace = () => {
 						<small className="text-red-500 text-xs">{formik.errors.parking_capacity}</small>
 
 						<div className="w-full space-y-2.5">
-							<h3>{intl.formatMessage({ id: "ABOUT PLACE" })}</h3>
+							<h3>{intl.formatMessage({ id: "ABOUT PLACE" })}<span className="text-xs" style={{color:'#20C0E8'
+							}}> {about.length} / </span><span className='text-xs'>2000</span></h3>
 							<CKEditor
 								editor={ClassicEditor}
 								onChange={(event, editor) => {

@@ -11,6 +11,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { capacityId, yourCapacity } from './capacitySlice';
 import { useIntl } from "react-intl";
+import axios from 'axios';
 
 const EventCapacity = () => {
   const intl = useIntl();
@@ -22,6 +23,8 @@ const EventCapacity = () => {
   const eventId = localStorage.getItem("eventId");
   const token = localStorage.getItem("Token");
   const [type, setType] = useState("romantic_stay");
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
   const [coordinates, setCoordinates] = useState([]);
 
   const ValidationSchema = Yup.object().shape({
@@ -77,6 +80,7 @@ const EventCapacity = () => {
       if (response.data.Data.capacity) {
         setValues(response.data.Data.capacity);
         formik.setValues(response.data.Data.capacity);
+        getPincodeDetail({target:{value:response.data.Data.capacity.pincode}})
         if ('facilities' in response.data.Data.capacity) {
           setType(response.data.Data.capacity?.facilities);
         }
@@ -98,21 +102,22 @@ const EventCapacity = () => {
 
 
   const clickNextHandler = async (values) => {
-   
-    let payload = { ...values, facilities: type, eventid: eventId }
-    try {
-      const response = await dispatch(yourCapacity(payload)).unwrap();
-      if (response.data.IsSuccess) {
-        // toast.success(response.data.Message);
-        dispatch(increment());
-        navigate(`../photosandvideos`);
-
-      } else {
-        toast.error(response.data.Message);
+   if(values.city == city && values.state == state) {
+     let payload = { ...values, facilities: type, eventid: eventId }
+     try {
+       const response = await dispatch(yourCapacity(payload)).unwrap();
+       if (response.data.IsSuccess) {
+         // toast.success(response.data.Message);
+         dispatch(increment());
+         navigate(`../photosandvideos`);
+         
+        } else {
+          toast.error(response.data.Message);
+        }
+      } catch (error) {
+        toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
+        console.log(error);
       }
-    } catch (error) {
-      toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
-      console.log(error);
     }
 
   }
@@ -146,6 +151,15 @@ const EventCapacity = () => {
       }, () => {
         console.log('Unable to retrieve your location');
       });
+    }
+  }
+
+  const getPincodeDetail = (e) => {
+    if(e.target.value.length > 5) {
+      axios.get('https://api.postalpincode.in/pincode/'+e.target.value).then(res => {
+        setState(res.data[0].PostOffice[0].State)
+        setCity(res.data[0].PostOffice[0].District)
+      })
     }
   }
 
@@ -288,7 +302,10 @@ const EventCapacity = () => {
                     className="input"
                     name="pincode"
                     value={formik.values?.pincode}
-                    onChange={(e) => formik.setFieldValue("pincode", e.target.value)}
+                    onChange={(e) => {
+                      getPincodeDetail(e)
+                      formik.setFieldValue("pincode", e.target.value)
+                  }}
                   />
                   <small className="text-red-500 text-xs">
                     {formik.errors.pincode}

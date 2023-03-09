@@ -26,6 +26,8 @@ import {
 } from "./companyDetailsSlice";
 import { useIntl } from "react-intl";
 import PhoneInput from "react-phone-input-2";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const EventCompanyDetails = () => {
   const intl = useIntl();
@@ -478,7 +480,14 @@ console.log(formik.values,"-----------");
                 <span className="input-titel">
                   {intl.formatMessage({ id: "COMPANY ABOUT" })} 
                 </span>
-                <textarea
+                <CKEditor
+								editor={ClassicEditor}
+								onChange={(event, editor) => {
+                  formik.setFieldValue("about", editor.getData())
+								}}
+								data={formik.values.about}
+							/>
+                {/* <textarea
                   name="about"
                   id=""
                   cols="30"
@@ -486,7 +495,7 @@ console.log(formik.values,"-----------");
                   className="outline-none flex items-center w-full bg-white rounded-md p-3"
                   value={formik.values?.about}
                   onChange={(e) => formik.setFieldValue("about", e.target.value)}
-                ></textarea>
+                ></textarea> */}
                 <small className="text-red-500 text-xs">
                   {formik.errors.about}
                 </small>

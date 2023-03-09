@@ -76,8 +76,8 @@ const EventAddServiceListItem = ({ data, edit, eventId, setReload, setActiveList
 								<span className="off text-base font-bold anim order-1 text-caribbeanGreen">{intl.formatMessage({ id: "OFF" })}</span>
 								<span className="on text-base font-bold anim order-3">{intl.formatMessage({ id: "ON" })}</span>
 							</div>
-							{data.quantity && <span
-								className="inline-block text-base text-spiroDiscoBall font-bold bg-brightGray py-1.5 px-3.5 rounded">{data.quantity} Qty</span>}
+							{data.quantity && <span style={{width:'120px'}}
+								className="inline-block text-base text-spiroDiscoBall font-bold text-center bg-brightGray py-1.5 px-3.5 rounded">{data.quantity} Qty</span>}
 							<a href="#" title="Delete" onClick={() => { deleteHandler() }}><i className="text-center icon-fill-delete text-xl"></i></a>
 							<a href="#" title="Edit" onClick={() => setIsAddServicesPopUpOpen(true)}><i className="text-center icon-edit text-xl"></i></a>
 						</div>

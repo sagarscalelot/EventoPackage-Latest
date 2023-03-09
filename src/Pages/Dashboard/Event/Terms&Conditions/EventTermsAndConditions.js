@@ -75,8 +75,10 @@ const EventTermsAndConditions = () => {
       toast.warn(`${intl.formatMessage({ id: "PLEACE ACCEPT THE TERMS AND CONDITION." })}`);
       return;
     }
-    try {
-      const payload = {
+    if(terms.length < 3001) {
+
+      try {
+        const payload = {
         ...values,
         t_and_c: terms,
         status: acceptTerm,
@@ -86,13 +88,17 @@ const EventTermsAndConditions = () => {
       console.log(response);
       if (response?.data?.IsSuccess) {
         toast.success(response.data.Message);
-        clickNextHandler()
+        navigate('../dashboard')
       } else {
         toast.error(response.data.Message);
       }
     } catch (error) {
       toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
       console.log(error);
+    } 
+    } else {
+		toast.error(`About text limit exceeded!`);
+
     }
   };
 
@@ -145,7 +151,8 @@ const EventTermsAndConditions = () => {
           {/* <!-- main-content  --> */}
           <div className="space-y-5">
             <div className="w-full space-y-2.5">
-              <h3>{intl.formatMessage({ id: "TERMS AND CONDITIONS" })}</h3>
+              <h3>{intl.formatMessage({ id: "TERMS AND CONDITIONS" })}<span className="text-xs" style={{color:'#20C0E8'
+							}}> {terms.length} / </span><span className='text-xs'>3000</span></h3>
               <CKEditor
                 editor={ClassicEditor}
                 onChange={(event, editor) => {

@@ -28,6 +28,7 @@
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-i18next": "^12.1.4",
+    "react-image-lightbox": "^5.1.4",
     "react-intl": "^6.2.5",
     "react-lightgallery": "^0.9.0",
     "react-modal-image": "^2.6.0",
