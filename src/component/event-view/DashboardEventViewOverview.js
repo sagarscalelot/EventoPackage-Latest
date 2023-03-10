@@ -524,10 +524,11 @@ const DashboardEventViewOverview = ({
               </div>
             )}
             {/* <!-- Person & Parking --> */}
-            {capacity && (
+            {data?.aboutplace && (
               <div className="space-y-1.5">
                 <h3 className="text-lg">
                   {intl.formatMessage({ id: "PERSON & PARKING" })}
+
                 </h3>
                 <div className="flex items-center -mx-2.5">
                   <div className="w-full lg:w-1/2 px-2.5">
@@ -535,7 +536,7 @@ const DashboardEventViewOverview = ({
                       <h3 className="text-quicksilver">
                         {intl.formatMessage({ id: "NO OF PERSON" })}
                       </h3>
-                      <h2>{capacity?.person_capacity}</h2>
+                      <h2>{data?.aboutplace?.person_capacity}</h2>
                     </div>
                   </div>
                   <div className="w-full lg:w-1/2 px-2.5">
@@ -543,7 +544,7 @@ const DashboardEventViewOverview = ({
                       <h3 className="text-quicksilver">
                         {intl.formatMessage({ id: "PARKING CAPACITY" })}
                       </h3>
-                      <h2>{capacity?.parking_capacity}</h2>
+                      <h2>{data?.aboutplace?.parking_capacity}</h2>
                     </div>
                   </div>
                 </div>
