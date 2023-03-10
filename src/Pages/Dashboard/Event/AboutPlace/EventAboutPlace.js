@@ -109,10 +109,10 @@ const EventAboutPlace = () => {
 		console.log("selected", selected);
 		try {
 			if (selected && types.includes(selected.type)) {
-				if (selected.size < (3 * 1024 * 1024)) {
+				if(selected.size < (3 * 1024 * 1024)) {
 					setBanner(selected);
 					addBanner(selected);
-				}
+				} 
 				else {
 					toast.warn(`${intl.formatMessage({ id: "FILE SIZE IS GREATER THAN 3MB" })}`);
 				}
