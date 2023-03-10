@@ -4,6 +4,7 @@ import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
 } from "react-places-autocomplete";
+import GoogleMapReact from "google-map-react";
 import GoogleMap from "./GoogleMap";
 
 
@@ -43,8 +44,8 @@ export class AutoPlaceSearch extends Component {
             .then((latLng) => {
                 // update center state
                 this.setState({ mapCenter: latLng });
-                console.log("update : ")(
-                    this.props.handleClick(this.state.address, latLng.lng, latLng.lat)
+                console.log("update : ",latLng)(
+                    this.props.handleClick(this.state.address, latLng.lng, latLng.lat,latLng)
                 );
             })
             .catch((error) => console.error("Error", error));
@@ -89,11 +90,23 @@ export class AutoPlaceSearch extends Component {
                                 );
                             })}
                         </div>
-                        <GoogleMap
+                        {/* <GoogleMap
+                                centerMoved={this.props.centerMoved}
                             coordinates={{
                                 type: "Point",
                                 coordinates: [this.props.coordinates.coordinates[0], this.props.coordinates.coordinates[1]]
-                            }} />
+                            }} /> */}
+                            <div style={{height:'300px'}}>
+
+                            <GoogleMapReact
+          bootstrapURLKeys={{ key: "AIzaSyDLgr8YB5IK8dBIEWClexZGzXaB7UlVm7Q" }}
+          defaultCenter={this.state.mapCenter ?  this.state.mapCenter : { lat: 21.1702, lng: 72.8311 }}
+          center={this.state.mapCenter ?  this.state.mapCenter : { lat: 21.1702, lng: 72.8311 }}
+          defaultZoom={10}
+          yesIWantToUseGoogleMapApiInternals
+          onGoogleApiLoaded={({ map, maps }) => this.props.loadMap(map, maps)}
+        />
+                            </div>
                     </div>
                 )}
             </PlacesAutocomplete>

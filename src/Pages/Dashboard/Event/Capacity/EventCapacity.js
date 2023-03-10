@@ -12,7 +12,14 @@ import * as Yup from 'yup';
 import { capacityId, yourCapacity } from './capacitySlice';
 import { useIntl } from "react-intl";
 import axios from 'axios';
-
+import Geocode from "react-geocode";
+import GoogleMapReact from "google-map-react";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
+Geocode.setApiKey("AIzaSyDLgr8YB5IK8dBIEWClexZGzXaB7UlVm7Q");
+let marker;
 const EventCapacity = () => {
   const intl = useIntl();
   const displayName = localStorage.getItem("displayName");
@@ -26,7 +33,7 @@ const EventCapacity = () => {
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [coordinates, setCoordinates] = useState([]);
-
+const [add,setAdd] = useState()
   const ValidationSchema = Yup.object().shape({
     // person_capacity: Yup.number().typeError('Person Capacity must be a digit').integer().positive("Person Capacity must be positive").required(`${intl.formatMessage({ id: "PERSON CAPACITY IS REQUIRED" })}`),
     // parking_capacity: Yup.number().typeError('Parking Capacity must be a digit').integer().positive("Parking Capacity must be positive").required(`${intl.formatMessage({ id: "PARKING CAPACITY IS REQUIRED" })}`)
@@ -62,17 +69,63 @@ const EventCapacity = () => {
   // };
   // console.log(values);
 
+const getAddress = (lat,lng) => {
+  console.log(lat,lng)
+  Geocode.fromLatLng(lat, lng).then(
+    (response) => {
+      const address = response.results[0].formatted_address;
+      let city, state, country,postal_code;
+      for (let i = 0; i < response.results[0].address_components.length; i++) {
+        for (let j = 0; j < response.results[0].address_components[i].types.length; j++) {
+          switch (response.results[0].address_components[i].types[j]) {
+            case "locality":
+              city = response.results[0].address_components[i].long_name;
+              break;
+            case "administrative_area_level_1":
+              state = response.results[0].address_components[i].long_name;
+              break;
+            case "country":
+              country = response.results[0].address_components[i].long_name;
+              break;
+              case "postal_code":
+                postal_code = response.results[0].address_components[i].long_name;
+                break;
+          }
+        }
+      }
+      formik.setFieldValue('city',city)
+      formik.setFieldValue('state',state)
+      formik.setFieldValue('pincode',postal_code)
+      console.log(city, state, country);
+      console.log(address);
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+}
 
-
-  const handleClick = (address, lng, lat) => {
+  const handleClick = (address, lng, lat,latlng) => {
     setCoordinates([lng, lat]);
-    values.address = address;
+    setAdd(address)
     values.location = {
       type: "Point",
       coordinates: [lng, lat],
     };
-  };
+    console.log(lat,lng,marker)
+    marker.setPosition(latlng)
+    // marker.setCoordinates( lat,lng )
 
+  };
+ const handleChange = (address) => {
+    setAdd({address });
+  
+};
+
+const handleSelect = (address) => {
+    setAdd({ address });
+    
+};
 
   const getCapacity = async () => {
     try {
@@ -102,7 +155,6 @@ const EventCapacity = () => {
 
 
   const clickNextHandler = async (values) => {
-   if(values.city == city && values.state == state) {
      let payload = { ...values, facilities: type, eventid: eventId }
      try {
        const response = await dispatch(yourCapacity(payload)).unwrap();
@@ -118,8 +170,6 @@ const EventCapacity = () => {
         toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
         console.log(error);
       }
-    }
-
   }
 
   const formik = useFormik({
@@ -173,7 +223,26 @@ const EventCapacity = () => {
     [formik]
   );
 
+  const loadMap = (map, maps) => {
+    marker = new maps.Marker({
+      position: { lat: coordinates[1], lng: coordinates[0] },
+      map,
+      draggable: true
+    });
+    console.log(maps)
+     marker.addListener("dragend", () => {
+      formik.setFieldValue('location',{ type: "Point",
+      coordinates: [marker.getPosition().lat(),marker.getPosition().lng()]})
+       values.location = {
+            type: "Point",
+            coordinates: [marker.getPosition().lat(),marker.getPosition().lng()],
+          };
+      setCoordinates([marker.getPosition().lat(),marker.getPosition().lng()]);
+      getAddress(marker.getPosition().lat(),marker.getPosition().lng())
+    console.log(marker.getPosition().lat());
+  });
 
+  };
   return (
     //   <!-- Content In -->
     <form onSubmit={formik.handleSubmit}>
@@ -269,6 +338,7 @@ const EventCapacity = () => {
                     type="text"
                     className="input"
                     name="city"
+                    readOnly
                     value={formik.values?.city}
                     onChange={(e) => formik.setFieldValue("city", e.target.value)}
                   />
@@ -285,6 +355,7 @@ const EventCapacity = () => {
                     type="text"
                     className="input"
                     name="state"
+                    readOnly
                     value={formik.values?.state}
                     onChange={(e) => formik.setFieldValue("state", e.target.value)}
                   />
@@ -301,6 +372,7 @@ const EventCapacity = () => {
                     type="text"
                     className="input"
                     name="pincode"
+                    readOnly
                     value={formik.values?.pincode}
                     onChange={(e) => {
                       getPincodeDetail(e)
@@ -311,6 +383,18 @@ const EventCapacity = () => {
                     {formik.errors.pincode}
                   </small>
                   <br />
+                </div>
+                <div className="w-full  px-2 inputHolder">
+                <label className="input-titel">
+                Manual address ( If address from the google map is not accurate, you can write it manually. )
+                  </label>
+                <textarea
+                cols="30"
+                rows="5"
+                className="w-full outline-none p-7 py-5"
+                value={formik.values.address}
+                onChange={(e) =>  formik.setFieldValue("address", e.target.value)}
+              ></textarea>
                 </div>
               </div>
             </div>
@@ -324,6 +408,8 @@ const EventCapacity = () => {
               <div className="w-full flex flex-wrap bg-white p-2 rounded-md min-h-[300px] xl:min-h-[400px]">
                 <div className="relative rounded-md w-full">
                   {console.log("add : ", values.location.coordinates)}
+            
+             
                   {Object.keys(values.location).length === 0 ? (
                     <>
                       <AutoPlaceSearch
@@ -332,6 +418,7 @@ const EventCapacity = () => {
                           type: "Point",
                           coordinates: [coordinates[0], coordinates[1]]
                         }}
+                        loadMap={loadMap}
                       />
                     </>
                   ) : (
@@ -339,7 +426,7 @@ const EventCapacity = () => {
                       <AutoPlaceSearch
                         handleClick={handleClick}
                         coordinates={values.location}
-                        add={values.address}
+                        loadMap={loadMap}
                       />
                     </>
                   )}

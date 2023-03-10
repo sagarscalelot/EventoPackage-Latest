@@ -15,7 +15,7 @@ export class GoogleMap extends Component {
             },
         };
     }
-
+    
     render() {
         return (
             <Map
@@ -35,6 +35,8 @@ export class GoogleMap extends Component {
                 }}
             >
                 <Marker
+                draggable
+                onDragend={this.props.centerMoved}
                     position={{
                         lat: parseFloat(this.props.coordinates.coordinates[1]),
                         lng: parseFloat(this.props.coordinates.coordinates[0]),
