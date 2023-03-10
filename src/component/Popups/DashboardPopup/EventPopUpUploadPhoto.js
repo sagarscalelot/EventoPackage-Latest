@@ -30,7 +30,7 @@ const EventPopUpUploadPhoto = ({ handleClose, eventId, imageList }) => {
       maxFiles: 15,
       maxSize: 3140021,
     });
-
+  console.log(acceptedFiles.length, "acceptedFilesacceptedFiles");
   const token = localStorage.getItem("Token");
   const header = {
     Authorization: `Token ${token}`,
@@ -54,35 +54,72 @@ const EventPopUpUploadPhoto = ({ handleClose, eventId, imageList }) => {
         });
         newArr.push(response);
       }
-      Promise.all(newArr).then((res) => {
-        res.forEach((imageRes) => {
-          if (imageRes) {
-            imageList.push({
-              url: imageRes.data.Data.url,
-              description: details,
-            });
-          }
-        });
-
-        const payload = {
-          eventid: eventId,
-          photos: [...imageList],
-        };
-        const result = dispatch(AllMedia(payload))
-          .unwrap()
-          .then((r) => {
-            console.log("r : ", r.data.IsSuccess);
-
-            if (r.data.IsSuccess) {
-              handleClose(false);
-            } else {
-              console.log("df");
+      if (newArr.length + imageList.length > 16) {
+        let array = Object.assign([], newArr);
+        array.splice(0, newArr.length + imageList.length - 15);
+        Promise.all(array).then((res) => {
+          // console.log(newArr,"newArrnewArr");
+          res.forEach((imageRes) => {
+            if (imageRes) {
+              imageList.push({
+                url: imageRes.data.Data.url,
+                description: details,
+              });
             }
-          })
-          .catch((error) => {
-            console.log(error);
           });
-      });
+  
+          const payload = {
+            eventid: eventId,
+            photos: [...imageList],
+          };
+          const result = dispatch(AllMedia(payload))
+            .unwrap()
+            .then((r) => {
+              console.log("r : ", r.data.IsSuccess);
+  
+              if (r.data.IsSuccess) {
+                handleClose(false);
+              } else {
+                console.log("df");
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        });
+      }else{
+        Promise.all(newArr).then((res) => {
+          // console.log(newArr,"newArrnewArr");
+          res.forEach((imageRes) => {
+            if (imageRes) {
+              imageList.push({
+                url: imageRes.data.Data.url,
+                description: details,
+              });
+            }
+          });
+  
+          const payload = {
+            eventid: eventId,
+            photos: [...imageList],
+          };
+          const result = dispatch(AllMedia(payload))
+            .unwrap()
+            .then((r) => {
+              console.log("r : ", r.data.IsSuccess);
+  
+              if (r.data.IsSuccess) {
+                handleClose(false);
+              } else {
+                console.log("df");
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        });
+      }
+     
     } catch (error) {
       toast.success(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
       console.log(error);
@@ -148,22 +185,21 @@ const EventPopUpUploadPhoto = ({ handleClose, eventId, imageList }) => {
                   </span>
                 )}
               </div>
-              {acceptedFiles.length > 1 ? null : 
-               <div className="w-full">
-               <span className="input-titel">
-                 {intl.formatMessage({ id: "DETAILS" })}
-               </span>
-               <textarea
-                 name="details"
-                 id=""
-                 cols="30"
-                 rows="5"
-                 className="outline-none flex items-center w-full bg-white p-2 px-3.5 rounded-md"
-                 onChange={(e) => setDetails(e.target.value)}
-               ></textarea>
-             </div>
-              }
-             
+              {acceptedFiles.length > 1 ? null : (
+                <div className="w-full">
+                  <span className="input-titel">
+                    {intl.formatMessage({ id: "DETAILS" })}
+                  </span>
+                  <textarea
+                    name="details"
+                    id=""
+                    cols="30"
+                    rows="5"
+                    className="outline-none flex items-center w-full bg-white p-2 px-3.5 rounded-md"
+                    onChange={(e) => setDetails(e.target.value)}
+                  ></textarea>
+                </div>
+              )}
             </form>
             {/* <Link to="/" className="btn-primary w-full uppercase">Submit</Link> */}
             <div

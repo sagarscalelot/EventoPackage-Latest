@@ -92,10 +92,11 @@ const GalleryAll = () => {
 
 	return (
 		<div className="w-full relative tab-main active" id="all">
-			<div className="container">
+			<div className="container photo-show">
 				<LightGallery
 					onInit={onInit}
 					speed={500}
+					width="70%"
 					plugins={[lgThumbnail, lgVideo, lgFullscreen, lgHash, lgRotate, lgZoom, lgShare]}
 				>
 					{getItems()}

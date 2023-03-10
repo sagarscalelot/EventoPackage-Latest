@@ -228,7 +228,7 @@ const Register = () => {
                       </button>
                     </div>
                     <span className="block text-sm text-japaneseIndigo font-bold text-center">
-                      Are you Already User? <Link to="../login">Login Now</Link>
+                    Have an account? <Link to="../login">Login in</Link>
                     </span>
                   </Form>
                 )}

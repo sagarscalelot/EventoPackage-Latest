@@ -62,10 +62,13 @@ const DashboardEvent = () => {
       console.log(error);
     }
   };
-
+let catType = [];
   useEffect(() => {
-    setCategory(categoryByType);
-    setAllEvents(allEventList);
+    categoryByType.map((type) => (
+      catType.push(type.category_name)
+      ))
+      setCategory(catType.sort());
+      setAllEvents(allEventList);
   }, [categoryByType, allEventList]);
 
   useEffect(() => {
@@ -127,8 +130,8 @@ const DashboardEvent = () => {
           >
             <option value="">{intl.formatMessage({ id: "ALL CATEGORY" })}</option>
             {category?.map((ele) => (
-              <option value={ele?.category_name} key={ele._id}>
-                {ele?.category_name}
+              <option value={ele} >
+                {ele}
               </option>
             ))}
           </select>

@@ -874,3 +874,6 @@ img.fixed-images {
   border: none !important;
   background-color: unset !important;
 }
+.photo-show .lg-css3.lg-slide.lg-use-css3 .lg-item.lg-current {
+  width: 70% !important; 
+}

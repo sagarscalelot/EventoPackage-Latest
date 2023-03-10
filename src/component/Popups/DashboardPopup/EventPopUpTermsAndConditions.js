@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useIntl } from "react-intl";
 
-const EventPopUpTermsAndConditions = ({ handleClose, terms, saveData }) => {
+const EventPopUpTermsAndConditions = ({ handleClose, terms, saveData,setIsCheck }) => {
   const intl = useIntl();
   useEffect(() => {
     const box = document.getElementById("termsBox");
@@ -23,6 +23,7 @@ const EventPopUpTermsAndConditions = ({ handleClose, terms, saveData }) => {
             <div className="flex items-center space-x-5">
               <button
                 onClick={() => {
+                  setIsCheck(false);
                   handleClose(false);
                 }}
                 className="btn-primary btn-cancel w-full"
@@ -32,7 +33,7 @@ const EventPopUpTermsAndConditions = ({ handleClose, terms, saveData }) => {
               <div
                 className="btn-primary w-full"
                 onClick={() => {
-                  saveData();
+                  setIsCheck(true);
                   handleClose(false);
                 }}
               >

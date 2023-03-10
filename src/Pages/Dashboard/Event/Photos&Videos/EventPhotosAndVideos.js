@@ -23,6 +23,7 @@ const EventPhotosAndVideos = () => {
   const [isUploadPhotoPopUpOpen, setIsUploadPhotoPopUpOpen] = useState(false);
   const [isUploadVideoPopUpOpen, setIsUploadVideoPopUpOpen] = useState(false);
   const [imageList, setImageList] = useState([]);
+  console.log(imageList,"imageList");
   const [videoList, setVideoList] = useState([]);
   const [photoIndex, setPhotoIndex] = useState(null);
   const navigate = useNavigate();

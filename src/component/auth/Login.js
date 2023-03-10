@@ -138,7 +138,7 @@ const Login = () => {
                   </button>
                 </div>
                 <span className="block text-sm text-japaneseIndigo font-bold text-center">
-                  Are you new? <Link to="../register">Register Now</Link>
+                Don’t have an account? <Link to="../register">Sign up</Link>
                 </span>
               </form>
             </div>

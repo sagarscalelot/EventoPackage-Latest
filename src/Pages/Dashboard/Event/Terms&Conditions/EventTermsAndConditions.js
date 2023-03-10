@@ -13,6 +13,7 @@ import { tandcId, termsAndCondition } from "./termsAndVideoSlice";
 import { useIntl } from "react-intl";
 
 const EventTermsAndConditions = () => {
+  const [isCheck,setIsCheck] = useState(false)
   const intl = useIntl();
   const editorConfig = {
     toolbar: [
@@ -57,7 +58,6 @@ const EventTermsAndConditions = () => {
     instagram: "",
     linkedin: "",
   };
-  const [acceptTerm, setAcceptTerm] = useState(false);
   const [values, setValues] = useState(initialState);
 
   const handleInputChange = (e) => {
@@ -70,8 +70,9 @@ const EventTermsAndConditions = () => {
   };
   // https://m.media-amazon.com/images/I/516wEE7dasL.jpg
   // https://m.media-amazon.com/images/I/516wEE7dasL.jpg
+  console.log(isCheck,"isCheck");
   const saveData = async () => {
-    if (!acceptTerm) {
+    if (!isCheck) {
       toast.warn(`${intl.formatMessage({ id: "PLEACE ACCEPT THE TERMS AND CONDITION." })}`);
       return;
     }
@@ -81,9 +82,10 @@ const EventTermsAndConditions = () => {
         const payload = {
         ...values,
         t_and_c: terms,
-        status: acceptTerm,
+        status: isCheck,
         eventid: eventId,
       };
+      console.log(payload,"statusstatus");
       const response = await dispatch(termsAndCondition(payload)).unwrap()
       console.log(response);
       if (response?.data?.IsSuccess) {
@@ -119,7 +121,7 @@ const EventTermsAndConditions = () => {
       console.log(response);
       if (response.data.IsSuccess) {
         setValues(response.data.Data.tandc);
-        setAcceptTerm(response.data.Data.tandc.status);
+        setIsCheck(response.data.Data.tandc.status);
         setTerms(response.data.Data.tandc.t_and_c);
       }
     } catch (error) {
@@ -390,8 +392,10 @@ const EventTermsAndConditions = () => {
               <label className="checkbox rounded bg-white">
                 <input
                   type="checkbox"
-                  checked={acceptTerm}
-                  onClick={() => setAcceptTerm(!acceptTerm)}
+                  checked={isCheck ? true : false}
+                  onClick={() =>
+                    {setIsTermsAndConditionPopUpOpen(true)}
+                  }
                 />
                 <i className="icon-right"></i>
               </label>
@@ -401,9 +405,7 @@ const EventTermsAndConditions = () => {
             </div>
             <button
               className="btn-primary w-full"
-              onClick={() =>
-                setIsTermsAndConditionPopUpOpen(!isTermsAndConditionPopUpOpen)
-              }
+             onClick={()=>saveData()}
             >
               {intl.formatMessage({ id: "SAVE" })}
             </button>
@@ -430,7 +432,7 @@ const EventTermsAndConditions = () => {
           <EventPopUpTermsAndConditions
             handleClose={setIsTermsAndConditionPopUpOpen}
             terms={terms}
-            saveData={saveData}
+              setIsCheck={setIsCheck}
           />
         </Modal>
       </div>
