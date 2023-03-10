@@ -894,8 +894,8 @@ const DashboardEventViewOverview = ({
                     coordinates={{
                       type: "Point",
                       coordinates: [
-                        capacity?.location?.coordinates[0],
                         capacity?.location?.coordinates[1],
+                        capacity?.location?.coordinates[0],
                       ],
                     }}
                   />
@@ -906,7 +906,7 @@ const DashboardEventViewOverview = ({
                     {intl.formatMessage({ id: "LOCATION" })}
                   </span>
                   <h3 className="text-sm xl:text-base">
-                    {data?.capacity?.address}
+                    {/* {data?.capacity?.area_name} */}
                   </h3>
                 </div>
               </div>
