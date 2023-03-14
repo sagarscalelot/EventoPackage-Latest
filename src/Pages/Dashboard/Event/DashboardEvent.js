@@ -82,7 +82,6 @@ let catType = [];
   }, [isCreateNewPopUpOpen]);
 
   const multipleEventlive = async () => {
-    console.log("live id : ");
     try {
       let payload = {
         eventids: activeList,

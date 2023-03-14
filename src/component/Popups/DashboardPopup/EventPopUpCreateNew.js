@@ -30,14 +30,18 @@ const EventPopUpCreateNew = ({
   const eventType = getEventType(params.eventType);
 
   const getCategory = async () => {
+    let catType = [];
     try {
       const response = await dispatch(getCategoryByType(eventType)).unwrap();
-      setCategory(response.data.Data);
-      setNewCategoryId(response.data.Data[0]?._id);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+      (response.data.Data).map((type) => (
+        catType.push(type)
+        ))
+        setCategory(catType.sort((a, b) => a.category_name > b.category_name ? 1 : -1));  
+        setNewCategoryId(response.data.Data[0]?._id);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
   useEffect(() => {
     getCategory();

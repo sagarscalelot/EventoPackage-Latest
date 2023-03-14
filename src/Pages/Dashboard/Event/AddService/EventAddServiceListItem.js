@@ -3,32 +3,18 @@ import { s3Url } from '../../../../config';
 import Modal from '../../../../Common/Modals/Modal';
 import EventPopUpAddService from '../../../../component/Popups/DashboardPopup/EventPopUpAddService';
 import imagePreview from "../../../../assest/images/image-preview.png";
-import { deleteService, selectService } from './addServiceSlice';
+import { selectService } from './addServiceSlice';
 import { useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
 import { useIntl } from "react-intl";
+import RemoveServices from '../../../../component/Popups/DashboardPopup/RemoveServices';
 
 const EventAddServiceListItem = ({ data, edit, eventId, setReload, setActiveList, activeList }) => {
 	const intl = useIntl();
 	const [isAddServicesPopUpOpen, setIsAddServicesPopUpOpen] = useState(false);
+	const [removeService, setRemoveService] = useState(false);
 	const dispatch = useDispatch()
 	const [isLive, setIsLive] = useState(false);
 
-	const deleteHandler = async () => {
-		try {
-			let payload = {
-				serviceid: data._id
-			}
-			const response = await dispatch(deleteService(payload)).unwrap()
-			if (response.data.IsSuccess) {
-				toast.success(response.data.Message)
-			}
-			setReload(current => !current);
-		} catch (error) {
-			console.log(error);
-			console.log("Something went Wrong");
-		}
-	}
 
 	const addService = () => {
 		if (isLive && !activeList.includes(data._id)) {
@@ -76,9 +62,9 @@ const EventAddServiceListItem = ({ data, edit, eventId, setReload, setActiveList
 								<span className="off text-base font-bold anim order-1 text-caribbeanGreen">{intl.formatMessage({ id: "OFF" })}</span>
 								<span className="on text-base font-bold anim order-3">{intl.formatMessage({ id: "ON" })}</span>
 							</div>
-							{data.quantity && <span style={{width:'120px'}}
+							{data.quantity && <span style={{ width: '120px' }}
 								className="inline-block text-base text-spiroDiscoBall font-bold text-center bg-brightGray py-1.5 px-3.5 rounded">{data.quantity} Qty</span>}
-							<a href="#" title="Delete" onClick={() => { deleteHandler() }}><i className="text-center icon-fill-delete text-xl"></i></a>
+							<a href="#" title="Delete" onClick={() => { setRemoveService(true) }}><i className="text-center icon-fill-delete text-xl"></i></a>
 							<a href="#" title="Edit" onClick={() => setIsAddServicesPopUpOpen(true)}><i className="text-center icon-edit text-xl"></i></a>
 						</div>
 					</div>
@@ -93,6 +79,9 @@ const EventAddServiceListItem = ({ data, edit, eventId, setReload, setActiveList
 			</div>
 			<Modal isOpen={isAddServicesPopUpOpen}>
 				<EventPopUpAddService handleClose={setIsAddServicesPopUpOpen} data={data} edit={edit} setReload={setReload} />
+			</Modal>
+			<Modal isOpen={removeService}>
+				<RemoveServices handleClose={setRemoveService} setReload={setReload} data={data} />
 			</Modal>
 		</div>
 	)

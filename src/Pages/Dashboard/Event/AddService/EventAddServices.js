@@ -13,8 +13,7 @@ import { useIntl } from "react-intl";
 
 const EventAddServices = () => {
 	const intl = useIntl();
-	const selectServices = useSelectServices()
-	console.log(selectServices, "selectServicesselectServices");
+	const selectServices = useSelectServices();
 	const displayName = localStorage.getItem("displayName");
 	const navigate = useNavigate();
 	const params = useParams();

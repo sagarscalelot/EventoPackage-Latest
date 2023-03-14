@@ -9,6 +9,7 @@ import { useState } from 'react';
 import moment from 'moment/moment';
 import { getOneEventDetails, useEventCalender } from './calenderSlice';
 import { useIntl } from "react-intl";
+import { MoonLoader } from 'react-spinners';
 
 const EventCalender = () => {
 	const intl = useIntl();
@@ -21,7 +22,7 @@ const EventCalender = () => {
 	const params = useParams();
 	const eventType = params.eventType;
 	const [calendarEvents, setCalendarEvents] = useState([]);
-
+	const [loading, setLoading] = useState(true);
 
 
 	const setDate = (e) => {
@@ -32,6 +33,7 @@ const EventCalender = () => {
 	const Calendar = async () => {
 		try {
 			await dispatch(getOneEventDetails(eventId)).unwrap()
+			setLoading(false);
 			const attendeeArr = stateEventCalender?.attendee;
 			const calendarEvents = [];
 			attendeeArr.forEach(attendee => {
@@ -92,71 +94,84 @@ const EventCalender = () => {
 					{/* <!-- step-progress-bar  --> */}
 					<StepProgressBar eventType={eventType} />
 					{/* <!-- main-content  --> */}
-					<div className="space-y-5">
-						<div className="flex items-end -mx-3.5 max-[820px]:flex-col">
-							<div className="w-full lg:w-1/3 px-3.5">
-								<h3 className="pb-2">{intl.formatMessage({ id: "START DATE & TIME" })}</h3>
-								<label className="bg-white rounded-md flex space-x-3 relative">
-									<i className="icon-date-time flex items-center pl-5 absolute left-0 inset-y-0"></i>
-									<input type="date" onChange={setDate} className="w-full rounded-md outline-none appearance-none pl-10 py-4" />
-								</label>
-							</div>
-							<div className="w-full lg:w-1/3 px-3.5 max-[820px]:pt-2">
-								<h3 className="pb-2">{intl.formatMessage({ id: "END DATE & TIME" })}</h3>
-								<label className="bg-white rounded-md flex space-x-3 relative">
-									<i className="icon-date-time flex items-center pl-5 absolute left-0 inset-y-0"></i>
-									<input type="date" className="w-full rounded-md outline-none appearance-none pl-10 py-4" />
-								</label>
-							</div>
-							<div className="w-full lg:w-1/3 px-3.5 max-[820px]:pt-2">
-								<h3 className="pb-2">{intl.formatMessage({ id: "MONTHS" })}</h3>
-								<select className="bg-white rounded-md flex space-x-3 outline-0 px-6 py-4 relative arrow">
-									<option>{intl.formatMessage({ id: "JANUARY" })}</option>
-									<option>{intl.formatMessage({ id: "FEBRUARY" })}</option>
-									<option>{intl.formatMessage({ id: "MARCH" })}</option>
-									<option>{intl.formatMessage({ id: "APRIL" })}</option>
-									<option>{intl.formatMessage({ id: "MAY" })}</option>
-									<option>{intl.formatMessage({ id: "JUNE" })}</option>
-									<option>{intl.formatMessage({ id: "JULY" })}</option>
-									<option>{intl.formatMessage({ id: "AUGUST" })}</option>
-									<option>{intl.formatMessage({ id: "SEPTEMBER" })}</option>
-									<option>{intl.formatMessage({ id: "OCTOBER" })}</option>
-									<option>{intl.formatMessage({ id: "NOVEMBER" })}</option>
-									<option>{intl.formatMessage({ id: "DECEMBER" })}</option>
-								</select>
-							</div>
-							<div className="w-full lg:w-1/3 px-3.5 max-[820px]:pt-2">
-								<h3 className="pb-2">{intl.formatMessage({ id: "YEARS" })}</h3>
-								<select className="bg-white rounded-md flex space-x-3 outline-0 px-6 py-4 relative arrow">
-									<option>{year}</option>
-									<option>{year + 1}</option>
-									<option>{year + 2}</option>
-									<option>{year + 3}</option>
-									<option>{year + 4}</option>
-									<option>{year + 5}</option>
-									<option>{year + 6}</option>
-									<option>{year + 7}</option>
-									<option>{year + 8}</option>
-									<option>{year + 9}</option>
-								</select>
-							</div>
-						</div>
-
-						<div className="calendar inline-block justify-center items-center rounded-md drop-shadow-one bg-white w-full px-12 py-7">
-							<FullCalendar
-								plugins={[dayGridPlugin]}
-								initialView="dayGridMonth"
-								events={calendarEvents}
-
+					{
+						loading ?
+							<MoonLoader
+								cssOverride={{ margin: "100px auto" }}
+								color={"#20c0E8"}
+								loading={loading}
+								size={50}
+								aria-label="Loading Spinner"
+								data-testid="loader"
 							/>
-						</div>
-						{/* <!-- calendar end --> */}
-						{/* <Advertisement /> */}
-						<div className="prw-next-btn">
-							<button type="button" className="flex items-center" onClick={clickBackHander}><i className="icon-back-arrow mr-3"></i><h3>{intl.formatMessage({ id: "BACK" })}</h3></button>
-							<button className="btn-primary" onClick={clickNextHandler}>{intl.formatMessage({ id: "DONE" })}</button>
-						</div>
-					</div>
+							:
+
+							<div className="space-y-5">
+								<div className="flex items-end -mx-3.5 max-[820px]:flex-col">
+									<div className="w-full lg:w-1/3 px-3.5">
+										<h3 className="pb-2">{intl.formatMessage({ id: "START DATE & TIME" })}</h3>
+										<label className="bg-white rounded-md flex space-x-3 relative">
+											<i className="icon-date-time flex items-center pl-5 absolute left-0 inset-y-0"></i>
+											<input type="date" onChange={setDate} className="w-full rounded-md outline-none appearance-none pl-10 py-4" />
+										</label>
+									</div>
+									<div className="w-full lg:w-1/3 px-3.5 max-[820px]:pt-2">
+										<h3 className="pb-2">{intl.formatMessage({ id: "END DATE & TIME" })}</h3>
+										<label className="bg-white rounded-md flex space-x-3 relative">
+											<i className="icon-date-time flex items-center pl-5 absolute left-0 inset-y-0"></i>
+											<input type="date" className="w-full rounded-md outline-none appearance-none pl-10 py-4" />
+										</label>
+									</div>
+									<div className="w-full lg:w-1/3 px-3.5 max-[820px]:pt-2">
+										<h3 className="pb-2">{intl.formatMessage({ id: "MONTHS" })}</h3>
+										<select className="bg-white rounded-md flex space-x-3 outline-0 px-6 py-4 relative arrow">
+											<option>{intl.formatMessage({ id: "JANUARY" })}</option>
+											<option>{intl.formatMessage({ id: "FEBRUARY" })}</option>
+											<option>{intl.formatMessage({ id: "MARCH" })}</option>
+											<option>{intl.formatMessage({ id: "APRIL" })}</option>
+											<option>{intl.formatMessage({ id: "MAY" })}</option>
+											<option>{intl.formatMessage({ id: "JUNE" })}</option>
+											<option>{intl.formatMessage({ id: "JULY" })}</option>
+											<option>{intl.formatMessage({ id: "AUGUST" })}</option>
+											<option>{intl.formatMessage({ id: "SEPTEMBER" })}</option>
+											<option>{intl.formatMessage({ id: "OCTOBER" })}</option>
+											<option>{intl.formatMessage({ id: "NOVEMBER" })}</option>
+											<option>{intl.formatMessage({ id: "DECEMBER" })}</option>
+										</select>
+									</div>
+									<div className="w-full lg:w-1/3 px-3.5 max-[820px]:pt-2">
+										<h3 className="pb-2">{intl.formatMessage({ id: "YEARS" })}</h3>
+										<select className="bg-white rounded-md flex space-x-3 outline-0 px-6 py-4 relative arrow">
+											<option>{year}</option>
+											<option>{year + 1}</option>
+											<option>{year + 2}</option>
+											<option>{year + 3}</option>
+											<option>{year + 4}</option>
+											<option>{year + 5}</option>
+											<option>{year + 6}</option>
+											<option>{year + 7}</option>
+											<option>{year + 8}</option>
+											<option>{year + 9}</option>
+										</select>
+									</div>
+								</div>
+
+								<div className="calendar inline-block justify-center items-center rounded-md drop-shadow-one bg-white w-full px-12 py-7">
+									<FullCalendar
+										plugins={[dayGridPlugin]}
+										initialView="dayGridMonth"
+										events={calendarEvents}
+
+									/>
+								</div>
+								{/* <!-- calendar end --> */}
+								{/* <Advertisement /> */}
+								<div className="prw-next-btn">
+									<button type="button" className="flex items-center" onClick={clickBackHander}><i className="icon-back-arrow mr-3"></i><h3>{intl.formatMessage({ id: "BACK" })}</h3></button>
+									<button className="btn-primary" onClick={clickNextHandler}>{intl.formatMessage({ id: "DONE" })}</button>
+								</div>
+							</div>
+					}
 				</div>
 			</div>
 		</div>

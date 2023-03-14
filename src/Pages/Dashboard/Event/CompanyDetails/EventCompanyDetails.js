@@ -28,6 +28,7 @@ import { useIntl } from "react-intl";
 import PhoneInput from "react-phone-input-2";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { MoonLoader } from 'react-spinners';
 
 const EventCompanyDetails = () => {
   const intl = useIntl();
@@ -47,42 +48,45 @@ const EventCompanyDetails = () => {
   const [error2, setError2] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [count, setCount] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const validationSchema = Yup.object().shape({
-    // name: Yup.string().required(
-    //   `${intl.formatMessage({ id: "COMPANY NAME IS REQUIRED" })}`
-    // ),
-    // mobile: Yup.number()
-    //   .typeError(`${intl.formatMessage({ id: "THE VALUE MUST BE A DIGIT" })}`)
-    //   .integer()
-    //   .positive(
-    //     `${intl.formatMessage({ id: "CONTACT NUMBER MUST BE POSITIVE" })}`
-    //   )
-    //   .required(`${intl.formatMessage({ id: "CONTACT NUMBER IS REQUIRED" })}`),
-    // email: Yup.string()
-    //   .email(`${intl.formatMessage({ id: "INVALID EMAIL FORMAT" })}`)
-    //   .required(`${intl.formatMessage({ id: "EMAIL IS REQUIRED" })}`),
-    // about: Yup.string().required(
-    //   `${intl.formatMessage({ id: "ABOUT IS REQUIRED" })}`
-    // ),
-    // flat_no: Yup.string(),
-    // street: Yup.string(),
-    // area: Yup.string(),
-    // city: Yup.string().required(
-    //   `${intl.formatMessage({ id: "CITY IS REQUIRED" })}`
-    // ),
-    // state: Yup.string().required(
-    //   `${intl.formatMessage({ id: "STATE IS REQUIRED" })}`
-    // ),
-    // pincode: Yup.number()
-    //   .typeError(`${intl.formatMessage({ id: "THE VALUE MUST BE A DIGIT" })}`)
-    //   .min(
-    //     6,
-    //     `${intl.formatMessage({ id: "PINCODE SHOULD BE SIX DIGIT LONG." })}`
-    //   )
-    //   .required(`${intl.formatMessage({ id: "PINCODE IS REQUIRED" })}`),
+    name: Yup.string().required(
+      `${intl.formatMessage({ id: "COMPANY NAME IS REQUIRED" })}`
+    ),
+    mobile: Yup.number()
+      .typeError(`${intl.formatMessage({ id: "THE VALUE MUST BE A DIGIT" })}`)
+      .integer()
+      .positive(
+        `${intl.formatMessage({ id: "CONTACT NUMBER MUST BE POSITIVE" })}`
+      )
+      .required(`${intl.formatMessage({ id: "CONTACT NUMBER IS REQUIRED" })}`),
+    email: Yup.string()
+      .email(`${intl.formatMessage({ id: "INVALID EMAIL FORMAT" })}`)
+      .required(`${intl.formatMessage({ id: "EMAIL IS REQUIRED" })}`),
+    about: Yup.string().required(
+      `${intl.formatMessage({ id: "ABOUT IS REQUIRED" })}`
+    ),
+    flat_no: Yup.string(),
+    street: Yup.string(),
+    area: Yup.string(),
+    city: Yup.string()
+    .matches(/^[a-zA-Z ]*$/, `${intl.formatMessage({ id: "CITY NAME CAN ONLY CONTAIN ENGLISH CHARACTERS" })}`)
+    .required(
+      `${intl.formatMessage({ id: "CITY NAME IS REQUIRED*" })}`
+    ),  
+    state: Yup.string()
+    .matches(/^[a-zA-Z ]*$/, `${intl.formatMessage({ id: "STATE NAME CAN ONLY CONTAIN ENGLISH CHARACTERS" })}`)
+    .required(
+      `${intl.formatMessage({ id: "STATE NAME IS REQUIRED*" })}`
+    ),  
+    pincode: Yup.string()
+    .matches(/^[0-9]*$/, `${intl.formatMessage({ id: "THE VALUE MUST BE A DIGIT" })}`)
+      .min(6, `${intl.formatMessage({ id: "PINCODE SHOULD BE SIX DIGIT LONG." })}`)
+      .max(6, `${intl.formatMessage({ id: "PINCODE SHOULD BE SIX DIGIT LONG." })}`)
+      .required(`${intl.formatMessage({ id: "PINCODE IS REQUIRED*" })}`),
   });
-
+ 
   const initialState = {
     name: "",
     country_code: "",
@@ -166,6 +170,7 @@ const EventCompanyDetails = () => {
   const getCompanyDetail = async () => {
     try {
       const response = await dispatch(companyDetailId(eventId)).unwrap();
+      setLoading(false);
       //   setImageList(stateCompanyDetailId?.companydetail?.photos)
       //   setVideoList(stateCompanyDetailId?.companydetail?.videos)
       //   setGstFile(stateCompanyDetailId?.companydetail?.gst)
@@ -265,8 +270,8 @@ const EventCompanyDetails = () => {
         } else {
           setErrorMessage(
             `${intl.formatMessage({ id: "FILE SIZE IS GREATER THEN" })}` +
-              size +
-              " MB"
+            size +
+            " MB"
           );
           setError(true);
         }
@@ -318,8 +323,8 @@ const EventCompanyDetails = () => {
         } else {
           setErrorMessage(
             `${intl.formatMessage({ id: "FILE SIZE IS GREATER THEN" })}` +
-              size +
-              " Mb."
+            size +
+            " Mb."
           );
           setError2(true);
         }
@@ -348,8 +353,7 @@ const EventCompanyDetails = () => {
     tmpList.splice(index, 1);
     setVideoList([...tmpList]);
   };
-console.log(formik.values,"-----------");
-  
+
   return (
     <div>
       <form onSubmit={formik.handleSubmit} className="wrapper min-h-full">
@@ -367,78 +371,90 @@ console.log(formik.values,"-----------");
           {/* <!-- step-progress-bar  --> */}
           <StepProgressBar eventType={eventType} />
           {/* <!-- main-content  --> */}
-          <div className="space-y-5 -mx-2 max-[768px]:space-y-1">
-            <div className="w-full flex items-end flex-wrap">
-              <div className="w-full md:w-1/2 px-2 inputHolder">
-                <span className="input-titel">
-                  {intl.formatMessage({ id: "COMPANY NAME" })}
-                </span>
-                <input
-                  type="text"
-                  className="input"
-                  name="name"
-                  value={formik.values?.name}
-                  onChange={(e) => formik.setFieldValue("name", e.target.value)}
-                />
-                <small className="text-red-500 text-xs">
-                  {formik.errors.name}
-                </small>
-                <br />
-              </div>
-              <div className="w-full md:w-1/2 px-2 inputHolder">
-                <span className="input-titel">
-                  {intl.formatMessage({ id: "COMPANY GST" })} (
-                  {intl.formatMessage({ id: "OPTIONAL" })})
-                </span>
-                <label htmlFor="upload" className="upload upload-popup">
-                  <input
-                    type="file"
-                    name="images"
-                    id="upload"
-                    className="appearance-none hidden"
-                    onChange={pdfUpload}
-                  />
-                  <span className="input-titel mt-1">
-                    <i className="icon-pdf mr-2"></i>
-                    {intl.formatMessage({ id: "UPLOAD PDF" })}
-                  </span>
-                </label>
-                {gstFileError && (
-                  <span className="text-red-500 text-xs">{gstFileError}</span>
-                )}
-                {!gstFileError && gstFile !== null && (
-                  <span className="text-[#20C0E8] text-xs">
-                    <a target="blank" href={s3Url + "/" + gstFile}>
-                      {intl.formatMessage({ id: "PREVIEW LINK" })}
-                    </a>
-                  </span>
-                )}
-                <br />
-              </div>
-            </div>
-            <div className="w-full flex items-end flex-wrap">
-              <div className="w-full md:w-1/2 px-2 inputHolder">
-                <div className="input-label-holder">
-                  <label className="input-titel">
-                    {intl.formatMessage({ id: "COMPANY CONTACT NO" })}{" "}
-                    
-                  </label>
-                </div>
-                {/* {country_code} */}
-                <div className="flex">
-                  <PhoneInput
-                    country={"us"}
-                    value={formik.values.mobile}
-                    className="input"
-                    defaultErrorMessage="kjnihiou"
-                    onChange={(e, i, o) => {
-                      console.log(e,i,"gsfds");
-                      formik.setValues({...formik.values,mobile:e,country_code:i.dialCode})
-                      // formik.setFieldValue("mobile", e);
-                      // formik.setFieldValue("country_code", i.dialCode);
-                    }}
-                  />
-                  {/* <input
+          {
+            loading ?
+              <MoonLoader
+                cssOverride={{ margin: "100px auto" }}
+                color={"#20c0E8"}
+                loading={loading}
+                size={50}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+              :
+              <>
+                <div className="space-y-5 -mx-2 max-[768px]:space-y-1">
+                  <div className="w-full flex items-end flex-wrap">
+                    <div className="w-full md:w-1/2 px-2 inputHolder">
+                      <span className="input-titel">
+                        {intl.formatMessage({ id: "COMPANY NAME" })}
+                      </span>
+                      <input
+                        type="text"
+                        className="input"
+                        name="name"
+                        value={formik.values?.name}
+                        onChange={(e) => formik.setFieldValue("name", e.target.value)}
+                      />
+                      <small className="text-red-500 text-xs">
+                        {formik.errors.name}
+                      </small>
+                      <br />
+                    </div>
+                    <div className="w-full md:w-1/2 px-2 inputHolder">
+                      <span className="input-titel">
+                        {intl.formatMessage({ id: "COMPANY GST" })} (
+                        {intl.formatMessage({ id: "OPTIONAL" })})
+                      </span>
+                      <label htmlFor="upload" className="upload upload-popup">
+                        <input
+                          type="file"
+                          name="images"
+                          id="upload"
+                          className="appearance-none hidden"
+                          onChange={pdfUpload}
+                        />
+                        <span className="input-titel mt-1">
+                          <i className="icon-pdf mr-2"></i>
+                          {intl.formatMessage({ id: "UPLOAD PDF" })}
+                        </span>
+                      </label>
+                      {gstFileError && (
+                        <span className="text-red-500 text-xs">{gstFileError}</span>
+                      )}
+                      {!gstFileError && gstFile !== null && (
+                        <span className="text-[#20C0E8] text-xs">
+                          <a target="blank" href={s3Url + "/" + gstFile}>
+                            {intl.formatMessage({ id: "PREVIEW LINK" })}
+                          </a>
+                        </span>
+                      )}
+                      <br />
+                    </div>
+                  </div>
+                  <div className="w-full flex items-end flex-wrap">
+                    <div className="w-full md:w-1/2 px-2 inputHolder">
+                      <div className="input-label-holder">
+                        <label className="input-titel">
+                          {intl.formatMessage({ id: "COMPANY CONTACT NO" })}{" "}
+
+                        </label>
+                      </div>
+                      {/* {country_code} */}
+                      <div className="flex">
+                        <PhoneInput
+                          country={"us"}
+                          value={formik.values.mobile}
+                          className="input"
+                          defaultErrorMessage="kjnihiou"
+                          onChange={(e, i, o) => {
+                            console.log(e, i, "gsfds");
+                            formik.setValues({ ...formik.values, mobile: e, country_code: i.dialCode })
+                            // formik.setFieldValue("mobile", e);
+                            // formik.setFieldValue("country_code", i.dialCode);
+                          }}
+                        />
+                        {/* <input
                     type="text"
                     className="input max-w-[80px] w-full mr-3"
                     name="country_code"
@@ -454,40 +470,40 @@ console.log(formik.values,"-----------");
                     value={formik.values?.mobile}
                     onChange={(e) => formik.setFieldValue("mobile", e.target.value)}
                   /> */}
-                </div>
-                <small className="text-red-500 text-xs">
-                  {formik.errors.mobile}
-                </small>
-                <br />
-              </div>
-              <div className="w-full md:w-1/2 px-2 inputHolder">
-                <span className="input-titel">
-                  {intl.formatMessage({ id: "COMPANY EMAIL" })} 
-                </span>
-                <input
-                  type="text"
-                  className="input"
-                  name="email"
-                  value={formik.values?.email}
-                  onChange={(e) => formik.setFieldValue("email", e.target.value)}
-                />
-                <small className="text-red-500 text-xs">
-                  {formik.errors.email}
-                </small>
-                <br />
-              </div>
-              <div className="w-full px-2 mt-3">
-                <span className="input-titel">
-                  {intl.formatMessage({ id: "COMPANY ABOUT" })} 
-                </span>
-                <CKEditor
-								editor={ClassicEditor}
-								onChange={(event, editor) => {
-                  formik.setFieldValue("about", editor.getData())
-								}}
-								data={formik.values.about}
-							/>
-                {/* <textarea
+                      </div>
+                      <small className="text-red-500 text-xs">
+                        {formik.errors.mobile}
+                      </small>
+                      <br />
+                    </div>
+                    <div className="w-full md:w-1/2 px-2 inputHolder">
+                      <span className="input-titel">
+                        {intl.formatMessage({ id: "COMPANY EMAIL" })}
+                      </span>
+                      <input
+                        type="text"
+                        className="input"
+                        name="email"
+                        value={formik.values?.email}
+                        onChange={(e) => formik.setFieldValue("email", e.target.value)}
+                      />
+                      <small className="text-red-500 text-xs">
+                        {formik.errors.email}
+                      </small>
+                      <br />
+                    </div>
+                    <div className="w-full px-2 mt-3">
+                      <span className="input-titel">
+                        {intl.formatMessage({ id: "COMPANY ABOUT" })}
+                      </span>
+                      <CKEditor
+                        editor={ClassicEditor}
+                        onChange={(event, editor) => {
+                          formik.setFieldValue("about", editor.getData())
+                        }}
+                        data={formik.values.about}
+                      />
+                      {/* <textarea
                   name="about"
                   id=""
                   cols="30"
@@ -496,227 +512,228 @@ console.log(formik.values,"-----------");
                   value={formik.values?.about}
                   onChange={(e) => formik.setFieldValue("about", e.target.value)}
                 ></textarea> */}
-                <small className="text-red-500 text-xs">
-                  {formik.errors.about}
-                </small>
-                <br />
-              </div>
-            </div>
-            <div className="space-y-5 max-[768px]:space-y-0">
-              <h3 className="px-2">{intl.formatMessage({ id: "ADDRESS" })}</h3>
-              <div className="w-full flex flex-wrap">
-                <div className="w-full md:w-1/3 px-2 inputHolder">
-                  <span className="input-titel">
-                    {intl.formatMessage({ id: "FLAT NO." })}
-                  </span>
-                  <input
-                    type="text"
-                    className="input"
-                    name="flat_no"
-                    value={formik.values?.flat_no}
-                    onChange={(e) => formik.setFieldValue("flat_no", e.target.value)}
-                  />
-                  <small className="text-red-500 text-xs">
-                    {formik.errors.area}
-                  </small>
-                  <br />
-                </div>
-                <div className="w-full md:w-1/3 px-2 inputHolder">
-                  <span className="input-titel">
-                    {intl.formatMessage({ id: "STREET NAME." })}
-                  </span>
-                  <input
-                    type="text"
-                    className="input"
-                    name="street"
-                    value={formik.values?.street}
-                    onChange={(e) => formik.setFieldValue("street", e.target.value)}
-                  />
-                  <small className="text-red-500 text-xs">
-                    {formik.errors.street}
-                  </small>
-                  <br />
-                </div>
-                <div className="w-full md:w-1/3 px-2 inputHolder">
-                  <span className="input-titel">
-                    {intl.formatMessage({ id: "AREA NAME." })}
-                  </span>
-                  <input
-                    type="text"
-                    className="input"
-                    name="area"
-                    value={formik.values?.area}
-                    onChange={(e) => formik.setFieldValue("area", e.target.value)}
-                  />
-                  <small className="text-red-500 text-xs">
-                    {formik.errors.area}
-                  </small>
-                  <br />
-                </div>
-              </div>
-              <div className="w-full flex flex-wrap">
-                <div className="w-full md:w-1/3 px-2 inputHolder">
-                  <label className="input-titel">
-                    {intl.formatMessage({ id: "CITY" })} 
-                  </label>
-                  <input
-                    type="text"
-                    className="input"
-                    name="city"
-                    value={formik.values?.city}
-                    onChange={(e) => formik.setFieldValue("city", e.target.value)}
-                  />
-                  <small className="text-red-500 text-xs">
-                    {formik.errors.city}
-                  </small>
-                  <br />
-                </div>
-                <div className="w-full md:w-1/3 px-2 inputHolder">
-                  <label className="input-titel">
-                    {intl.formatMessage({ id: "STATE" })} 
-                  </label>
-                  <input
-                    type="text"
-                    className="input"
-                    name="state"
-                    value={formik.values?.state}
-                    onChange={(e) => formik.setFieldValue("state", e.target.value)}
-                  />
-                  <small className="text-red-500 text-xs">
-                    {formik.errors.state}
-                  </small>
-                  <br />
-                </div>
-                <div className="w-full md:w-1/3 px-2 inputHolder">
-                  <label className="input-titel">
-                    {intl.formatMessage({ id: "PINCODE" })}
-                  </label>
-                  <input
-                    type="text"
-                    className="input"
-                    name="pincode"
-                    value={formik.values?.pincode}
-                    onChange={(e) => formik.setFieldValue("pincode", e.target.value)}
-                  />
-                  <small className="text-red-500 text-xs">
-                    {formik.errors.pincode}
-                  </small>
-                  <br />
-                </div>
-              </div>
-            </div>
-            <div className="upload-holder px-2">
-              <span className="input-titel ">
-                {intl.formatMessage({
-                  id: "COMPANY PHOTOS MAX 5 IMAGES (UP TO 5MB/IMAGE)",
-                })}
-              </span>
-              <label htmlFor="uploadimages" className="upload">
-                <input
-                  type="file"
-                  name="images"
-                  id="uploadimages"
-                  className="appearance-none hidden"
-                  onChange={photoChangeHandler}
-                />
-                <span className="input-titel mt-1">
-                  <i className="icon-image mr-2"></i>
-                  {intl.formatMessage({ id: "UPLOAD IMAGES" })}
-                </span>
-              </label>
-              {error && (
-                <small className="text-red-500 text-xs">{errorMessage} </small>
-              )}
-              <br />
-            </div>
-            <div className="media-upload-holder ml-2">
-              {imageList?.length !== 0 && (
-                <span className="input-titel">
-                  {intl.formatMessage({ id: "UPLOADED PHOTO" })}
-                </span>
-              )}
-              <div className="flex flex-wrap herobox">
-                {imageList?.map((img, index) => (
-                  <div key={index} className="mt-2 mr-2">
-                    <div className="upload-box">
-                      <div className="rounded relative overflow-hidden flex justify-center items-center h-full">
-                        <img
-                          src={s3Url + "/" + img.url}
-                          alt={"upload-" + index}
+                      <small className="text-red-500 text-xs">
+                        {formik.errors.about}
+                      </small>
+                      <br />
+                    </div>
+                  </div>
+                  <div className="space-y-5 max-[768px]:space-y-0">
+                    <h3 className="px-2">{intl.formatMessage({ id: "ADDRESS" })}</h3>
+                    <div className="w-full flex flex-wrap">
+                      <div className="w-full md:w-1/3 px-2 inputHolder">
+                        <span className="input-titel">
+                          {intl.formatMessage({ id: "FLAT NO." })}
+                        </span>
+                        <input
+                          type="text"
+                          className="input"
+                          name="flat_no"
+                          value={formik.values?.flat_no}
+                          onChange={(e) => formik.setFieldValue("flat_no", e.target.value)}
                         />
-                        <button
-                          type="button"
-                          onClick={() => removeImageClick(index)}
-                        >
-                          {intl.formatMessage({ id: "REMOVE" })}
-                        </button>
+                        <small className="text-red-500 text-xs">
+                          {formik.errors.area}
+                        </small>
+                        <br />
+                      </div>
+                      <div className="w-full md:w-1/3 px-2 inputHolder">
+                        <span className="input-titel">
+                          {intl.formatMessage({ id: "STREET NAME." })}
+                        </span>
+                        <input
+                          type="text"
+                          className="input"
+                          name="street"
+                          value={formik.values?.street}
+                          onChange={(e) => formik.setFieldValue("street", e.target.value)}
+                        />
+                        <small className="text-red-500 text-xs">
+                          {formik.errors.street}
+                        </small>
+                        <br />
+                      </div>
+                      <div className="w-full md:w-1/3 px-2 inputHolder">
+                        <span className="input-titel">
+                          {intl.formatMessage({ id: "AREA NAME." })}
+                        </span>
+                        <input
+                          type="text"
+                          className="input"
+                          name="area"
+                          value={formik.values?.area}
+                          onChange={(e) => formik.setFieldValue("area", e.target.value)}
+                        />
+                        <small className="text-red-500 text-xs">
+                          {formik.errors.area}
+                        </small>
+                        <br />
+                      </div>
+                    </div>
+                    <div className="w-full flex flex-wrap">
+                      <div className="w-full md:w-1/3 px-2 inputHolder">
+                        <label className="input-titel">
+                          {intl.formatMessage({ id: "CITY" })}
+                        </label>
+                        <input
+                          type="text"
+                          className="input"
+                          name="city"
+                          value={formik.values?.city}
+                          onChange={(e) => formik.setFieldValue("city", e.target.value)}
+                        />
+                        <small className="text-red-500 text-xs">
+                          {formik.errors.city}
+                        </small>
+                        <br />
+                      </div>
+                      <div className="w-full md:w-1/3 px-2 inputHolder">
+                        <label className="input-titel">
+                          {intl.formatMessage({ id: "STATE" })}
+                        </label>
+                        <input
+                          type="text"
+                          className="input"
+                          name="state"
+                          value={formik.values?.state}
+                          onChange={(e) => formik.setFieldValue("state", e.target.value)}
+                        />
+                        <small className="text-red-500 text-xs">
+                          {formik.errors.state}
+                        </small>
+                        <br />
+                      </div>
+                      <div className="w-full md:w-1/3 px-2 inputHolder">
+                        <label className="input-titel">
+                          {intl.formatMessage({ id: "PINCODE" })}
+                        </label>
+                        <input
+                          type="text"
+                          className="input"
+                          name="pincode"
+                          value={formik.values?.pincode}
+                          onChange={(e) => formik.setFieldValue("pincode", e.target.value)}
+                        />
+                        <small className="text-red-500 text-xs">
+                          {formik.errors.pincode}
+                        </small>
+                        <br />
                       </div>
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
-            <div className="upload-holder px-2">
-              <span className="input-titel ">
-                {intl.formatMessage({
-                  id: "COMPANY VIDEO MAX 2 VIDEOS (UP TO 512MB/VIDEO)",
-                })}
-              </span>
-              <label htmlFor="upload2" className="upload">
-                <input
-                  type="file"
-                  name="images"
-                  id="upload2"
-                  className="appearance-none hidden"
-                  onChange={videoChangeHandler}
-                />
-                <div className="mt-1 flex items-baseline justify-center">
-                  <i className="icon-video-play text-base mr-2"></i>{" "}
-                  <span className="input-titel pt-1">
-                    {intl.formatMessage({ id: "UPLOAD VIDEOS" })}
-                  </span>
-                </div>
-              </label>
-              {error2 && (
-                <small className="text-red-500 text-xs">{errorMessage} </small>
-              )}
-              <br />
-            </div>
-            <div className="media-upload-holder ml-2">
-              {videoList?.length !== 0 && (
-                <span className="input-titel">
-                  {intl.formatMessage({ id: "UPLOADED VIDEOS" })}
-                </span>
-              )}
-              <div className="flex space-x-2.5">
-                {videoList?.map((vid, index) => (
-                  <div className="upload-box" key={index}>
-                    <div className="rounded relative overflow-hidden h-full">
-                      <video className="h-full">
-                        <source
-                          src={s3Url + "/" + vid.url}
-                          alt={"upload-" + index}
-                        />
-                      </video>
-                      <button
-                        type="button"
-                        onClick={() => removeVideoClick(index)}
-                      >
-                        {intl.formatMessage({ id: "REMOVE" })}
-                      </button>
+                  <div className="upload-holder px-2">
+                    <span className="input-titel ">
+                      {intl.formatMessage({
+                        id: "COMPANY PHOTOS MAX 5 IMAGES (UP TO 5MB/IMAGE)",
+                      })}
+                    </span>
+                    <label htmlFor="uploadimages" className="upload">
+                      <input
+                        type="file"
+                        name="images"
+                        id="uploadimages"
+                        className="appearance-none hidden"
+                        onChange={photoChangeHandler}
+                      />
+                      <span className="input-titel mt-1">
+                        <i className="icon-image mr-2"></i>
+                        {intl.formatMessage({ id: "UPLOAD IMAGES" })}
+                      </span>
+                    </label>
+                    {error && (
+                      <small className="text-red-500 text-xs">{errorMessage} </small>
+                    )}
+                    <br />
+                  </div>
+                  <div className="media-upload-holder ml-2">
+                    {imageList?.length !== 0 && (
+                      <span className="input-titel">
+                        {intl.formatMessage({ id: "UPLOADED PHOTO" })}
+                      </span>
+                    )}
+                    <div className="flex flex-wrap herobox">
+                      {imageList?.map((img, index) => (
+                        <div key={index} className="mt-2 mr-2">
+                          <div className="upload-box">
+                            <div className="rounded relative overflow-hidden flex justify-center items-center h-full">
+                              <img
+                                src={s3Url + "/" + img.url}
+                                alt={"upload-" + index}
+                              />
+                              <button
+                                type="button"
+                                onClick={() => removeImageClick(index)}
+                              >
+                                {intl.formatMessage({ id: "REMOVE" })}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <span className="input-titel capitalize">
-            {intl.formatMessage({
-              id: "DISCLAIMER - THESE IMAGES AND VIDEOS WILL FIRST BE VERIFIED BY THE ADMIN AND THEN GIVEN THE AUTHORITY.",
-            })}
-          </span>
+                  <div className="upload-holder px-2">
+                    <span className="input-titel ">
+                      {intl.formatMessage({
+                        id: "COMPANY VIDEO MAX 2 VIDEOS (UP TO 512MB/VIDEO)",
+                      })}
+                    </span>
+                    <label htmlFor="upload2" className="upload">
+                      <input
+                        type="file"
+                        name="images"
+                        id="upload2"
+                        className="appearance-none hidden"
+                        onChange={videoChangeHandler}
+                      />
+                      <div className="mt-1 flex items-baseline justify-center">
+                        <i className="icon-video-play text-base mr-2"></i>{" "}
+                        <span className="input-titel pt-1">
+                          {intl.formatMessage({ id: "UPLOAD VIDEOS" })}
+                        </span>
+                      </div>
+                    </label>
+                    {error2 && (
+                      <small className="text-red-500 text-xs">{errorMessage} </small>
+                    )}
+                    <br />
+                  </div>
+                  <div className="media-upload-holder ml-2">
+                    {videoList?.length !== 0 && (
+                      <span className="input-titel">
+                        {intl.formatMessage({ id: "UPLOADED VIDEOS" })}
+                      </span>
+                    )}
+                    <div className="flex space-x-2.5">
+                      {videoList?.map((vid, index) => (
+                        <div className="upload-box" key={index}>
+                          <div className="rounded relative overflow-hidden h-full">
+                            <video className="h-full">
+                              <source
+                                src={s3Url + "/" + vid.url}
+                                alt={"upload-" + index}
+                              />
+                            </video>
+                            <button
+                              type="button"
+                              onClick={() => removeVideoClick(index)}
+                            >
+                              {intl.formatMessage({ id: "REMOVE" })}
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <span className="input-titel capitalize">
+                  {intl.formatMessage({
+                    id: "DISCLAIMER - THESE IMAGES AND VIDEOS WILL FIRST BE VERIFIED BY THE ADMIN AND THEN GIVEN THE AUTHORITY.",
+                  })}
+                </span>
+              </>
+          }
         </div>
-
         <div className="prw-next-btn">
           <button
             type="button"

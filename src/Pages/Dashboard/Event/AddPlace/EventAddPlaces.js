@@ -7,6 +7,7 @@ import { decrement, increment } from '../../../../Common/CommonSlice/stepProgres
 import { toast, ToastContainer } from 'react-toastify';
 import { addPlaces, useAddPlaces } from './eventAddPlaceSlice';
 import { useIntl } from "react-intl";
+import { MoonLoader } from 'react-spinners';
 
 const EventAddPlaces = () => {
 	const intl = useIntl();
@@ -18,6 +19,7 @@ const EventAddPlaces = () => {
 	const [newEvent, setNewEvent] = useState([]);
 	const [categoryName, setCategoryName] = useState("");
 	const eventId = localStorage.getItem("eventId");
+	const [loading, setLoading] = useState(true);
 
 	const getAddedEvent = async () => {
 		try {
@@ -27,6 +29,7 @@ const EventAddPlaces = () => {
 				setNewEvent(response?.data?.Data);
 				setCategoryName(addPlace?.event_category?.category_name);
 			}
+			setLoading(false);
 		} catch (error) {
 			console.log(error);
 		}
@@ -64,9 +67,21 @@ const EventAddPlaces = () => {
 					{/* <!-- step-progress-bar  --> */}
 					<StepProgressBar eventType={eventType} />
 					{/* <!-- main-content  --> */}
-					<div className=" space-y-3">
-						<EventAddPlacesEventList displayName={newEvent?.display_name} categoryName={categoryName} eventId={newEvent?._id} />
-					</div>
+					{
+						loading ?
+							<MoonLoader
+								cssOverride={{ margin: "100px auto" }}
+								color={"#20c0E8"}
+								loading={loading}
+								size={50}
+								aria-label="Loading Spinner"
+								data-testid="loader"
+							/>
+							:
+							<div className=" space-y-3">
+								<EventAddPlacesEventList displayName={newEvent?.display_name} categoryName={categoryName} eventId={newEvent?._id} />
+							</div>
+					}
 					{/* <!-- advisement --> */}
 					{/* <Advertisement /> */}
 				</div>

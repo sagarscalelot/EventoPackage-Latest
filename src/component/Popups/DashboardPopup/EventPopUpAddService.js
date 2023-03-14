@@ -98,6 +98,7 @@ const EventPopUpAddService = ({
         if (typeof image === "object") {
           const response = await dispatch(uploadPhoto(formData)).unwrap();
           if (response.data.IsSuccess) {
+
             url = response.data.Data.url;
           }
         }

@@ -6,7 +6,7 @@ import moment from 'moment';
 const DashboardEventReviewListItem = ({ data }) => {
 
   let reviewTime = moment.unix(data?.timestamp/1000).fromNow();
-console.log("Review Data list",data.userid.profile_pic);
+// console.log("Review Data list",data);
     const Star = ({ratings}) => {
         const numberRating = Number(ratings);
         // console.log("numberRating",numberRating);

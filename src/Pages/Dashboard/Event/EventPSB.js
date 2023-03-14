@@ -19,6 +19,7 @@ import {
   personalDetails,
 } from "./PersonalDetails/personalDetailsSlice";
 import { useIntl } from "react-intl";
+import { MoonLoader } from 'react-spinners';
 
 const EventPersonalDetails = () => {
   const intl = useIntl();
@@ -30,7 +31,7 @@ const EventPersonalDetails = () => {
   // const [price, setPrice] = useState("");
   const [priceType, setPriceType] = useState("per_day");
   const eventId = localStorage.getItem("eventId");
-
+  const [loading, setLoading] = useState(true);
   const [banner, setBanner] = useState("");
   const displayName = localStorage.getItem("displayName");
 
@@ -45,10 +46,10 @@ const EventPersonalDetails = () => {
       .integer()
       .positive(`${intl.formatMessage({ id: "CONTACT NUMBER MUST BE POSITIVE" })}`)
       .required(`${intl.formatMessage({ id: "CONTACT NUMBER IS REQUIRED" })}`),
-    alt_mobile_no: Yup.number()
-      .typeError(`${intl.formatMessage({ id: "CONTACT NUMBER MUST BE A DIGIT" })}`)
-      .integer()
-      .positive(`${intl.formatMessage({ id: "CONTACT NUMBER MUST BE POSITIVE" })}`),
+    alt_mobile_no: Yup.string()
+    .matches(/^[0-9]*$/, `${intl.formatMessage({ id: "CONTACT NUMBER MUST BE A DIGIT" })}`)
+      .min(10, `${intl.formatMessage({ id: "CONTACT NUMBER SHOULD BE TEN DIGIT LONG." })}`)
+      .max(10, `${intl.formatMessage({ id: "CONTACT NUMBER BE TEN DIGIT LONG." })}`),
     email: Yup.string()
       .email(`${intl.formatMessage({ id: "INVALID EMAIL FORMAT" })}`)
       .required(`${intl.formatMessage({ id: "EMAIL ADDRESS IS REQUIRED*" })}`),
@@ -165,6 +166,7 @@ const EventPersonalDetails = () => {
   const getProfile = async () => {
     try {
       await dispatch(getProfileDetails()).unwrap();
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -186,6 +188,7 @@ const EventPersonalDetails = () => {
         setBanner(response.data.Data.personaldetail.banner);
         // setPrice(response.data.Data.personaldetail.price);
         setPriceType(response.data.Data.personaldetail.price_type);
+        setLoading(false);
       }
       if (!response.data.IsSuccess) {
         toast.error(`${intl.formatMessage({ id: "ERROR OCCURED WHILE FETCHING DATA." })}`);
@@ -224,385 +227,396 @@ const EventPersonalDetails = () => {
           </div>
           {/* <!-- step-progress-bar  --> */}
           <StepProgressBar eventType={eventType} />
-          {/* <!-- main-content  --> */}
-          <div className="space-y-5 -mx-2 max-[768px]:space-y-0">
-            <div className="w-full flex items-end flex-wrap">
-              <div className="w-full md:w-1/2 px-2 inputHolder">
-                <span className="input-titel">
-                  {intl.formatMessage({ id: "PROFESSIONAL SKILL" })}
-                </span>
-                <input
-                  type="text"
-                  className="input"
-                  name="professional_skill"
-                  value={formik.values?.professional_skill}
-                  onChange={(e) =>
-                    setInputValue("professional_skill", e.target.value)
-                  }
-                />
-                <small className="text-red-500 text-xs">
-                  {formik.errors.professional_skill}
-                </small>
-                <br />
-              </div>
-              <div className="w-full md:w-1/2 px-2 inputHolder">
-                <span className="input-titel">
-                  {intl.formatMessage({ id: "FULL NAME" })}(
-                  {intl.formatMessage({ id: "MR" })} /{" "}
-                  {intl.formatMessage({ id: "MRS" })} /{" "}
-                  {intl.formatMessage({ id: "MS" })}) <span>*</span>
-                </span>
-                <input
-                  type="text"
-                  className="input"
-                  name="full_name"
-                  value={formik.values?.full_name}
-                  onChange={(e) => setInputValue("full_name", e.target.value)}
-                  readOnly
-                />
-                <small className="text-red-500 text-xs">
-                  {formik.errors.full_name}
-                </small>
-                <br />
-              </div>
-            </div>
-            <div className="w-full flex items-end flex-wrap">
-              <div className="w-full md:w-1/3 px-2 inputHolder">
-                <div className="input-label-holder">
-                  <label className="input-titel">
-                    {intl.formatMessage({ id: "MOBILE NUMBER" })} <span>*</span>
-                  </label>
-                  <div className="input-checkd">
-                    <input
-                      type="checkbox"
-                      className="mr-2"
-                      name="is_mobile_hidden"
-                      onChange={() => setMobileNoHidden(!mobileNoHidden)}
-                    />
-                    {intl.formatMessage({ id: "HIDDEN" })}
-                  </div>
-                </div>
-                <div className="flex">
-                  <input
-                    type="text"
-                    className="input max-w-[80px] w-full mr-3"
-                    name="country_code"
-                    value={formik.values?.country_code}
-                    onChange={(e) =>
-                      setInputValue("country_code", e.target.value)
-                    }
-                    readOnly
-                  />
-                  <input
-                    type="text"
-                    className="input"
-                    name="mobile"
-                    value={formik.values?.mobile}
-                    onChange={(e) => setInputValue("mobile", e.target.value)}
-                    readOnly
-                  />
-                </div>
-                <small className="text-red-500 text-xs">
-                  {formik.errors.mobile}
-                </small>
-                <br />
-              </div>
-              <div className="w-full md:w-1/3 px-2 inputHolder">
-                <label className="input-titel">
-                  {intl.formatMessage({ id: "ALTERNATIVE" })}{" "}
-                  {intl.formatMessage({ id: "MOBILE NUMBER" })} <span></span>
-                </label>
-                <input
-                  type="text"
-                  className="input"
-                  name="alt_mobile"
-                  value={formik.values?.alt_mobile_no}
-                  onChange={(e) => setInputValue("alt_mobile", e.target.value)}
-                />
-                <small className="text-red-500 text-xs">
-                  {formik.errors.alt_mobile_no}
-                </small>
-                <br />
-              </div>
-              <div className="w-full md:w-1/3 px-2 inputHolder">
-                <div className="input-label-holder">
-                  <label className="input-titel">
-                    {intl.formatMessage({ id: "EMAIL ADDRESS" })} <span>*</span>
-                  </label>
-                  <div className="input-checkd">
-                    <input
-                      type="checkbox"
-                      className="mr-2"
-                      onChange={() => setEmailHidden(!emailHidden)}
-                    />
-                    {intl.formatMessage({ id: "HIDDEN" })}
-                  </div>
-                </div>
-                <input
-                  type="text"
-                  className="input"
-                  name="email"
-                  value={formik.values?.email}
-                  onChange={(e) => setInputValue("email", e.target.value)}
-                  readOnly
-                />
-                <small className="text-red-500 text-xs">
-                  {formik.errors.email}
-                </small>
-                <br />
-              </div>
-            </div>
-            <div className="upload-holder">
-              <span className="input-titel ml-2">
-                {intl.formatMessage({ id: "SKILL BANNER" })}
-              </span>
-              <label htmlFor="upload" className="upload">
-                <input
-                  type="file"
-                  name="images"
-                  id="upload"
-                  className="appearance-none hidden"
-                  onChange={photoChangeHandler}
-                />
-                <span className="input-titel mt-1">
-                  <i className="icon-image mr-2"></i>
-                  {intl.formatMessage({ id: "UPLOAD IMAGES" })}
-                </span>
-              </label>
-              <span className="input-titel ml-2">
-                {banner ? banner.name || banner : `${intl.formatMessage({ id: "PLEASE SELECT IMAGES" })}`}
-              </span>
-            </div>
-            {/* option 1 */}
-            <div className="flex items-center space-x-3 max-[768px]:flex-col max-[768px]:space-x-0">
-              <div
-                className={
-                  "inputHolder " +
-                  (priceType === "per_day" && true
-                    ? "w-8/12 max-[768px]:w-full"
-                    : (priceType === "per_event"
-                        ? "w-7/12 2xl:w-8/12 max-[768px]:w-full"
-                        : "w-7/12 2xl:w-8/12 max-[768px]:w-full") &&
-                      (priceType === "per_hour" ? "w-8/12 max-[768px]:w-full" : "w-8/12 max-[768px]:w-full"))
-                }
-              >
-                <span className="input-titel">
-                  {intl.formatMessage({ id: "PRICE" })}
-                  <span>*</span>
-                </span>
-                <label
-                  htmlFor=""
-                  className="flex items-center w-full bg-white p-2 px-3.5 rounded-md max-[768px]:flex-col"
-                >
-                  <div className="w-full inputHolder">
+          {loading ? <MoonLoader
+            cssOverride={{ margin: "100px auto" }}
+            color={"#20c0E8"}
+            loading={loading}
+            size={50}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          /> :
+            <>
+              {/* <!-- main-content  --> */}
+              <div className="space-y-5 -mx-2 max-[768px]:space-y-0">
+                <div className="w-full flex items-end flex-wrap">
+                  <div className="w-full md:w-1/2 px-2 inputHolder">
+                    <span className="input-titel">
+                      {intl.formatMessage({ id: "PROFESSIONAL SKILL" })}
+                    </span>
                     <input
                       type="text"
-                      className="w-full outline-none text-spiroDiscoBall font-bold text-base max-[768px]:pb-2"
-                      value={formik.values?.price}
-                      name="price"
-                      onChange={(e) => setInputValue("price", e.target.value)}
+                      className="input"
+                      name="professional_skill"
+                      value={formik.values?.professional_skill}
+                      onChange={(e) =>
+                        setInputValue("professional_skill", e.target.value)
+                      }
+                    />
+                    <small className="text-red-500 text-xs">
+                      {formik.errors.professional_skill}
+                    </small>
+                    <br />
+                  </div>
+                  <div className="w-full md:w-1/2 px-2 inputHolder">
+                    <span className="input-titel">
+                      {intl.formatMessage({ id: "FULL NAME" })}(
+                      {intl.formatMessage({ id: "MR" })} /{" "}
+                      {intl.formatMessage({ id: "MRS" })} /{" "}
+                      {intl.formatMessage({ id: "MS" })}) <span>*</span>
+                    </span>
+                    <input
+                      type="text"
+                      className="input"
+                      name="full_name"
+                      value={formik.values?.full_name}
+                      onChange={(e) => setInputValue("full_name", e.target.value)}
+                      readOnly
+                    />
+                    <small className="text-red-500 text-xs">
+                      {formik.errors.full_name}
+                    </small>
+                    <br />
+                  </div>
+                </div>
+                <div className="w-full flex items-end flex-wrap">
+                  <div className="w-full md:w-1/3 px-2 inputHolder">
+                    <div className="input-label-holder">
+                      <label className="input-titel">
+                        {intl.formatMessage({ id: "MOBILE NUMBER" })} <span>*</span>
+                      </label>
+                      <div className="input-checkd">
+                        <input
+                          type="checkbox"
+                          className="mr-2"
+                          name="is_mobile_hidden"
+                          onChange={() => setMobileNoHidden(!mobileNoHidden)}
+                        />
+                        {intl.formatMessage({ id: "HIDDEN" })}
+                      </div>
+                    </div>
+                    <div className="flex">
+                      <input
+                        type="text"
+                        className="input max-w-[80px] w-full mr-3"
+                        name="country_code"
+                        value={formik.values?.country_code}
+                        onChange={(e) =>
+                          setInputValue("country_code", e.target.value)
+                        }
+                        readOnly
+                      />
+                      <input
+                        type="text"
+                        className="input"
+                        name="mobile"
+                        value={formik.values?.mobile}
+                        onChange={(e) => setInputValue("mobile", e.target.value)}
+                        readOnly
+                      />
+                    </div>
+                    <small className="text-red-500 text-xs">
+                      {formik.errors.mobile}
+                    </small>
+                    <br />
+                  </div>
+                  <div className="w-full md:w-1/3 px-2 inputHolder">
+                    <label className="input-titel">
+                      {intl.formatMessage({ id: "ALTERNATIVE" })}{" "}
+                      {intl.formatMessage({ id: "MOBILE NUMBER" })} <span></span>
+                    </label>
+                    <input
+                      type="text"
+                      className="input"
+                      name="alt_mobile_no"
+                      value={formik.values?.alt_mobile_no}
+                      onChange={(e) => setInputValue("alt_mobile_no", e.target.value)}
+                    />
+                    <small className="text-red-500 text-xs">
+                      {formik.errors.alt_mobile_no}
+                    </small>
+                    <br />
+                  </div>
+                  <div className="w-full md:w-1/3 px-2 inputHolder">
+                    <div className="input-label-holder">
+                      <label className="input-titel">
+                        {intl.formatMessage({ id: "EMAIL ADDRESS" })} <span>*</span>
+                      </label>
+                      <div className="input-checkd">
+                        <input
+                          type="checkbox"
+                          className="mr-2"
+                          onChange={() => setEmailHidden(!emailHidden)}
+                        />
+                        {intl.formatMessage({ id: "HIDDEN" })}
+                      </div>
+                    </div>
+                    <input
+                      type="text"
+                      className="input"
+                      name="email"
+                      value={formik.values?.email}
+                      onChange={(e) => setInputValue("email", e.target.value)}
+                      readOnly
+                    />
+                    <small className="text-red-500 text-xs">
+                      {formik.errors.email}
+                    </small>
+                    <br />
+                  </div>
+                </div>
+                <div className="upload-holder">
+                  <span className="input-titel ml-2">
+                    {intl.formatMessage({ id: "SKILL BANNER" })}
+                  </span>
+                  <label htmlFor="upload" className="upload">
+                    <input
+                      type="file"
+                      name="images"
+                      id="upload"
+                      className="appearance-none hidden"
+                      onChange={photoChangeHandler}
+                    />
+                    <span className="input-titel mt-1">
+                      <i className="icon-image mr-2"></i>
+                      {intl.formatMessage({ id: "UPLOAD IMAGES" })}
+                    </span>
+                  </label>
+                  <span className="input-titel ml-2">
+                    {banner ? banner.name || banner : `${intl.formatMessage({ id: "PLEASE SELECT IMAGES" })}`}
+                  </span>
+                </div>
+                {/* option 1 */}
+                <div className="flex items-center space-x-3 max-[768px]:flex-col max-[768px]:space-x-0">
+                  <div
+                    className={
+                      "inputHolder " +
+                      (priceType === "per_day" && true
+                        ? "w-8/12 max-[768px]:w-full"
+                        : (priceType === "per_event"
+                          ? "w-7/12 2xl:w-8/12 max-[768px]:w-full"
+                          : "w-7/12 2xl:w-8/12 max-[768px]:w-full") &&
+                        (priceType === "per_hour" ? "w-8/12 max-[768px]:w-full" : "w-8/12 max-[768px]:w-full"))
+                    }
+                  >
+                    <span className="input-titel">
+                      {intl.formatMessage({ id: "PRICE" })}
+                      <span>*</span>
+                    </span>
+                    <label
+                      htmlFor=""
+                      className="flex items-center w-full bg-white p-2 px-3.5 rounded-md max-[768px]:flex-col"
+                    >
+                      <div className="w-full inputHolder">
+                        <input
+                          type="text"
+                          className="w-full outline-none text-spiroDiscoBall font-bold text-base max-[768px]:pb-2"
+                          value={formik.values?.price}
+                          name="price"
+                          onChange={(e) => setInputValue("price", e.target.value)}
+                        />
+                      </div>
+                      <div className="selectPrice flex items-center space-x-3 max-[768px]:w-full max-[768px]:justify-between">
+                        <label className="block cursor-pointer">
+                          <input
+                            type="radio"
+                            name="price"
+                            value="per_day"
+                            className="hidden"
+                            checked={priceType === "per_day" && true}
+                            onChange={(e) => setPriceType("per_day")}
+                          />
+                          <span className="text-sm text-quicksilver py-2 px-3 bg-white shadow-lg whitespace-nowrap font-bold rounded block">
+                            {intl.formatMessage({ id: "PER" })} /{" "}
+                            {intl.formatMessage({ id: "DAY" })}
+                          </span>
+                        </label>
+                        <label className="block cursor-pointer">
+                          <input
+                            type="radio"
+                            name="price"
+                            value="per_hour"
+                            className="hidden"
+                            checked={priceType === "per_hour" && true}
+                            onChange={(e) => setPriceType("per_hour")}
+                          />
+                          <span className="text-sm text-quicksilver py-2 px-3 bg-white shadow-lg whitespace-nowrap font-bold rounded block">
+                            {intl.formatMessage({ id: "PER" })} /{" "}
+                            {intl.formatMessage({ id: "HOUR" })}
+                          </span>
+                        </label>
+                        <label className="block cursor-pointer">
+                          <input
+                            type="radio"
+                            name="price"
+                            value="per_event"
+                            className="hidden"
+                            checked={priceType === "per_event" && true}
+                            onChange={(e) => setPriceType("per_event")}
+                          />
+                          <span className="text-sm text-quicksilver py-2 px-3 bg-white shadow-lg whitespace-nowrap font-bold rounded block">
+                            {intl.formatMessage({ id: "PER" })} /{" "}
+                            {intl.formatMessage({ id: "EVENT" })}
+                          </span>
+                        </label>
+                      </div>
+                    </label>
+                  </div>
+                  <div
+                    className={
+                      "inputHolder " +
+                      (priceType === "per_hour"
+                        ? "w-4/12 max-[768px]:w-full max-[768px]:pt-2"
+                        : priceType === "per_event"
+                          ? "w-4/12 2xl:w-2/12 max-[768px]:w-full max-[768px]:pt-2"
+                          : priceType === "per_day"
+                            ? "w-4/12 max-[768px]:w-full max-[768px]:pt-2"
+                            : "hidden")
+                    }
+                  >
+                    <label className="input-titel">
+                      {intl.formatMessage({ id: "CLEARING TIME (IN HOURS)" })}{" "}
+                      <span>*</span>
+                    </label>
+                    <input
+                      type="number"
+                      className="input py-[14px]"
+                      name="clearning time"
+                      value={formik.values?.clearing_time}
+                      onChange={(e) =>
+                        setInputValue("clearing_time", e.target.value)
+                      }
                     />
                   </div>
-                  <div className="selectPrice flex items-center space-x-3 max-[768px]:w-full max-[768px]:justify-between">
-                    <label className="block cursor-pointer">
-                      <input
-                        type="radio"
-                        name="price"
-                        value="per_day"
-                        className="hidden"
-                        checked={priceType === "per_day" && true}
-                        onChange={(e) => setPriceType("per_day")}
-                      />
-                      <span className="text-sm text-quicksilver py-2 px-3 bg-white shadow-lg whitespace-nowrap font-bold rounded block">
-                        {intl.formatMessage({ id: "PER" })} /{" "}
-                        {intl.formatMessage({ id: "DAY" })}
-                      </span>
+                  <div
+                    className={
+                      "inputHolder " +
+                      (priceType === "per_event" ? "w-2/12 max-[768px]:w-full max-[768px]:pt-2" : "hidden")
+                    }
+                  >
+                    <label className="input-titel">
+                      {intl.formatMessage({ id: "MAX DAY (IN DAYS)" })}
+                      <span>*</span>
                     </label>
-                    <label className="block cursor-pointer">
-                      <input
-                        type="radio"
-                        name="price"
-                        value="per_hour"
-                        className="hidden"
-                        checked={priceType === "per_hour" && true}
-                        onChange={(e) => setPriceType("per_hour")}
-                      />
-                      <span className="text-sm text-quicksilver py-2 px-3 bg-white shadow-lg whitespace-nowrap font-bold rounded block">
-                        {intl.formatMessage({ id: "PER" })} /{" "}
-                        {intl.formatMessage({ id: "HOUR" })}
-                      </span>
-                    </label>
-                    <label className="block cursor-pointer">
-                      <input
-                        type="radio"
-                        name="price"
-                        value="per_event"
-                        className="hidden"
-                        checked={priceType === "per_event" && true}
-                        onChange={(e) => setPriceType("per_event")}
-                      />
-                      <span className="text-sm text-quicksilver py-2 px-3 bg-white shadow-lg whitespace-nowrap font-bold rounded block">
-                        {intl.formatMessage({ id: "PER" })} /{" "}
-                        {intl.formatMessage({ id: "EVENT" })}
-                      </span>
-                    </label>
+                    <input
+                      type="number"
+                      className="input py-[14px]"
+                      name="max_day"
+                      value={formik.values?.max_day}
+                      onChange={(e) => setInputValue("max_day", e.target.value)}
+                    />
                   </div>
-                </label>
-              </div>
-              <div
-                className={
-                  "inputHolder " +
-                  (priceType === "per_hour"
-                    ? "w-4/12 max-[768px]:w-full max-[768px]:pt-2"
-                    : priceType === "per_event"
-                    ? "w-4/12 2xl:w-2/12 max-[768px]:w-full max-[768px]:pt-2"
-                    : priceType === "per_day"
-                    ? "w-4/12 max-[768px]:w-full max-[768px]:pt-2"
-                    : "hidden")
-                }
-              >
-                <label className="input-titel">
-                  {intl.formatMessage({ id: "CLEARING TIME (IN HOURS)" })}{" "}
-                  <span>*</span>
-                </label>
-                <input
-                  type="number"
-                  className="input py-[14px]"
-                  name="clearning time"
-                  value={formik.values?.clearing_time}
-                  onChange={(e) =>
-                    setInputValue("clearing_time", e.target.value)
-                  }
-                />
-              </div>
-              <div
-                className={
-                  "inputHolder " +
-                  (priceType === "per_event" ? "w-2/12 max-[768px]:w-full max-[768px]:pt-2" : "hidden")
-                }
-              >
-                <label className="input-titel">
-                  {intl.formatMessage({ id: "MAX DAY (IN DAYS)" })}
-                  <span>*</span>
-                </label>
-                <input
-                  type="number"
-                  className="input py-[14px]"
-                  name="max_day"
-                  value={formik.values?.max_day}
-                  onChange={(e) => setInputValue("max_day", e.target.value)}
-                />
-              </div>
-            </div>
-            <small className="text-red-500 text-xs">
-              {formik.errors.price}
-            </small>
-            <div className="space-y-5 max-[768px]:space-y-1">
-              <h3 className="px-2">{intl.formatMessage({ id: "ADDRESS" })}</h3>
-              <div className="w-full flex flex-wrap">
-                <div className="w-full md:w-1/3 px-2 inputHolder">
-                  <span className="input-titel">
-                    {intl.formatMessage({ id: "FLAT NO." })}
-                  </span>
-                  <input
-                    type="text"
-                    className="input"
-                    name="flat_no"
-                    value={formik.values?.flat_no}
-                    onChange={(e) => setInputValue("flat_no", e.target.value)}
-                  />
-                  <small className="text-red-500 text-xs">
-                    {formik.errors.flat_no}
-                  </small>
-                  <br />
                 </div>
-                <div className="w-full md:w-1/3 px-2 inputHolder">
-                  <span className="input-titel">
-                    {intl.formatMessage({ id: "STREET NAME." })}
-                  </span>
-                  <input
-                    type="text"
-                    className="input"
-                    name="street"
-                    value={formik.values?.street}
-                    onChange={(e) => setInputValue("street", e.target.value)}
-                  />
-                  <small className="text-red-500 text-xs">
-                    {formik.errors.street}
-                  </small>
-                  <br />
-                </div>
-                <div className="w-full md:w-1/3 px-2 inputHolder">
-                  <span className="input-titel">
-                    {intl.formatMessage({ id: "AREA NAME." })}
-                  </span>
-                  <input
-                    type="text"
-                    className="input"
-                    name="area"
-                    value={formik.values?.area}
-                    onChange={(e) => setInputValue("area", e.target.value)}
-                  />
-                  <small className="text-red-500 text-xs">
-                    {formik.errors.area}
-                  </small>
-                  <br />
-                </div>
-              </div>
-              <div className="w-full flex flex-wrap">
-                <div className="w-full md:w-1/3 px-2 inputHolder">
-                  <label className="input-titel">
-                    {intl.formatMessage({ id: "CITY" })} <span>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    className="input"
-                    name="city"
-                    value={formik.values?.city}
-                    onChange={(e) => setInputValue("city", e.target.value)}
-                  />
-                  <small className="text-red-500 text-xs">
-                    {formik.errors.city}
-                  </small>
-                  <br />
-                </div>
-                <div className="w-full md:w-1/3 px-2 inputHolder">
-                  <label className="input-titel">
-                    {intl.formatMessage({ id: "STATE" })} <span>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    className="input"
-                    name="state"
-                    value={formik.values?.state}
-                    onChange={(e) => setInputValue("state", e.target.value)}
-                  />
-                  <small className="text-red-500 text-xs">
-                    {formik.errors.state}
-                  </small>
-                  <br />
-                </div>
-                <div className="w-full md:w-1/3 px-2 inputHolder">
-                  <label className="input-titel">
-                    {intl.formatMessage({ id: "PINCODE" })} <span>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    className="input"
-                    name="pincode"
-                    value={formik.values?.pincode}
-                    onChange={(e) => setInputValue("pincode", e.target.value)}
-                  />
-                  <small className="text-red-500 text-xs">
-                    {formik.errors.pincode}
-                  </small>
-                  <br />
+                <small className="text-red-500 text-xs">
+                  {formik.errors.price}
+                </small>
+                <div className="space-y-5 max-[768px]:space-y-1">
+                  <h3 className="px-2">{intl.formatMessage({ id: "ADDRESS" })}</h3>
+                  <div className="w-full flex flex-wrap">
+                    <div className="w-full md:w-1/3 px-2 inputHolder">
+                      <span className="input-titel">
+                        {intl.formatMessage({ id: "FLAT NO." })}
+                      </span>
+                      <input
+                        type="text"
+                        className="input"
+                        name="flat_no"
+                        value={formik.values?.flat_no}
+                        onChange={(e) => setInputValue("flat_no", e.target.value)}
+                      />
+                      <small className="text-red-500 text-xs">
+                        {formik.errors.flat_no}
+                      </small>
+                      <br />
+                    </div>
+                    <div className="w-full md:w-1/3 px-2 inputHolder">
+                      <span className="input-titel">
+                        {intl.formatMessage({ id: "STREET NAME." })}
+                      </span>
+                      <input
+                        type="text"
+                        className="input"
+                        name="street"
+                        value={formik.values?.street}
+                        onChange={(e) => setInputValue("street", e.target.value)}
+                      />
+                      <small className="text-red-500 text-xs">
+                        {formik.errors.street}
+                      </small>
+                      <br />
+                    </div>
+                    <div className="w-full md:w-1/3 px-2 inputHolder">
+                      <span className="input-titel">
+                        {intl.formatMessage({ id: "AREA NAME." })}
+                      </span>
+                      <input
+                        type="text"
+                        className="input"
+                        name="area"
+                        value={formik.values?.area}
+                        onChange={(e) => setInputValue("area", e.target.value)}
+                      />
+                      <small className="text-red-500 text-xs">
+                        {formik.errors.area}
+                      </small>
+                      <br />
+                    </div>
+                  </div>
+                  <div className="w-full flex flex-wrap">
+                    <div className="w-full md:w-1/3 px-2 inputHolder">
+                      <label className="input-titel">
+                        {intl.formatMessage({ id: "CITY" })} <span>*</span>
+                      </label>
+                      <input
+                        type="text"
+                        className="input"
+                        name="city"
+                        value={formik.values?.city}
+                        onChange={(e) => setInputValue("city", e.target.value)}
+                      />
+                      <small className="text-red-500 text-xs">
+                        {formik.errors.city}
+                      </small>
+                      <br />
+                    </div>
+                    <div className="w-full md:w-1/3 px-2 inputHolder">
+                      <label className="input-titel">
+                        {intl.formatMessage({ id: "STATE" })} <span>*</span>
+                      </label>
+                      <input
+                        type="text"
+                        className="input"
+                        name="state"
+                        value={formik.values?.state}
+                        onChange={(e) => setInputValue("state", e.target.value)}
+                      />
+                      <small className="text-red-500 text-xs">
+                        {formik.errors.state}
+                      </small>
+                      <br />
+                    </div>
+                    <div className="w-full md:w-1/3 px-2 inputHolder">
+                      <label className="input-titel">
+                        {intl.formatMessage({ id: "PINCODE" })} <span>*</span>
+                      </label>
+                      <input
+                        type="text"
+                        className="input"
+                        name="pincode"
+                        value={formik.values?.pincode}
+                        onChange={(e) => setInputValue("pincode", e.target.value)}
+                      />
+                      <small className="text-red-500 text-xs">
+                        {formik.errors.pincode}
+                      </small>
+                      <br />
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-          {/* <!-- advisement --> */}
-          {/* <Advertisement /> */}
+              {/* <!-- advisement --> */}
+              {/* <Advertisement /> */}
+            </>
+          }
         </div>
         <div className="prw-next-btn">
           <button

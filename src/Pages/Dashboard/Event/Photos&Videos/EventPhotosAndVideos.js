@@ -16,6 +16,7 @@ import { AllMedia, mediaId } from "./photoAndVideoSlice";
 import { useIntl } from "react-intl";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
+import { MoonLoader } from 'react-spinners';
 
 const EventPhotosAndVideos = () => {
   const intl = useIntl();
@@ -23,7 +24,7 @@ const EventPhotosAndVideos = () => {
   const [isUploadPhotoPopUpOpen, setIsUploadPhotoPopUpOpen] = useState(false);
   const [isUploadVideoPopUpOpen, setIsUploadVideoPopUpOpen] = useState(false);
   const [imageList, setImageList] = useState([]);
-  console.log(imageList,"imageList");
+  console.log(imageList, "imageList");
   const [videoList, setVideoList] = useState([]);
   const [photoIndex, setPhotoIndex] = useState(null);
   const navigate = useNavigate();
@@ -31,12 +32,14 @@ const EventPhotosAndVideos = () => {
   const params = useParams();
   const eventId = localStorage.getItem("eventId");
   const eventType = params.eventType;
+  const [loading, setLoading] = useState(true);
 
   const getMedia = async () => {
     try {
       const response = await dispatch(mediaId(eventId)).unwrap();
       if (response.data.Data.photos) setImageList(response.data?.Data?.photos);
       if (response.data.Data.videos) setVideoList(response.data?.Data?.videos);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -134,150 +137,160 @@ const EventPhotosAndVideos = () => {
           {/* <!-- step-progress-bar  --> */}
           <StepProgressBar eventType={eventType} />
           {/* <!-- main-content  --> */}
-          <div className="space-y-5">
-            <div className="upload-holder">
-              <h3 className="flex items-end">
-                {intl.formatMessage({ id: "PHOTO" })}
-                <span className="input-titel ml-2">
-                  {intl.formatMessage({ id: "15 IMAGES" })} (
-                  {intl.formatMessage({ id: "UP TO 3MB" })} /{" "}
-                  {intl.formatMessage({ id: "IMAGE" })})
-                </span>
-              </h3>
-              <label
-                onClick={() => openUploadPhoto()}
-                htmlFor="upload"
-                className="upload"
-              >
-                <input
-                  name="images"
-                  id="upload"
-                  className="appearance-none hidden"
-                />
-                <span className="input-titel mt-1">
-                  <i className="icon-image mr-2"></i>
-                  {intl.formatMessage({ id: "UPLOAD IMAGES" })}
-                </span>
-              </label>
-              {imageList?.length !== 0 && (
-                <span className="input-titel mt-1">
-                  {imageList?.length}{" "}
-                  {intl.formatMessage({ id: "IMAGES UPLOADED" })}
-                </span>
-              )}
-            </div>
-            <div className="media-upload-holder">
-              {imageList?.length !== 0 && (
-                <span className="input-titel">
-                  {intl.formatMessage({ id: "UPLOADED PHOTO" })}
-                </span>
-              )}
-              <div className="flex flex-wrap herobox">
-                {imageList?.map((img, index) => (
-                  <div key={index} className="mt-2 mr-2" >
-                    <div className="upload-box">
-                      <div className="rounded relative overflow-hidden flex justify-center items-center h-full">
-                        <img onClick={()=>{
-                    setPhotoIndex(index)
-                  }}
-                          src={s3Url + "/" + img.url}
-                          alt={"upload-" + index}
-                        />
-                        <button onClick={() => removeImageClick(index)}>
+          {loading ? <MoonLoader
+            cssOverride={{ margin: "100px auto" }}
+            color={"#20c0E8"}
+            loading={loading}
+            size={50}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          /> :
+
+            <div className="space-y-5">
+              <div className="upload-holder">
+                <h3 className="flex items-end">
+                  {intl.formatMessage({ id: "PHOTO" })}
+                  <span className="input-titel ml-2">
+                    {intl.formatMessage({ id: "15 IMAGES" })} (
+                    {intl.formatMessage({ id: "UP TO 3MB" })} /{" "}
+                    {intl.formatMessage({ id: "IMAGE" })})
+                  </span>
+                </h3>
+                <label
+                  onClick={() => openUploadPhoto()}
+                  htmlFor="upload"
+                  className="upload"
+                >
+                  <input
+                    name="images"
+                    id="upload"
+                    className="appearance-none hidden"
+                  />
+                  <span className="input-titel mt-1">
+                    <i className="icon-image mr-2"></i>
+                    {intl.formatMessage({ id: "UPLOAD IMAGES" })}
+                  </span>
+                </label>
+                {imageList?.length !== 0 && (
+                  <span className="input-titel mt-1">
+                    {imageList?.length}{" "}
+                    {intl.formatMessage({ id: "IMAGES UPLOADED" })}
+                  </span>
+                )}
+              </div>
+              <div className="media-upload-holder">
+                {imageList?.length !== 0 && (
+                  <span className="input-titel">
+                    {intl.formatMessage({ id: "UPLOADED PHOTO" })}
+                  </span>
+                )}
+                <div className="flex flex-wrap herobox">
+                  {imageList?.map((img, index) => (
+                    <div key={index} className="mt-2 mr-2" >
+                      <div className="upload-box">
+                        <div className="rounded relative overflow-hidden flex justify-center items-center h-full">
+                          <img onClick={() => {
+                            setPhotoIndex(index)
+                          }}
+                            src={s3Url + "/" + img.url}
+                            alt={"upload-" + index}
+                          />
+                          <button onClick={() => removeImageClick(index)}>
+                            {intl.formatMessage({ id: "REMOVE" })}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  {(photoIndex === 0 || photoIndex) && imageList[photoIndex] && (
+                    <Lightbox
+                      mainSrc={s3Url + "/" + imageList[photoIndex]?.url}
+                      nextSrc={s3Url + "/" + imageList[(photoIndex + 1) % imageList.length]?.url}
+                      prevSrc={
+                        s3Url + "/" + imageList[(photoIndex + imageList.length - 1) % imageList.length]?.url
+                      }
+                      onCloseRequest={() => {
+                        setPhotoIndex(null);
+                      }}
+                      onMovePrevRequest={() => {
+                        setPhotoIndex(
+                          (photoIndex + imageList.length - 1) % imageList.length
+                        );
+                      }}
+                      onMoveNextRequest={() => {
+                        setPhotoIndex((photoIndex + 1) % imageList.length);
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+              <div className="upload-holder">
+                <h3 className="flex items-end">
+                  {intl.formatMessage({ id: "VIDEOS" })}
+                  <span className="input-titel ml-2">
+                    {intl.formatMessage({ id: "2" })}{" "}
+                    {intl.formatMessage({ id: "VIDEOS" })} (
+                    {intl.formatMessage({ id: "UP TO 512MB" })} /{" "}
+                    {intl.formatMessage({ id: "VIDEO" })})
+                  </span>
+                </h3>
+                <label
+                  onClick={() => setIsUploadVideoPopUpOpen(true)}
+                  htmlFor="upload2"
+                  className="upload"
+                >
+                  <input
+                    name="images"
+                    id="upload2"
+                    className="appearance-none hidden"
+                  />
+                  <div className="mt-1 flex items-baseline justify-center">
+                    <i className="icon-video-play text-base mr-2"></i>
+                    <span className="input-titel pt-1">
+                      {intl.formatMessage({ id: "UPLOAD VIDEOS" })}
+                    </span>
+                  </div>
+                </label>
+                {videoList?.length !== 0 && (
+                  <span className="input-titel mt-1">
+                    {videoList?.length}{" "}
+                    {intl.formatMessage({ id: "VIDEOS UPLOADED" })}
+                  </span>
+                )}
+              </div>
+              <div className="media-upload-holder">
+                {videoList?.length !== 0 && (
+                  <span className="input-titel">
+                    {intl.formatMessage({ id: "UPLOADED VIDEOS" })}
+                  </span>
+                )}
+                <div className="flex space-x-2.5">
+                  {videoList?.map((vid, index) => (
+                    <div className="upload-box" key={index}>
+                      <div className="rounded relative overflow-hidden h-full">
+                        <video className="h-full">
+                          <source
+                            src={s3Url + "/" + vid.url}
+                            alt={"upload-" + index}
+                          />
+                        </video>
+                        <button onClick={() => removeVideoClick(index)}>
                           {intl.formatMessage({ id: "REMOVE" })}
                         </button>
                       </div>
                     </div>
-                  </div>
-                ))}
-                {(photoIndex === 0 || photoIndex) && imageList[photoIndex] && (
-                  <Lightbox
-                    mainSrc={s3Url + "/" + imageList[photoIndex]?.url}
-                    nextSrc={s3Url + "/" + imageList[(photoIndex + 1) % imageList.length]?.url}
-                    prevSrc={
-                      s3Url + "/" + imageList[(photoIndex + imageList.length - 1) % imageList.length]?.url
-                    }
-                    onCloseRequest={() => {
-                      setPhotoIndex(null);
-                    }}
-                    onMovePrevRequest={() => {
-                      setPhotoIndex(
-                        (photoIndex + imageList.length - 1) % imageList.length
-                      );
-                    }}
-                    onMoveNextRequest={() => {
-                      setPhotoIndex((photoIndex + 1) % imageList.length);
-                    }}
-                  />
-                )}
-              </div>
-            </div>
-            <div className="upload-holder">
-              <h3 className="flex items-end">
-                {intl.formatMessage({ id: "VIDEOS" })}
-                <span className="input-titel ml-2">
-                  {intl.formatMessage({ id: "2" })}{" "}
-                  {intl.formatMessage({ id: "VIDEOS" })} (
-                  {intl.formatMessage({ id: "UP TO 512MB" })} /{" "}
-                  {intl.formatMessage({ id: "VIDEO" })})
-                </span>
-              </h3>
-              <label
-                onClick={() => setIsUploadVideoPopUpOpen(true)}
-                htmlFor="upload2"
-                className="upload"
-              >
-                <input
-                  name="images"
-                  id="upload2"
-                  className="appearance-none hidden"
-                />
-                <div className="mt-1 flex items-baseline justify-center">
-                  <i className="icon-video-play text-base mr-2"></i>
-                  <span className="input-titel pt-1">
-                    {intl.formatMessage({ id: "UPLOAD VIDEOS" })}
-                  </span>
+                  ))}
                 </div>
-              </label>
-              {videoList?.length !== 0 && (
-                <span className="input-titel mt-1">
-                  {videoList?.length}{" "}
-                  {intl.formatMessage({ id: "VIDEOS UPLOADED" })}
+              </div>
+              <div className="w-full inline-block">
+                <span className="float-left input-titel text-sm lg:leading-10">
+                  {intl.formatMessage({
+                    id: "DISCLAIMER - THESE IMAGES AND VIDEOS WILL FIRST BE VERIFIED BY THE ADMIN AND THEN GIVEN THE AUTHORITY.",
+                  })}
                 </span>
-              )}
-            </div>
-            <div className="media-upload-holder">
-              {videoList?.length !== 0 && (
-                <span className="input-titel">
-                  {intl.formatMessage({ id: "UPLOADED VIDEOS" })}
-                </span>
-              )}
-              <div className="flex space-x-2.5">
-                {videoList?.map((vid, index) => (
-                  <div className="upload-box" key={index}>
-                    <div className="rounded relative overflow-hidden h-full">
-                      <video className="h-full">
-                        <source
-                          src={s3Url + "/" + vid.url}
-                          alt={"upload-" + index}
-                        />
-                      </video>
-                      <button onClick={() => removeVideoClick(index)}>
-                        {intl.formatMessage({ id: "REMOVE" })}
-                      </button>
-                    </div>
-                  </div>
-                ))}
               </div>
             </div>
-            <div className="w-full inline-block">
-              <span className="float-left input-titel text-sm lg:leading-10">
-                {intl.formatMessage({
-                  id: "DISCLAIMER - THESE IMAGES AND VIDEOS WILL FIRST BE VERIFIED BY THE ADMIN AND THEN GIVEN THE AUTHORITY.",
-                })}
-              </span>
-            </div>
-          </div>
+          }
           {/* <!-- advisement --> */}
           {/* <Advertisement /> */}
         </div>

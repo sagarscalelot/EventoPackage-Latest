@@ -7,7 +7,7 @@ import appleIcon from "../../assest/images/apple-icon.png";
 import webIcon from "../../assest/images/web-icon.png";
 import fcoin from "../../assest/images/landing-page/festumcoin.png";
 import festumLogo from "../../assest/images/landing-page/FE.png";
-import ffLogo from "../../assest/images/landing-page/FF.png";
+import ffLogo from "../../assest/images/landing-page/Field.png";
 import festumAds from "../../assest/images/landing-page/festumadvertising.jpg";
 import { useIntl } from 'react-intl';
 
@@ -37,7 +37,7 @@ const OurProducts = () => {
                 <h5>{intl.formatMessage({ id: "FESTUMEVENTO APP" })}</h5>
               </div>
               <div className="flex items-center space-x-2 pb-2">
-                <p className="text-sm text-quicksilver font-normal pt-2 max-[768px]:text-justify">{intl.formatMessage({ id: "THERE ARE MANY VARIATIONS OF PASSAGES OF LOREM IPSUM AVAILABLE, BUT THE MAJORITY HAVE SUFFERED ALTERATION IN SOME FORM, BY INJECTED HUMOUR, OR RANDOMISED WORDS WHICH DON'T LOOK EVEN SLIGHTLY BELIEVABLE" })}</p>
+                <p className="text-sm text-quicksilver font-normal pt-2 max-[768px]:text-justify">{intl.formatMessage({ id: "“FESTUM EVENTO” ALLOWS EVENT ORGANIZERS TO ADVERTISE THEIR EVENTS AND ACTIVITIES. THIS DIGITAL TOOL ENABLES USERS TO MAKE RESERVATIONS FOR EVENTS AND GET BENEFITS FROM DEALS FROM NEARBY MERCHANTS OR ONLINE SELLERS. MOREOVER, IT PERMITS BOTH SMALL AND LARGE PROFESSIONALS TO LIVE STREAM THEIR EVENTS TO A GLOBAL AUDIENCE." })}</p>
               </div>
               <div className="flex space-x-7 pt-3 max-[600px]:justify-between">
                 <div className="">
@@ -74,12 +74,12 @@ const OurProducts = () => {
           <div className="w-full bg-white flex flex-wrap items-center min-[880px]:flex-nowrap p-2.5 rounded-md max-[600px]:flex-col max-[768px]:flex-nowrap">
             <div className="max-w-[205px] w-full h-[205px]">
               <div className="bg-[#E9EAEE] h-full flex justify-center items-center px-5 py-7">
-                <img src={ffLogo} alt="Friends Fields" className="w-full h-full p-5" />
+                <img src={ffLogo} alt="Festum Field" className="w-full h-full p-5" />
               </div>
             </div>
             <div className="w-full px-3">
               <div className="flex justify-between items-center py-2 max-[600px]:justify-center">
-                <h5>{intl.formatMessage({ id: "FRIENDS FIELDS" })}</h5>
+                <h5>{intl.formatMessage({ id: "FESTUM FIELD" })}</h5>
               </div>
               <div className="flex items-center space-x-2 pb-2">
                 <p className="text-sm text-quicksilver font-normal pt-2 max-[768px]:text-justify">{intl.formatMessage({ id: "THERE ARE MANY VARIATIONS OF PASSAGES OF LOREM IPSUM AVAILABLE, BUT THE MAJORITY HAVE SUFFERED ALTERATION IN SOME FORM, BY INJECTED HUMOUR, OR RANDOMISED WORDS WHICH DON'T LOOK EVEN SLIGHTLY BELIEVABLE" })}</p>

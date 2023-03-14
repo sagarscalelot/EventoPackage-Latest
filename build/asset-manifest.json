@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.cd29e5d5.css",
-    "main.js": "/static/js/main.cdda8cdf.js",
+    "main.css": "/static/css/main.c7f71e74.css",
+    "main.js": "/static/js/main.1597b183.js",
     "static/js/787.ceb36d6b.chunk.js": "/static/js/787.ceb36d6b.chunk.js",
     "static/media/festumcoin.png": "/static/media/festumcoin.b724878c085dbb2323e8.png",
     "static/media/cakemaker.jpg": "/static/media/cakemaker.7c8057341ee26b82fefb.jpg",
@@ -40,6 +40,7 @@
     "static/media/Photographer.jpg": "/static/media/Photographer.023baefda317d1140a74.jpg",
     "static/media/Speaker.png": "/static/media/Speaker.f6d2bd158e746e3848c2.png",
     "static/media/Event_Decorators.jpeg": "/static/media/Event_Decorators.c9c83e2da5d656e44c2e.jpeg",
+    "static/media/Field.png": "/static/media/Field.b1ed525ff5de73f093ef.png",
     "static/media/banquet.jfif": "/static/media/banquet.aa0e0c0ccb35f677cd52.jfif",
     "static/media/Museums.jpg": "/static/media/Museums.e8057d21575bef72a2c3.jpg",
     "static/media/Makeup_Artist.jpg": "/static/media/Makeup_Artist.03d891739866919727ee.jpg",
@@ -101,12 +102,12 @@
     "static/media/eye-icon.svg": "/static/media/eye-icon.c78a8da23d31ff70149bc54fa5c10814.svg",
     "index.html": "/index.html",
     "static/media/arrow.svg": "/static/media/arrow.61b9984bc1e1daf590d2.svg",
-    "main.cd29e5d5.css.map": "/static/css/main.cd29e5d5.css.map",
-    "main.cdda8cdf.js.map": "/static/js/main.cdda8cdf.js.map",
+    "main.c7f71e74.css.map": "/static/css/main.c7f71e74.css.map",
+    "main.1597b183.js.map": "/static/js/main.1597b183.js.map",
     "787.ceb36d6b.chunk.js.map": "/static/js/787.ceb36d6b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cd29e5d5.css",
-    "static/js/main.cdda8cdf.js"
+    "static/css/main.c7f71e74.css",
+    "static/js/main.1597b183.js"
   ]
 }

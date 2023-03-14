@@ -3,13 +3,17 @@ import PersonalProfile from "./PersonalProfile";
 import BusinessProfile from "./BusinessProfile";
 import { useDispatch } from "react-redux";
 import { useProfileDetails, getProfileDetails } from "./profileSlice";
+import { MoonLoader } from 'react-spinners';
 
 const Profile = () => {
   const profileDetails = useProfileDetails();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+
   const getProfile = async () => {
     try {
       await dispatch(getProfileDetails()).unwrap();
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -24,14 +28,26 @@ const Profile = () => {
       <div className="space-y-8 h-full">
         {/* <!-- advisement --> */}
         {/* <!-- profile 1 --> */}
-        <PersonalProfile details={profileDetails} getProfile={getProfile} />
-        {/* <Advertisement /> */}
-
-        {/* <!-- profile 2 --> */}
-        <BusinessProfile
-          business={profileDetails?.businessProfile}
-          getProfile={getProfile}
+        {loading ? <MoonLoader
+          cssOverride={{ margin: "100px auto" }}
+          color={"#20c0E8"}
+          loading={loading}
+          size={50}
+          aria-label="Loading Spinner"
+          data-testid="loader"
         />
+          :
+          <>
+            <PersonalProfile details={profileDetails} getProfile={getProfile} />
+            {/* <Advertisement /> */}
+
+            {/* <!-- profile 2 --> */}
+            <BusinessProfile
+              business={profileDetails?.businessProfile}
+              getProfile={getProfile}
+            />
+          </>
+        }
       </div>
     </div>
   );

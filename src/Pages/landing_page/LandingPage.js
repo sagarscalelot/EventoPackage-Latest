@@ -14,7 +14,7 @@ import "owl.carousel/dist/assets/owl.theme.default.min.css";
 import fcoin from "../../assest/images/landing-page/festumcoin.png";
 import sfe from "../../assest/images/landing-page/FE.png";
 import ad from "../../assest/images/landing-page/festumadvertising.jpg";
-import ff from "../../assest/images/landing-page/FF.png";
+import ff from "../../assest/images/landing-page/Field.png";
 
 import Showcasebg from "../../assest/images/landing-page/Showcase-bg22.jpg";
 import ShowBACK from "../../assest/images/landing-page/BACK.jpg";
@@ -102,13 +102,15 @@ import LiveStream from "./LiveStream";
 import Modal from "../../Common/Modals/Modal";
 import VideoPlayer from "../../component/Popups/LandingPopup/VideoPlayer";
 
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useCallback } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import { getInTouchLanding } from "./landingSlice";
 import { useDispatch } from "react-redux";
+import TncPopUp from './TncPopUp'
+import PolicyPopUp from "./PolicyPopUp";
 
 
 const changeLanguage = (ln) => {
@@ -178,18 +180,23 @@ const LandingPage = () => {
     console.log("CLICKED");
   }
 
-
+  const [msg, setMsg] = useState("Something went wrong.")
   const clickNextHandler = async (values) => {
     try {
       const payload = { ...values };
       const response = await dispatch(getInTouchLanding(payload)).unwrap()
-      console.log("RESPONSE>>>>>>>>", response);
+      
       if (response.data.IsSuccess) {
-        toast.success(response.data?.Message);
+        setSubmit(true);
+        setMsg(response.data?.Message);
+        // toast.success(response.data?.Message);
       } else {
-        toast.success(response.data?.Message);
+        setSubmit(true);
+        // toast.success(response.data?.Message);
       }
     } catch (error) {
+      setSubmit(true);
+      setMsg("Something went wrong.");
       console.log(error);
     }
   };
@@ -210,7 +217,10 @@ const LandingPage = () => {
   );
 
   const [isVideoPlayerPopUpOpen, setIsVideoPlayerPopUpOpen] = useState(false);
+  const [isTnc, setIsTnc] = useState(false);
+  const [isPolicy, setIsPolicy] = useState(false);
   const [videoUrl, setVideoUrl] = useState("");
+	const [submit, setSubmit] = useState(false);
 
   useEffect(() => {
     $(document).ready(function () {
@@ -1373,7 +1383,7 @@ const LandingPage = () => {
                   <a href="https://friendsfield.in" target="blank" className="px-5 py-6 bg-white drop-shadow-lg block">
                     <img src={ff} className="mx-auto fixed-images" alt="" />
                     <div className="text-center pt-7 w-full overflow-hidden">
-                      <p className="text-xl font-bold text-ev-dark">Friends Fields</p>
+                      <p className="text-xl font-bold text-ev-dark">Festum Field</p>
                       {/* <a href="https://friendsfield.in" target="blank" className="text-spiroDiscoBall text-sm font-bold text-ellipsis">https://friendsfield.in</a> */}
                     </div>
                   </a>
@@ -1500,7 +1510,7 @@ const LandingPage = () => {
               </div>
               <div className="w-full md:w-6/12 space-y-5 lg:space-y-10">
                 <div className="space-y-4">
-                  <span className="ft-titel">Userful Link</span>
+                  <span className="ft-titel">Usefull Link</span>
                   <div className="flex flex-wrap f-manu">
 
                     <a href="#"  className="block opacity-50 mr-4 hover:text-white hover:opacity-100 anim">{t('Home')}</a>
@@ -1517,6 +1527,7 @@ const LandingPage = () => {
                 <div className="space-y-2 lg:space-y-4">
                   <div className="flex flex-wrap items-center -mx-3.5 space-y-4 lg:space-y-0">
                     <div className="w-full lg:w-1/2 px-3.5 ">
+                    <span className="ft-titel px-2">Mail us :</span>
                       <a href="javascript:void(0)" className="py-2 ft-text inline-block opacity-50">
                         help@eventopackage.com
                       </a>
@@ -1563,11 +1574,11 @@ const LandingPage = () => {
         </div>
         <div className="wrapper py-3">
           <div className="flex flex-wrap justify-between text-xs md:text-sm">
-            <span>© {(new Date().getFullYear())} Festum Evento - Devepoled By Scalelot Technoligies</span>
+            <span>© {(new Date().getFullYear())} Festum Evento - Devepoled By Scalelot Technologies</span>
             <ul className="flex items-center capitalize space-x-3">
-              <li><a href="#">privacy policy</a></li>
+              <li  className="cursor-pointer" onClick={(e) => setIsPolicy(true)}>privacy policy</li>
               <li>|</li>
-              <li><a href="#">terms and conditions</a></li>
+              <li className="cursor-pointer" onClick={(e) => setIsTnc(true)}>terms and conditions</li>
             </ul>
           </div>
         </div>
@@ -1576,6 +1587,35 @@ const LandingPage = () => {
       <Modal isOpen={isVideoPlayerPopUpOpen}>
         <VideoPlayer handleClose={setIsVideoPlayerPopUpOpen} videoUrl={videoUrl} />
       </Modal>
+
+      
+      <Modal isOpen={submit}>
+      <div className="popup table fixed w-full inset-0 z-40 bg-black bg-opacity-75 h-screen">
+            <div className="table-cell align-middle">
+                <div className="popin max-w-2xl w-full mx-auto max-h-[calc(100vh-55px)] overflow-y-auto lg:px-9">
+                    <div className="bg-brightGray px-12 py-8 max-[640px]:p-8 rounded-2xl">
+                        <div className="flex items-center justify-start">
+                            <h3 className="text-[#2E363F] font-bold pl-4">{msg}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {
+        setTimeout(() => {
+          setSubmit(false);
+        }, 2000)
+      }
+      </Modal>
+
+      <Modal isOpen={isTnc}>
+        <TncPopUp handleClose={setIsTnc}/>
+      </Modal>
+      <Modal isOpen={isPolicy}>
+        <PolicyPopUp handleClose={setIsPolicy}/>
+      </Modal>
+
+
     </>
   );
 }

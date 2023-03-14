@@ -19,6 +19,7 @@ import {
 } from "./discountSlice";
 import { useIntl } from "react-intl";
 import { toast } from "react-toastify";
+import { MoonLoader } from 'react-spinners';
 
 const EventDiscounts = () => {
   const intl = useIntl();
@@ -34,12 +35,12 @@ const EventDiscounts = () => {
   const [activeList, setActiveList] = useState([]);
   const [selectedDiscount, setSelectedDiscount] = useState({});
   const [serviceList, setServiceList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getDiscount = async () => {
     const displayDiscount = [];
     try {
       const response = await dispatch(listOfDiscount()).unwrap();
-
       if (response.data.IsSuccess) {
         try {
           const res = await dispatch(discountId(eventId)).unwrap();
@@ -56,6 +57,7 @@ const EventDiscounts = () => {
               displayDiscount.push(element);
             }
           });
+          setLoading(false);
         } catch (error) {
           console.log(error);
         }
@@ -157,6 +159,7 @@ const EventDiscounts = () => {
     try {
       setServiceList([]);
       const response = await dispatch(getSelectServiceId(eventId)).unwrap();
+      setLoading(false);
       setServiceList([]);
       response.data.Data.map((ele) => {
         setServiceList((current) => [
@@ -168,7 +171,6 @@ const EventDiscounts = () => {
       console.log(error);
     }
   };
-  console.log(allDiscount, "allDiscount");
 
   const checkboxHandler = (e, ele) => {
     let allList = Object.assign([], allDiscount);
@@ -248,107 +250,120 @@ const EventDiscounts = () => {
             <StepProgressBar eventType={eventType} />
           </div>
           {/* <!-- main-content  --> */}
-          <div className="space-y-5">
-            {allDiscount.map((ele, index) => {
-              return (
-                <div
-                  className="w-full flex items-center max-[768px]:relative"
-                  id={ele._id}
-                  key={index}
-                >
-                  {/* {console.log("tf : ",  ele.isAdded)} */}
-                  <label className="checkbox w-16 max-[768px]:absolute max-[768px]:top-1 max-[768px]:left-1 max-[768px]:justify-start max-[768px]:z-[1]">
-                    <input
-                      type="checkbox"
-                      className="bg-white"
-                      checked={ele.isAdded ?? false}
-                      onChange={(e) => checkboxHandler(e, ele)}
-                      disabled={
-                        ele?.discounttype ===
-                        "advance_and_discount_confirmation"
-                      }
-                    />
-                    <i className="icon-right"></i>
-                  </label>
-                  <div
-                    className={
-                      gradientStyle(ele.discounttype) +
-                      "bg-gradient-to-r p-5 pr-8 max-[768px]:pr-5 relative overflow-hidden rounded-lg w-full"
-                    }
-                  >
-                    <div className="flex justify-between item-basline">
-                      <div>
-                        <h1 className="text-white">{ele.discountname}</h1>
-                        <div className="text-[40px] text-black font-bold">
-                          {ele.discount}
-                        </div>
+          {
+            loading ?
+              <MoonLoader
+                cssOverride={{ margin: "100px auto" }}
+                color={"#20c0E8"}
+                loading={loading}
+                size={50}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+              :
 
-                        {
-                          // ele?.services?.length > 0 ?
-                          // 	ele?.services?.map((e, i) => (
-                          // 		<span className="text-xs text-white font-normal">
-                          // 			{e.name}
-                          // 		</span>
-                          // 	))
-                          // 	// <div className="media-upload-holder">
-                          // 	// 	{/* <!-- photo-holder --> */}
-                          // 	// 	<div className="w-full">
-                          // 	// 		<div className="flex flex-wrap -mx-2" >
-                          // 	// 			{data?.photos?.map((e, i) => (
-                          // 	// 				<DashboardEventViewOverviewPhoto key={i} alt={e.description} imageUrl={s3Url + "/" + e?.url} />
-                          // 	// 			))}
-                          // 	// 		</div>
-                          // 	// 	</div>
-                          // 	// </div>
-                          // 	:
-                          // 	(ele?.equipments?.length > 0 ?
-                          // 		ele?.equipments?.map((e, i) => (
-                          // 			<span className="text-xs text-white font-normal">
-                          // 				{e.name}
-                          // 			</span>
-                          // 		))
-                          // 		:
-                          // 		ele?.items?.length > 0 ?
-                          // 			ele?.items?.map((e, i) => (
-                          // 				<span className="text-xs text-white font-normal">
-                          // 					{e.name}
-                          // 				</span>
-                          // 			))
-                          // 			: ele.description
-                          // 	)
+              <div className="space-y-5">
+                {allDiscount.map((ele, index) => {
+                  return (
+                    <div
+                      className="w-full flex items-center max-[768px]:relative"
+                      id={ele._id}
+                      key={index}
+                    >
+                      {/* {console.log("tf : ",  ele.isAdded)} */}
+                      <label className="checkbox w-16 max-[768px]:absolute max-[768px]:top-1 max-[768px]:left-1 max-[768px]:justify-start max-[768px]:z-[1]">
+                        <input
+                          type="checkbox"
+                          className="bg-white"
+                          checked={ele.isAdded ?? false}
+                          onChange={(e) => checkboxHandler(e, ele)}
+                          disabled={
+                            ele?.discounttype ===
+                            "advance_and_discount_confirmation"
+                          }
+                        />
+                        <i className="icon-right"></i>
+                      </label>
+                      <div
+                        className={
+                          gradientStyle(ele.discounttype) +
+                          "bg-gradient-to-r p-5 pr-8 max-[768px]:pr-5 relative overflow-hidden rounded-lg w-full"
                         }
-                        {/* <span className="text-xs text-white font-normal">{ele?.services.length > 0 ? "a" : "b"}</span>
+                      >
+                        <div className="flex justify-between item-basline">
+                          <div>
+                            <h1 className="text-white">{ele.discountname}</h1>
+                            <div className="text-[40px] text-black font-bold">
+                              {ele.discount}
+                            </div>
+
+                            {
+                              // ele?.services?.length > 0 ?
+                              // 	ele?.services?.map((e, i) => (
+                              // 		<span className="text-xs text-white font-normal">
+                              // 			{e.name}
+                              // 		</span>
+                              // 	))
+                              // 	// <div className="media-upload-holder">
+                              // 	// 	{/* <!-- photo-holder --> */}
+                              // 	// 	<div className="w-full">
+                              // 	// 		<div className="flex flex-wrap -mx-2" >
+                              // 	// 			{data?.photos?.map((e, i) => (
+                              // 	// 				<DashboardEventViewOverviewPhoto key={i} alt={e.description} imageUrl={s3Url + "/" + e?.url} />
+                              // 	// 			))}
+                              // 	// 		</div>
+                              // 	// 	</div>
+                              // 	// </div>
+                              // 	:
+                              // 	(ele?.equipments?.length > 0 ?
+                              // 		ele?.equipments?.map((e, i) => (
+                              // 			<span className="text-xs text-white font-normal">
+                              // 				{e.name}
+                              // 			</span>
+                              // 		))
+                              // 		:
+                              // 		ele?.items?.length > 0 ?
+                              // 			ele?.items?.map((e, i) => (
+                              // 				<span className="text-xs text-white font-normal">
+                              // 					{e.name}
+                              // 				</span>
+                              // 			))
+                              // 			: ele.description
+                              // 	)
+                            }
+                            {/* <span className="text-xs text-white font-normal">{ele?.services.length > 0 ? "a" : "b"}</span>
 											<span className="text-xs text-white font-normal">{ele?.equipments ? "c" : "d"}</span>
 											<span className="text-xs text-white font-normal">{ele?.items ? "e" : "f"}</span> */}
-                        <span className="text-xs text-white font-normal">
-                          {ele?.description}
-                        </span>
-                      </div>
-                      <div>
-                        <button
-                          onClick={() => editButtonHandler(ele)}
-                          className="bg-white p-2 rounded-md text-sm font-bold"
-                        >
-                          <i className="text-sm edit text-black icon-edit mr-2"></i>
-                          {intl.formatMessage({ id: "EDIT" })}
-                        </button>
-                        <div
-                          className="absolute"
-                          style={{
-                            right: "40px",
-                            top: "65%",
-                            transform: "scale(1.2)",
-                          }}
-                        >
-                          <img src={celebration} alt="" />
+                            <span className="text-xs text-white font-normal">
+                              {ele?.description}
+                            </span>
+                          </div>
+                          <div>
+                            <button
+                              onClick={() => editButtonHandler(ele)}
+                              className="bg-white p-2 rounded-md text-sm font-bold"
+                            >
+                              <i className="text-sm edit text-black icon-edit mr-2"></i>
+                              {intl.formatMessage({ id: "EDIT" })}
+                            </button>
+                            <div
+                              className="absolute"
+                              style={{
+                                right: "40px",
+                                top: "65%",
+                                transform: "scale(1.2)",
+                              }}
+                            >
+                              <img src={celebration} alt="" />
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+                  );
+                })}
+              </div>
+          }
           {/* <!-- advisement --> */}
           {/* <Advertisement /> */}
           {/* <!-- next preview button --> */}
