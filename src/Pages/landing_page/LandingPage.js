@@ -1510,7 +1510,7 @@ const LandingPage = () => {
               </div>
               <div className="w-full md:w-6/12 space-y-5 lg:space-y-10">
                 <div className="space-y-4">
-                  <span className="ft-titel">Useful Link</span>
+                  <span className="ft-titel">Useful Links</span>
                   <div className="flex flex-wrap f-manu">
 
                     <a href="#"  className="block opacity-50 mr-4 hover:text-white hover:opacity-100 anim">{t('Home')}</a>
@@ -1574,7 +1574,7 @@ const LandingPage = () => {
         </div>
         <div className="wrapper py-3">
           <div className="flex flex-wrap justify-between text-xs md:text-sm">
-            <span>© {(new Date().getFullYear())} Festum Evento - Developed  By Scalelot Technologies</span>
+            <span>© 2020 Festum Evento Private Limited</span>
             <ul className="flex items-center capitalize space-x-3">
               <li  className="cursor-pointer" onClick={(e) => setIsPolicy(true)}>privacy policy</li>
               <li>|</li>

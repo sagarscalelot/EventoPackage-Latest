@@ -197,7 +197,7 @@ const Register = () => {
                     >
                       Register Now
                     </button>
-                    <div type="button" className="relative py-5">
+                    {/* <div type="button" className="relative py-5">
                       <span className="absolute inset-x-0 top-1/2 -translate-y-1/2 w-full h-[1px] bg-brightGray"></span>
                       <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-max p-2 bg-white">
                         or
@@ -226,7 +226,7 @@ const Register = () => {
                         />
                         Facebook
                       </button>
-                    </div>
+                    </div> */}
                     <span className="block text-sm text-japaneseIndigo font-bold text-center">
                     Have an account? <Link to="../login">Login in</Link>
                     </span>

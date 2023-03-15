@@ -12,7 +12,7 @@ import { equipmentsId, listOfEquipment, useEquipmentsId } from "./addEquipmentsS
 import { useIntl } from "react-intl";
 
 const EventAddEquipments = () => {
-	const intl = useIntl();
+  const intl = useIntl();
   const equipmentsIDState = useEquipmentsId();
   const displayName = localStorage.getItem("displayName");
   const navigate = useNavigate();

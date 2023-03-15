@@ -59,8 +59,7 @@ const EventCompanyDetails = () => {
       .integer()
       .positive(
         `${intl.formatMessage({ id: "CONTACT NUMBER MUST BE POSITIVE" })}`
-      )
-      .required(`${intl.formatMessage({ id: "CONTACT NUMBER IS REQUIRED" })}`),
+      ),
     email: Yup.string()
       .email(`${intl.formatMessage({ id: "INVALID EMAIL FORMAT" })}`)
       .required(`${intl.formatMessage({ id: "EMAIL IS REQUIRED" })}`),
@@ -111,7 +110,7 @@ const EventCompanyDetails = () => {
         videos: videoList,
         eventid: eventId,
       };
-      payload["mobile"] = values?.mobile.slice(values.country_code?.length)
+      // payload["mobile"] = values?.mobile.slice(values.country_code?.length)
       const response = await dispatch(detailsOfCompany(payload)).unwrap();
       if (response.data.IsSuccess) {
         // toast.success(response.data.Message);
@@ -442,7 +441,7 @@ const EventCompanyDetails = () => {
                       </div>
                       {/* {country_code} */}
                       <div className="flex">
-                        <PhoneInput
+                        {/* <PhoneInput
                           country={"us"}
                           value={formik.values.mobile}
                           className="input"
@@ -453,8 +452,8 @@ const EventCompanyDetails = () => {
                             // formik.setFieldValue("mobile", e);
                             // formik.setFieldValue("country_code", i.dialCode);
                           }}
-                        />
-                        {/* <input
+                        /> */}
+                        <input
                     type="text"
                     className="input max-w-[80px] w-full mr-3"
                     name="country_code"
@@ -469,7 +468,7 @@ const EventCompanyDetails = () => {
                     name="mobile"
                     value={formik.values?.mobile}
                     onChange={(e) => formik.setFieldValue("mobile", e.target.value)}
-                  /> */}
+                  />
                       </div>
                       <small className="text-red-500 text-xs">
                         {formik.errors.mobile}

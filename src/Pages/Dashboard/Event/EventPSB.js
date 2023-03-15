@@ -47,7 +47,7 @@ const EventPersonalDetails = () => {
       .positive(`${intl.formatMessage({ id: "CONTACT NUMBER MUST BE POSITIVE" })}`)
       .required(`${intl.formatMessage({ id: "CONTACT NUMBER IS REQUIRED" })}`),
     alt_mobile_no: Yup.string()
-    .matches(/^[0-9]*$/, `${intl.formatMessage({ id: "CONTACT NUMBER MUST BE A DIGIT" })}`)
+      .matches(/^[0-9]*$/, `${intl.formatMessage({ id: "CONTACT NUMBER MUST BE A DIGIT" })}`)
       .min(10, `${intl.formatMessage({ id: "CONTACT NUMBER SHOULD BE TEN DIGIT LONG." })}`)
       .max(10, `${intl.formatMessage({ id: "CONTACT NUMBER BE TEN DIGIT LONG." })}`),
     email: Yup.string()
@@ -67,6 +67,8 @@ const EventPersonalDetails = () => {
       .integer()
       .positive(`${intl.formatMessage({ id: "PRICE MUST BE POSITIVE" })}`)
       .required(`${intl.formatMessage({ id: "PRICE IS REQUIRED" })}`),
+    clearing_time: Yup.number().typeError(`${intl.formatMessage({ id: "TIME MUST BE A DIGIT" })}`).integer().positive(`${intl.formatMessage({ id: "TIME MUST BE POSITIVE" })}`).required(`${intl.formatMessage({ id: "TIME IS REQUIRED" })}`),
+    max_day: Yup.number().typeError(`${intl.formatMessage({ id: "DAY MUST BE A DIGIT" })}`).integer().positive(`${intl.formatMessage({ id: "DAY MUST BE POSITIVE" })}`).required(`${intl.formatMessage({ id: "DAY IS REQUIRED" })}`),
   });
   const initialState = {
     professional_skill: "",
@@ -386,7 +388,7 @@ const EventPersonalDetails = () => {
                   </span>
                 </div>
                 {/* option 1 */}
-                <div className="flex items-center space-x-3 max-[768px]:flex-col max-[768px]:space-x-0">
+                <div className="flex space-x-3 max-[768px]:flex-col max-[768px]:space-x-0">
                   <div
                     className={
                       "inputHolder " +
@@ -460,6 +462,9 @@ const EventPersonalDetails = () => {
                         </label>
                       </div>
                     </label>
+                    <small className="text-red-500 text-xs">
+                      {formik.errors.price}
+                    </small>
                   </div>
                   <div
                     className={
@@ -486,6 +491,9 @@ const EventPersonalDetails = () => {
                         setInputValue("clearing_time", e.target.value)
                       }
                     />
+                    <small className="text-red-500 text-xs">
+                      {formik.errors.clearing_time}
+                    </small>
                   </div>
                   <div
                     className={
@@ -504,11 +512,12 @@ const EventPersonalDetails = () => {
                       value={formik.values?.max_day}
                       onChange={(e) => setInputValue("max_day", e.target.value)}
                     />
+                    <small className="text-red-500 text-xs">
+                      {formik.errors.max_day}
+                    </small>
                   </div>
                 </div>
-                <small className="text-red-500 text-xs">
-                  {formik.errors.price}
-                </small>
+
                 <div className="space-y-5 max-[768px]:space-y-1">
                   <h3 className="px-2">{intl.formatMessage({ id: "ADDRESS" })}</h3>
                   <div className="w-full flex flex-wrap">

@@ -32,54 +32,54 @@ const EventAboutPlace = () => {
 	const eventType = params.eventType;
 
 	const ValidationSchema = Yup.object().shape({
-		place_price: Yup.number().typeError(`${intl.formatMessage({ id: "PRICE MUST BE A DIGIT" })}`).integer().positive(`${intl.formatMessage({ id: "PRICE MUST BE POSITIVE" })}`).required(`${intl.formatMessage({ id: "PRICE IS REQUIRED" })}`)
+		place_price: Yup.number().typeError(`${intl.formatMessage({ id: "PRICE MUST BE A DIGIT" })}`).integer().positive(`${intl.formatMessage({ id: "PRICE MUST BE POSITIVE" })}`).required(`${intl.formatMessage({ id: "PRICE IS REQUIRED" })}`),
+		person_capacity: Yup.number().typeError('Person Capacity must be a digit').integer().positive("Person Capacity must be positive"),
+		parking_capacity: Yup.number().typeError('Parking Capacity must be a digit').integer().positive("Parking Capacity must be positive")
 	});
 
 	const removeImage = () => {
 		setbannerSrc("")
 		setBanner("")
-
 	}
-	
+
 	const initialState = {
 		place_price: "",
 		clearing_time: "0",
 		max_day: "0",
 		person_capacity: "0",
 		parking_capacity: "0",
-
 	}
 
 
 	const clickNextHandler = async (values) => {
-		if(about.length < 2001) {
+		if (about.length < 2001) {
 
 			const payload = {
 				...values,
-			eventid: eventId,
-			price_type: priceType,
-			details: about,
-			banner: banner,
-		}
-		try {
-			const response = await dispatch(aboutPlaces(payload)).unwrap();
-			if (response.data.IsSuccess) {
-				toast.success(response.data.Message);
-				dispatch(increment());
-				navigate("../location");
-				
-			} else {
-				toast.error(response.data.Message);
+				eventid: eventId,
+				price_type: priceType,
+				details: about,
+				banner: banner,
 			}
-			
-			
-		} catch (error) {
-			console.log(error);
-			toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
+			try {
+				const response = await dispatch(aboutPlaces(payload)).unwrap();
+				if (response.data.IsSuccess) {
+					toast.success(response.data.Message);
+					dispatch(increment());
+					navigate("../location");
+
+				} else {
+					toast.error(response.data.Message);
+				}
+
+
+			} catch (error) {
+				console.log(error);
+				toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
+			}
+		} else {
+			toast.error(`About text limit exceeded!`);
 		}
-	} else {
-		toast.error(`About text limit exceeded!`);
-	}
 	}
 
 	const addBanner = async (selected) => {
@@ -188,12 +188,12 @@ const EventAboutPlace = () => {
 						<div className="upload-holder">
 							<span className="input-titel ml-2">{intl.formatMessage({ id: "PLACE BANNER" })}</span>
 							<label htmlFor="upload" className="upload relative flex justify-center items-center h-40 p-0">
-								
+
 								<input type="file" name="images" id="upload" className="appearance-none hidden" onChange={photoChangeHandler} />
 								{bannerSrc ? <>
-								<button className='absolute right-2 top-2 bg-sky-500/75 ... w-16 h-7 text-white' type="button" onClick={()=>removeImage()}>Remove</button>
-								<img src={bannerSrc} className="w-full h-full object-cover" /> 
-								</>:
+									<button className='absolute right-2 top-2 bg-sky-500/75 ... w-16 h-7 text-white' type="button" onClick={() => removeImage()}>Remove</button>
+									<img src={bannerSrc} className="w-full h-full object-cover" />
+								</> :
 									<span className="input-titel flex justify-center"><i className="icon-image mr-2"></i>{intl.formatMessage({ id: "UPLOAD IMAGES" })}</span>
 								}
 							</label>
@@ -259,7 +259,8 @@ const EventAboutPlace = () => {
 						<small className="text-red-500 text-xs">{formik.errors.parking_capacity}</small>
 
 						<div className="w-full space-y-2.5">
-							<h3>{intl.formatMessage({ id: "ABOUT PLACE" })}<span className="text-xs" style={{color:'#20C0E8'
+							<h3>{intl.formatMessage({ id: "ABOUT PLACE" })}<span className="text-xs" style={{
+								color: '#20C0E8'
 							}}> {about.length} / </span><span className='text-xs'>2000</span></h3>
 							<CKEditor
 								editor={ClassicEditor}

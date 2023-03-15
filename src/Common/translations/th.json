@@ -405,8 +405,6 @@
   "SEARCH": "ค้นหา",
   "FILTER": "กรอง",
   "NO EVENT FOUND": "ไม่พบกิจกรรม",
-  "PERSON CAPACITY IS REQUIRED": "ต้องการความสามารถของบุคลากร",
-  "PARKING CAPACITY IS REQUIRED": "จำเป็นต้องระบุความจุของที่จอดรถ",
   "COMPANY NAME IS REQUIRED": "ต้องระบุชื่อบริษัท",
   "CONTACT NUMBER IS REQUIRED": "ต้องระบุหมายเลขติดต่อ",
   "CONTACT NUMBER MUST BE POSITIVE": "หมายเลขติดต่อต้องเป็นบวก",
@@ -435,6 +433,12 @@
   "DAY MUST BE A DIGIT": "วันที่ต้องเป็นตัวเลข",
   "DAY MUST BE POSITIVE": "วันที่ต้องเป็นบวก",
   "DAY IS REQUIRED": "วันเป็นสิ่งจำเป็น",
+  "PERSON CAPACITY MUST BE A DIGIT": "ความจุของบุคคลต้องเป็นตัวเลข",
+  "PERSON CAPACITY MUST BE POSITIVE": "ความสามารถของบุคคลต้องเป็นไปในเชิงบวก",
+  "PERSON CAPACITY IS REQUIRED": "ต้องการความสามารถของบุคลากร",
+  "PARKING CAPACITY MUST BE A DIGIT": "ความจุที่จอดรถต้องเป็นตัวเลข",
+  "PARKING CAPACITY MUST BE POSITIVE": "ความจุของที่จอดรถต้องเป็นบวก",
+  "PARKING CAPACITY IS REQUIRED": "ต้องการความจุของที่จอดรถ",
   "COUNTRY CODE IS REQUIRED*": "ต้องระบุรหัสประเทศ*",
   "EVENTO PACKAGE IS AN ONLINE SERVICE OFFERED BY THE COMPANY. BY ACCESSING OR USING ANY WEBSITE WITH AN AUTHORIZED LINK TO THE WEBSITE AND/OR THE APP, REGISTERING AN ACCOUNT, OR ACCESSING OR USING ANY CONTENT, INFORMATION, SERVICES, FEATURES, OR RESOURCES AVAILABLE OR ENABLED VIA THE WEBSITE AND/OR THE APP, CLICKING ON A BUTTON OR TAKING ANOTHER ACTION TO SIGNIFY YOUR ACCEPTANCE OF THIS AGREEMENT, YOU:": "เหตุการณ์บรรจุุภัณฑ์เป็นบริการออนไลน์ที่นำเสนอโดยบริษัท โดยการเข้าถึงหรือใช้เว็บไซต์ใดๆ ที่มีลิงก์ที่ได้รับอนุญาตไปยังเว็บไซต์และ/หรือแอพ ลงทะเบียนบัญชี หรือเข้าถึงหรือใช้เนื้อหา ข้อมูล บริการ คุณสมบัติ หรือทรัพยากรที่มีหรือเปิดใช้งานผ่านเว็บไซต์และ/หรือแอพ การคลิกที่ปุ่มหรือดำเนินการอื่นเพื่อแสดงการยอมรับข้อตกลงนี้ แสดงว่าคุณ:",
   "SOMETHING WENT WRONG.": "บางอย่างผิดพลาด.",
@@ -472,7 +476,7 @@
   "PLEASE SELECT VIDEO FILE WITH MP4 EXTENSION.": "กรุณาเลือกไฟล์วิดีโอที่มีนามสกุล mp4",
   "PLEASE SELECT PDF FILE.": "กรุณาเลือกไฟล์ รูปแบบเอกสารพกพา",
   "ONLY 15 IMAGES ARE ALLOW": "อนุญาตเพียง 15 ภาพเท่านั้น",
-  "HAVE_YOU_PLACES":"คุณมีสถานที่",
-  "GROUP_SKILLS_BUSINESS":"ธุรกิจทักษะกลุ่ม",
-  "PERSONAL_SKILLS_BUSINESS":"ส่วนบุคคล_ทักษะ_ธุรกิจ"
+  "HAVE_YOU_PLACES": "คุณมีสถานที่",
+  "GROUP_SKILLS_BUSINESS": "ธุรกิจทักษะกลุ่ม",
+  "PERSONAL_SKILLS_BUSINESS": "ส่วนบุคคล_ทักษะ_ธุรกิจ"
 }

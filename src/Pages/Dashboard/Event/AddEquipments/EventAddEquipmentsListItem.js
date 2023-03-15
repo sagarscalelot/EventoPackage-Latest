@@ -6,26 +6,14 @@ import imagePreview from "../../../../assest/images/image-preview.png";
 import { useDispatch } from 'react-redux';
 import { deleteEquipment, selectEquipment } from './addEquipmentsSlices';
 import { useIntl } from "react-intl";
+import RemoveEquipment from '../../../../component/Popups/DashboardPopup/RemoveEquipment';
 
 const EventAddEquipmentsListItem = ({ data, edit, eventId, setReload, setActiveList, activeList }) => {
 	const intl = useIntl();
 	const [isAddServicesPopUpOpen, setIsAddServicesPopUpOpen] = useState(false);
+	const [removeEquipment, setRemoveEquipment] = useState(false);
 	const dispatch = useDispatch()
 	const [isLive, setIsLive] = useState(false);
-
-	const deleteHandler = async () => {
-		try {
-			let payload = {
-				equipmentid: data._id
-			}
-			const response = await dispatch(deleteEquipment(payload)).unwrap()
-			console.log("Equipment Deleted >> ", response);
-			setReload(current => !current);
-		} catch (error) {
-			console.log(error);
-			console.log("Something went Wrong");
-		}
-	}
 
 	const addService = () => {
 		if (isLive && !activeList?.includes(data._id)) {
@@ -78,7 +66,7 @@ const EventAddEquipmentsListItem = ({ data, edit, eventId, setReload, setActiveL
 							</div>
 							{data.quantity && <span
 								className="inline-block text-base text-spiroDiscoBall font-bold bg-brightGray py-1.5 px-3.5 rounded">{data.quantity} Qty</span>}
-							<a href="#" title="Delete" onClick={deleteHandler}><i className="text-center icon-fill-delete text-xl"></i></a>
+							<a href="#" title="Delete" onClick={() => setRemoveEquipment(true)}><i className="text-center icon-fill-delete text-xl"></i></a>
 							<a href="#" title="Edit" onClick={() => setIsAddServicesPopUpOpen(true)}><i className="text-center icon-edit text-xl"></i></a>
 						</div>
 					</div>
@@ -88,6 +76,9 @@ const EventAddEquipmentsListItem = ({ data, edit, eventId, setReload, setActiveL
 			</div>
 			<Modal isOpen={isAddServicesPopUpOpen}>
 				<EventPopUpAddEquipment handleClose={setIsAddServicesPopUpOpen} data={data} edit={edit} setReload={setReload} />
+			</Modal>
+			<Modal isOpen={removeEquipment}>
+				<RemoveEquipment handleClose={setRemoveEquipment} data={data} setReload={setReload}/>
 			</Modal>
 		</div>
 	)

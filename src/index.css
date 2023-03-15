@@ -482,7 +482,7 @@ li#video-card.active .video-cover {
 .gallery-holder button {
   @apply border-b-0 border-t text-base text-japaneseIndigo py-3.5;
 }
-
+.videoGallery .lg-react-element {@apply flex space-x-5}
 /* swiper slider  */
 .swiper-container {
   @apply w-full h-[300px] mx-auto;
