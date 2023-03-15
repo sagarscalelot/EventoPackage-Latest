@@ -245,12 +245,12 @@ const SideBar = () => {
           <NavLink
             to="chatbot"
             activeclassname="active"
-            title={intl.formatMessage({ id: "HELP" })}
+            title={intl.formatMessage({ id: "ASK SRIVALLI" })}
           >
             <span>
               <i className="w-6 block text-center text-lg icon-massage"></i>
             </span>
-            <span>{intl.formatMessage({ id: "HELP" })}</span>
+            <span>{intl.formatMessage({ id: "ASK SRIVALLI" })}</span>
           </NavLink>
         </div>
       </div>

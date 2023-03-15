@@ -121,19 +121,19 @@ const EventCapacity = () => {
   };
   const handleChange = (address) => {
     setAdd({ address });
-
   };
 
   const handleSelect = (address) => {
     setAdd({ address });
-
   };
 
   const getCapacity = async () => {
     try {
       const response = await dispatch(capacityId(eventId)).unwrap();
       setLoading(false);
-      if (response.data.Data.capacity) {
+      if (response.data.Data.capacity.location && (Object.keys(response.data.Data.capacity.location).length === 0)) {
+        getLiveLocation();
+      } else {
         setValues(response.data.Data.capacity);
         formik.setValues(response.data.Data.capacity);
         getPincodeDetail({ target: { value: response.data.Data.capacity.pincode } })
@@ -144,15 +144,14 @@ const EventCapacity = () => {
       if (!response.data.IsSuccess) {
         toast.error(`${intl.formatMessage({ id: "ERROR OCCURED WHILE FETCHING DATA." })}`)
       }
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
-    console.log("co : ", coordinates[0]);
+    // console.log("co : ", coordinates[0]);
   }
   useEffect(() => {
     getCapacity();
-    getLiveLocation();
+    // getLiveLocation();
   }, []);
 
 
@@ -194,10 +193,10 @@ const EventCapacity = () => {
       navigator.geolocation.getCurrentPosition((position) => {
         // setStatus(null);
         console.log(position.coords.latitude, position.coords.longitude);
-        setCoordinates([position.coords.longitude, position.coords.latitude]);
+        setCoordinates([position.coords.latitude, position.coords.longitude]);
         values.location = {
           type: "Point",
-          coordinates: [position.coords.longitude, position.coords.latitude],
+          coordinates: [position.coords.latitude, position.coords.longitude],
         };
         // setLat(position.coords.latitude);
         // setLng(position.coords.longitude);
@@ -227,26 +226,24 @@ const EventCapacity = () => {
   );
 
   const loadMap = (map, maps) => {
-    marker = new maps.Marker({
-      position: { lat: coordinates[1], lng: coordinates[0] },
-      map,
-      draggable: true
-    });
-    console.log(maps)
-    marker.addListener("dragend", () => {
-      formik.setFieldValue('location', {
-        type: "Point",
-        coordinates: [marker.getPosition().lat(), marker.getPosition().lng()]
-      })
-      values.location = {
-        type: "Point",
-        coordinates: [marker.getPosition().lat(), marker.getPosition().lng()],
-      };
-      setCoordinates([marker.getPosition().lat(), marker.getPosition().lng()]);
-      getAddress(marker.getPosition().lat(), marker.getPosition().lng())
-      console.log(marker.getPosition().lat());
-    });
-
+      marker = new maps.Marker({
+        position: { lat: values.location.coordinates[0], lng: values.location.coordinates[1] },
+        map,
+        draggable: true
+      });
+      marker.addListener("dragend", () => {
+        formik.setFieldValue('location', {
+          type: "Point",
+          coordinates: [marker.getPosition().lat(), marker.getPosition().lng()]
+        })
+        values.location = {
+          type: "Point",
+          coordinates: [marker.getPosition().lat(), marker.getPosition().lng()],
+        };
+        setCoordinates([marker.getPosition().lat(), marker.getPosition().lng()]);
+        getAddress(marker.getPosition().lat(), marker.getPosition().lng())
+        console.log(marker.getPosition().lat());
+      });
   };
   return (
     //   <!-- Content In -->
@@ -423,9 +420,6 @@ const EventCapacity = () => {
                   <span className="input-titel">{values.address}</span>
                   <div className="w-full flex flex-wrap bg-white p-2 rounded-md min-h-[300px] xl:min-h-[400px]">
                     <div className="relative rounded-md w-full">
-                      {console.log("add : ", values.location.coordinates)}
-
-
                       {Object.keys(values.location).length === 0 ? (
                         <>
                           <AutoPlaceSearch
@@ -441,7 +435,10 @@ const EventCapacity = () => {
                         <>
                           <AutoPlaceSearch
                             handleClick={handleClick}
-                            coordinates={values.location}
+                            coordinates={{
+                              type:"Point",
+                              coordinates: [values.location.coordinates[1], values.location.coordinates[0]]
+                            }}
                             loadMap={loadMap}
                           />
                         </>

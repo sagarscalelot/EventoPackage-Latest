@@ -51,9 +51,7 @@ const EventCompanyDetails = () => {
   const [loading, setLoading] = useState(true);
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required(
-      `${intl.formatMessage({ id: "COMPANY NAME IS REQUIRED" })}`
-    ),
+    name: Yup.string(),
     mobile: Yup.number()
       .typeError(`${intl.formatMessage({ id: "THE VALUE MUST BE A DIGIT" })}`)
       .integer()
@@ -61,29 +59,19 @@ const EventCompanyDetails = () => {
         `${intl.formatMessage({ id: "CONTACT NUMBER MUST BE POSITIVE" })}`
       ),
     email: Yup.string()
-      .email(`${intl.formatMessage({ id: "INVALID EMAIL FORMAT" })}`)
-      .required(`${intl.formatMessage({ id: "EMAIL IS REQUIRED" })}`),
-    about: Yup.string().required(
-      `${intl.formatMessage({ id: "ABOUT IS REQUIRED" })}`
-    ),
+      .email(`${intl.formatMessage({ id: "INVALID EMAIL FORMAT" })}`),
+    about: Yup.string(),
     flat_no: Yup.string(),
     street: Yup.string(),
     area: Yup.string(),
     city: Yup.string()
-    .matches(/^[a-zA-Z ]*$/, `${intl.formatMessage({ id: "CITY NAME CAN ONLY CONTAIN ENGLISH CHARACTERS" })}`)
-    .required(
-      `${intl.formatMessage({ id: "CITY NAME IS REQUIRED*" })}`
-    ),  
+    .matches(/^[a-zA-Z ]*$/, `${intl.formatMessage({ id: "CITY NAME CAN ONLY CONTAIN ENGLISH CHARACTERS" })}`),  
     state: Yup.string()
-    .matches(/^[a-zA-Z ]*$/, `${intl.formatMessage({ id: "STATE NAME CAN ONLY CONTAIN ENGLISH CHARACTERS" })}`)
-    .required(
-      `${intl.formatMessage({ id: "STATE NAME IS REQUIRED*" })}`
-    ),  
+    .matches(/^[a-zA-Z ]*$/, `${intl.formatMessage({ id: "STATE NAME CAN ONLY CONTAIN ENGLISH CHARACTERS" })}`),  
     pincode: Yup.string()
     .matches(/^[0-9]*$/, `${intl.formatMessage({ id: "THE VALUE MUST BE A DIGIT" })}`)
       .min(6, `${intl.formatMessage({ id: "PINCODE SHOULD BE SIX DIGIT LONG." })}`)
       .max(6, `${intl.formatMessage({ id: "PINCODE SHOULD BE SIX DIGIT LONG." })}`)
-      .required(`${intl.formatMessage({ id: "PINCODE IS REQUIRED*" })}`),
   });
  
   const initialState = {

@@ -202,34 +202,34 @@ const DashboardEventViewOverview = ({
     });
   }, [VideosEvent]);
 
-  const flat_no = data?.personaldetail?.flat_no + ", ";
-  const street = data?.personaldetail?.street + ", ";
-  const area = data?.personaldetail?.area + ", ";
-  const city = data?.personaldetail?.city + ", ";
-  const state = data?.personaldetail?.state + "-";
-  const pincode = data?.personaldetail?.pincode;
+  const area_name = data?.capacity?.area_name + ", ";
+  const city = data?.capacity?.city + ", ";
+  const state = data?.capacity?.state + ", ";
+  const pincode = data?.capacity?.pincode + ", ";
+  // const state = data?.personaldetail?.state + "-";
+  // const pincode = data?.personaldetail?.pincode;
   // const regex = /(<([^>]+)>)/ig;
   return (
     <>
-    {
-      loading ?
-        <MoonLoader
-          cssOverride={{ margin: "100px auto" }}
-          color={"#20c0E8"}
-          loading={loading}
-          size={50}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        />
-        :
-        <>
-    <div className="pt-7 lg:pt-10">
-      {/* <!--overview-tab-contents --> */}
-      <div className="relative tab-main active" id="overview">
-        <div className="flex max-[640px]:flex-col">
-         
-          {/* <!-- left-bar --> */}
-          <div className="w-full lg:w-8/12 lg:pr-5 space-y-7">
+      {
+        loading ?
+          <MoonLoader
+            cssOverride={{ margin: "100px auto" }}
+            color={"#20c0E8"}
+            loading={loading}
+            size={50}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+          :
+          <>
+            <div className="pt-7 lg:pt-10">
+              {/* <!--overview-tab-contents --> */}
+              <div className="relative tab-main active" id="overview">
+                <div className="flex max-[640px]:flex-col">
+
+                  {/* <!-- left-bar --> */}
+                  <div className="w-full lg:w-8/12 lg:pr-5 space-y-7">
                     <div className="p-7 bg-white rounded-md space-y-1 max-[820px]:mr-3">
                       <h3>{data?.display_name}</h3>
                       <p className="text-quicksilver text-sm font-normal break-all">
@@ -592,12 +592,11 @@ const DashboardEventViewOverview = ({
                       </h3>
                       <div className="bg-white p-4 rounded-md">
                         <h3>
-                          {data?.personaldetail?.flat_no ? flat_no : ""}
-                          {data?.personaldetail?.street ? street : ""}
-                          {data?.personaldetail?.area ? area : ""}
-                          {data?.personaldetail?.city ? city : ""}
-                          {data?.personaldetail?.state ? state : ""}
-                          {data?.personaldetail?.pincode ? pincode : ""}
+                          {/* {data?.capacity?.area_name ? area_name : ""} */}
+                          {data?.capacity?.city ? city : ""}
+                          {data?.capacity?.state ? state : ""}
+                          {data?.capacity?.pincode ? pincode : ""}
+
                         </h3>
                         {/* <h3>Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016</h3> */}
                       </div>
@@ -978,83 +977,81 @@ const DashboardEventViewOverview = ({
                       </div>
                     </div>
                   </div>
-          {/* <!-- right-bar  --> */}
-          <div className="w-full lg:w-4/12 lg:pl-5 space-y-7 sticky top-0">
-            {/* <!-- map-content  --> */}
-            {/* {console.log("L : ", capacity?.location > 0)} */}
-            {capacity?.location?.coordinates && (
-              <div className="w-full relative min-h-[170px] xl:min-h-[220px] p-2.5 bg-white rounded-md">
-                <div
-                  className="w-full min-h-[180px]"
-                  style={{ position: "inherit" }}
-                >
-                  <GoogleMap
-                    // handleClick={handleClick}
-                    coordinates={{
-                      type: "Point",
-                      coordinates: [
-                        capacity?.location?.coordinates[1],
-                        capacity?.location?.coordinates[0],
-                      ],
-                    }}
-                  />
-                </div>
-                <div className="p-3.5 pt-0 xl:p-5 xl:pt-0">
-                  <span className="input-titel">
-                    <i className="icon-fill-location mr-1"></i>{" "}
-                    {intl.formatMessage({ id: "LOCATION" })}
-                  </span>
-                  <h3 className="text-sm xl:text-base">
-                    {/* {data?.capacity?.area_name} */}
-                    {data?.personaldetail?.flat_no ? flat_no : ""}
-                  {data?.personaldetail?.street ? street : ""}
-                  {data?.personaldetail?.area ? area : ""}
-                  {data?.personaldetail?.city ? city : ""}
-                  {data?.personaldetail?.state ? state : ""}
-                  {data?.personaldetail?.pincode ? pincode : ""}
-                  </h3>
-                </div>
-              </div>
-            )}
-
-            {/* <!-- Discount On Total Bill  --> */}
-            {/* <div className="bg-gradient-to-r from-[#13e1b094] to-[#13E1B0] p-3.5 xl:p-5 rounded-lg relative"> */}
-            {data?.discounts?.length > 0 && (
-              <>
-                {data?.discounts?.map((e, i) => (
-                  <div
-                    key={i}
-                    className={
-                      gradientStyle(e.discounttype) +
-                      "bg-gradient-to-r from-[#13e1b094] to-[#13E1B0] p-3.5 xl:p-5 rounded-lg relative max-[820px]:py-3 max-[820px]:px-1"
-                    }
-                  >
-                    {/* <DashboardEventViewOverviewPhoto key={e.id} alt={e.description} imageUrl={s3Url + "/" + e?.url} /> */}
-                    <div className="text-center">
-                      <h1 className="text-white">{e?.discountname}</h1>
-                      <div className="text-[40px] text-black font-bold">
-                        {e?.discount}
+                  {/* <!-- right-bar  --> */}
+                  <div className="w-full lg:w-4/12 lg:pl-5 space-y-7 sticky top-0">
+                    {/* <!-- map-content  --> */}
+                    {/* {console.log("L : ", capacity?.location > 0)} */}
+                    {capacity?.location?.coordinates && (
+                      <div className="w-full relative min-h-[170px] xl:min-h-[220px] p-2.5 bg-white rounded-md">
+                        <div
+                          className="w-full min-h-[180px]"
+                          style={{ position: "inherit" }}
+                        >
+                          <GoogleMap
+                            // handleClick={handleClick}
+                            coordinates={{
+                              type: "Point",
+                              coordinates: [
+                                capacity?.location?.coordinates[1],
+                                capacity?.location?.coordinates[0],
+                              ],
+                            }}
+                          />
+                        </div>
+                        <div className="p-3.5 pt-0 xl:p-5 xl:pt-0">
+                          <span className="input-titel">
+                            <i className="icon-fill-location mr-1"></i>{" "}
+                            {intl.formatMessage({ id: "LOCATION" })}
+                          </span>
+                          <h3 className="text-sm xl:text-base">
+                            {/* {data?.capacity?.area_name} */}
+                            {/* {data?.capacity?.area_name ? area_name : ""} */}
+                            {data?.capacity?.city ? city : ""}
+                            {data?.capacity?.state ? state : ""}
+                            {data?.capacity?.pincode ? pincode : ""}
+                          </h3>
+                        </div>
                       </div>
-                      <div className="space-y-2">
-                        <span className="text-xs text-white font-normal block">
-                          {e.description}
-                        </span>
-                        <span className="text-xs text-white font-normal block">
-                          {e.tandc}
-                        </span>
-                      </div>
-                      <img
-                        src={celebrationSvg}
-                        alt="celebration"
-                        className="absolute -right-2 -bottom-2 -rotate-90 opacity-80"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </>
-            )}
+                    )}
 
-            {/* <div className="calendar inline-block justify-center items-center rounded-md drop-shadow-one bg-white w-full my-10 pb-5 ">
+                    {/* <!-- Discount On Total Bill  --> */}
+                    {/* <div className="bg-gradient-to-r from-[#13e1b094] to-[#13E1B0] p-3.5 xl:p-5 rounded-lg relative"> */}
+                    {data?.discounts?.length > 0 && (
+                      <>
+                        {data?.discounts?.map((e, i) => (
+                          <div
+                            key={i}
+                            className={
+                              gradientStyle(e.discounttype) +
+                              "bg-gradient-to-r from-[#13e1b094] to-[#13E1B0] p-3.5 xl:p-5 rounded-lg relative max-[820px]:py-3 max-[820px]:px-1"
+                            }
+                          >
+                            {/* <DashboardEventViewOverviewPhoto key={e.id} alt={e.description} imageUrl={s3Url + "/" + e?.url} /> */}
+                            <div className="text-center">
+                              <h1 className="text-white">{e?.discountname}</h1>
+                              <div className="text-[40px] text-black font-bold">
+                                {e?.discount}
+                              </div>
+                              <div className="space-y-2">
+                                <span className="text-xs text-white font-normal block">
+                                  {e.description}
+                                </span>
+                                <span className="text-xs text-white font-normal block">
+                                  {e.tandc}
+                                </span>
+                              </div>
+                              <img
+                                src={celebrationSvg}
+                                alt="celebration"
+                                className="absolute -right-2 -bottom-2 -rotate-90 opacity-80"
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </>
+                    )}
+
+                    {/* <div className="calendar inline-block justify-center items-center rounded-md drop-shadow-one bg-white w-full my-10 pb-5 ">
 							<div className="month flex justify-center items-center text-lg lg:text-xl font-semibold py-4 px-10 border-b border-opacity-20">
 								<a href="#"><i className="icon-left-d-arrow"></i></a>
 								<div className="year px-8 xl:px-14 whitespace-nowrap">July 2021</div>
@@ -1063,42 +1060,42 @@ const DashboardEventViewOverview = ({
 							<div className="days grid grid-cols-7 justify-center items-center text-center py-4 font-semibold"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
 							<div className="dates flex flex-wrap"><button><time></time></button><button><time></time></button><button><time>1</time></button><button><time>2</time></button><button><time>3</time></button><button><time>4</time></button><button><time>5</time></button><button><time>6</time></button><button className="active"><time>7</time></button><button><time>8</time></button><button><time>9</time></button><button><time>10</time></button><button><time>11</time></button><button><time>12</time></button><button><time>13</time></button><button><time>14</time></button><button><time>15</time></button><button className="active"><time>16</time></button><button><time className="selact">17</time></button><button className="today"><time>18</time></button><button><time>19</time></button><button><time className="selact">20</time></button><button><time>21</time></button><button><time>22</time></button><button><time>23</time></button><button><time>24</time></button><button><time>25</time></button><button><time>26</time></button><button><time>27</time></button><button><time>28</time></button><button><time>29</time></button><button><time>30</time></button><button><time>31</time></button></div>
 						</div> */}
-            <div className="calendar inline-block justify-center items-center rounded-md drop-shadow-one bg-white w-full px-12 py-7 max-[820px]:px-3 max-[820px]:ml-1 max-[820px]:py-4">
-              <FullCalendar
-                plugins={[dayGridPlugin]}
-                initialView="dayGridMonth"
-                events={calendarEvents}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+                    <div className="calendar inline-block justify-center items-center rounded-md drop-shadow-one bg-white w-full px-12 py-7 max-[820px]:px-3 max-[820px]:ml-1 max-[820px]:py-4">
+                      <FullCalendar
+                        plugins={[dayGridPlugin]}
+                        initialView="dayGridMonth"
+                        events={calendarEvents}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-      {/* <Modal isOpen={preview}>
+              {/* <Modal isOpen={preview}>
 				<ImageAndVideoPreview handleClose={setPreview} data={data} />
 			</Modal> */}
-      <Modal isOpen={previewPhoto}>
-        <ImagePreview handleClose={setPreviewPhoto} data={data?.photos} />
-      </Modal>
-      <Modal isOpen={previewVideo}>
-        <VideoPreview handleClose={setPreviewVideo} data={data?.videos} />
-      </Modal>
-      <Modal isOpen={previewCompanyPhoto}>
-        <ImageCompanyPreview
-          handleClose={setPreviewcompanyPhoto}
-          data={company?.photos}
-        />
-      </Modal>
-      <Modal isOpen={previewCompanyVideo}>
-        <VideoCompanyPreview
-          handleClose={setPreviewCompanyVideo}
-          data={company?.videos}
-        />
-      </Modal>
-    </div>
-  </>
-  }
-  </>
+              <Modal isOpen={previewPhoto}>
+                <ImagePreview handleClose={setPreviewPhoto} data={data?.photos} />
+              </Modal>
+              <Modal isOpen={previewVideo}>
+                <VideoPreview handleClose={setPreviewVideo} data={data?.videos} />
+              </Modal>
+              <Modal isOpen={previewCompanyPhoto}>
+                <ImageCompanyPreview
+                  handleClose={setPreviewcompanyPhoto}
+                  data={company?.photos}
+                />
+              </Modal>
+              <Modal isOpen={previewCompanyVideo}>
+                <VideoCompanyPreview
+                  handleClose={setPreviewCompanyVideo}
+                  data={company?.videos}
+                />
+              </Modal>
+            </div>
+          </>
+      }
+    </>
   );
 };
 

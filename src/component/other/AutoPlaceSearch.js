@@ -58,7 +58,6 @@ export class AutoPlaceSearch extends Component {
   };
 
   render() {
-    console.log("co : ", this.props.coordinates.coordinates[0]);
     return (
       <PlacesAutocomplete
         value={this.state.address}
