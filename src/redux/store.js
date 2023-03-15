@@ -25,6 +25,7 @@ import publishDateAndTimeSlice from "../component/Notification/Events/PublishDat
 import selectBusinessSlice from "../component/Notification/Events/SelectBusiness/selectBusinessSlice";
 import userSlice from "../component/Notification/Events/User/userSlice";
 import languageSlice from "../Common/CommonSlice/languageSlice";
+import redeemSlice from "../Pages/Redeem/redeemSlice";
 
 const combineReducer = combineReducers({
   auth: authSlice,
@@ -53,6 +54,7 @@ const combineReducer = combineReducers({
   selectBusiness: selectBusinessSlice,
   user: userSlice,
   language: languageSlice,
+  redeem: redeemSlice,
 });
 
 const store = configureStore({

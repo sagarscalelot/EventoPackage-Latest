@@ -34,7 +34,15 @@ const EventAboutPlace = () => {
 	const ValidationSchema = Yup.object().shape({
 		place_price: Yup.number().typeError(`${intl.formatMessage({ id: "PRICE MUST BE A DIGIT" })}`).integer().positive(`${intl.formatMessage({ id: "PRICE MUST BE POSITIVE" })}`).required(`${intl.formatMessage({ id: "PRICE IS REQUIRED" })}`),
 		person_capacity: Yup.number().typeError('Person Capacity must be a digit').integer().positive("Person Capacity must be positive"),
-		parking_capacity: Yup.number().typeError('Parking Capacity must be a digit').integer().positive("Parking Capacity must be positive")
+		parking_capacity: Yup.number().typeError('Parking Capacity must be a digit').integer().positive("Parking Capacity must be positive"),
+		clearing_time: Yup.string()
+		.typeError('Clearing time must be a digit')
+    .matches(/^[0-9]*$/, `${intl.formatMessage({ id: "Clearing time MUST BE A DIGIT" })}`)
+      .required(`${intl.formatMessage({ id: "CLEARING TIME IS REQUIRED*" })}`),
+		max_day:  Yup.string()
+		.typeError('Max day must be a digit')
+    .matches(/^[0-9]*$/, `${intl.formatMessage({ id: "Max day MUST BE A DIGIT" })}`)
+      // .required(`${intl.formatMessage({ id: "MAX DAY IS REQUIRED*" })}`),
 	});
 
 	const removeImage = () => {
@@ -201,7 +209,7 @@ const EventAboutPlace = () => {
 						</div>
 
 						{/* option 1 */}
-						<div className="flex items-center space-x-3 max-[820px]:flex-col max-[820px]:items-start max-[820px]:space-x-0">
+						<div className="flex space-x-3 max-[820px]:flex-col max-[820px]:items-start max-[820px]:space-x-0">
 							<div className={"inputHolder " + (priceType === "per_day" && true ? 'w-8/12 max-[820px]:w-full' : (priceType === "per_event" ? 'w-7/12 2xl:w-8/12 max-[820px]:w-full' : 'w-7/12 2xl:w-8/12 max-[820px]:w-full') && (priceType === "per_hour" ? 'w-8/12 max-[820px]:w-full' : 'w-8/12 max-[820px]:w-full'))}>
 								<span className="input-titel">{intl.formatMessage({ id: "PRICE" })}<span>*</span></span>
 								<label htmlFor="" className="flex items-center w-full bg-white p-2 px-3.5 rounded-md max-[640px]:flex-col">
@@ -233,19 +241,22 @@ const EventAboutPlace = () => {
 										</label>
 									</div>
 								</label>
+								<small className="text-red-500 text-xs">{formik.errors.place_price}</small>
 							</div>
 							<div className={"inputHolder " + (priceType === "per_hour" ? 'w-4/12 max-[820px]:w-full' : (priceType === "per_event" ? 'w-4/12 2xl:w-2/12 max-[820px]:w-full' : (priceType === "per_day" ? 'w-4/12 max-[820px]:w-full' : 'hidden')))}>
 								<label className="input-titel">{intl.formatMessage({ id: "CLEARING TIME (IN HOURS)" })} <span>*</span></label>
-								<input type="number" className="input py-[14px]" name='clearning time' value={formik.values?.clearing_time} onChange={(e) => setInputValue("clearing_time", e.target.value)} />
+								<input type="text" className="input py-[14px]" name='clearning time' value={formik.values?.clearing_time} onChange={(e) => setInputValue("clearing_time", e.target.value)} />
+								<small className="text-red-500 text-xs">{formik.errors.clearing_time}</small>
 							</div>
 							<div className={"inputHolder " + (priceType === "per_event" ? 'w-2/12 max-[820px]:w-full' : 'hidden')}>
 								<label className="input-titel">{intl.formatMessage({ id: "MAX DAY (IN DAYS)" })}<span>*</span></label>
-								<input type="number" className="input py-[14px]" name='max_day' value={formik.values?.max_day} onChange={(e) => setInputValue("max_day", e.target.value)} />
+								<input type="text" className="input py-[14px]" name='max_day' value={formik.values?.max_day} onChange={(e) => setInputValue("max_day", e.target.value)} />
+								<small className="text-red-500 text-xs">{formik.errors.max_day}</small>
 							</div>
 						</div>
 
 
-						<small className="text-red-500 text-xs">{formik.errors.place_price}</small>
+						
 
 						<div className="w-full inputHolder">
 							<span className="input-titel">{intl.formatMessage({ id: "PERSON CAPACITY" })}</span>

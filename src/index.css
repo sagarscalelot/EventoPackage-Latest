@@ -73,6 +73,7 @@ p.exsmall {
   @apply px-6 py-2 text-base rounded-md;
 }
 
+
 ::-webkit-scrollbar {
   background-color: transparent;
 }
@@ -97,6 +98,13 @@ p.exsmall {
   border-radius: 0.25rem !important;
 }
 
+
+.box::-webkit-scrollbar {
+  background-color: transparent;
+}
+.box::-webkit-scrollbar {
+  height: 0rem !important;
+}
 .input_box {
   @apply flex items-center w-full bg-brightGray p-3.5 py-[13px] outline-none rounded-md;
 }

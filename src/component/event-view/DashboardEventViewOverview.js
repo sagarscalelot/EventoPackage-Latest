@@ -205,7 +205,7 @@ const DashboardEventViewOverview = ({
   const area_name = data?.capacity?.area_name + ", ";
   const city = data?.capacity?.city + ", ";
   const state = data?.capacity?.state + ", ";
-  const pincode = data?.capacity?.pincode + ", ";
+  const pincode = data?.capacity?.pincode;
   // const state = data?.personaldetail?.state + "-";
   // const pincode = data?.personaldetail?.pincode;
   // const regex = /(<([^>]+)>)/ig;
@@ -256,7 +256,7 @@ const DashboardEventViewOverview = ({
                       <>
                         <section className="overflow-hidden text-neutral-700">
                           <div className="mx-auto py-2">
-                            <div className="flex space-x-3 overflow-x-auto pb-2">
+                            <div className="box flex space-x-3 overflow-x-auto pb-2">
                               {data?.photos?.map((e, i) => (
                                 <div
                                   className="flex w-[150px] h-[150px] space-x-5 flex-wrap"
@@ -1050,7 +1050,6 @@ const DashboardEventViewOverview = ({
                         ))}
                       </>
                     )}
-
                     {/* <div className="calendar inline-block justify-center items-center rounded-md drop-shadow-one bg-white w-full my-10 pb-5 ">
 							<div className="month flex justify-center items-center text-lg lg:text-xl font-semibold py-4 px-10 border-b border-opacity-20">
 								<a href="#"><i className="icon-left-d-arrow"></i></a>

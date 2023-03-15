@@ -124,3 +124,6 @@ export const SELECT_USER = "/organizer/notification/selectusers";
 export const NOTIFICATION_COUPON_LIST = "/organizer/notificationcoupons/list";
 export const SELECT_BUSINESS = "/organizer/notification/selectusertype";
 export const PAY_NOW = "/organizer/notification/paynow";
+
+/* REFER TO EARN */
+export const REDEEM = "/organizer/redeem/history"

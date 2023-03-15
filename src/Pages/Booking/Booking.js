@@ -22,20 +22,20 @@ const Booking = () => {
   const [pageNo, setPageNo] = useState(1);
   const limit = 3;
   const categoryByType = useCategory();
-  const [values,setValues] = useState({
-    time:"",
-    date:"",
-    option:""
+  const [values, setValues] = useState({
+    time: "",
+    date: "",
+    option: ""
   })
-  console.log(values,"valuesvaluesvalues");
-console.log(values,"valuesvaluesvaluesvaluesvalues");
+  console.log(values, "valuesvaluesvalues");
+  console.log(values, "valuesvaluesvaluesvaluesvalues");
   const BookingList = async () => {
     const payload = {
       page: pageNo,
       limit: limit,
-      time:values.time,
-      date:values.date,
-      event_type:values.option
+      time: values.time,
+      date: values.date,
+      event_type: values.option
     };
     try {
       const response = await dispatch(userBooking(payload)).unwrap();
@@ -48,7 +48,7 @@ console.log(values,"valuesvaluesvaluesvaluesvalues");
 
   useEffect(() => {
     BookingList();
-  }, [pageNo,values]);
+  }, [pageNo, values]);
 
   let catType = [];
   useEffect(() => {
@@ -71,7 +71,7 @@ console.log(values,"valuesvaluesvaluesvaluesvalues");
                 type="date"
                 className="w-full outline-none"
                 placeholder=""
-                onChange={(e)=>setValues({...values,date: e.target.value})}
+                onChange={(e) => setValues({ ...values, date: e.target.value })}
               />
               <span
                 className="icon-calendar pl-2"
@@ -82,12 +82,12 @@ console.log(values,"valuesvaluesvaluesvaluesvalues");
                 type="time"
                 className="w-full outline-none"
                 placeholder=""
-                onChange={(e)=>setValues({...values,time : e.target.value})}
+                onChange={(e) => setValues({ ...values, time: e.target.value })}
               />
               <span className="icon-time pl-2"></span>
             </div>
             <div className="w-4/12 relative bg-white py-2 px-3 rounded-md max-[820px]:w-full max-[820px]:mt-3">
-              <select name="All Category" className="arrow pr-11 text-japaneseIndigo font-bold tracking-wider appearance-none focus-visible:outline-none" onChange={(e)=> setValues({...values,option : e.target.value})}>
+              <select name="All Category" className="arrow pr-11 text-japaneseIndigo font-bold tracking-wider appearance-none focus-visible:outline-none" onChange={(e) => setValues({ ...values, option: e.target.value })}>
                 <option value="have_you_places">{intl.formatMessage({ id: "HAVE_YOU_PLACES" })}    </option>
                 <option value="group_skills_business">{intl.formatMessage({ id: "GROUP_SKILLS_BUSINESS" })} </option>
                 <option value="personal_skills_business">{intl.formatMessage({ id: "PERSONAL_SKILLS_BUSINESS" })} </option>
@@ -127,9 +127,9 @@ console.log(values,"valuesvaluesvaluesvaluesvalues");
                 <img
                   src={
                     e &&
-                    e.userid &&
-                    e.userid.profile_pic &&
-                    e.userid.profile_pic !== ""
+                      e.userid &&
+                      e.userid.profile_pic &&
+                      e.userid.profile_pic !== ""
                       ? s3Url + "/" + e.userid.profile_pic
                       : userImg
                   }
