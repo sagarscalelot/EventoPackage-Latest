@@ -37,7 +37,7 @@ function ImagePreview({ handleClose, data }) {
             modules={[Navigation, Thumbs]}
           >
             {data.map((e) => (
-              <SwiperSlide>
+              <SwiperSlide className={e.description ?  "" : 'mySwiper'}>
                 <ImagePreviewMainSlide link={e.url} desc={e.description} />
               </SwiperSlide>
             ))}

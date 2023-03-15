@@ -10,7 +10,7 @@ import ImagePreviewMainSlide from './ImagePreviewMainSlide';
 
 const ImageCompanyPreview = ({ handleClose, data }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  console.log("i data : ", data);
+  console.log("i data : ", handleClose);
   return (
     <div className="fixed inset-0 w-full h-full bg-[rgba(0,0,0,0.6)] flex justify-center items-center z-50">
       <button type="button" onClick={() => handleClose(false)} className="absolute right-10 top-10 z-50 rounded-full text-white text-lg"><i className="icon-close"></i></button>
@@ -22,11 +22,12 @@ const ImageCompanyPreview = ({ handleClose, data }) => {
               "--swiper-pagination-color": "#fff",
             }}
             spaceBetween={10}
+            
             navigation={true}
             thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
             modules={[Navigation, Thumbs]}
           >
-            {data.map((e, i) => (
+            {data?.map((e, i) => (
               <SwiperSlide key={i}>
                 <ImagePreviewMainSlide link={e.url} desc={e.description} />
               </SwiperSlide>

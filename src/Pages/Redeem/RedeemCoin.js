@@ -126,7 +126,8 @@ const RedeemCoin = () => {
                           </div>
                           <div>
                             <h3 className="text-base"><span>{e.transaction_type === "refer" ? intl.formatMessage({ id: "LOGIN REFER" }) : e.transaction_type === "redeem" ? intl.formatMessage({ id: "COIN REDEEM" }) : e.transaction_type === "send" ? intl.formatMessage({ id: "COIN SEND" }) : ""}</span></h3>
-                            <span className="input-titel capitalize">Refer By {e?.refer_data?.from_refer?.name}</span>
+                            {/* <span className="input-titel capitalize">Refer By {e?.refer_data?.from_refer?.name}</span> */}
+                            <span className="input-titel capitalize">Refer By {(e?.receiver_id?._id == e?.refer_data?.from_refer?._id) ? e?.refer_data?.to_refer?.name : (e?.refer_data?.from_refer?.name ? e?.refer_data?.from_refer?.name : e?.refer_data?.from_refer?.name)}</span>
                           </div>
                         </div>
                         <div className="flex items-center">

@@ -42,22 +42,25 @@ const EventPopUpUploadPhoto = ({ handleClose, eventId, imageList }) => {
 
   const uploadImage = async () => {
     try {
-      const newArr = [];
-      for (let index = 0; index < acceptedFiles.length; index++) {
-        let formDataImage = new FormData();
+      if (acceptedFiles.length + imageList.length > 15) {
+        let array = Object.assign([], acceptedFiles);
+        array.splice(0, acceptedFiles.length + imageList.length - 15);
+        console.log(array,"-----=");
+        const newArr = [];
+        for (let index = 0; index < array.length; index++) {
+          let formDataImage = new FormData();
+  
+          formDataImage.append("file", array[index]);
+  
+          var response = new Promise((resolve, reject) => {
+            const result = dispatch(uploadPhoto(formDataImage)).unwrap();
+            if (result) resolve(result);
+          });
+          newArr.push(response);
+        }
+        let array1 = Object.assign([], newArr);
 
-        formDataImage.append("file", acceptedFiles[index]);
-
-        var response = new Promise((resolve, reject) => {
-          const result = dispatch(uploadPhoto(formDataImage)).unwrap();
-          if (result) resolve(result);
-        });
-        newArr.push(response);
-      }
-      if (newArr.length + imageList.length > 16) {
-        let array = Object.assign([], newArr);
-        array.splice(0, newArr.length + imageList.length - 15);
-        Promise.all(array).then((res) => {
+        Promise.all(array1).then((res) => {
           // console.log(newArr,"newArrnewArr");
           res.forEach((imageRes) => {
             if (imageRes) {
@@ -87,7 +90,21 @@ const EventPopUpUploadPhoto = ({ handleClose, eventId, imageList }) => {
               console.log(error);
             });
         });
+    
+        
       }else{
+        const newArr = [];
+        for (let index = 0; index < acceptedFiles.length; index++) {
+          let formDataImage = new FormData();
+  
+          formDataImage.append("file", acceptedFiles[index]);
+  
+          var response = new Promise((resolve, reject) => {
+            const result = dispatch(uploadPhoto(formDataImage)).unwrap();
+            if (result) resolve(result);
+          });
+          newArr.push(response);
+        }
         Promise.all(newArr).then((res) => {
           // console.log(newArr,"newArrnewArr");
           res.forEach((imageRes) => {

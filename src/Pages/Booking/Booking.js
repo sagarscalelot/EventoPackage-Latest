@@ -39,6 +39,7 @@ const Booking = () => {
     };
     try {
       const response = await dispatch(userBooking(payload)).unwrap();
+      console.log(response,"responseresponseresponseresponse");
       setBooking(response.data.Data);
       setLoading(false);
     } catch (error) {

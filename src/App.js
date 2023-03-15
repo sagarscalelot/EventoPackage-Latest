@@ -7,6 +7,8 @@ import grTranslationMessages from "./Common/translations/gr.json";
 import thTranslationMessages from "./Common/translations/th.json";
 import frTranslationMessages from "./Common/translations/fr.json";
 import chTranslationMessages from "./Common/translations/ch.json";
+import "swiper/css";
+import "swiper/css/navigation";
 
 const App = () => {
   document

@@ -166,11 +166,16 @@ input:checked + i {
 }
 
 /* gallery swippers */
-.gallery-top .swiper-wrapper,
+/* .gallery-top .swiper-wrapper,
 .gallery-swippers .swiper-wrapper {
   @apply flex items-center justify-center;
+} */
+.gallery-top .swiper-wrapper,
+.gallery-swippers .swiper-wrapper{
+  justify-content: revert !important;
+  display: flex;
+  align-items: center;
 }
-
 .container {
   column-count: 4;
   column-gap: 15px;
@@ -417,7 +422,7 @@ input:checked + .check-language i {
 .text-massage p {
   @apply relative max-w-fit text-sm font-bold p-3 py-2 rounded-md pr-7 min-w-[284px];
 }
-@media (max-width:600px) {
+@media (max-width: 600px) {
   .text-massage p {
     @apply min-w-[200px];
   }
@@ -490,7 +495,9 @@ li#video-card.active .video-cover {
 .gallery-holder button {
   @apply border-b-0 border-t text-base text-japaneseIndigo py-3.5;
 }
-.videoGallery .lg-react-element {@apply flex space-x-5}
+.videoGallery .lg-react-element {
+  @apply flex space-x-5;
+}
 /* swiper slider  */
 .swiper-container {
   @apply w-full h-[300px] mx-auto;
@@ -852,39 +859,52 @@ img.fixed-images {
 }
 
 @media (max-width: 768px) {
-	.share-event .react-share__ShareButton svg{
-		width: 40px; 
-		height: 40px;
-	}
+  .share-event .react-share__ShareButton svg {
+    width: 40px;
+    height: 40px;
+  }
 
-	.share-event .cope-event{
-		width: 40px !important; 
-		height: 40px !important;
-	}
+  .share-event .cope-event {
+    width: 40px !important;
+    height: 40px !important;
+  }
 }
 
-@media (max-width: 590px){
-	.btn-live{
-		margin-top: 0.75rem;
-		margin-right: 2rem !important;
-	}
-	.btn-create{
-		margin-top: 0.75rem;
-	}
+@media (max-width: 590px) {
+  .btn-live {
+    margin-top: 0.75rem;
+    margin-right: 2rem !important;
+  }
+  .btn-create {
+    margin-top: 0.75rem;
+  }
 }
 
-.react-tel-input .form-control{
-    height: 47px !important;
-    width: 100% !important;
-    border: none !important;
+.react-tel-input .form-control {
+  height: 47px !important;
+  width: 100% !important;
+  border: none !important;
 }
-.react-tel-input .flag-dropdown{
+.react-tel-input .flag-dropdown {
   border: none !important;
   background-color: unset !important;
 }
 .photo-show .lg-css3.lg-slide.lg-use-css3 .lg-item.lg-current {
-  width: 70% !important; 
+  width: 70% !important;
 }
-.react-calendar{
-top:150px
+.react-calendar {
+  top: 150px;
+}
+/* .ril-inner .ril__inner{
+  width: 57% !important;
+} */
+/* .ril__image {
+  right: unset !important;
+  width: 57% !important;
+} */
+.mySwiper .swiper-slide-container .rounded-md{
+width: 100% !important;
+}
+.mySwiper .swiper-slide-container .space-y-3{
+display: none !important;
 }

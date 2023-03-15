@@ -16,11 +16,13 @@ import { AllMedia, mediaId } from "./photoAndVideoSlice";
 import { useIntl } from "react-intl";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
-import { MoonLoader } from 'react-spinners';
+import { MoonLoader } from "react-spinners";
+import EventPhotoPreview from "../../../../component/Modals/DashboardModals/EventPhotoPreview";
 
 const EventPhotosAndVideos = () => {
   const intl = useIntl();
   const displayName = localStorage.getItem("displayName");
+  const [previewPhoto, setPreviewPhoto] = useState(false);
   const [isUploadPhotoPopUpOpen, setIsUploadPhotoPopUpOpen] = useState(false);
   const [isUploadVideoPopUpOpen, setIsUploadVideoPopUpOpen] = useState(false);
   const [imageList, setImageList] = useState([]);
@@ -137,15 +139,16 @@ const EventPhotosAndVideos = () => {
           {/* <!-- step-progress-bar  --> */}
           <StepProgressBar eventType={eventType} />
           {/* <!-- main-content  --> */}
-          {loading ? <MoonLoader
-            cssOverride={{ margin: "100px auto" }}
-            color={"#20c0E8"}
-            loading={loading}
-            size={50}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          /> :
-
+          {loading ? (
+            <MoonLoader
+              cssOverride={{ margin: "100px auto" }}
+              color={"#20c0E8"}
+              loading={loading}
+              size={50}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          ) : (
             <div className="space-y-5">
               <div className="upload-holder">
                 <h3 className="flex items-end">
@@ -180,18 +183,30 @@ const EventPhotosAndVideos = () => {
               </div>
               <div className="media-upload-holder">
                 {imageList?.length !== 0 && (
-                  <span className="input-titel">
-                    {intl.formatMessage({ id: "UPLOADED PHOTO" })}
-                  </span>
+                  <div className="flex justify-between">
+                    <span className="input-titel">
+                      {intl.formatMessage({ id: "UPLOADED PHOTO" })}
+                    </span>
+                    <span
+                      className="text-spiroDiscoBall text-sm font-bold cursor-pointer"
+                      onClick={() => {
+                        // setPhotoIndex(0)
+                        setPreviewPhoto(true);
+                      }}
+                    >
+                      {intl.formatMessage({ id: "VIEW ALL" })}
+                    </span>
+                  </div>
                 )}
                 <div className="flex flex-wrap herobox">
                   {imageList?.map((img, index) => (
-                    <div key={index} className="mt-2 mr-2" >
+                    <div key={index} className="mt-2 mr-2">
                       <div className="upload-box">
                         <div className="rounded relative overflow-hidden flex justify-center items-center h-full">
-                          <img onClick={() => {
-                            setPhotoIndex(index)
-                          }}
+                          <img
+                            onClick={() => {
+                              setPhotoIndex(index);
+                            }}
                             src={s3Url + "/" + img.url}
                             alt={"upload-" + index}
                           />
@@ -202,26 +217,37 @@ const EventPhotosAndVideos = () => {
                       </div>
                     </div>
                   ))}
-                  {(photoIndex === 0 || photoIndex) && imageList[photoIndex] && (
-                    <Lightbox
-                      mainSrc={s3Url + "/" + imageList[photoIndex]?.url}
-                      nextSrc={s3Url + "/" + imageList[(photoIndex + 1) % imageList.length]?.url}
-                      prevSrc={
-                        s3Url + "/" + imageList[(photoIndex + imageList.length - 1) % imageList.length]?.url
-                      }
-                      onCloseRequest={() => {
-                        setPhotoIndex(null);
-                      }}
-                      onMovePrevRequest={() => {
-                        setPhotoIndex(
-                          (photoIndex + imageList.length - 1) % imageList.length
-                        );
-                      }}
-                      onMoveNextRequest={() => {
-                        setPhotoIndex((photoIndex + 1) % imageList.length);
-                      }}
-                    />
-                  )}
+                  {(photoIndex === 0 || photoIndex) &&
+                    imageList[photoIndex] && (
+                      <Lightbox
+                        mainSrc={s3Url + "/" + imageList[photoIndex]?.url}
+                        nextSrc={
+                          s3Url +
+                          "/" +
+                          imageList[(photoIndex + 1) % imageList.length]?.url
+                        }
+                        prevSrc={
+                          s3Url +
+                          "/" +
+                          imageList[
+                            (photoIndex + imageList.length - 1) %
+                              imageList.length
+                          ]?.url
+                        }
+                        onCloseRequest={() => {
+                          setPhotoIndex(null);
+                        }}
+                        onMovePrevRequest={() => {
+                          setPhotoIndex(
+                            (photoIndex + imageList.length - 1) %
+                              imageList.length
+                          );
+                        }}
+                        onMoveNextRequest={() => {
+                          setPhotoIndex((photoIndex + 1) % imageList.length);
+                        }}
+                      />
+                    )}
                 </div>
               </div>
               <div className="upload-holder">
@@ -290,7 +316,7 @@ const EventPhotosAndVideos = () => {
                 </span>
               </div>
             </div>
-          }
+          )}
           {/* <!-- advisement --> */}
           {/* <Advertisement /> */}
         </div>
@@ -332,6 +358,10 @@ const EventPhotosAndVideos = () => {
             />
           </Modal>
         )}
+        <Modal isOpen={previewPhoto}>
+          <EventPhotoPreview handleClose={setPreviewPhoto} data={imageList} />
+        </Modal>
+        
       </div>
     </div>
   );
