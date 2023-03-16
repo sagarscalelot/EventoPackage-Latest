@@ -112,6 +112,7 @@ export const GET_ONE_INVOICE = "/organizer/invoice/getone";
 
 /* ENTERTAINMENT */
 export const GALLERY = "/organizer/gallery";
+export const GALLERY_MYPOST = "/organizer/gallery/mypost"
 
 /* NOTOFICATION */
 export const NOTIFICATION = "/organizer/notification";

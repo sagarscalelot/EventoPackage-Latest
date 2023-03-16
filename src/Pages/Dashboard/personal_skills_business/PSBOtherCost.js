@@ -136,7 +136,7 @@ const PSBOtherCost = () => {
                 </div>
               </div>
               <div className="w-full md:w-1/2 lg:w-1/3">
-                <h3>{intl.formatMessage({ id: "ACCOMMODATION" })}</h3>
+                <h3>{intl.formatMessage({ id: "ACCOMMODATION COST" })}</h3>
                 <div className="bg-white shadow rounded-md mt-5">
                   <div className="flex items-center bg-brightGray px-8 py-3">
                     <input
@@ -167,7 +167,7 @@ const PSBOtherCost = () => {
                 </div>
               </div>
               <div className="w-full md:w-1/2 lg:w-1/3">
-                <h3>{intl.formatMessage({ id: "FOOD" })}</h3>
+                <h3>{intl.formatMessage({ id: "FOOD COST" })}</h3>
                 <div className="bg-white shadow rounded-md mt-5">
                   <div className="flex items-center bg-brightGray px-8 py-3">
                     <input

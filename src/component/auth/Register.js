@@ -37,7 +37,7 @@ const Register = () => {
       .positive("Phone no must be positive")
       .required("Phone no is required"),
     password: Yup.string()
-      .min(6, "Too Short!")
+      .min(8, "Too Short!").matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, `Make sure your password is of 8 characters, 5 alphabets, 2 number and 1 symbol.`)
       .required("Password is required*"),
     password2: Yup.string()
       .min(6, "Too Short!")
@@ -148,7 +148,7 @@ const Register = () => {
                         <ErrorMessage
                           name="password"
                           component="span"
-                          className="text-red-500 text-xs"
+                          className="text-red-500 text-xs whitespace-nowrap"
                         />
                         {/* <span className="icon-eye text-xl opacity-50 absolute right-3 bottom-3 cursor-pointer"></span> */}
                       </div>
@@ -228,7 +228,7 @@ const Register = () => {
                       </button>
                     </div> */}
                     <span className="block text-sm text-japaneseIndigo font-bold text-center">
-                    Have an account? <Link to="../login">Login in</Link>
+                      Have an account? <Link to="../login">Login in</Link>
                     </span>
                   </Form>
                 )}

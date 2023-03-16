@@ -260,10 +260,10 @@ console.log(company,"photoIndexphotoIndex");
                     <>
                       <section className="overflow-hidden text-neutral-700">
                         <div className="mx-auto py-2">
-                          <div className="flex space-x-3 overflow-x-auto pb-2">
+                          <div className="imagessliders flex space-x-3 overflow-x-auto pb-2">
                             {data?.photos?.map((e, i) => (
                               <div
-                                className="flex w-[150px] h-[150px] space-x-5 flex-wrap"
+                                className="flex w-[150px] h-[150px] space-x-5 flex-wrap cursor-pointer"
                                 key={encodeURI.id}
                                 data-lg-size={encodeURI.size}
                                 data-src={s3Url + "/" + e?.url}
@@ -700,10 +700,10 @@ console.log(company,"photoIndexphotoIndex");
                           </div> */}
                         <section className="overflow-hidden text-neutral-700">
                           <div className="mx-auto py-2">
-                            <div className="flex space-x-3 overflow-x-auto pb-2">
+                            <div className="imagessliders flex space-x-3 overflow-x-auto pb-2">
                               {data?.companydetail?.photos?.map((e, i) => (
                                 <div
-                                  className="flex w-[150px] h-[150px] flex-wrap"
+                                  className="flex w-[150px] h-[150px] flex-wrap cursor-pointer"
                                   key={encodeURI.id}
                                   data-lg-size={encodeURI.size}
                                   data-src={s3Url + "/" + e?.url}

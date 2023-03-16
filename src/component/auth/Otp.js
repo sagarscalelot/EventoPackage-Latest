@@ -103,7 +103,7 @@ const Otp = () => {
           <div className="max-w-max w-full m-auto">
             <h1 className="whitespace-nowrap">Enter OTP</h1>
             <p className="sm:text-lg xl:text-xl text-quicksilver font-normal sm:pt-3.5 xl:pr-8">
-              Please enter the 4 Digit code sent to
+              Please enter the 6 Digit code sent to
             </p>
             {username != 0 && (
               <div className="flex justify-between sm:mt-1">

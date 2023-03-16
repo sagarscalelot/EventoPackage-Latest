@@ -23,7 +23,7 @@ import lgShare from "lightgallery/plugins/share";
 import { useGallery } from "../../Pages/Entertainment/gallerySlice";
 
 const GalleryAll = () => {
-  const galleryPic = useGallery();
+   const galleryPic = useGallery();
 	const [gallery, setGallery] = useState([]);
 
   useEffect(() => {

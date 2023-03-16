@@ -21,8 +21,6 @@ const RedeemCoin = () => {
       console.log(error);
     }
   }
-  console.log("REDEEM COIN", redeem);
-
   const fCoin = useSelector(state => state.profile.profileDetails.f_coin);
 
   useEffect(() => {
@@ -140,19 +138,19 @@ const RedeemCoin = () => {
               }
               {/* Coin Redeem */}
               {/* <div className="flex items-center justify-between p-2.5 bg-white rounded-md">
-            <div className="flex items-center space-x-4">
-              <div className="rounded bg-[#D5DBFF] text-4xl w-14 h-14 flex items-center justify-center">
-                <i className="icon-reward"></i>
-              </div>
-              <div>
-                <h3 className="text-base"><span>{intl.formatMessage({ id: "COIN REDEEM" })}</span></h3>
-                <span className="input-titel">{intl.formatMessage({ id: "PROCESSING" })}</span>
-              </div>
-            </div>
-            <div className="flex items-center">
-              <p className="pr-5 border-r-2 border-quicksilver"><span>{intl.formatMessage({ id: "JAN 18, 2021" })}</span></p><h3 className="pl-5 pr-3 text-red-500">{intl.formatMessage({ id: "-325" })}</h3>
-            </div>
-          </div> */}
+                <div className="flex items-center space-x-4">
+                  <div className="rounded bg-[#D5DBFF] text-4xl w-14 h-14 flex items-center justify-center">
+                    <i className="icon-reward"></i>
+                  </div>
+                  <div>
+                    <h3 className="text-base"><span>{intl.formatMessage({ id: "COIN REDEEM" })}</span></h3>
+                    <span className="input-titel">{intl.formatMessage({ id: "PROCESSING" })}</span>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <p className="pr-5 border-r-2 border-quicksilver"><span>{intl.formatMessage({ id: "JAN 18, 2021" })}</span></p><h3 className="pl-5 pr-3 text-red-500">{intl.formatMessage({ id: "-325" })}</h3>
+                </div>
+              </div> */}
 
               {/* Login Refer */}
               {/* <div className="flex items-center justify-between p-2.5 bg-white rounded-md">
@@ -168,7 +166,7 @@ const RedeemCoin = () => {
             <div className="flex items-center">
               <p className="pr-5 border-r-2 border-quicksilver"><span>{intl.formatMessage({ id: "JAN 18, 2021" })}</span></p><h3 className="pl-5 pr-3 text-ufoGreen">{intl.formatMessage({ id: "+250" })}</h3>
             </div>
-          </div> */}
+               </div> */}
 
               {/* Coin Send */}
               {/* <div className="flex items-center justify-between p-2.5 bg-white rounded-md">
@@ -184,12 +182,10 @@ const RedeemCoin = () => {
             <div className="flex items-center">
               <p className="pr-5 border-r-2 border-quicksilver"><span>{intl.formatMessage({ id: "JAN 18, 2021" })}</span></p><h3 className="pl-5 pr-3 text-red-500">{intl.formatMessage({ id: "-14" })}</h3>
             </div>
-          </div> */}
+              </div> */}
             </>
           }
         </div>
-        {/* <!-- advisement --> */}
-        {/* <Advertisement /> */}
       </div>
     </div>
   )

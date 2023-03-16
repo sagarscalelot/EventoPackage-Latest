@@ -20,6 +20,7 @@ import {
 } from "./PersonalDetails/personalDetailsSlice";
 import { useIntl } from "react-intl";
 import { MoonLoader } from 'react-spinners';
+import { s3Url } from '../../../config';
 
 const EventPersonalDetails = () => {
   const intl = useIntl();
@@ -32,6 +33,7 @@ const EventPersonalDetails = () => {
   const [priceType, setPriceType] = useState("per_day");
   const eventId = localStorage.getItem("eventId");
   const [loading, setLoading] = useState(true);
+	const [bannerSrc, setbannerSrc] = useState();
   const [banner, setBanner] = useState("");
   const displayName = localStorage.getItem("displayName");
 
@@ -56,19 +58,34 @@ const EventPersonalDetails = () => {
     flat_no: Yup.string(),
     street: Yup.string(),
     area: Yup.string(),
-    city: Yup.string().required(`${intl.formatMessage({ id: "CITY NAME IS REQUIRED*" })}`),
-    state: Yup.string().required(`${intl.formatMessage({ id: "STATE NAME IS REQUIRED*" })}`),
+    city: Yup.string()
+    .matches(/^[a-zA-Z ]*$/, `${intl.formatMessage({ id: "CITY NAME CAN ONLY CONTAIN ENGLISH CHARACTERS" })}`)
+    .required(
+      `${intl.formatMessage({ id: "CITY NAME IS REQUIRED*" })}`
+    ),  
+    state: Yup.string()
+    .matches(/^[a-zA-Z ]*$/, `${intl.formatMessage({ id: "STATE NAME CAN ONLY CONTAIN ENGLISH CHARACTERS" })}`)
+    .required(
+      `${intl.formatMessage({ id: "STATE NAME IS REQUIRED*" })}`
+    ),  
     pincode: Yup.string()
-      .min(6, `${intl.formatMessage({ id: "TOO SHORT!" })}`)
-      .max(6, `${intl.formatMessage({ id: "TOO LONG!" })}`)
+    .matches(/^[0-9]*$/, `${intl.formatMessage({ id: "THE VALUE MUST BE A DIGIT" })}`)
+      .min(6, `${intl.formatMessage({ id: "PINCODE SHOULD BE SIX DIGIT LONG." })}`)
+      .max(6, `${intl.formatMessage({ id: "PINCODE SHOULD BE SIX DIGIT LONG." })}`)
       .required(`${intl.formatMessage({ id: "PINCODE IS REQUIRED*" })}`),
     price: Yup.number()
       .typeError(`${intl.formatMessage({ id: "PRICE MUST BE A DIGIT" })}`)
       .integer()
       .positive(`${intl.formatMessage({ id: "PRICE MUST BE POSITIVE" })}`)
       .required(`${intl.formatMessage({ id: "PRICE IS REQUIRED" })}`),
-    clearing_time: Yup.number().typeError(`${intl.formatMessage({ id: "TIME MUST BE A DIGIT" })}`).integer().positive(`${intl.formatMessage({ id: "TIME MUST BE POSITIVE" })}`).required(`${intl.formatMessage({ id: "TIME IS REQUIRED" })}`),
-    max_day: Yup.number().typeError(`${intl.formatMessage({ id: "DAY MUST BE A DIGIT" })}`).integer().positive(`${intl.formatMessage({ id: "DAY MUST BE POSITIVE" })}`).required(`${intl.formatMessage({ id: "DAY IS REQUIRED" })}`),
+      clearing_time: Yup.string()
+      .typeError('TIME MUST BE A DIGIT')
+      .matches(/^[0-9]*$/, `${intl.formatMessage({ id: "Clearing time MUST BE A DIGIT" })}`)
+        .required(`${intl.formatMessage({ id: "TIME IS REQUIRED" })}`),
+      max_day:  Yup.string()
+      .typeError('DAY MUST BE A DIGIT')
+      .matches(/^[0-9]*$/, `${intl.formatMessage({ id: "DAY MUST BE A DIGIT" })}`)
+        // .required(`${intl.formatMessage({ id: "MAX DAY IS REQUIRED*" })}`),
   });
   const initialState = {
     professional_skill: "",
@@ -141,6 +158,7 @@ const EventPersonalDetails = () => {
   const photoChangeHandler = (event) => {
     const types = ["image/png", "image/jpeg", "image/jpg"];
     let selected = event.target.files[0];
+    setbannerSrc(URL.createObjectURL(selected))
     console.log("selected", selected);
     try {
       if (selected && types.includes(selected.type)) {
@@ -189,6 +207,7 @@ const EventPersonalDetails = () => {
         formik.setValues(response.data.Data.personaldetail);
         setBanner(response.data.Data.personaldetail.banner);
         // setPrice(response.data.Data.personaldetail.price);
+        setbannerSrc(s3Url + "/" + response.data.Data.personaldetail.banner)
         setPriceType(response.data.Data.personaldetail.price_type);
         setLoading(false);
       }
@@ -204,6 +223,11 @@ const EventPersonalDetails = () => {
     getProfile();
     getPersonalDetails();
   }, [count]);
+
+  const removeImage = () => {
+		setbannerSrc("")
+		setBanner("")
+	}
 
   const setInputValue = useCallback(
     (key, value) =>
@@ -367,25 +391,18 @@ const EventPersonalDetails = () => {
                   </div>
                 </div>
                 <div className="upload-holder">
-                  <span className="input-titel ml-2">
-                    {intl.formatMessage({ id: "SKILL BANNER" })}
-                  </span>
-                  <label htmlFor="upload" className="upload">
-                    <input
-                      type="file"
-                      name="images"
-                      id="upload"
-                      className="appearance-none hidden"
-                      onChange={photoChangeHandler}
-                    />
-                    <span className="input-titel mt-1">
-                      <i className="icon-image mr-2"></i>
-                      {intl.formatMessage({ id: "UPLOAD IMAGES" })}
-                    </span>
+                  <span className="input-titel ml-2">{intl.formatMessage({ id: "SKILL BANNER" })}</span>
+                  <label htmlFor="upload" className="upload relative flex justify-center items-center h-40 p-0">
+
+                    <input type="file" name="images" id="upload" className="appearance-none hidden" onChange={photoChangeHandler} />
+                    {bannerSrc ? <>
+                      <button className='absolute right-2 top-2 bg-sky-500/75 ... w-16 h-7 text-white' type="button" onClick={() => removeImage()}>Remove</button>
+                      <img src={bannerSrc} className="w-full h-full object-cover" />
+                    </> :
+                      <span className="input-titel flex justify-center"><i className="icon-image mr-2"></i>{intl.formatMessage({ id: "UPLOAD IMAGES" })}</span>
+                    }
                   </label>
-                  <span className="input-titel ml-2">
-                    {banner ? banner.name || banner : `${intl.formatMessage({ id: "PLEASE SELECT IMAGES" })}`}
-                  </span>
+                  <span className="input-titel ml-2">{banner ? (banner.name || banner) : `${intl.formatMessage({ id: "PLEASE SELECT IMAGES" })}`}</span>
                 </div>
                 {/* option 1 */}
                 <div className="flex space-x-3 max-[768px]:flex-col max-[768px]:space-x-0">
@@ -466,7 +483,7 @@ const EventPersonalDetails = () => {
                       {formik.errors.price}
                     </small>
                   </div>
-                  <div
+                  {/* <div
                     className={
                       "inputHolder " +
                       (priceType === "per_hour"
@@ -515,7 +532,17 @@ const EventPersonalDetails = () => {
                     <small className="text-red-500 text-xs">
                       {formik.errors.max_day}
                     </small>
-                  </div>
+                  </div> */}
+                  <div className={"inputHolder " + (priceType === "per_hour" ? 'w-4/12 max-[820px]:w-full' : (priceType === "per_event" ? 'w-4/12 2xl:w-2/12 max-[820px]:w-full' : (priceType === "per_day" ? 'w-4/12 max-[820px]:w-full' : 'hidden')))}>
+								<label className="input-titel">{intl.formatMessage({ id: "CLEARING TIME (IN HOURS)" })} <span>*</span></label>
+								<input type="text" className="input py-[14px]" name='clearning time' value={formik.values?.clearing_time} onChange={(e) => setInputValue("clearing_time", e.target.value)} />
+								<small className="text-red-500 text-xs">{formik.errors.clearing_time}</small>
+							</div>
+							<div className={"inputHolder " + (priceType === "per_event" ? 'w-2/12 max-[820px]:w-full' : 'hidden')}>
+								<label className="input-titel">{intl.formatMessage({ id: "MAX DAY (IN DAYS)" })}<span>*</span></label>
+								<input type="text" className="input py-[14px]" name='max_day' value={formik.values?.max_day} onChange={(e) => setInputValue("max_day", e.target.value)} />
+								<small className="text-red-500 text-xs">{formik.errors.max_day}</small>
+							</div>
                 </div>
 
                 <div className="space-y-5 max-[768px]:space-y-1">

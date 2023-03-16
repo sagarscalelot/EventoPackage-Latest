@@ -36,12 +36,12 @@ const EventAboutPlace = () => {
 		person_capacity: Yup.number().typeError('Person Capacity must be a digit').integer().positive("Person Capacity must be positive"),
 		parking_capacity: Yup.number().typeError('Parking Capacity must be a digit').integer().positive("Parking Capacity must be positive"),
 		clearing_time: Yup.string()
-		.typeError('Clearing time must be a digit')
+		.typeError('TIME MUST BE A DIGIT')
     .matches(/^[0-9]*$/, `${intl.formatMessage({ id: "Clearing time MUST BE A DIGIT" })}`)
-      .required(`${intl.formatMessage({ id: "CLEARING TIME IS REQUIRED*" })}`),
+      .required(`${intl.formatMessage({ id: "TIME IS REQUIRED" })}`),
 		max_day:  Yup.string()
-		.typeError('Max day must be a digit')
-    .matches(/^[0-9]*$/, `${intl.formatMessage({ id: "Max day MUST BE A DIGIT" })}`)
+		.typeError('DAY MUST BE A DIGIT')
+    .matches(/^[0-9]*$/, `${intl.formatMessage({ id: "DAY MUST BE A DIGIT" })}`)
       // .required(`${intl.formatMessage({ id: "MAX DAY IS REQUIRED*" })}`),
 	});
 

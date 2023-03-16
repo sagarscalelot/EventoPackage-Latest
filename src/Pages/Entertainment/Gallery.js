@@ -5,6 +5,7 @@ import GalleryVideos from "./GalleryVideos";
 import { userGallery } from "./gallerySlice";
 import { useDispatch } from "react-redux";
 import { useIntl } from "react-intl";
+import MyPost from "./MyPost";
 
 
 const Gallery = () => {
@@ -38,7 +39,7 @@ const Gallery = () => {
               className={tab === 1 ? "active" : undefined}
               onClick={() => setTab(1)}
             >
-            <span>{intl.formatMessage({ id: "ALL" })}</span>
+              <span>{intl.formatMessage({ id: "ALL" })}</span>
             </button>
             <button
               type="button"
@@ -46,7 +47,7 @@ const Gallery = () => {
               className={tab === 2 ? "active" : undefined}
               onClick={() => setTab(2)}
             >
-            <span>{intl.formatMessage({ id: "PHOTO" })}</span>
+              <span>{intl.formatMessage({ id: "PHOTO" })}</span>
             </button>
             <button
               type="button"
@@ -54,7 +55,15 @@ const Gallery = () => {
               className={tab === 3 ? "active" : undefined}
               onClick={() => setTab(3)}
             >
-            <span>{intl.formatMessage({ id: "VIDEO" })}</span>
+              <span>{intl.formatMessage({ id: "VIDEO" })}</span>
+            </button>
+            <button
+              type="button"
+              data-tab="myPost"
+              className={tab === 4 ? "active" : undefined}
+              onClick={() => setTab(4)}
+            >
+              <span>{intl.formatMessage({ id: "MY POST" })}</span>
             </button>
           </div>
           {/* <!-- gallery-holder / --> */}
@@ -62,6 +71,7 @@ const Gallery = () => {
             {tab === 1 && <GalleryAll />}
             {tab === 2 && <GalleryPhotos />}
             {tab === 3 && <GalleryVideos />}
+            {tab === 4 && <MyPost />}
           </div>
         </div>
       </div>

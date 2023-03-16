@@ -16,10 +16,6 @@ const EventPopUpTermsAndConditions = ({ handleClose, terms, saveData, setIsCheck
       <div className="table-cell align-middle">
         <div className="popin max-w-2xl w-full mx-auto max-h-[calc(100vh-55px)] overflow-y-auto ">
           <div className="bg-brightGray p-7 space-y-7">
-            <div className='w-full flex items-center justify-between sticky top-0 mb-5 py-5 bg-brightGray'>
-              <h2 className="h1 w-full max-w-xs"> {intl.formatMessage({ id: "TERMS AND CONDITIONS" })} </h2>
-              <i className="icon-close cursor-pointer" onClick={() => { handleClose(false); }}></i>
-            </div>
 
             <div id="termsBox">
               <div className='w-full flex items-center justify-between sticky top-0 mb-5 py-5 bg-brightGray'>

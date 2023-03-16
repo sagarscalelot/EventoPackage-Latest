@@ -99,10 +99,10 @@ p.exsmall {
 }
 
 
-.box::-webkit-scrollbar {
+.imagessliders::-webkit-scrollbar {
   background-color: transparent;
 }
-.box::-webkit-scrollbar {
+.imagessliders::-webkit-scrollbar {
   height: 0rem !important;
 }
 .input_box {
