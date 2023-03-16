@@ -40,6 +40,7 @@ const DashboardEventAttendee = () => {
     setAllAttendee(response.data.Data);
   }
 
+  console.log("AAAAAAAAAAAA", allAttendee);
   useEffect(() => {
     getAttendee();
     allAttendees();
@@ -48,8 +49,15 @@ const DashboardEventAttendee = () => {
   return (
     <div className="pt-5 lg:pt-7">
       {/* <a href={allAttendee} className="flex justify-end mb-4">
-        <button className='bg-spiroDiscoBall text-base capitalize font-semibold text-white px-7 py-3 rounded-md whitespace-nowrap'>{intl.formatMessage({ id: "EXPORT ALL ATTENDEE" })}</button>
-      </a> */}
+          <button className='bg-spiroDiscoBall text-base capitalize font-semibold text-white px-7 py-3 rounded-md whitespace-nowrap'>{intl.formatMessage({ id: "EXPORT ALL ATTENDEE" })}</button>
+        </a> */}
+      {
+        attendee.length == 0 ?
+          ""
+          :
+          <a href={allAttendee} className="flex justify-end mb-4">
+            <button className='bg-spiroDiscoBall text-base capitalize font-semibold text-white px-7 py-3 rounded-md whitespace-nowrap'>{intl.formatMessage({ id: "EXPORT ALL ATTENDEE" })}</button>
+          </a>}
       {/* <!-- Attendee-Teb-Content   --> */}
       <div className="w-full space-y-7" id="attendee">
         <div className="w-full space-y-2.5">
@@ -61,22 +69,22 @@ const DashboardEventAttendee = () => {
               size={50}
               aria-label="Loading Spinner"
               data-testid="loader"
-            /> 
-           : <> 
+            />
+            : <>
               {attendee.docs?.map(ele => (
                 <>
                   <DashboardEventAtteneeListItem key={ele._id} data={ele} />
                 </>
               ))}
               {!loading && ((attendee?.totalPages > 0) ? <AttendeePage attendee={attendee} limit={limit} setPageNo={setPageNo} pageNo={pageNo} /> : <h1 style={{ margin: "100px 0" }}>{intl.formatMessage({ id: "NO ATTENDEE FOUND" })}</h1>)}
-      </>
-        }
-            {/* </> */}
+            </>
+          }
+          {/* </> */}
           {/* } */}
         </div>
 
       </div>
-    </div>  
+    </div>
   )
 }
 

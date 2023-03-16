@@ -65,15 +65,15 @@ const EventCompanyDetails = () => {
     street: Yup.string(),
     area: Yup.string(),
     city: Yup.string()
-    .matches(/^[a-zA-Z ]*$/, `${intl.formatMessage({ id: "CITY NAME CAN ONLY CONTAIN ENGLISH CHARACTERS" })}`),  
+      .matches(/^[a-zA-Z ]*$/, `${intl.formatMessage({ id: "CITY NAME CAN ONLY CONTAIN ENGLISH CHARACTERS" })}`),
     state: Yup.string()
-    .matches(/^[a-zA-Z ]*$/, `${intl.formatMessage({ id: "STATE NAME CAN ONLY CONTAIN ENGLISH CHARACTERS" })}`),  
+      .matches(/^[a-zA-Z ]*$/, `${intl.formatMessage({ id: "STATE NAME CAN ONLY CONTAIN ENGLISH CHARACTERS" })}`),
     pincode: Yup.string()
-    .matches(/^[0-9]*$/, `${intl.formatMessage({ id: "THE VALUE MUST BE A DIGIT" })}`)
+      .matches(/^[0-9]*$/, `${intl.formatMessage({ id: "THE VALUE MUST BE A DIGIT" })}`)
       .min(6, `${intl.formatMessage({ id: "PINCODE SHOULD BE SIX DIGIT LONG." })}`)
       .max(6, `${intl.formatMessage({ id: "PINCODE SHOULD BE SIX DIGIT LONG." })}`)
   });
- 
+
   const initialState = {
     name: "",
     country_code: "",
@@ -90,25 +90,30 @@ const EventCompanyDetails = () => {
   const clickNextHandler = async (values) => {
     // console.log(values,"jhdfdf");
     // return
-    try {
-      const payload = {
-        ...values,
-        gst: gstFile,
-        photos: imageList,
-        videos: videoList,
-        eventid: eventId,
-      };
-      // payload["mobile"] = values?.mobile.slice(values.country_code?.length)
-      const response = await dispatch(detailsOfCompany(payload)).unwrap();
-      if (response.data.IsSuccess) {
-        // toast.success(response.data.Message);
-        dispatch(increment());
-        navigate(`../termsandconditions`);
-      } else {
-        toast.success(response.data.Message);
+    if ((formik.values.about).length < 1001) {
+
+      try {
+        const payload = {
+          ...values,
+          gst: gstFile,
+          photos: imageList,
+          videos: videoList,
+          eventid: eventId,
+        };
+        // payload["mobile"] = values?.mobile.slice(values.country_code?.length)
+        const response = await dispatch(detailsOfCompany(payload)).unwrap();
+        if (response.data.IsSuccess) {
+          // toast.success(response.data.Message);
+          dispatch(increment());
+          navigate(`../termsandconditions`);
+        } else {
+          toast.success(response.data.Message);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      toast.error(`About text limit exceeded!`);
     }
   };
 
@@ -442,21 +447,21 @@ const EventCompanyDetails = () => {
                           }}
                         /> */}
                         <input
-                    type="text"
-                    className="input max-w-[80px] w-full mr-3"
-                    name="country_code"
-                    value={formik.values?.country_code}
-                    onChange={(e) =>
-                      formik.setFieldValue("country_code", e.target.value)
-                    }
-                  />
-                  <input
-                    type="text"
-                    className="input"
-                    name="mobile"
-                    value={formik.values?.mobile}
-                    onChange={(e) => formik.setFieldValue("mobile", e.target.value)}
-                  />
+                          type="text"
+                          className="input max-w-[80px] w-full mr-3"
+                          name="country_code"
+                          value={formik.values?.country_code}
+                          onChange={(e) =>
+                            formik.setFieldValue("country_code", e.target.value)
+                          }
+                        />
+                        <input
+                          type="text"
+                          className="input"
+                          name="mobile"
+                          value={formik.values?.mobile}
+                          onChange={(e) => formik.setFieldValue("mobile", e.target.value)}
+                        />
                       </div>
                       <small className="text-red-500 text-xs">
                         {formik.errors.mobile}
@@ -479,17 +484,32 @@ const EventCompanyDetails = () => {
                       </small>
                       <br />
                     </div>
-                    <div className="w-full px-2 mt-3">
+                    <div className="w-full space-y-2.5">
+                      <h3>{intl.formatMessage({ id: "ABOUT PLACE" })}<span className="text-xs" style={{
+                        color: '#20C0E8'
+                      }}> {(formik.values.about).length} / </span><span className='text-xs'>1000</span></h3>
+                      <CKEditor
+                        editor={ClassicEditor}
+                        onChange={(event, editor) => {
+                          formik.setFieldValue("about", editor.getData());
+                        }}
+                        data={(formik.values.about)}
+                      />
+                    </div>
+                    {/* <div className="w-full px-2 mt-3">
                       <span className="input-titel">
                         {intl.formatMessage({ id: "COMPANY ABOUT" })}
-                      </span>
-                      <CKEditor
+                        <span className="text-xs" style={{
+                          color: '#20C0E8'
+                        }}> {(formik.values.about).length} / </span><span className='text-xs'>2000</span>
+                      </span> */}
+                      {/* <CKEditor
                         editor={ClassicEditor}
                         onChange={(event, editor) => {
                           formik.setFieldValue("about", editor.getData())
                         }}
                         data={formik.values.about}
-                      />
+                      /> */}
                       {/* <textarea
                   name="about"
                   id=""
@@ -499,11 +519,11 @@ const EventCompanyDetails = () => {
                   value={formik.values?.about}
                   onChange={(e) => formik.setFieldValue("about", e.target.value)}
                 ></textarea> */}
-                      <small className="text-red-500 text-xs">
+                      {/* <small className="text-red-500 text-xs">
                         {formik.errors.about}
                       </small>
                       <br />
-                    </div>
+                    </div> */}
                   </div>
                   <div className="space-y-5 max-[768px]:space-y-0">
                     <h3 className="px-2">{intl.formatMessage({ id: "ADDRESS" })}</h3>

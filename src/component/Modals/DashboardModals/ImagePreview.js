@@ -13,7 +13,7 @@ import ImagePreviewMainSlide from "./ImagePreviewMainSlide";
 function ImagePreview({ handleClose, data }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   return (
-    <div className="fixed inset-0 w-full h-full bg-[rgba(0,0,0,0.6)] flex justify-center items-center z-50">
+    <div className="fixed inset-0 w-full h-full bg-black flex justify-center items-center z-50">
       <button
         type="button"
         onClick={() => handleClose(false)}
@@ -37,7 +37,7 @@ function ImagePreview({ handleClose, data }) {
             modules={[Navigation, Thumbs]}
           >
             {data.map((e) => (
-              <SwiperSlide className={e.description ?  "" : 'mySwiper'}>
+              <SwiperSlide className={e.description ? "" : 'mySwiper'}>
                 <ImagePreviewMainSlide link={e.url} desc={e.description} />
               </SwiperSlide>
             ))}

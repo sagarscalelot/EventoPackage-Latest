@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.48e9643f.css",
-    "main.js": "/static/js/main.0ebffa73.js",
+    "main.css": "/static/css/main.ebaf5881.css",
+    "main.js": "/static/js/main.e5b3057e.js",
     "static/js/787.ceb36d6b.chunk.js": "/static/js/787.ceb36d6b.chunk.js",
     "static/media/festumcoin.png": "/static/media/festumcoin.b724878c085dbb2323e8.png",
     "static/media/cakemaker.jpg": "/static/media/cakemaker.7c8057341ee26b82fefb.jpg",
@@ -102,12 +102,12 @@
     "static/media/eye-icon.svg": "/static/media/eye-icon.c78a8da23d31ff70149bc54fa5c10814.svg",
     "index.html": "/index.html",
     "static/media/arrow.svg": "/static/media/arrow.61b9984bc1e1daf590d2.svg",
-    "main.48e9643f.css.map": "/static/css/main.48e9643f.css.map",
-    "main.0ebffa73.js.map": "/static/js/main.0ebffa73.js.map",
+    "main.ebaf5881.css.map": "/static/css/main.ebaf5881.css.map",
+    "main.e5b3057e.js.map": "/static/js/main.e5b3057e.js.map",
     "787.ceb36d6b.chunk.js.map": "/static/js/787.ceb36d6b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.48e9643f.css",
-    "static/js/main.0ebffa73.js"
+    "static/css/main.ebaf5881.css",
+    "static/js/main.e5b3057e.js"
   ]
 }
