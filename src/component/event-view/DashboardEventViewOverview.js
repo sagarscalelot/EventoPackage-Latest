@@ -39,7 +39,7 @@ import { getOneEventDetails } from "../../Pages/Dashboard/Event/Calendar/calende
 import { useIntl } from "react-intl";
 import { MoonLoader } from "react-spinners";
 import { Navigation, Thumbs } from "swiper";
-import { Swiper,SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import ImagePreviewMainSlide from "../Modals/DashboardModals/ImagePreviewMainSlide";
 
 const DashboardEventViewOverview = ({
@@ -59,7 +59,7 @@ const DashboardEventViewOverview = ({
   const [calendarEvents, setCalendarEvents] = useState([]);
   const [photoIndex, setPhotoIndex] = useState(null);
   const [loading, setLoading] = useState(true);
-console.log(company,"photoIndexphotoIndex");
+  console.log(company, "photoIndexphotoIndex");
   const gradientStyle = (type) => {
     if (type === "discount_on_total_bill")
       return " from-[#13e1b094] to-[#13E1B0] ";
@@ -97,7 +97,7 @@ console.log(company,"photoIndexphotoIndex");
 
   // lightgallery personal Video
   const VideosEvent = data?.videos;
-  const onInit = () => {};
+  const onInit = () => { };
   const getItems = useCallback(() => {
     return VideosEvent.map((e) => {
       const videoSrc = s3Url + "/" + e?.url;
@@ -289,34 +289,34 @@ console.log(company,"photoIndexphotoIndex");
                           </div>
                         </div>
                       </section>
-                      </>
-                      )}
-                      {
-                        // <div
-                        //   key={encodeURI.id}
-                        //   data-lg-size={encodeURI.size}
-                        //   className="gallery-preview relative mb-[15px] block"
-                        //   data-src={s3Url + "/" + e?.url}
-                        //   onClick={()=>{
-                        //     setPhotoIndex(i)
-                        //   }}
-                        // >
-                        //   <div className="group cursor-pointer">
-                        //     <img
-                        //       className="img-responsive w-full relative"
-                        //       src={s3Url + "/" + e?.url}
-                        //       alt={e.description}
-                        //     />
-                        //     <img
-                        //       src={EyeIcon}
-                        //       alt="Eye icon"
-                        //       className="block absolute top-1/2 left-1/2 -translate-x-1/2 group-hover:-translate-y-1/2 z-30 opacity-0 group-hover:opacity-100 group-hover:scale-125 anim"
-                        //     />
-                        //     <span className="box absolute inset-0 block w-full h-full group-hover:bg-[#000000] group-hover:opacity-50 anim"></span>
-                        //   </div>
-                        // </div>
-                      }
-                      {/* {(photoIndex === 0 || photoIndex) &&
+                    </>
+                  )}
+                  {
+                    // <div
+                    //   key={encodeURI.id}
+                    //   data-lg-size={encodeURI.size}
+                    //   className="gallery-preview relative mb-[15px] block"
+                    //   data-src={s3Url + "/" + e?.url}
+                    //   onClick={()=>{
+                    //     setPhotoIndex(i)
+                    //   }}
+                    // >
+                    //   <div className="group cursor-pointer">
+                    //     <img
+                    //       className="img-responsive w-full relative"
+                    //       src={s3Url + "/" + e?.url}
+                    //       alt={e.description}
+                    //     />
+                    //     <img
+                    //       src={EyeIcon}
+                    //       alt="Eye icon"
+                    //       className="block absolute top-1/2 left-1/2 -translate-x-1/2 group-hover:-translate-y-1/2 z-30 opacity-0 group-hover:opacity-100 group-hover:scale-125 anim"
+                    //     />
+                    //     <span className="box absolute inset-0 block w-full h-full group-hover:bg-[#000000] group-hover:opacity-50 anim"></span>
+                    //   </div>
+                    // </div>
+                  }
+                  {/* {(photoIndex === 0 || photoIndex) &&
                         data?.photos[photoIndex] && (
                           <Swiper
                           style={{
@@ -370,7 +370,7 @@ console.log(company,"photoIndexphotoIndex");
                             }}
                           />
                         )} */}
-                      {/* <div className="">
+                  {/* <div className="">
                     <LightGallery
                       onInit={onInit}
                       speed={500}
@@ -408,7 +408,7 @@ console.log(company,"photoIndexphotoIndex");
                       ))}
                     </LightGallery>
                   </div> */}
-               
+
                   {/* <!-- videos-holder --> */}
                   {/* <!-- media title  --> */}
                   <div className="flex justify-between items-center">
@@ -438,7 +438,7 @@ console.log(company,"photoIndexphotoIndex");
                     </div>
                   )}
                   {/* <!-- Service --> */}
-                  {}
+                  { }
                   {service && service?.length > 0 && (
                     <div className="space-y-1.5">
                       <h3 className="text-lg">
@@ -617,6 +617,9 @@ console.log(company,"photoIndexphotoIndex");
                     </h3>
                     <div className="bg-white p-4 rounded-md">
                       <h3>
+                        {data?.capacity?.city ? city : ""}
+                        {data?.capacity?.state ? state : ""}
+                        {data?.capacity?.pincode ? pincode : ""}
                         {/* {data?.personaldetail?.flat_no ? flat_no : ""}
                         {data?.personaldetail?.street ? street : ""}
                         {data?.personaldetail?.area ? area : ""}
@@ -1044,6 +1047,9 @@ console.log(company,"photoIndexphotoIndex");
                           {intl.formatMessage({ id: "LOCATION" })}
                         </span>
                         <h3 className="text-sm xl:text-base">
+                          {data?.capacity?.city ? city : ""}
+                          {data?.capacity?.state ? state : ""}
+                          {data?.capacity?.pincode ? pincode : ""}
                           {/* {data?.capacity?.area_name} */}
                           {/* {data?.personaldetail?.flat_no ? flat_no : ""}
                           {data?.personaldetail?.street ? street : ""}
