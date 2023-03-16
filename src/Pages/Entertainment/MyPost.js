@@ -35,7 +35,7 @@ function MyPost() {
 
     useEffect(() => {
         galleryMyPost();
-    }, [MyPost])
+    }, [])
 
 
     const onInit = () => { };
