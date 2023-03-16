@@ -92,7 +92,7 @@ function MyPost() {
                         data-video={JSON.stringify(videoUrl)}
                         className="gallery-preview relative mb-[15px] block cursor-pointer"
                     >
-                        <video className="w-full" src={videoSrc} controls />
+                        <video className="w-full" src={videoSrc} />
                     </div>
             );
         });
