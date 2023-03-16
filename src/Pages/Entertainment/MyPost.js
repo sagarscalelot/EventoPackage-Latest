@@ -26,15 +26,15 @@ function MyPost() {
 
     const MyPost = useGalleryPost();
     const [galleryPosts, setGalleryPosts] = useState([]);
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-    // const galleryMyPost = async () => {
-    //     const response = await dispatch(userGalleryPost()).unwrap();
-    //     setGalleryPosts(response.data.Data);
-    // }
+    const galleryMyPost = async () => {
+        const response = await dispatch(userGalleryPost()).unwrap();
+        setGalleryPosts(response.data.Data);
+    }
 
     useEffect(() => {
-        setGalleryPosts(MyPost);
+        galleryMyPost();
     }, [MyPost])
 
 
