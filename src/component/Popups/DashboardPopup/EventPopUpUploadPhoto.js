@@ -15,6 +15,7 @@ const EventPopUpUploadPhoto = ({ handleClose, eventId, imageList }) => {
   const [image, setImage] = useState("");
   //const [currentImageList, setCurrentImageList] = useState(imageList);
   const [details, setDetails] = useState("");
+  console.log(details.length,"-=-=-=-=-=");
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -144,10 +145,15 @@ const EventPopUpUploadPhoto = ({ handleClose, eventId, imageList }) => {
   };
 
   const submitHandler = async () => {
-    if (!error) {
-      uploadImage();
-    } else {
-      console.log("error occured");
+    if(details.length < 501){
+      if (!error) {
+        uploadImage();
+      } else {
+        console.log("error occured");
+      }
+    }else{
+			toast.error(`${intl.formatMessage({ id: "ABOUT TEXT LIMIT EXCEEDED!" })}`);
+
     }
   };
 

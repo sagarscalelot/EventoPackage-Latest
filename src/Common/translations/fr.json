@@ -478,5 +478,9 @@
   "ONLY 15 IMAGES ARE ALLOW": "Seulement 15 images sont autorisées",
   "HAVE_YOU_PLACES":"avez_vous_des_lieux",
   "GROUP_SKILLS_BUSINESS":"entreprise de compétences de groupe",
-  "PERSONAL_SKILLS_BUSINESS":"compétences_personnelles_entreprise"
+  "PERSONAL_SKILLS_BUSINESS":"compétences_personnelles_entreprise",
+  "MAX DAY MUST BE A DIGIT":"Le jour maximum doit être un chiffre",
+  "CLEARING TIME IS REQUIRED*":"Un temps de dédouanement est requis",
+  "CLEARING TIME MUST BE A DIGIT":"L'heure de compensation doit être un chiffre",
+  "ABOUT TEXT LIMIT EXCEEDED!":"À propos de la limite de texte dépassée !"
 }

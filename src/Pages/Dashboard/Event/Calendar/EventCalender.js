@@ -7,7 +7,7 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import { useState } from 'react';
 import moment from 'moment/moment';
-import { getOneEventDetails, useEventCalender } from './calenderSlice';
+import { getOneEventDetails, idCalendar, useEventCalender } from './calenderSlice';
 import { useIntl } from "react-intl";
 import { MoonLoader } from 'react-spinners';
 
@@ -51,10 +51,13 @@ const EventCalender = () => {
 	}
 
 
+	
 	useEffect(() => {
 		Calendar();
 	}, [])
-
+	// useEffect(()=>{
+	// 	IdCalendar()
+	// },[])
 
 	const clickNextHandler = () => {
 		dispatch(reset());
@@ -161,7 +164,7 @@ const EventCalender = () => {
 										plugins={[dayGridPlugin]}
 										initialView="dayGridMonth"
 										events={calendarEvents}
-
+										// dateClick={(e) => console.log(e,"=========")}
 									/>
 								</div>
 								{/* <!-- calendar end --> */}

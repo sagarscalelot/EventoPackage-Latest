@@ -74,6 +74,7 @@ export const GET_SELECT_SERVICE_DISCOUNT =
 
 /* DASHBOARD EVENT - CALENDER */
 export const GET_ONE_EVENT_BY_ID = "/organizer/events/getone?eventid=";
+export const CALENDER_ID = "/organizer/events/calendar"
 
 /* DASHBOARD EVENT - ADD SERVICE */
 export const ADD_SERVICE = "/organizer/events/addservice";
@@ -114,7 +115,7 @@ export const GET_ONE_INVOICE = "/organizer/invoice/getone";
 export const GALLERY = "/organizer/gallery";
 export const GALLERY_MYPOST = "/organizer/gallery/mypost"
 
-/* NOTOFICATION */
+/* NOTIFICATION */
 export const NOTIFICATION = "/organizer/notification";
 export const PHOTOUPLOAD = "/organizer/events/banner";
 export const CREATE_NOTIFICATION = "/organizer/notification/save";

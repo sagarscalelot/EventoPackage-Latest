@@ -32,7 +32,8 @@ import VenueVideo from "../../assest/images/landing-page/video3.png";
 // import video3 from "../../assest/images/landing-page/Birthday-party-Event.mp4";
 // import video4 from "../../assest/images/landing-page/Summer-Garden-Party-Event.mp4";
 
-import ourcompany from "../../assest/images/landing-page/our-company.png";
+// import ourcompany from "../../assest/images/landing-page/company.svg";
+import ourcompany from "../../assest/images/landing-page/company.png";
 import googleplay from "../../assest/images/landing-page/google-play.png";
 import appstore from "../../assest/images/landing-page/app-store.png";
 import whatsupfooter from "../../assest/images/landing-page/whatsup-footer.png";
@@ -51,7 +52,7 @@ import thailand from "../../assest/images/landing-page/thailand.png";
 import iphone from "../../assest/images/landing-page/Place2.png";
 import siderevento from "../../assest/images/landing-page/sider-evento.png";
 import giftfcoin from "../../assest/images/landing-page/surprise 1.png";
-import Advertisement from "../../component/Advertisement/Advertisement"; 
+import Advertisement from "../../component/Advertisement/Advertisement";
 import multidivice from "../../assest/images/landing-page/Multi-Devices.png";
 import banner1 from "../../assest/images/landing-page/SevicesPhotos/Art_Galleries.jpg";
 import banner2 from "../../assest/images/landing-page/SevicesPhotos/Ballrooms.jpg";
@@ -185,7 +186,7 @@ const LandingPage = () => {
     try {
       const payload = { ...values };
       const response = await dispatch(getInTouchLanding(payload)).unwrap()
-      
+
       if (response.data.IsSuccess) {
         setSubmit(true);
         setMsg(response.data?.Message);
@@ -220,7 +221,7 @@ const LandingPage = () => {
   const [isTnc, setIsTnc] = useState(false);
   const [isPolicy, setIsPolicy] = useState(false);
   const [videoUrl, setVideoUrl] = useState("");
-	const [submit, setSubmit] = useState(false);
+  const [submit, setSubmit] = useState(false);
 
   useEffect(() => {
     $(document).ready(function () {
@@ -1255,9 +1256,9 @@ const LandingPage = () => {
       {/* Our Company */}
       <div id="aboutus" className="bg-white">
         <div className="wrapper pt-14 md:pt-24">
-          <div className="flex flex-wrap items-center bg-[#EEEEEE]">
-            <div className="w-full lg:w-6/12">
-              <img src={ourcompany} alt="Our Company" className="w-full" />
+          <div className="flex flex-wrap items-center justify-center bg-[#EEEEEE] lg:h-[524px]">
+            <div className="w-full lg:w-6/12 h-full">
+              <img src={ourcompany} alt="Our Company" className="w-full h-full object-contain py-10 xl:py-5" />
             </div>
             <div className="w-full lg:w-6/12">
               <div className="pl-5 pr-3 lg:pl-14 lg:pr-10 py-10 xl:py-5">
@@ -1513,7 +1514,7 @@ const LandingPage = () => {
                   <span className="ft-titel">Useful Links</span>
                   <div className="flex flex-wrap f-manu">
 
-                    <a href="#"  className="block opacity-50 mr-4 hover:text-white hover:opacity-100 anim">{t('Home')}</a>
+                    <a href="#" className="block opacity-50 mr-4 hover:text-white hover:opacity-100 anim">{t('Home')}</a>
                     <a href="#about" className="block opacity-50 mr-4 hover:text-white hover:opacity-100 anim">About</a>
                     <a href="#feature" className="block opacity-50 mr-4 hover:text-white hover:opacity-100 anim">Feature</a>
                     {/* <a href="#" className="block opacity-50 mr-4 hover:text-white hover:opacity-100 anim">Upcoming</a> */}
@@ -1527,7 +1528,7 @@ const LandingPage = () => {
                 <div className="space-y-2 lg:space-y-4">
                   <div className="flex flex-wrap items-center -mx-3.5 space-y-4 lg:space-y-0">
                     <div className="w-full lg:w-1/2 px-3.5 ">
-                    <span className="ft-titel px-2">Mail Us :</span>
+                      <span className="ft-titel px-2">Mail Us :</span>
                       <a href="javascript:void(0)" className="py-2 ft-text inline-block opacity-50">
                         help@eventopackage.com
                       </a>
@@ -1576,7 +1577,7 @@ const LandingPage = () => {
           <div className="flex flex-wrap justify-between text-xs md:text-sm">
             <span>© 2020 Festum Evento Private Limited</span>
             <ul className="flex items-center capitalize space-x-3">
-              <li  className="cursor-pointer" onClick={(e) => setIsPolicy(true)}>privacy policy</li>
+              <li className="cursor-pointer" onClick={(e) => setIsPolicy(true)}>privacy policy</li>
               <li>|</li>
               <li className="cursor-pointer" onClick={(e) => setIsTnc(true)}>terms and conditions</li>
             </ul>
@@ -1588,31 +1589,31 @@ const LandingPage = () => {
         <VideoPlayer handleClose={setIsVideoPlayerPopUpOpen} videoUrl={videoUrl} />
       </Modal>
 
-      
+
       <Modal isOpen={submit}>
-      <div className="popup table fixed w-full inset-0 z-40 bg-black bg-opacity-75 h-screen">
-            <div className="table-cell align-middle">
-                <div className="popin max-w-2xl w-full mx-auto max-h-[calc(100vh-55px)] overflow-y-auto lg:px-9">
-                    <div className="bg-brightGray px-12 py-8 max-[640px]:p-8 rounded-2xl">
-                        <div className="flex items-center justify-start">
-                            <h3 className="text-[#2E363F] font-bold pl-4">{msg}</h3>
-                        </div>
-                    </div>
+        <div className="popup table fixed w-full inset-0 z-40 bg-black bg-opacity-75 h-screen">
+          <div className="table-cell align-middle">
+            <div className="popin max-w-2xl w-full mx-auto max-h-[calc(100vh-55px)] overflow-y-auto lg:px-9">
+              <div className="bg-brightGray px-12 py-8 max-[640px]:p-8 rounded-2xl">
+                <div className="flex items-center justify-start">
+                  <h3 className="text-[#2E363F] font-bold pl-4">{msg}</h3>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
         {
-        setTimeout(() => {
-          setSubmit(false);
-        }, 2000)
-      }
+          setTimeout(() => {
+            setSubmit(false);
+          }, 2000)
+        }
       </Modal>
 
       <Modal isOpen={isTnc}>
-        <TncPopUp handleClose={setIsTnc}/>
+        <TncPopUp handleClose={setIsTnc} />
       </Modal>
       <Modal isOpen={isPolicy}>
-        <PolicyPopUp handleClose={setIsPolicy}/>
+        <PolicyPopUp handleClose={setIsPolicy} />
       </Modal>
 
 

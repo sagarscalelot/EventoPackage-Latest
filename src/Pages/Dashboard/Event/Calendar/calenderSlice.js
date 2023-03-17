@@ -2,7 +2,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { getEventByID } from "../../../../redux/services/eventServices/calendarServices";
+import { calendarId, getEventByID } from "../../../../redux/services/eventServices/calendarServices";
 
 const initialState = {
     stateEventCalender: []
@@ -14,7 +14,12 @@ export const getOneEventDetails = createAsyncThunk(
         return await getEventByID(id);
     }
 );
-
+export const idCalendar = createAsyncThunk(
+    "event/calenderid",
+    async (payload) => {
+        return await calendarId(payload);
+    }
+);
 const eventCalenderSlice = createSlice({
     name: "eventCalenderSlice",
     initialState,

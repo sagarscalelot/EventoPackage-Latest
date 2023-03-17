@@ -10,6 +10,7 @@ import chTranslationMessages from "./Common/translations/ch.json";
 import "swiper/css";
 import "swiper/css/navigation";
 
+
 const App = () => {
   document
     .querySelector("body")

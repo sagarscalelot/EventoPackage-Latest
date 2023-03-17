@@ -479,5 +479,9 @@
   "ONLY 15 IMAGES ARE ALLOW": "Nur 15 Bilder sind erlaubt",
   "HAVE_YOU_PLACES":"hast du Plätze",
   "GROUP_SKILLS_BUSINESS":"Gruppenfähigkeiten Geschäft",
-  "PERSONAL_SKILLS_BUSINESS":"persönliche_kompetenzen_geschäft"
+  "PERSONAL_SKILLS_BUSINESS":"persönliche_kompetenzen_geschäft",
+  "MAX DAY MUST BE A DIGIT":"Max. Tag muss eine Ziffer sein",
+  "CLEARING TIME IS REQUIRED*":"Räumungszeit ist erforderlich",
+  "CLEARING TIME MUST BE A DIGIT":"Die Clearing-Zeit muss eine Ziffer sein",
+  "ABOUT TEXT LIMIT EXCEEDED!":"Über Textlimit überschritten!"
 }

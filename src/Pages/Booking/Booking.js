@@ -89,6 +89,7 @@ const Booking = () => {
             </div>
             <div className="w-4/12 relative bg-white py-2 px-3 rounded-md max-[820px]:w-full max-[820px]:mt-3">
               <select name="All Category" className="arrow pr-11 text-japaneseIndigo font-bold tracking-wider appearance-none focus-visible:outline-none" onChange={(e) => setValues({ ...values, option: e.target.value })}>
+              <option value="all">All</option>
                 <option value="have_you_places">{intl.formatMessage({ id: "HAVE_YOU_PLACES" })}    </option>
                 <option value="group_skills_business">{intl.formatMessage({ id: "GROUP_SKILLS_BUSINESS" })} </option>
                 <option value="personal_skills_business">{intl.formatMessage({ id: "PERSONAL_SKILLS_BUSINESS" })} </option>

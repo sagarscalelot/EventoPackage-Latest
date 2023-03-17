@@ -480,5 +480,14 @@
   "ONLY 15 IMAGES ARE ALLOW": "Only 15 Images Are Allow",
   "HAVE_YOU_PLACES":"have you places",
   "GROUP_SKILLS_BUSINESS":"group skills business",
-  "PERSONAL_SKILLS_BUSINESS":"personal skills business"
+  "PERSONAL_SKILLS_BUSINESS":"personal skills business",
+  "MAX DAY MUST BE A DIGIT":"Max day must be a digit",
+  "CLEARING TIME IS REQUIRED*":"Clearing time is required",
+  "CLEARING TIME MUST BE A DIGIT":"Clearing time must be a digit",
+  "ABOUT TEXT LIMIT EXCEEDED!":"About text limit exceeded!",
+  "STATE NAME CAN ONLY CONTAIN ENGLISH CHARACTERS":"STATE NAME CAN ONLY CONTAIN ENGLISH CHARACTERS",
+
+
+  "CITY NAME CAN ONLY CONTAIN ENGLISH CHARACTERS":"CITY NAME CAN ONLY CONTAIN ENGLISH CHARACTERS",
+  "MYPOST":"My Post"
 }

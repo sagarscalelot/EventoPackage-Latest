@@ -479,5 +479,9 @@
   "ONLY 15 IMAGES ARE ALLOW": "อนุญาตเพียง 15 ภาพเท่านั้น",
   "HAVE_YOU_PLACES": "คุณมีสถานที่",
   "GROUP_SKILLS_BUSINESS": "ธุรกิจทักษะกลุ่ม",
-  "PERSONAL_SKILLS_BUSINESS": "ส่วนบุคคล_ทักษะ_ธุรกิจ"
+  "PERSONAL_SKILLS_BUSINESS": "ส่วนบุคคล_ทักษะ_ธุรกิจ",
+  "MAX DAY MUST BE A DIGIT":"วันที่สูงสุดต้องเป็นตัวเลข",
+  "CLEARING TIME IS REQUIRED*":"ต้องใช้เวลาเคลียร์",
+  "CLEARING TIME MUST BE A DIGIT":"เวลาเคลียร์ต้องเป็นตัวเลข",
+  "ABOUT TEXT LIMIT EXCEEDED!":"เกินขีดจำกัดของข้อความ!"
 }

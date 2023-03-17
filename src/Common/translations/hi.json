@@ -479,5 +479,9 @@
   "ONLY 15 IMAGES ARE ALLOW": "केवल 15 छवियों की अनुमति है",
   "HAVE_YOU_PLACES":"क्या आपके पास जगह है",
   "GROUP_SKILLS_BUSINESS":"समूह कौशल व्यवसाय",
-  "PERSONAL_SKILLS_BUSINESS":"व्यक्तिगत कौशल व्यवसाय"
+  "PERSONAL_SKILLS_BUSINESS":"व्यक्तिगत कौशल व्यवसाय",
+  "MAX DAY MUST BE A DIGIT":"अधिकतम दिन एक अंक होना चाहिए",
+  "CLEARING TIME IS REQUIRED*":"समाशोधन समय की आवश्यकता है",
+  "CLEARING TIME MUST BE A DIGIT":"समाशोधन समय एक अंक होना चाहिए",
+  "ABOUT TEXT LIMIT EXCEEDED!":"पाठ के बारे में सीमा पार हो गई!"
 }

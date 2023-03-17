@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.ebaf5881.css",
-    "main.js": "/static/js/main.e5b3057e.js",
+    "main.css": "/static/css/main.2b8498aa.css",
+    "main.js": "/static/js/main.d548e8f2.js",
     "static/js/787.ceb36d6b.chunk.js": "/static/js/787.ceb36d6b.chunk.js",
     "static/media/festumcoin.png": "/static/media/festumcoin.b724878c085dbb2323e8.png",
     "static/media/cakemaker.jpg": "/static/media/cakemaker.7c8057341ee26b82fefb.jpg",
@@ -17,7 +17,6 @@
     "static/media/Wedding_Decorator.jpg": "/static/media/Wedding_Decorator.be30722f8369c41a1e41.jpg",
     "static/media/Caterers_And_Serving_Staff.jpeg": "/static/media/Caterers_And_Serving_Staff.342e97346844e17e1b82.jpeg",
     "static/media/Light_and_Sound.png": "/static/media/Light_and_Sound.02e45be717fd71c17514.png",
-    "static/media/our-company.png": "/static/media/our-company.45ef6fee72911b257f4e.png",
     "static/media/Showcase-bg22.jpg": "/static/media/Showcase-bg22.aecd805ed6a56dea5039.jpg",
     "static/media/about-g.png": "/static/media/about-g.04de760cbc40ae16993a.png",
     "static/media/Fashion_Designer.jpg": "/static/media/Fashion_Designer.5519795cd44795c59310.jpg",
@@ -27,6 +26,7 @@
     "static/media/dashboard-bg.png": "/static/media/dashboard-bg.2c2e29cfa6c58bacf69b.png",
     "static/media/Yachts_And_Houseboats.jpg": "/static/media/Yachts_And_Houseboats.9e142b435fbd2bc6bc36.jpg",
     "static/media/Multi-Devices.png": "/static/media/Multi-Devices.7706f19c5a4497306401.png",
+    "static/media/company.png": "/static/media/company.c6c3099b657783fa6db2.png",
     "static/media/Helvetica.ttf": "/static/media/Helvetica.7d56bb0f81215ad6946b.ttf",
     "static/media/Helvetica-Bold.ttf": "/static/media/Helvetica-Bold.67d6d718668ddb852a90.ttf",
     "static/media/primeicons.svg": "/static/media/primeicons.e1441b135b3ca9ad643c.svg",
@@ -102,12 +102,12 @@
     "static/media/eye-icon.svg": "/static/media/eye-icon.c78a8da23d31ff70149bc54fa5c10814.svg",
     "index.html": "/index.html",
     "static/media/arrow.svg": "/static/media/arrow.61b9984bc1e1daf590d2.svg",
-    "main.ebaf5881.css.map": "/static/css/main.ebaf5881.css.map",
-    "main.e5b3057e.js.map": "/static/js/main.e5b3057e.js.map",
+    "main.2b8498aa.css.map": "/static/css/main.2b8498aa.css.map",
+    "main.d548e8f2.js.map": "/static/js/main.d548e8f2.js.map",
     "787.ceb36d6b.chunk.js.map": "/static/js/787.ceb36d6b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ebaf5881.css",
-    "static/js/main.e5b3057e.js"
+    "static/css/main.2b8498aa.css",
+    "static/js/main.d548e8f2.js"
   ]
 }

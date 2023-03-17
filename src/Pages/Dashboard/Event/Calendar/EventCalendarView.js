@@ -10,7 +10,7 @@ import { Calendar } from 'primereact/calendar';
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.css';
-import { getOneEventDetails, useEventCalender } from './calenderSlice';
+import { getOneEventDetails, idCalendar, useEventCalender } from './calenderSlice';
 import { useIntl } from "react-intl";
 
 
@@ -45,12 +45,51 @@ const EventCalendarView = () => {
 			console.log(error);
 		}
 	}
-
+	const IdCalendar = async () => {
+		try {
+			console.log(eventId,"==");
+			const response = await dispatch(idCalendar({
+				"eventId": eventId
+			})).unwrap()
+			// const attendeeArr = stateEventCalender?.attendee;
+			// const calendarEvents = [];
+			// attendeeArr.forEach(attendee => {
+			// 	calendarEvents.push({
+			// 		title: attendee.name,
+			// 		start: new Date((moment.unix(attendee.start_timestamp / 1000)).toString()),
+			// 		end: new Date((moment.unix(attendee.end_timestamp / 1000)).toString()),
+			// 		color: generateRandomColor()
+			// 	});
+			// });
+			// setCalendarEvents(calendarEvents);
+		} catch (error) {
+			console.log(error);
+		}
+	}
 
 	useEffect(() => {
 		CalendarViewList();
+		IdCalendar()
 	}, [])
 
+	// const CalendarViewList = async () => {
+	// 	try {
+	// 		const response = await dispatch(idCalendar(eventId)).unwrap()
+	// 		const attendeeArr = stateEventCalender?.attendee;
+	// 		const calendarEvents = [];
+	// 		attendeeArr.forEach(attendee => {
+	// 			calendarEvents.push({
+	// 				title: attendee.name,
+	// 				start: new Date((moment.unix(attendee.start_timestamp / 1000)).toString()),
+	// 				end: new Date((moment.unix(attendee.end_timestamp / 1000)).toString()),
+	// 				color: generateRandomColor()
+	// 			});
+	// 		});
+	// 		setCalendarEvents(calendarEvents);
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// }
 
 	const clickNextHandler = () => {
 		dispatch(reset());
@@ -144,7 +183,8 @@ const EventCalendarView = () => {
 								plugins={[dayGridPlugin]}
 								initialView="dayGridMonth"
 								events={calendarEvents}
-
+								// onClick={(e) => console.log(e,"=======")}
+								dateClick={(e)=>console.log(e,"=======")}
 							/>
 						</div>
 						{/* <!-- calendar end --> */}

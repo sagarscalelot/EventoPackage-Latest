@@ -26,8 +26,6 @@ const EventAboutPlace = () => {
 	const [clearTime, setClearTime] = useState("0");
 	const [maxDay, setMaxDay] = useState("0");
 	const [about, setAbout] = useState("");
-
-
 	const eventId = localStorage.getItem("eventId");
 	const eventType = params.eventType;
 
@@ -38,10 +36,10 @@ const EventAboutPlace = () => {
 		clearing_time: Yup.string()
 		.typeError('TIME MUST BE A DIGIT')
     .matches(/^[0-9]*$/, `${intl.formatMessage({ id: "Clearing time MUST BE A DIGIT" })}`)
-      .required(`${intl.formatMessage({ id: "TIME IS REQUIRED" })}`),
-		max_day:  Yup.string()
-		.typeError('DAY MUST BE A DIGIT')
-    .matches(/^[0-9]*$/, `${intl.formatMessage({ id: "DAY MUST BE A DIGIT" })}`)
+      .required(`${intl.formatMessage({ id: "CLEARING TIME IS REQUIRED*" })}`),
+		max_day:  Yup.string().nullable()
+	// 	.typeError('Max day must be a digit')
+    // .matches(/^[0-9]*$/, `${intl.formatMessage({ id: "MAX DAY MUST BE A DIGIT" })}`)
       // .required(`${intl.formatMessage({ id: "MAX DAY IS REQUIRED*" })}`),
 	});
 
@@ -86,7 +84,7 @@ const EventAboutPlace = () => {
 				toast.error(`${intl.formatMessage({ id: "SOMETHING WENT WRONG." })}`);
 			}
 		} else {
-			toast.error(`About text limit exceeded!`);
+			toast.error(`${intl.formatMessage({ id: "ABOUT TEXT LIMIT EXCEEDED!" })}`);
 		}
 	}
 
@@ -177,6 +175,7 @@ const EventAboutPlace = () => {
 			}),
 		[formik]
 	);
+	console.log(formik.errors,"-------");
 
 	return (
 		//  <!-- Content In -->
