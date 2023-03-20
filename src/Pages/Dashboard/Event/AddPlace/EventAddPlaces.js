@@ -37,7 +37,7 @@ const EventAddPlaces = () => {
 
 	useEffect(() => {
 		getAddedEvent();
-	}, [newEvent]);
+	}, []);
 
 	useEffect(() => {
 		setNewEvent(addPlace);
