@@ -108,9 +108,9 @@ function MyPost() {
                     plugins={[lgVideo, lgFullscreen, lgHash, lgRotate, lgZoom, lgShare]}
                 >
                     {getItems()}
-                </LightGallery >
-            </div >
-        </div >
+                </LightGallery>
+            </div>
+        </div>
     )
 }
 

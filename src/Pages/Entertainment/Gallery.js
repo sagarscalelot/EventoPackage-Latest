@@ -6,6 +6,7 @@ import { userGallery } from "./gallerySlice";
 import { useDispatch } from "react-redux";
 import { useIntl } from "react-intl";
 import GalleryMyPost from "./GalleryMyPost";
+import MyPost from "./MyPost";
 
 
 const Gallery = () => {
@@ -65,21 +66,21 @@ const Gallery = () => {
             >
               <span>{intl.formatMessage({ id: "MY POST" })}</span>
             </button>
-            <button
+            {/* <button
               type="button"
               data-tab="mypost"
               className={tab === 4 ? "active" : undefined}
               onClick={() => setTab(4)}
             >
             <span>{intl.formatMessage({ id: "MYPOST" })}</span>
-            </button>
+            </button> */}
           </div>
           {/* <!-- gallery-holder / --> */}
           <div className="gallery-holder">
             {tab === 1 && <GalleryAll />}
             {tab === 2 && <GalleryPhotos />}
             {tab === 3 && <GalleryVideos />}
-            {tab === 4 && <GalleryMyPost />}
+            {tab === 4 && <MyPost />}
 
           </div>
         </div>
